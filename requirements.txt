@@ -1,4 +1,5 @@
 Django==2.2.9
+mysqlclient==1.4.6
 Pillow==7.0.0
 pytz==2019.3
 sqlparse==0.3.0
