@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 ]
 
 SECONDED_APPS = [
-    'lysten',
+    'K-asa',
 ]
 
 INSTALLED_APPS += SECONDED_APPS
