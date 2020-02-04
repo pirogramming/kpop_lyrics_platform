@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        nav{
+            width:100%;
+            background:black;
+            /*overflow:auto;*/
+            /*border-bottom:1px solid white;*/
+            /*cursor:pointer;*/
+            font-family:Aller ;
+            /*font-weight:bold;*/
+        }
+        ul{
+            display:flex;
+            flex-direction:row;
+            padding:0px 40px 0px 0px;
+            margin:0;
+            list-style:none;
+            list-style-type:none;
+            align-items:center;
+        }
+        ul .title{
+            font-size:3em;
+            padding:0px 0px 0px 50px;
+            /*vertical-align: bottom;*/
+            /*align-items:center;*/
+
+        }
+
+        li:hover:not(.title){
+            border-bottom:2px solid;
+        }
+
+        li{
+            float:left;
+        }
+        li:first-child{
+            margin-right:auto;
+        }
+        nav a {
+            width:60px;
+            display:block;
+            padding:10px 10px;
+            text-decoration:none;
+            font-family:Aller;
+            color:white;
+            text-align:center;
+
+
+        }
+
+            nav #title_a_tag {
+            width:138px;
+            height: 45px;
+            display:block;
+            padding:10px 10px;
+            text-decoration:none;
+            font-family:Aller;
+            color:white;
+            text-align:center;
+            }
+        html {
+            font-family: "Aller Light";
+            position: relative;
+            min-height: 100%;
+            margin: 0;
+            background:white;
+             }
+        body {
+            min-height: 100%;
+            margin:0 0 10px 0;
+            padding-bottom: 300px;
+            }
+        .footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            text-align: center;
+            color: #00fffe;
+            background: black;
+            font-weight:bold
+            }
+        .height{
+            min-height: 10px;
+        }
+        .search-box{
+              padding: 10px;
+              position: absolute;
+              top: 10%;
+              left: 50%;
+              transform: translate(-50%,-50%);
+              height: 30px;
+              background-color: #fff;
+              border: 1px solid #51e3d4;
+              border-radius: 30px;
+              transition: 0.4s;
+              width:30px;
+            }
+            .search-box:hover{
+              box-shadow: 0px 0px .5px 1px #51e3d4;
+              width: 282px;
+            }
+            .search-btn{
+              text-decoration: none;
+              float: right;
+              width: 30px;
+              height: 30px;
+              background-color: #fff;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: #51e3d4;
+            }
+            .search-box:hover > .search-btn{
+              background-color: #fff;
+            }
+            .search-txt{
+              display: flex;
+              padding: 0;
+              width: 0px;
+              border:none;
+              background: none;
+              outline: none;
+              float: left;
+              font-size: 1rem;
+              line-height: 30px;
+              transition: .4s;
+            }
+            .search-box:hover > .search-txt{
+              width: 240px;
+              padding: 0 6px;
+            }
+
+
+    </style>
+</head>
+<body>
+<nav>
+
+    <ul>
+      >  <li class="title"><a id="title_a_tag" href="#"><img src="KakaoTalk_20200204_155442069.png"></a></li>
+        <li><a href="#">Sign in</a></li>
+        <li><a href="#">Sign up</a></li>
+    </ul>
+</nav>
+<div class="search-box">
+      <input type="text" class="search-txt" name=""placeholder="Type to search">
+      <a class="search-btn" href="#">
+        <i class="fas fa-search"</i>
+      </a>
+    </div>
+
+<div class="height"></div>
+<div class="footer">
+    <div class="developer">피로그래밍 12기    정승현    권구상    신우철    송민호</div>
+
+</div>
+</body>
+</html>
