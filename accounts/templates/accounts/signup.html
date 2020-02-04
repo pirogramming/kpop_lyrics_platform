@@ -1,0 +1,28 @@
+{% if user.is_authenticated %}
+    <script type="text/javascript">
+        alert('회원가입을 위해서는 로그아웃이 필요합니다.')
+    </script>
+{% else %}
+
+    {% for label in form %}
+        {% if label.errors %}
+            {% for error in label.errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h2>회원가입</h2>
+        {% for field in form %}
+            <div class="field">
+                {{ field.label }}
+                {{ field }}
+            </div>
+            <br/>
+        {% endfor %}
+        <button type="submit">회원가입</button>
+    </form>
+{% endif %}
+

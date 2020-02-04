@@ -2,8 +2,10 @@ from django.urls import path, include
 
 from accounts import views
 
+app_name = 'accounts'
+
 urlpatterns = [
-    path('', include('allauth.urls')),
-    path('', include('django.contrib.auth.urls')),
-    path('connection/', views.connection, name='connection'),
+    path('', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('signup/', views.signup, name='signup'),
 ]

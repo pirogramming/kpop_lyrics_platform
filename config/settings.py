@@ -54,6 +54,9 @@ ACCOUNTS_APPS = [
 INSTALLED_APPS += SECONDED_APPS
 INSTALLED_APPS += ACCOUNTS_APPS
 
+# User 모델을 사용자 지정 모델로 사용
+AUTH_USER_MODEL = 'accounts.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
