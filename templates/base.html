@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>K-asa</title>
+    <style>
+         html {
+        font-family: "Aller Light";
+        position: relative;
+        min-height: 100%;
+        margin: 0;
+        background:white;
+         }
+    body {
+        min-height: 100%;
+        margin:0 0 10px 0;
+        }
+     .height{
+        min-height: 10px;
+    }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="wrap" style="min-width:1400px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="height"></div>
+    {% include 'footer.html' %}
+</body>
+</html>
