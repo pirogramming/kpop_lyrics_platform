@@ -1,0 +1,14 @@
+{% if validlink %}
+
+    <h1>새로운 비밀번호를 설정하세요</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="비밀번호 변경">
+    </form>
+
+{% else %}
+
+    <p>{% trans "비밀번호 초기화 링크가 올바르지 않습니다." %}</p>
+
+{% endif %}

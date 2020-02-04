@@ -5,12 +5,13 @@
 {% if user.is_authenticated %}
     <h2>Welcome, {{ user.alias }}</h2>
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    <a href="{% url 'accounts:change_pw' %}">비밀번호 변경</a>
 {% else %}
     {% if errors %}
-        <p>ID나 비밀번호가 일치하지 않습니다.</p>
+        <p>아이디 또는 비밀번호가 일치하지 않습니다.</p>
     {% endif %}
     <form action="" method="POST">
-    {% csrf_token %}
+        {% csrf_token %}
         <div>
             ID: <input type="text" name="username" autocomplete=off>
         </div>
@@ -19,6 +20,7 @@
         </div>
         <button type="submit">로그인</button>
     </form>
+    <a href="{% url 'accounts:reset_pw' %}">비밀번호 찾기</a>
     <a href="{% url 'accounts:signup' %}">회원가입</a>
     <a href="{% provider_login_url 'google' %}">GOOGLE</a>
     <a href="{% provider_login_url 'kakao' %}">KAKAO</a>
