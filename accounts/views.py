@@ -1,3 +1,4 @@
+from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.contrib.auth import authenticate
 from django.contrib import auth
 from django.http import HttpResponse
