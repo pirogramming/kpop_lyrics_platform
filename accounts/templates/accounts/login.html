@@ -6,6 +6,7 @@
     <h2>Welcome, {{ user.alias }}</h2>
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
     <a href="{% url 'accounts:change_pw' %}">비밀번호 변경</a>
+    <a href="{% url 'accounts:set_alias' %}">닉네임 변경</a>
 {% else %}
     {% if errors %}
         <p>아이디 또는 비밀번호가 일치하지 않습니다.</p>

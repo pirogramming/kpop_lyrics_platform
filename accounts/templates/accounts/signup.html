@@ -4,13 +4,13 @@
     </script>
 {% else %}
 
-    {% for label in form %}
-        {% if label.errors %}
-            {% for error in label.errors %}
-                <div>{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endfor %}
+{#    {% for label in form %}#}
+{#        {% if label.errors %}#}
+{#            {% for error in label.errors %}#}
+{#                <div>{{ error }}</div>#}
+{#            {% endfor %}#}
+{#        {% endif %}#}
+{#    {% endfor %}#}
 
     <form action="" method="POST">
         {% csrf_token %}

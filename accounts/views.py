@@ -3,9 +3,9 @@ from allauth.account.views import PasswordResetView, PasswordResetDoneView, Pass
 from django.contrib.auth import authenticate
 from django.contrib import auth, messages
 from django.contrib.auth.hashers import check_password
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from accounts.forms import UserForm
+from accounts.forms import UserForm, InfoForm
 from accounts.models import User
 
 
@@ -99,3 +99,23 @@ class reset_pw_confirm(PasswordResetFromKeyView):
 
 class reset_pw_complete(PasswordResetFromKeyDoneView):
     template_name = "accounts/reset_pw_complete.html"
+
+
+def change_info(request):
+    if request.method == "POST":
+        form = InfoForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:login')
+        else:
+            form = InfoForm(request.POST)
+            context = {
+                'form': form
+            }
+            return render(request, 'accounts/change_info.html', context)
+    else:
+        form = InfoForm(instance=request.user)
+        context = {
+            'form': form
+        }
+        return render(request, 'accounts/change_info.html', context)

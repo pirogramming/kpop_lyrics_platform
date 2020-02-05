@@ -13,5 +13,5 @@ urlpatterns = [
     path('reset_pw/done/', views.reset_pw_done.as_view(), name='reset_pw_done'),
     path('reset/<uidb64>/<token>', views.reset_pw_confirm.as_view(), name='reset_pw_confirm'),
     path('reset_pw/complete/', views.reset_pw_complete.as_view(), name='reset_pw_complete'),
-
+    path('change_info/', views.change_info, name='change_info'),
 ]

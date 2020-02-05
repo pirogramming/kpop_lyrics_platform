@@ -4,7 +4,8 @@ from accounts.models import User
 
 
 class UserForm(forms.ModelForm):
-    verify_password = forms.CharField(label = '비밀번호 확인', widget = forms.PasswordInput)
+    verify_password = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password', 'verify_password', 'alias', 'interest']
@@ -14,7 +15,6 @@ class UserForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
             'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
-
             'alias': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': '10자 이내로 입력 가능', 'autocomplete': 'off'}),
             'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
@@ -50,3 +50,25 @@ class UserForm(forms.ModelForm):
         if password1 != password2:
             raise forms.ValidationError('Emails must match')
         return password2
+
+
+class InfoForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['alias', 'interest']
+        widgets = {
+            'alias': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': '10자 이내로 입력 가능', 'autocomplete': 'off'}),
+            'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(InfoForm, self).__init__(*args, **kwargs)
+        self.fields['alias'].widget.attrs['maxlength'] = 10
+
+    def clean_alias(self):
+        alias = self.cleaned_data['alias']
+        if User.objects.filter(alias=alias).exists():
+            raise forms.ValidationError('닉네임이 이미 사용중입니다.')
+        return alias
