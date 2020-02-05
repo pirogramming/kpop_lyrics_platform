@@ -8,72 +8,53 @@
     <title>Navbar</title>
     <link rel="favicon" href="hnet.com-image.ico">
 <style>
-body{
-    margin:0;
-    padding:0;
-    background-color:rgba(226,223,214,0.99);
-}
-nav{
-    width:100%;
-    background:black;
-    /*overflow:auto;*/
-    /*border-bottom:1px solid white;*/
-    /*cursor:pointer;*/
-    font-family:Aller ;
-    /*font-weight:bold;*/
 
-
-}
-ul{
-    display:flex;
-    flex-direction:row;
-    padding:0px 40px 0px 0px;
-    margin:0;
-    list-style:none;
-    list-style-type:none;
-    align-items:center;
-}
-ul .title{
-    font-size:3em;
-    padding:0px 0px 0px 50px;
-    /*vertical-align: bottom;*/
-    /*align-items:center;*/
-
-}
-
-li:hover:not(.title){
-    border-bottom:2px solid;
-}
-
-li{
-    float:left;
-}
-li:first-child{
-    margin-right:auto;
-}
-nav a {
-    width:60px;
-    display:block;
-    padding:10px 10px;
-    text-decoration:none;
-    font-family:Aller;
-    color:white;
-    text-align:center;
-
-
-}
-
-    nav #title_a_tag {
-    width:138px;
-    height: 45px;
-    display:block;
-    padding:10px 10px;
-    text-decoration:none;
-    font-family:Aller;
-    color:white;
-    text-align:center;
-    }
-
+     nav{
+            width:100%;
+            background:black;
+            font-weight: bold;
+        }
+        .navlist{
+            display:flex;
+            flex-direction:row;
+            padding:0px 40px 0px 0px;
+            margin:0;
+            list-style:none;
+            list-style-type:none;
+            align-items:center;
+        }
+        ul .title{
+            font-size:3em;
+            padding:0px 0px 0px 50px;
+            /*vertical-align: bottom;*/
+            /*align-items:center;*/
+        }
+        li:hover:not(.title){
+            border-bottom:2px solid;
+        }
+        .title, .signin, .signup{
+            float:left;
+        }
+        li:first-child{
+            margin-right:auto;
+        }
+        nav a {
+            width:60px;
+            display:block;
+            padding:10px 10px;
+            text-decoration:none;
+            color:white;
+            text-align:center;
+        }
+        nav #title_a_tag {
+            width:138px;
+            height: 45px;
+            display:block;
+            padding:10px 10px;
+            text-decoration:none;
+            color:white;
+            text-align:center;
+            }
 
 
 </style>
@@ -83,11 +64,10 @@ nav a {
 
 
 <nav>
-
-    <ul>
-        <li class="title"><a id="title_a_tag" href="#"><img src="KakaoTalk_20200204_155442069.png"></a></li>
-        <li><a href="#">Sign in</a></li>
-        <li><a href="#">Sign up</a></li>
+    <ul class = "navlist">
+        <li class="title"><a id="title_a_tag" href="#"> <img src="KakaoTalk_20200204_155442069.png"></a></li>
+        <li class="signin"><a href="#">Sign in</a></li>
+        <li class="signup"><a href="#">Sign up</a></li>
     </ul>
 </nav>
 
