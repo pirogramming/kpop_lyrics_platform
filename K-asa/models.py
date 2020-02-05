@@ -7,11 +7,18 @@ class Groups(models.Model):
     agency = models.CharField(max_length=255, blank=True, verbose_name='소속사')
     sns_url = models.URLField(verbose_name='SNS', blank=True)
 
+    def __str__(self):
+        return self.gname
+
 
 class Albums(models.Model):
+    aname = models.CharField(max_length=255, verbose_name='앨범이름')
     release_date = models.DateField(verbose_name='발매일')
     album_art = models.ImageField(verbose_name='자켓사진')
     group = models.ForeignKey(Groups, on_delete=models.CASCADE, verbose_name='그룹이름', related_name='group_album')
+
+    def __str__(self):
+        return self.aname
 
 
 class Singers(models.Model):
@@ -20,13 +27,20 @@ class Singers(models.Model):
     wiki_url = models.URLField(blank=True, verbose_name='가수정보')
     group = models.ManyToManyField(Groups, verbose_name='소속그룹', related_name='group_singer')
 
+    def __str__(self):
+        return self.sname
+
 
 class Songs(models.Model):
+    sname = models.CharField(max_length=255, verbose_name='노래제목')
     youtube_url = models.URLField(blank=True, verbose_name='뮤직비디오')
     soundcloud_url = models.URLField(blank=True, verbose_name='오디오')
     dance_url = models.URLField(blank=True, verbose_name='무대영상')
     album = models.ForeignKey(Albums, on_delete=models.CASCADE, verbose_name='앨범', related_name='album_song')
     singer = models.ManyToManyField(Singers, verbose_name='가수', related_name='singer_song')
+
+    def __str__(self):
+        return self.sname
 
 
 class Comments(models.Model):
@@ -35,11 +49,17 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='작성자', related_name='user_comment')
     song = models.ForeignKey(Songs, on_delete=models.CASCADE, verbose_name='노래', related_name='song_comment')
 
+    def __str__(self):
+        return self.content
+
 
 class Fandoms(models.Model):
     fname = models.CharField(max_length=255, verbose_name='팬덤명')
     official_url = models.URLField(verbose_name='팬카페')
     group = models.OneToOneField(Groups, on_delete=models.CASCADE, verbose_name='그룹', related_name='group_fandom')
+
+    def __str__(self):
+        return self.fname
 
 
 class Lyrics(models.Model):
@@ -51,6 +71,9 @@ class Lyrics(models.Model):
     song = models.ForeignKey(Songs, on_delete=models.CASCADE, verbose_name='노래', related_name='song_lyrics')
     singer = models.ManyToManyField(Singers, verbose_name='파트', related_name='singer_lyrics')
 
+    def __str__(self):
+        return self.song.sname, str(self.order)
+
 
 class Explanations(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
@@ -59,3 +82,6 @@ class Explanations(models.Model):
     image = models.ImageField(blank=True, verbose_name='사진')
     likes = models.IntegerField(default=0, editable=False, verbose_name='좋아요')
     lyrics = models.ForeignKey(Lyrics, on_delete=models.CASCADE, verbose_name='가사', related_name='lyrics_explanation')
+
+    def __str__(self):
+        return self.content
