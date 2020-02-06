@@ -13,7 +13,6 @@ def search_live(request):
     render_template('search/search_detail.html')
 
     singer_list = [Singers]; max length 10
-    album_list = [Albums]; max length 10
     song_list = [Songs]; max length 10
     lyrics_list = [Lyrics]; max length 10
 
@@ -74,7 +73,7 @@ def show_lyric(request):
     lyrics = Lyrics.objects.filter(song_id=song.id)
     explanations = list()
     for lyric in lyrics:
-        
+
         explanations += Explanations.objects.filter(lyrics_id=lyric.id)
 
     max_explanation = None
