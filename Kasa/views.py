@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+from Kasa.models import Songs, Lyrics, Explanations
 
 
 def search_live(request):
@@ -55,3 +56,31 @@ def main(request):
         'group': group
     })
 
+def show_lyric(request):
+    """
+    method : GET
+
+    :param request:
+    request.GET.song_id;
+
+    :return:
+
+    render_template('explanation.html')
+
+    explanation : Explanations
+
+    """
+    song = Songs.objects.get(id=request.GET.song_id)
+    lyrics = Lyrics.objects.filter(song_id=song.id)
+    explanations = list()
+    for lyric in lyrics:
+        
+        explanations += Explanations.objects.filter(lyrics_id=lyric.id)
+
+    max_explanation = None
+    max_likes = -1
+    for explanation in explanations:
+        if explanation.likes > max_likes:
+            max_explanation = explanation
+
+    raise NotImplementedError
