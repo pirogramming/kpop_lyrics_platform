@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kasa,Best way to find K-pop lyrics</title>
+    <style>
+     html {
+            font-family: "Aller Light";
+            position: relative;
+            min-height: 100%;
+            margin: 0;
+            background:white;
+             }
+        body {
+            min-height: 100%;
+            margin:0 0 10px 0;
+            padding-bottom: 100px;
+            }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="wrap" style="min-width:1400px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>
