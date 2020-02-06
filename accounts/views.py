@@ -5,10 +5,12 @@ from django.contrib import auth, messages
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from Kasa.models import Comments
 from accounts.forms import UserForm, InfoForm
 from accounts.models import User
 
 
+# 로그인 뷰
 def login(request):
     if request.method == 'POST':
         print(request.POST)
@@ -28,11 +30,13 @@ def login(request):
         return render(request, 'accounts/login.html')
 
 
+# 로그아웃 뷰
 def logout(request):
     auth.logout(request)
     return redirect('accounts:login')
 
 
+# 회원가입 뷰
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -55,6 +59,7 @@ def signup(request):
         return render(request, 'accounts/signup.html', context)
 
 
+# 비밀번호 변경 뷰
 def change_pw(request):
     context = {}
     if request.method == "POST":
@@ -79,6 +84,7 @@ def change_pw(request):
     return render(request, 'accounts/change_pw.html', context)
 
 
+# 비밀번호 초기화 뷰
 class reset_pw(PasswordResetView):
     template_name = "accounts/reset_pw.html"
     success_url = reverse_lazy('accounts:reset_pw_done')
@@ -88,19 +94,24 @@ class reset_pw(PasswordResetView):
         return super().form_valid(form)
 
 
+# 비밀번호 초기화 완료 뷰 / 메일발송 후
 class reset_pw_done(PasswordResetDoneView):
     template_name = "accounts/reset_pw_done.html"
 
 
+# 비밀번호 초기화 메일로 들어온 URL 처리
+# 새로운 비밀번호 설정 뷰
 class reset_pw_confirm(PasswordResetFromKeyView):
     template_name = "accounts/reset_pw_confirm.html"
     success_url = reverse_lazy("accounts:reset_pw_complete")
 
 
+# 새로운 비밀번호 설정 완료 뷰
 class reset_pw_complete(PasswordResetFromKeyDoneView):
     template_name = "accounts/reset_pw_complete.html"
 
 
+# 닉네임, 관심사에 대한 정보 변경 뷰
 def change_info(request):
     if request.method == "POST":
         form = InfoForm(data=request.POST, instance=request.user)
@@ -119,3 +130,25 @@ def change_info(request):
             'form': form
         }
         return render(request, 'accounts/change_info.html', context)
+
+
+# 사용자가 작성한 댓글들 확인하는 뷰
+def check_comment(request):
+    comments = Comments.objects.filter(user=request.user)
+    context = {
+        'comments': comments
+    }
+
+    return render(request, 'accounts/check_comment.html', context)
+
+
+# 특정 댓글 삭제 뷰
+def delete_comment(request, comment_pk):
+    comment = get_object_or_404(Comments, pk=comment_pk)
+
+    # 요청을 보낸 사용자와 comment 작성자가 같은지 확인
+    # 한번의 검증단계(굳이 필요없을 수도...)
+    if comment.user.pk == request.user.pk:
+        comment.delete()
+
+    return redirect('accounts:check_comment')

@@ -14,4 +14,6 @@ urlpatterns = [
     path('reset/<uidb64>/<token>', views.reset_pw_confirm.as_view(), name='reset_pw_confirm'),
     path('reset_pw/complete/', views.reset_pw_complete.as_view(), name='reset_pw_complete'),
     path('change_info/', views.change_info, name='change_info'),
+    path('check_comment/', views.check_comment, name='check_comment'),
+    path('check_comment/del/<int:comment_pk>/', views.delete_comment, name='delete_comment'),
 ]

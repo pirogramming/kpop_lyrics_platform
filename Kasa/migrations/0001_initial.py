@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('sname', models.CharField(max_length=255, verbose_name='가수이름')),
                 ('image', models.ImageField(blank=True, upload_to='', verbose_name='가수사진')),
                 ('wiki_url', models.URLField(blank=True, verbose_name='가수정보')),
-                ('group', models.ManyToManyField(related_name='group_singer', to='K-asa.Groups', verbose_name='소속그룹')),
+                ('group', models.ManyToManyField(related_name='group_singer', to='Kasa.Groups', verbose_name='소속그룹')),
             ],
         ),
         migrations.CreateModel(
@@ -48,8 +48,8 @@ class Migration(migrations.Migration):
                 ('youtube_url', models.URLField(blank=True, verbose_name='뮤직비디오')),
                 ('soundcloud_url', models.URLField(blank=True, verbose_name='오디오')),
                 ('dance_url', models.URLField(blank=True, verbose_name='무대영상')),
-                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='album_song', to='K-asa.Albums', verbose_name='앨범')),
-                ('singer', models.ManyToManyField(related_name='singer_song', to='K-asa.Singers', verbose_name='가수')),
+                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='album_song', to='Kasa.Albums', verbose_name='앨범')),
+                ('singer', models.ManyToManyField(related_name='singer_song', to='Kasa.Singers', verbose_name='가수')),
             ],
         ),
         migrations.CreateModel(
@@ -61,8 +61,8 @@ class Migration(migrations.Migration):
                 ('rom', models.TextField(blank=True, verbose_name='로마자')),
                 ('fanchant', models.TextField(blank=True, verbose_name='응원법')),
                 ('order', models.IntegerField(verbose_name='순서')),
-                ('singer', models.ManyToManyField(related_name='singer_lyrics', to='K-asa.Singers', verbose_name='파트')),
-                ('song', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='song_lyrics', to='K-asa.Songs', verbose_name='노래')),
+                ('singer', models.ManyToManyField(related_name='singer_lyrics', to='Kasa.Singers', verbose_name='파트')),
+                ('song', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='song_lyrics', to='Kasa.Songs', verbose_name='노래')),
             ],
         ),
         migrations.CreateModel(
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('fname', models.CharField(max_length=255, verbose_name='팬덤명')),
                 ('official_url', models.URLField(verbose_name='팬카페')),
-                ('group', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='group_fandom', to='K-asa.Groups', verbose_name='그룹')),
+                ('group', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='group_fandom', to='Kasa.Groups', verbose_name='그룹')),
             ],
         ),
         migrations.CreateModel(
@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
                 ('content', models.TextField(verbose_name='내용')),
                 ('image', models.ImageField(blank=True, upload_to='', verbose_name='사진')),
                 ('likes', models.IntegerField(default=0, editable=False, verbose_name='좋아요')),
-                ('lyrics', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lyrics_explanation', to='K-asa.Lyrics', verbose_name='가사')),
+                ('lyrics', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lyrics_explanation', to='Kasa.Lyrics', verbose_name='가사')),
             ],
         ),
         migrations.CreateModel(
@@ -92,13 +92,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField(verbose_name='내용')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='작성일')),
-                ('song', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='song_comment', to='K-asa.Songs', verbose_name='노래')),
+                ('song', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='song_comment', to='Kasa.Songs', verbose_name='노래')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_comment', to=settings.AUTH_USER_MODEL, verbose_name='작성자')),
             ],
         ),
         migrations.AddField(
             model_name='albums',
             name='group',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='group_album', to='K-asa.Groups', verbose_name='그룹이름'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='group_album', to='Kasa.Groups', verbose_name='그룹이름'),
         ),
     ]
