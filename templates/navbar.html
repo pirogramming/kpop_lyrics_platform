@@ -8,37 +8,36 @@
     <title>Navbar</title>
     <link rel="favicon" href="hnet.com-image.ico">
 <style>
-
-     nav{
+ nav {
             width:100%;
-            background:black;
+            background: black;
             font-weight: bold;
         }
-        .navlist{
+        nav .navlist{
             display:flex;
             flex-direction:row;
-            padding:0px 40px 0px 0px;
+            {#padding:0px 40px 0px 0px;#}
             margin:0;
             list-style:none;
             list-style-type:none;
             align-items:center;
         }
-        ul .title{
+        nav .navlist .title{
             font-size:3em;
             padding:0px 0px 0px 50px;
             /*vertical-align: bottom;*/
             /*align-items:center;*/
         }
-        li:hover:not(.title){
+        nav .navlist .signin:hover, nav .navlist .signup:hover{
             border-bottom:2px solid;
         }
-        .title, .signin, .signup{
+        nav .navlist .title, .signin, .signup{
             float:left;
         }
-        li:first-child{
+        nav .navlist .title{
             margin-right:auto;
         }
-        nav a {
+        nav .navlist .title a, nav .navlist .signin a, nav .navlist .signup a{
             width:60px;
             display:block;
             padding:10px 10px;
@@ -46,7 +45,16 @@
             color:white;
             text-align:center;
         }
-        nav #title_a_tag {
+
+        nav .navlist .signup a {
+            margin-right : 50px;
+        }
+
+        nav .navlist .signin a {
+            margin-right: 10px;
+        }
+
+        nav .navlist #title_a_tag {
             width:138px;
             height: 45px;
             display:block;
@@ -64,13 +72,12 @@
 
 
 <nav>
-    <ul class = "navlist">
-        <li class="title"><a id="title_a_tag" href="#"> <img src="KakaoTalk_20200204_155442069.png"></a></li>
-        <li class="signin"><a href="#">Sign in</a></li>
-        <li class="signup"><a href="#">Sign up</a></li>
-    </ul>
+    <div class = "navlist">
+        <div class="title"><a id="title_a_tag" href="#"> <img src="KakaoTalk_20200204_155442069.png"></a></div>
+        <div class="signin"><a href="#">Sign in</a></div>
+        <div class="signup"><a href="#">Sign up</a></div>
+    </div>
 </nav>
-
 
 
 </body>
