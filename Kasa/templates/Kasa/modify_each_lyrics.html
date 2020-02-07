@@ -1,0 +1,32 @@
+<form action="{% url "Kasa:modify_each_lyrics" song.pk %}" method="POST">
+    {% csrf_token %}
+    노래: {{ song.sname }}
+    <input type="hidden" name="length" value="{{ length }}">
+    {% for kor in all_kor %}
+        <div>{{ forloop.counter }}</div>
+
+        <div class="division">
+            <div>한국어: <input type="text" name="kor{{ forloop.counter }}" class="kor_lyrics_part" value="{{ kor }}"
+                             style="width:500px;"></div>
+        </div>
+        <div class="division">
+            <div>영어: <input type="text" name="eng{{ forloop.counter }}" class="kor_lyrics_part" value=""
+                            style="width:500px;"></div>
+        </div>
+        <div class="division">
+            <div>로마자: <input type="text" name="rom{{ forloop.counter }}" class="kor_lyrics_part" value=""
+                             style="width:500px;"></div>
+        </div>
+        <div class="division">
+            <label for="all">
+                <input type="checkbox" name="part{{ forloop.counter }}" id="all" value="all">
+                전체
+            </label>
+            {% for singer in singers %}
+                <input type="checkbox" name="part" id="{{ singer }}" value="{{ singer }}" placeholder="{{ singer }}">
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+    <input type="submit" name="submit" value="제출">
+</form>
