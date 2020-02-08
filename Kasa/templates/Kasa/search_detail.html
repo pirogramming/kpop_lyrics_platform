@@ -11,18 +11,26 @@
 <h1>Singer name</h1>
 <hr/>
 {% for singer in singers %}
+    <h5>{{ forloop.counter }}</h5>
     <h3>{{ singer.sname }}</h3>
+    <h3>{{ singer.image }}</h3>
+    {% for group in singer.group.all %}
+        <h3>{{ group }}</h3>
+    {% endfor %}
 {% endfor %}
 <h1>Song name</h1>
 <hr/>
 {% for song in songs %}
+    <h5>{{ forloop.counter }}</h5>
+    <h3>{{ song.album.album_art }}</h3>
     <h3>{{ song.sname }}</h3>
 {% endfor %}
 <h1>Lyrics</h1>
 <hr/>
 {% for lyric in lyrics %}
-    <h3>{{ lyric.song }}</h3>
+    <h5>{{ forloop.counter }}</h5>
     <h3>{{ lyric.song.album.album_art }}</h3>
+    <h3>{{ lyric.song }}</h3>
     <h5>{{ lyric.kor }}</h5>
 {% endfor %}
 <h1></h1>

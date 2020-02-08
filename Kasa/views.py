@@ -8,14 +8,35 @@ from Kasa.models import Songs, Lyrics, Explanations, Singers
 def search(request):
     kwd = request.GET.get('kwd', '')
 
+    singers_list = []
+    songs_list =[]
+    lyrics_list = []
+
     singers = Singers.objects.filter(sname__icontains=kwd)
     songs = Songs.objects.filter(sname__icontains=kwd)
     lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
-    print(singers)
+
+    if len(singers) > 5:
+        for singers_count in range(5):
+            singers_list.append(singers[singers_count])
+    else:
+        singers_list = singers
+
+    if len(songs) > 5:
+        for songs_count in range(5):
+            songs_list.append(songs[songs_count])
+    else:
+        songs_list = songs
+
+    if len(lyrics) > 5:
+        for lyrics_count in range(5):
+            lyrics_list.append(lyrics[lyrics_count])
+    else:
+        lyrics_list = lyrics
     return render(request, 'Kasa/search_detail.html', {
-        'singers': singers,
-        'songs': songs,
-        'lyrics': lyrics,
+        'singers': singers_list,
+        'songs': songs_list,
+        'lyrics': lyrics_list,
         'kwd': kwd,
     })
 
