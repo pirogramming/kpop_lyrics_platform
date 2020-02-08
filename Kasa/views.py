@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 
 # Create your views here.
-from Kasa.models import Songs, Lyrics, Explanations, Singers
+from Kasa.models import *
 
 
 def search(request):
@@ -40,22 +40,29 @@ def search(request):
         'kwd': kwd,
     })
 
-    """
-    :method: GET
-    :param request:
-    request.GET['keyword']; 검색 키워드
-    :return:
-    render_template('search/search_detail.html')
+def singer_detail(request, pk):
+    singer = get_object_or_404(Singers, pk=pk)
+    return render(request, 'Kasa/singer_detail.html', {
+        'singer' : singer
+    })
 
-    singer_list = [Singers]; max length 10
-    album_list = [Albums]; max length 10
-    song_list = [Songs]; max length 10
-    lyrics_list = [Lyrics]; max length 10
+def group_detail(request, pk):
+    group = get_object_or_404(Groups, pk=pk)
+    return render(request, 'Kasa/group_detail.html', {
+        'group' : group
+    })
 
-    """
+def album_detail(request, pk):
+    album = get_object_or_404(Albums, pk=pk)
+    return render(request, 'Kasa/album_detail.html', {
+        'album' : album
+    })
 
-    raise NotImplementedError
-
+def song_detail(request, pk):
+    song = get_object_or_404(Songs, pk=pk)
+    return render(request, 'Kasa/song_detail.html', {
+        'song' : song
+    })
 
 def select_top_5_songs():
     """
