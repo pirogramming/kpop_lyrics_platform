@@ -14,15 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script>
-    $('html').click(function (e) {
-        if (!$(e.target).hasClass("result")) {
-            $('#result').html('');
-        }
-    })
 
     function complete(kwd, id) {
         $('#search').val(kwd);
-        $('#wrapper').append('<input type="hidden" class="id" name="id" value="'+id+'">')
+        $('#wrapper').append('<input type="hidden" class="id" name="id" value="' + id + '">')
     }
 
     function delay(callback, ms) {
@@ -37,6 +32,12 @@
     }
 
     $(document).ready(function () {
+        $('html').click(function (e) {
+            if (!$(e.target).hasClass("result")) {
+                $('#result').html('');
+            }
+        })
+
         $('#search').keyup(delay(function () {
             $('#result').html('');
             var searchField = $('#search').val();
@@ -54,14 +55,14 @@
                         } else {
                             for (var i in value) {
                                 $('#result').append('<div class="list_group_item">' +
-                                    '<button onclick="javascript:complete(\'' + value[i]['name'] + '\', '+value[i]['id']+')">' +
+                                    '<button onclick="javascript:complete(\'' + value[i]['name'] + '\', ' + value[i]['id'] + ')">' +
                                     value[i]['name'] + '</button></div>');
                             }
                         }
                     })
                 }
             })
-        }, 200));
+        }, 300));
     })
 </script>
 

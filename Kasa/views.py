@@ -45,14 +45,22 @@ def search_group(request):
 
 def enter_all_lyrics(request, song_id):
     if request.method == "POST":
-        all_kor = request.POST.get('all_kor').split('\r\n')
+        all_kor = request.POST.get('all_kor', None).split('\r\n')
+        all_kor_dict = list()
+
         song = Songs.objects.get(pk=song_id)
         singers = Singers.objects.filter(singer_song=song_id)
         length = len(all_kor)
+
+        for index, lyrics in enumerate(all_kor):
+            all_kor_dict.append({
+                str(index + 1): lyrics
+            })
+
         context = {
             'song': song,
             'singers': singers,
-            'all_kor': all_kor,
+            'all_kor_dict': all_kor_dict,
             'length': length,
         }
         return render(request, 'Kasa/modify_each_lyrics.html', context)
@@ -62,20 +70,32 @@ def enter_all_lyrics(request, song_id):
 
 def modify_each_lyrics(request, song_id):
     if request.method == "POST":
+        song = Songs.objects.get(pk=song_id)
         request_dict = request.POST
-        print(request_dict)
         lyrics_all = list()
         length = int(request_dict['length'])
         for index in range(1, length + 1):
             str_index = str(index)
-
-
             lyrics_all.append({
                 'kor': request_dict['kor' + str_index],
                 'eng': request_dict['eng' + str_index],
                 'rom': request_dict['rom' + str_index],
             })
+            if 'part' + str_index + '[]' in request_dict:
+                partList = request_dict.getlist('part' + str_index + '[]')
+                # for member in partList:
+                lyrics_all[index-1]['part'] = partList
+            else:
+                lyrics_all[index-1]['part'] = ''
+
+        print(lyrics_all)
         context = {
-            'lyrics_all': lyrics_all
+            'song': song,
+            'lyrics_all': lyrics_all,
         }
-        return render(request, 'Kasa/determine_parts.html', context)
+        return render(request, 'Kasa/double_check_request.html', context)
+
+
+def create_all_lyrics(request):
+    if request.method == "POST":
+        print(request.POST)

@@ -7,6 +7,7 @@ urlpatterns = [
     path('detail_song/<int:song_pk>/', views.detail_song, name='detail_song'),
     path('edit/<int:song_id>/stage1/', views.enter_all_lyrics, name='enter_all_lyrics'),
     path('edit/<int:song_id>/stage2/', views.modify_each_lyrics, name='modify_each_lyrics'),
+    path('edit/stage3/', views.create_all_lyrics, name='create_all_lyrics'),
 
 
 
