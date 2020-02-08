@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Best way to find K-pop lyrics Kasa</title>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <style>
+        html {
+            font-family: "Aller Light";
+            position: relative;
+            min-height: 100%;
+            margin: 0;
+            background:white;
+             }
+        body {
+            min-height: 100%;
+            margin:0 0 10px 0;
+            padding-bottom: 100px;
+            }
+        nav {
+            width:100%;
+            background: black;
+            font-weight: bold;
+        }
+        nav .navlist{
+            display:flex;
+            flex-direction:row;
+            {#padding:0px 40px 0px 0px;#}
+            margin:0;
+            list-style:none;
+            list-style-type:none;
+            align-items:center;
+        }
+        nav .navlist .title{
+            font-size:3em;
+            padding:0px 0px 0px 50px;
+            /*vertical-align: bottom;*/
+            /*align-items:center;*/
+        }
+        nav .navlist .signin:hover, nav .navlist .signup:hover{
+            border-bottom:2px solid;
+        }
+        nav .navlist .title, .signin, .signup{
+            float:left;
+        }
+        nav .navlist .title{
+            margin-right:auto;
+        }
+        nav .navlist .title a, nav .navlist .signin a, nav .navlist .signup a{
+            width:60px;
+            display:block;
+            padding:10px 10px;
+            text-decoration:none;
+            color:white;
+            text-align:center;
+        }
+
+        nav .navlist .signup a {
+            margin-right : 50px;
+        }
+
+        nav .navlist .signin a {
+            margin-right: 10px;
+        }
+
+        nav .navlist #title_a_tag {
+            width:138px;
+            height: 45px;
+            display:block;
+            padding:10px 10px;
+            text-decoration:none;
+            color:white;
+            text-align:center;
+            }
+
+        nav .navlist .search-box{
+            margin-right: 50px;
+            padding: 5px;
+            {#position: absolute;#}
+            {#top: 8px;#}
+            {#right:220px;#}
+            height: 25px;
+            background-color: #ffffff;
+            border: 2px solid #00fffe;
+            border-radius: 30px;
+            transition: 0.4s;
+            width:30px;
+        }
+        nav .navlist .search-box:hover{
+            box-shadow: 0px 0px 10px 1px #51e3d4;
+            border: 2px solid #00fffe;
+            width: 300px;
+        }
+        nav .navlist .search-box .search-btn{
+            text-decoration: none;
+            float: right;
+            padding-top : 2px;
+            width: 27px;
+            height: 27px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00fffe;
+        }
+        nav .navlist .search-box:hover > .search-btn{
+            background-color: #ffffff;
+        }
+
+        nav .navlist .search-box .search-txt{
+            display: flex;
+            padding: 0;
+            width: 0px;
+            border:none;
+            background: none;
+            outline: none;
+            float: left;
+            font-size: 1rem;
+            line-height: 30px;
+            transition: .4s;
+        }
+        nav .navlist .search-box:hover > .search-txt{
+            width: 240px;
+            padding: 0 6px;
+        }
+        .wrap{
+            width:500px;
+            margin:auto;
+            background-color: white;
+            padding:0px;
+        }
+        form{
+            padding:10px;
+            margin:10px;
+        }
+        h1{
+            text-align: center;
+            color: black;
+            font-size:3em;
+            font-family:Aller;
+            padding: 10px;
+            border-radius: 30px;
+        }
+        .field{
+               border:0;
+              background:none;
+            display:block;
+             margin:40px auto;
+             text-align: center;
+             border-bottom:2px solid black;
+            padding:5px 10px;
+            outline:none;
+            color:black;
+            transition: 0.25s;position: static;
+            font-size:1.5em;
+            border-color:black;position: static;
+            font-size:1em;
+            width:90%;
+        }
+
+        input[type=submit]{
+            width:95%;
+            background-color: white;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color:black;
+            padding:10px;
+            border-radius: 30px;
+            border: 2px solid #00fffe;
+            transition: 0.25s;
+        }
+        input[type=submit]:hover{
+            background-color: #00fffe;
+        }
+        select{
+            padding:10px;
+            width:32%;
+            border-radius: 30px;
+        }
+
+        footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            text-align: center;
+            color: gray;
+            font-weight:bold;
+            }
+    </style>
+</head>
+<body>
+<nav>
+    <div class = "navlist">
+        <div class="title"><a id="title_a_tag" href="#"> <img src="../../../templates/KakaoTalk_20200204_155442069.png"></a></div>
+        <div class="search-box">
+            <input type="text" class="search-txt" name="" placeholder=" Search">
+            <input type="image" src="../../../templates/KakaoTalk_20200206_174558346-1.png" alt="submit" class="search-btn">
+        </div>
+        <div class="signin"><a href="#">Sign in</a></div>
+        <div class="signup"><a href="#">Sign up</a></div>
+    </div>
+</nav>
+<div class="wrap">
+
+
+{% if user.is_authenticated %}
+    <script type="text/javascript">
+        alert('회원가입을 위해서는 로그아웃이 필요합니다.')
+    </script>
+{% else %}
+
+{#    {% for label in form %}#}
+{#        {% if label.errors %}#}
+{#            {% for error in label.errors %}#}
+{#                <div>{{ error }}</div>#}
+{#            {% endfor %}#}
+{#        {% endif %}#}
+{#    {% endfor %}#}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h1>SignUp</h1>
+        {% for field in form %}
+            <div class="field">
+                {{ field.label }}
+                {{ field }}
+            </div>
+            <br/>
+        {% endfor %}
+
+
+{% endif %}
+
+        <br>
+        <br>
+        <input type="radio" name="male" value="male">Male
+        <input type="radio" name="female" value="female">Female
+        <br>
+        <input type="checkbox"> I Agree To The Terms of Use
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="Submit Now">
+    </form>
+</div>
+
+
+<footer class="footer">
+    <div class="developer">피로그래밍 12기 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 정승현 &nbsp &nbsp &nbsp &nbsp 권구상 &nbsp &nbsp &nbsp &nbsp 신우철 &nbsp &nbsp &nbsp &nbsp 송민호</div>
+
+</footer>
+</body>
+</html>
+
+

@@ -1,0 +1,15 @@
+{% for label in form %}
+    {% if label.errors %}
+        {% for error in label.errors %}
+            <div>{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="변경">
+</form>

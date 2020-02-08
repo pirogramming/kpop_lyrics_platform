@@ -1,0 +1,11 @@
+{% for comment in comments %}
+    <div class="comment_wrapper">
+        <div>{{ comment.content }}</div>
+        <div>{{ comment.created_at }}</div>
+        <div>{{ comment.song.sname }}</div>
+        <a href="{% url 'accounts:delete_comment' %}">삭제버튼</a>
+    </div>
+{% endfor %}
+
+노래 제목 누르면 이동
+

@@ -1,0 +1,29 @@
+{% load socialaccount %}
+{% providers_media_js %}
+
+
+{% if user.is_authenticated %}
+    <h2>Welcome, {{ user.alias }}</h2>
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    <a href="{% url 'accounts:change_pw' %}">비밀번호 변경</a>
+    <a href="{% url 'accounts:change_info' %}">정보 변경</a>
+    <a href="{% url 'accounts:check_comment' %}">작성 댓글</a>
+{% else %}
+    {% if errors %}
+        <p>아이디 또는 비밀번호가 일치하지 않습니다.</p>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div>
+            ID: <input type="text" name="username" autocomplete=off>
+        </div>
+        <div>
+            PASSWORD: <input type="password" name="password">
+        </div>
+        <button type="submit">로그인</button>
+    </form>
+    <a href="{% url 'accounts:reset_pw' %}">비밀번호 찾기</a>
+    <a href="{% url 'accounts:signup' %}">회원가입</a>
+    <a href="{% provider_login_url 'google' %}">GOOGLE</a>
+    <a href="{% provider_login_url 'kakao' %}">KAKAO</a>
+{% endif %}

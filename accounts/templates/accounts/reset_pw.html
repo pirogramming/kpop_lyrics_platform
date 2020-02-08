@@ -1,0 +1,8 @@
+  <h1>비밀번호 초기화</h1>
+  <p>이메일을 입력하세요.</p>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="변경메일 발송">
+  </form>

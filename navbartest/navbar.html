@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar</title>
+    <link rel="favicon" href="hnet.com-image.ico" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<style>
+*{font-family: Aller}
+
+    body{
+    margin:0;
+    padding:0;
+    background-color:rgba(226,223,214,0.99);
+}
+nav{
+    width:100%;
+    background:black;
+    /*overflow:auto;*/
+    /*border-bottom:1px solid white;*/
+    /*cursor:pointer;*/
+    font-family:Aller ;
+    /*font-weight:bold;*/
+
+
+}
+ul{
+    display:flex;
+    flex-direction:row;
+    padding:0px 40px 0px 0px;
+    margin:0;
+    list-style:none;
+    list-style-type:none;
+    align-items:center;
+}
+ul .title{
+    font-size:3em;
+    padding:0px 0px 0px 50px;
+    /*vertical-align: bottom;*/
+    /*align-items:center;*/
+
+}
+
+li:hover:not(.title){
+    border-bottom:2px solid;
+}
+
+li{
+    float:left;
+}
+li:first-child{
+    margin-right:auto;
+}
+nav a {
+    width:60px;
+    display:block;
+    padding:10px 10px;
+    text-decoration:none;
+    font-family:Aller;
+    color:white;
+    text-align:center;
+
+
+}
+
+    nav #title_a_tag {
+    width:138px;
+    height: 45px;
+    display:block;
+    padding:10px 10px;
+    text-decoration:none;
+    font-family:Aller;
+    color:white;
+    text-align:center;
+    }
+
+
+
+
+body{
+  background: #f2f2f2;
+  font-family: Aller;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 40px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+    font-size:45px;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 60px;
+  height: 56px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 50%;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+
+
+<nav>
+
+    <ul>
+        <li class="title"><a id="title_a_tag" href="#"><img src="KakaoTalk_20200204_155442069.png"></a></li>
+        <li><a href="#">Sign in</a></li>
+        <li><a href="#">Sign up</a></li>
+    </ul>
+</nav>
+
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="뭐 찾는거 있엉?ㅎㅎㅎ">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+
+
+
+</body>
+</html>
