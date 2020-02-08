@@ -1,10 +1,30 @@
 from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
-from Kasa.models import Songs, Lyrics, Explanations
+from Kasa.models import Songs, Lyrics, Explanations, Singers
 
 
-def search_live(request):
+def search(request):
+    singers = Singers.objects.all()
+    songs = Songs.objects.all()
+    lyrics = Lyrics.objects.all()
+
+    kwd = request.GET.get('kwd', '')
+    if kwd:
+        singers = singers.filter(sname__icontains=kwd)
+        songs = songs.filter(sname__icontains=kwd)
+        lyrics = lyrics.filter(
+            Q(kor__icontains=kwd) | Q(eng__icontains=kwd) | Q(rom__icontains=kwd)
+        )
+
+    return render(request, 'Kasa/search_detail.html', {
+        'singer_list' : singers,
+        'song_list' : songs,
+        'lyrics_list' : lyrics,
+        'kwd':kwd,
+    })
+
     """
     :method: GET
     :param request:
