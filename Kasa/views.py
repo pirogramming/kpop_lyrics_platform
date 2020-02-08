@@ -6,23 +6,17 @@ from Kasa.models import Songs, Lyrics, Explanations, Singers
 
 
 def search(request):
-    singers = Singers.objects.all()
-    songs = Songs.objects.all()
-    lyrics = Lyrics.objects.all()
-
     kwd = request.GET.get('kwd', '')
-    if kwd:
-        singers = singers.filter(sname__icontains=kwd)
-        songs = songs.filter(sname__icontains=kwd)
-        lyrics = lyrics.filter(
-            Q(kor__icontains=kwd) | Q(eng__icontains=kwd) | Q(rom__icontains=kwd)
-        )
 
+    singers = Singers.objects.filter(sname__icontains=kwd)
+    songs = Songs.objects.filter(sname__icontains=kwd)
+    lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
+    print(singers)
     return render(request, 'Kasa/search_detail.html', {
-        'singer_list' : singers,
-        'song_list' : songs,
-        'lyrics_list' : lyrics,
-        'kwd':kwd,
+        'singers': singers,
+        'songs': songs,
+        'lyrics': lyrics,
+        'kwd': kwd,
     })
 
     """
@@ -47,7 +41,7 @@ def select_top_5_songs():
     5개의 노래를 뽑아서 리턴하세요.
     :return: a list of songs
     """
-    raise NotImplementedError
+    # raise NotImplementedError
 
 
 def pick_one_group_by_user(user=None):
@@ -55,7 +49,7 @@ def pick_one_group_by_user(user=None):
     만약 로그인이면, 관심사 그룹을 보여주고 아니면 랜덤픽
     :return:
     """
-    raise NotImplementedError
+    # raise NotImplementedError
 
 
 def main(request):
@@ -71,10 +65,11 @@ def main(request):
     """
     five_songs = select_top_5_songs()
     group = pick_one_group_by_user(request.user)
-    return render(request, 'main.html', context={
+    return render(request, 'main_revised_second_version.html', context={
         'five_songs': five_songs,
         'group': group
     })
+
 
 def show_lyric(request):
     """
@@ -94,7 +89,6 @@ def show_lyric(request):
     lyrics = Lyrics.objects.filter(song_id=song.id)
     explanations = list()
     for lyric in lyrics:
-        
         explanations += Explanations.objects.filter(lyrics_id=lyric.id)
 
     max_explanation = None
@@ -103,4 +97,4 @@ def show_lyric(request):
         if explanation.likes > max_likes:
             max_explanation = explanation
 
-    raise NotImplementedError
+    # raise NotImplementedError

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Singer name</h1>
+<hr/>
+{% for singer in singers %}
+    <h3>{{ singer.sname }}</h3>
+{% endfor %}
+<h1>Song name</h1>
+<hr/>
+{% for song in songs %}
+    <h3>{{ song.sname }}</h3>
+{% endfor %}
+<h1>Lyrics</h1>
+<hr/>
+{% for lyric in lyrics %}
+    <h3>{{ lyric.song }}</h3>
+    <h3>{{ lyric.song.album.album_art }}</h3>
+    <h5>{{ lyric.kor }}</h5>
+{% endfor %}
+<h1></h1>
+</body>
+</html>

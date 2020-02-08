@@ -72,7 +72,7 @@ class Lyrics(models.Model):
     singer = models.ManyToManyField(Singers, verbose_name='파트', related_name='singer_lyrics')
 
     def __str__(self):
-        return self.song.sname, str(self.order)
+        return self.song.sname + str(self.order)
 
 
 class Explanations(models.Model):
