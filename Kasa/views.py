@@ -7,12 +7,13 @@ from Kasa.models import Groups, Songs, Singers, Lyrics
 
 def detail_song(request, song_pk):
     song = get_object_or_404(Songs, pk=song_pk)
-    print(song.youtube_url)
     sns = song.album.group.sns_url
     youtube_url = convert_youtube(song.youtube_url)
+    all_lyrics = song.song_lyrics.all()
     context = {
         'youtube_url': youtube_url,
         'sns': sns,
+        'all_lyrics': all_lyrics,
     }
     return render(request, 'Kasa/detail_song.html', context)
 
@@ -45,22 +46,36 @@ def search_group(request):
 
 def enter_all_lyrics(request, song_id):
     if request.method == "POST":
-        all_kor = request.POST.get('all_kor', None).split('\r\n')
-        all_kor_dict = list()
-
         song = Songs.objects.get(pk=song_id)
         singers = Singers.objects.filter(singer_song=song_id)
+        all_kor = request.POST.get('all_kor', None).split('\r\n')
+
+        all_lang_dict = {}
         length = len(all_kor)
 
         for index, lyrics in enumerate(all_kor):
-            all_kor_dict.append({
-                str(index + 1): lyrics
-            })
+            all_lang_dict[str(index + 1)] = {'kor': lyrics}
+
+        eng_request = request.POST.get('all_eng', None)
+        if eng_request:
+            all_eng = eng_request.split('\r\n')
+            for index, lyrics in enumerate(all_eng):
+                location = all_lang_dict.get(str(index + 1), None)
+                location['eng'] = lyrics
+
+        rom_request = request.POST.get('all_rom', None)
+        if rom_request:
+            all_rom = rom_request.split('\r\n')
+            for index, lyrics in enumerate(all_rom):
+                location = all_lang_dict.get(str(index + 1), None)
+                location['rom'] = lyrics
+
+        print(all_lang_dict)
 
         context = {
             'song': song,
             'singers': singers,
-            'all_kor_dict': all_kor_dict,
+            'all_lang_dict': all_lang_dict,
             'length': length,
         }
         return render(request, 'Kasa/modify_and_create_each_lyrics.html', context)

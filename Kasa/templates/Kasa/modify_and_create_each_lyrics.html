@@ -4,43 +4,42 @@
     <div id="wrapper" class="wrapper">
         <input type="hidden" name="length" value="{{ length }}">
         <div>
-            <input type="submit" name="submit" value="제출">
             <button type="button" class="check" onclick="javascript:doDisplay()">검토</button>
+            <input type="submit" name="submit" value="제출">
         </div>
-        {% for all_kor in all_kor_dict %}
-            {% for index, kor in all_kor.items %}
-                <div>{{ index }}</div>
+        {% for index, lang_dict in all_lang_dict.items %}
+            <div>{{ index }}</div>
 
-                <div class="division">
-                    <div>한국어: <input type="text" id=kor{{ index }} name="kor{{ index }}" class="kor_lyrics_part"
-                                     value="{{ kor }}"
-                                     style="width:500px;"></div>
-                </div>
-                <div class="division">
-                    <div>영어: <input type="text" id=eng{{ index }} name="eng{{ index }}" class="kor_lyrics_part" value=""
-                                    style="width:500px;"></div>
-                </div>
-                <div class="division">
-                    <div>로마자: <input type="text" id=rom{{ index }} name="rom{{ index }}" class="kor_lyrics_part"
-                                     value=""
-                                     style="width:500px;"></div>
-                </div>
-                <div class="division">
-                    <label for="all">
-                        <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}all"
-                               class="chk_all{{ index }}" value=""
-                               onclick="javascript:check_all({{ index }}, this.checked)"
-                        >
-                        <label for="part{{ index }}all">전체</label>
-                    </label>
-                    {% for singer in singers %}
-                        <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}{{ singer }}"
-                               class="chk{{ index }}"
-                               value="{{ singer }}">
-                        <label for="part{{ index }}{{ singer }}">{{ singer }}</label>
-                    {% endfor %}
-                </div>
-            {% endfor %}
+            <div class="division">
+                <div>한국어: <input type="text" id=kor{{ index }} name="kor{{ index }}" class="kor_lyrics_part"
+                                 value="{{ lang_dict.kor }}"
+                                 style="width:500px;"></div>
+            </div>
+            <div class="division">
+                <div>영어: <input type="text" id=eng{{ index }} name="eng{{ index }}" class="kor_lyrics_part"
+                                value="{{ lang_dict.eng }}"
+                                style="width:500px;"></div>
+            </div>
+            <div class="division">
+                <div>로마자: <input type="text" id=rom{{ index }} name="rom{{ index }}" class="kor_lyrics_part"
+                                 value="{{ lang_dict.rom }}"
+                                 style="width:500px;"></div>
+            </div>
+            <div class="division">
+                <label for="all">
+                    <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}all"
+                           class="chk_all{{ index }}" value=""
+                           onclick="javascript:check_all({{ index }}, this.checked)"
+                    >
+                    <label for="part{{ index }}all">전체</label>
+                </label>
+                {% for singer in singers %}
+                    <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}{{ singer }}"
+                           class="chk{{ index }}"
+                           value="{{ singer }}">
+                    <label for="part{{ index }}{{ singer }}">{{ singer }}</label>
+                {% endfor %}
+            </div>
         {% endfor %}
     </div>
     <div id="load_check" style="display:none;">
@@ -68,8 +67,6 @@
             check.style.display = 'none';
             checking_input()
             input.style.display = 'block';
-
-
         }
     }
 
@@ -117,10 +114,7 @@
                 $('#load_check_eng').append('<div style="height:21.6px;">' + eng_list[loc] + '</div>');
                 $('#load_check_rom').append('<div style="height:21.6px;">' + rom_list[loc] + '</div>');
                 $('#load_check_part').append('<div style="height:21.6px;">' + part_list[loc] + '</div>');
-
             }
         })
     }
-
-
 </script>

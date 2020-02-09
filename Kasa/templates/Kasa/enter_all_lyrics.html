@@ -1,14 +1,48 @@
 <form action="" method="POST">
     {% csrf_token %}
-    <h2>한국어 가사</h2>
-    <textarea name="all_kor" cols="40" rows="30"></textarea>
-
-
+    <div id="all_kor">
+        <h2>한국어 가사</h2>
+        <textarea name="all_kor" cols="40" rows="30"></textarea>
+    </div>
+    <div id="all_eng" style="display:none;">
+        <h2>영어 가사</h2>
+        <textarea name="all_eng" cols="40" rows="30"></textarea>
+    </div>
+    <div id="all_rom" style="display:none;">
+        <h2>로마자 가사</h2>
+        <textarea name="all_rom" cols="40" rows="30"></textarea>
+    </div>
     <!--
     <h2>영어 가사</h2>
     <textarea name="all_eng" cols="40" rows="30"></textarea>
     <h2>로마자 가사</h2>
     <textarea name="all_rom" cols="40" rows="30"></textarea>
     -->
+    <button type="button" id="add_eng" onclick="doDisplay_eng()">영어가사추가</button>
+    <button type="button" id="add_rom" onclick="doDisplay_rom()">로마자가사추가</button>
+
     <input type="submit" value="입력">
 </form>
+
+<script type="text/javascript" language="javascript">
+    function doDisplay_eng() {
+        var check = document.getElementById("all_eng");
+
+        if (check.style.display == 'none') {
+            check.style.display = 'block';
+
+        } else {
+            check.style.display = 'none';
+        }
+    }
+
+    function doDisplay_rom() {
+        var check = document.getElementById("all_rom");
+
+        if (check.style.display == 'none') {
+            check.style.display = 'block';
+        } else {
+            check.style.display = 'none';
+        }
+    }
+</script>
