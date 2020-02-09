@@ -1,8 +1,8 @@
 import json
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from Kasa.convert_url import convert_youtube
-from Kasa.models import Groups, Songs, Singers
+from Kasa.models import Groups, Songs, Singers, Lyrics
 
 
 def detail_song(request, song_pk):
@@ -63,39 +63,78 @@ def enter_all_lyrics(request, song_id):
             'all_kor_dict': all_kor_dict,
             'length': length,
         }
-        return render(request, 'Kasa/modify_each_lyrics.html', context)
+        return render(request, 'Kasa/modify_and_create_each_lyrics.html', context)
     else:
         return render(request, 'Kasa/enter_all_lyrics.html')
 
 
-def modify_each_lyrics(request, song_id):
-    if request.method == "POST":
-        song = Songs.objects.get(pk=song_id)
-        request_dict = request.POST
-        lyrics_all = list()
-        length = int(request_dict['length'])
-        for index in range(1, length + 1):
-            str_index = str(index)
-            lyrics_all.append({
-                'kor': request_dict['kor' + str_index],
-                'eng': request_dict['eng' + str_index],
-                'rom': request_dict['rom' + str_index],
-            })
-            if 'part' + str_index + '[]' in request_dict:
-                partList = request_dict.getlist('part' + str_index + '[]')
-                # for member in partList:
-                lyrics_all[index-1]['part'] = partList
-            else:
-                lyrics_all[index-1]['part'] = ''
-
-        print(lyrics_all)
-        context = {
-            'song': song,
-            'lyrics_all': lyrics_all,
-        }
-        return render(request, 'Kasa/double_check_request.html', context)
-
-
-def create_all_lyrics(request):
+def modify_and_create_each_lyrics(request, song_id):
     if request.method == "POST":
         print(request.POST)
+        request_dict = request.POST
+        song = Songs.objects.get(pk=song_id)
+        singers = song.singer.all()
+        all_lyrics = song.song_lyrics.all().order_by('order')
+        length = int(request.POST['length'])
+        if all_lyrics:
+            # DB에 저장된 노래가사들이 있을 경우
+            print('있음')
+            existing_lyrics_length = len(all_lyrics)
+            if existing_lyrics_length > length:
+                # 새로 들어온 가사가 기존의 가사의 길이보다 작을 경우 삭제
+                start = length
+                end = existing_lyrics_length
+                for over in range(start, end):
+                    all_lyrics[over].delete()
+            for input_order in range(0, length):
+                str_input_order = str(input_order + 1)
+                if input_order < existing_lyrics_length:
+                    # 기존 순서의 가사가 있을 경우 변경
+                    all_lyrics[input_order].kor = request_dict['kor' + str_input_order]
+                    all_lyrics[input_order].order = input_order + 1
+                    if request_dict['eng' + str_input_order]:
+                        all_lyrics[input_order].eng = request_dict['eng' + str_input_order]
+                    if request_dict['rom' + str_input_order]:
+                        all_lyrics[input_order].rom = request_dict['rom' + str_input_order]
+                    if request_dict.get('part' + str_input_order + '[]', False):
+                        partList = request_dict.getlist('part' + str_input_order + '[]')
+                        all_lyrics[input_order].singer.clear()
+                        for member in singers:
+                            if member.sname in partList:
+                                all_lyrics[input_order].singer.add(member)
+                    all_lyrics[input_order].save()
+                else:
+                    # 기존 순서에 없는 가사가 있을 경우 추가
+                    new_lyrics = Lyrics.objects.create(kor=request_dict['kor' + str_input_order],
+                                                       order=input_order + 1, song=song)
+                    if request_dict['eng' + str_input_order]:
+                        new_lyrics.eng = request_dict['eng' + str_input_order]
+                    if request_dict['rom' + str_input_order]:
+                        new_lyrics.rom = request_dict['rom' + str_input_order]
+                    if request_dict.get('part' + str_input_order + '[]', False):
+                        partList = request_dict.getlist('part' + str_input_order + '[]')
+                        # all_lyrics[input_order].singer.clear()
+                        for member in singers:
+                            if member.sname in partList:
+                                new_lyrics.singer.add(member)
+                    new_lyrics.save()
+
+        else:
+            # 노래의 가사가 처음 등록되는 경우
+            for input_order in range(0, length):
+                str_input_order = str(input_order + 1)
+                new_lyrics = Lyrics.objects.create(kor=request_dict['kor' + str_input_order],
+                                                   order=input_order + 1, song=song)
+                if request_dict['eng' + str_input_order]:
+                    new_lyrics.eng = request_dict['eng' + str_input_order]
+                if request_dict['rom' + str_input_order]:
+                    new_lyrics.rom = request_dict['rom' + str_input_order]
+                if request_dict.get('part' + str_input_order + '[]', False):
+                    partList = request_dict.getlist('part' + str_input_order + '[]')
+                    # all_lyrics[input_order].singer.clear()
+                    for member in singers:
+                        if member.sname in partList:
+                            new_lyrics.singer.add(member)
+                new_lyrics.save()
+
+    return redirect('Kasa:detail_song', song.pk)

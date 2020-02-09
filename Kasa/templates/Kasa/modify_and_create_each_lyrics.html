@@ -1,4 +1,4 @@
-<form action="{% url "Kasa:modify_each_lyrics" song.pk %}" method="POST">
+<form action="{% url "Kasa:modify_and_create_each_lyrics" song.pk %}" method="POST">
     {% csrf_token %}
     노래: {{ song.sname }}
     <div id="wrapper" class="wrapper">
@@ -28,7 +28,7 @@
                 <div class="division">
                     <label for="all">
                         <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}all"
-                               class="chk_all{{ index }}"
+                               class="chk_all{{ index }}" value=""
                                onclick="javascript:check_all({{ index }}, this.checked)"
                         >
                         <label for="part{{ index }}all">전체</label>
