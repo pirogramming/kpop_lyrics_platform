@@ -14,3 +14,22 @@
 <iframe width="500" height="250" src="{{ youtube_url }}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+
+{% for comment in comments %}
+    <div>{{ comment.content }}</div>
+    <div>{{ comment.user.username }}</div>
+    <div>{{ comment.created_at }}</div>
+    <br/>
+{% endfor %}
+
+
+{% if user.is_authenticated %}
+    <form action="{% url "Kasa:write_new_comment" %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="comment_content" name="comment_content" placeholder="댓글 작성" autocomplete="off">
+        <input type="submit" class="submit" value="작성">
+        <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
+    </form>
+{% else %}
+    <a href="{% url "accounts:login" %}">로그인</a>
+{% endif %}

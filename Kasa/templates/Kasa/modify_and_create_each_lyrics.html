@@ -1,12 +1,13 @@
 <form action="{% url "Kasa:modify_and_create_each_lyrics" song.pk %}" method="POST">
     {% csrf_token %}
     노래: {{ song.sname }}
+    <div>
+        <button type="button" class="check" onclick="javascript:doDisplay()">검토</button>
+        <input type="submit" name="submit" value="제출">
+    </div>
     <div id="wrapper" class="wrapper">
         <input type="hidden" name="length" value="{{ length }}">
-        <div>
-            <button type="button" class="check" onclick="javascript:doDisplay()">검토</button>
-            <input type="submit" name="submit" value="제출">
-        </div>
+
         {% for index, lang_dict in all_lang_dict.items %}
             <div>{{ index }}</div>
 

@@ -2,7 +2,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from Kasa.convert_url import convert_youtube
-from Kasa.models import Groups, Songs, Singers, Lyrics
+from Kasa.models import Groups, Songs, Singers, Lyrics, Comments
 
 
 def detail_song(request, song_pk):
@@ -10,12 +10,22 @@ def detail_song(request, song_pk):
     sns = song.album.group.sns_url
     youtube_url = convert_youtube(song.youtube_url)
     all_lyrics = song.song_lyrics.all()
+    comments = song.song_comment.all().order_by('-created_at')
     context = {
+        'song': song,
+        'comments': comments,
         'youtube_url': youtube_url,
         'sns': sns,
         'all_lyrics': all_lyrics,
     }
     return render(request, 'Kasa/detail_song.html', context)
+
+
+def write_new_comment(request):
+    if request.method == "POST":
+        song = get_object_or_404(Songs, pk=request.POST.get('song_id', None))
+        Comments.objects.create(content=request.POST.get('comment_content', ''), user=request.user, song=song)
+        return redirect('Kasa:detail_song', song.pk)
 
 
 def choice_group(request):

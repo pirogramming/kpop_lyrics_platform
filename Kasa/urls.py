@@ -5,6 +5,7 @@ app_name = 'Kasa'
 
 urlpatterns = [
     path('detail_song/<int:song_pk>/', views.detail_song, name='detail_song'),
+    path('comment/new/', views.write_new_comment, name='write_new_comment'),
     path('edit/<int:song_id>/stage1/', views.enter_all_lyrics, name='enter_all_lyrics'),
     path('edit/<int:song_id>/stage2/', views.modify_and_create_each_lyrics, name='modify_and_create_each_lyrics'),
 
