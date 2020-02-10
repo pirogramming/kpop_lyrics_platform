@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Singer name</h1>
+<hr/>
+{% for singer in singers %}
+    <h5>{{ forloop.counter }}</h5>
+    <h3><a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.sname }}</a></h3>
+    <h3><a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.image }}</a></h3>
+    {% for group in singer.group.all %}
+        <h3><a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a></h3>
+    {% endfor %}
+{% endfor %}
+<h1>Song name</h1>
+<hr/>
+{% for song in songs %}
+    <h5>{{ forloop.counter }}</h5>
+    <h3><a href="{% url 'Kasa:album_detail' song.album.pk %}">{{ song.album.album_art }}</a></h3>
+    <h3><a href="{% url 'Kasa:song_detail' song.pk %}">{{ song.sname }}</a></h3>
+{% endfor %}
+<h1>Lyrics</h1>
+<hr/>
+{% for lyric in lyrics %}
+    <h5>{{ forloop.counter }}</h5>
+    <h3>{{ lyric.song.album.album_art }}</h3>
+    <h3>{{ lyric.song }}</h3>
+    <h5>{{ lyric.kor }}</h5>
+{% endfor %}
+<h1></h1>
+</body>
+</html>

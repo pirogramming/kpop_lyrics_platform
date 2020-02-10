@@ -1,0 +1,29 @@
+[33mcommit f49532536c76e34f99b4574532e30097893501ca[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/base,nav,footer[m[33m, [m[1;31morigin/woochul[m[33m, [m[1;32mwoochul[m[33m)[m
+Author: swc0620 <pinetreewave@naver.com>
+Date:   Tue Feb 4 13:31:52 2020 +0900
+
+    Sketched out models.py
+
+[33mcommit 0ebf9560cd3b61a3e5b50e547c9c08219437d60c[m
+Author: swc0620 <pinetreewave@naver.com>
+Date:   Tue Feb 4 11:22:29 2020 +0900
+
+    added new textfile, does it work?
+
+[33mcommit 13e5c7a0fe90585d90edca6865beaa992ea3a676[m[33m ([m[1;32mwoochul1[m[33m, [m[1;32mlogin[m[33m)[m
+Author: KwonKusang <rnjsrntkd95@gmail.com>
+Date:   Mon Feb 3 19:23:58 2020 +0900
+
+    renamed
+
+[33mcommit d99e62999b5c540d8522d190f70823575342c947[m
+Author: KwonKusang <rnjsrntkd95@gmail.com>
+Date:   Mon Feb 3 19:07:47 2020 +0900
+
+    inited project
+
+[33mcommit 68ee610d99e23c27e984701f0331a23d60ec71cf[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: KwonKusang <rnjsrntkd95@gmail.com>
+Date:   Mon Feb 3 18:48:38 2020 +0900
+
+    init
