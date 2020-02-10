@@ -35,13 +35,13 @@ class UserForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError('Id already exitsts.')
+            raise forms.ValidationError('Id already exsists.')
         return username
 
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
-            raise forms.ValidationError('Nickname already exitsts.')
+            raise forms.ValidationError('Nickname already exsists.')
         return alias
 
     def clean_verify_password(self):
@@ -70,5 +70,5 @@ class InfoForm(forms.ModelForm):
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
-            raise forms.ValidationError('Nickname already exitsts.')
+            raise forms.ValidationError('Nickname already exsists.')
         return alias
