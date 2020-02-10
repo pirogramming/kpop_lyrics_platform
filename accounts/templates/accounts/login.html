@@ -1,29 +1,129 @@
+{% extends 'base.html' %}
 {% load socialaccount %}
 {% providers_media_js %}
 
+{% block content %}
+ <style>
+    .unmatch{
+        text-align: center;
+    }
+    .sign_in_talk{
+        color:black;
+        font-weight: 500;
+        margin-top:80px;
+        padding:14px 0px;
+        text-align: center;
+        width:100%;
+        font-size:3em;
+        margin-bottom: 30px;
+    }
 
-{% if user.is_authenticated %}
-    <h2>Welcome, {{ user.alias }}</h2>
-    <a href="{% url 'accounts:logout' %}">로그아웃</a>
-    <a href="{% url 'accounts:change_pw' %}">비밀번호 변경</a>
-    <a href="{% url 'accounts:change_info' %}">정보 변경</a>
-    <a href="{% url 'accounts:check_comment' %}">작성 댓글</a>
-{% else %}
-    {% if errors %}
-        <p>아이디 또는 비밀번호가 일치하지 않습니다.</p>
+    .id, .password {
+        border:0;
+        background:none;
+        display:block;
+        margin:20px auto;
+        text-align: center;
+        border-bottom:2px solid black;
+        padding:10px 10px;
+        width:200px;
+        outline:none;
+        transition: 0.25s;position: static;
+    }
+    .submit,.google,.kakao{
+        font-weight: bold;
+        border:0;
+        background:none;
+        display:block;
+        margin:20px auto;
+        text-align: center;
+        border:2px solid #00fffe;
+        padding:10px 100px;
+        outline:none;
+        color:black;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor:pointer;
+        font-size:1em;
+    }
+
+    .submit:hover{
+        background:#00fffe;
+    }
+    .center{
+        text-align: center;
+        display:flex;
+        width:100%;
+        justify-content: center;
+    }
+    .findp, .signb, .or{
+        color:darkgray;
+        text-decoration: none;
+        font-weight: bold;
+        color:black;
+        text-align: center;
+
+    }
+    .or{
+        margin: 0 40px 0 10px;
+    }
+    .findpassword{
+        margin:0 40px 0 0;
+    }
+    .sociallogin > a{
+        width:250px;
+        text-decoration: none;
+        padding:10px 0;
+
+    }
+    .google:hover{
+        background:#de5246;
+        border:2px solid #de5246;
+    }
+    .kakao:hover{
+        background:#ffe812;
+        border:2px solid #ffe812;
+    }
+</style>
+    {% if user.is_authenticated %}
+        <h2>Welcome, {{ user.alias }}</h2>
+        <a href="{% url 'accounts:logout' %}">로그아웃</a>
+        <a href="{% url 'accounts:change_pw' %}">비밀번호 변경</a>
+        <a href="{% url 'accounts:change_info' %}">정보 변경</a>
+        <a href="{% url 'accounts:check_comment' %}">작성 댓글</a>
+    {% else %}
+        {% if errors %}
+            <p class="unmatch">아이디 또는 비밀번호가 일치하지 않습니다.</p>
+        {% endif %}
+        <div class="sign_in_talk">Sign in to Kasa</div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="memeberlogin">
+
+                <input type="text" class="id" name="username" autocomplete=off placeholder="id">
+
+
+                <input type="password" class="password" name="password" placeholder="Password">
+
+                <button type="submit" class="submit" value="sign in">로그인</button>
+            </div>
+
+        </form>
+        <div class="center">
+            <div class="findpassword">
+                <a href="{% url 'accounts:reset_pw' %}" class="findp">Find password</a></div>
+            <div class="or">
+                <a class="or">OR</a>
+            </div>
+            <div class="signupbutton"><a href="{% url 'accounts:signup' %}" class="signb">Sign up</a>
+            </div>
+        </div>
+        <div class="sociallogin">
+            <a href="{% provider_login_url 'google' %}" class="google" name="" value="sign in with google">GOOGLE</a>
+            <a href="{% provider_login_url 'kakao' %}" class="kakao" name="" value="sign in with kakao">KAKAO</a>
+        </div>
     {% endif %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        <div>
-            ID: <input type="text" name="username" autocomplete=off>
-        </div>
-        <div>
-            PASSWORD: <input type="password" name="password">
-        </div>
-        <button type="submit">로그인</button>
-    </form>
-    <a href="{% url 'accounts:reset_pw' %}">비밀번호 찾기</a>
-    <a href="{% url 'accounts:signup' %}">회원가입</a>
-    <a href="{% provider_login_url 'google' %}">GOOGLE</a>
-    <a href="{% provider_login_url 'kakao' %}">KAKAO</a>
-{% endif %}
+
+{% endblock %}
+</body>
+</html>

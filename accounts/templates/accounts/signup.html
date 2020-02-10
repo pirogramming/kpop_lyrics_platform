@@ -1,28 +1,86 @@
-{% if user.is_authenticated %}
-    <script type="text/javascript">
-        alert('회원가입을 위해서는 로그아웃이 필요합니다.')
-    </script>
-{% else %}
+{%  extends 'base.html' %}
+{% load widget_tweaks %}
 
-{#    {% for label in form %}#}
-{#        {% if label.errors %}#}
-{#            {% for error in label.errors %}#}
-{#                <div>{{ error }}</div>#}
-{#            {% endfor %}#}
-{#        {% endif %}#}
-{#    {% endfor %}#}
+{% block content %}
+    <style>
+        .signupwrap{
+            margin-top: 30px;
+            left:38%;
+            text-align: center;
+            position:absolute;
+            border: 2px solid #00fffe;
+            width:25%
+        }
+        .signupbutton{
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <h2>회원가입</h2>
-        {% for field in form %}
-            <div class="field">
+            font-size:20px;
+            margin-bottom: 70px;
+            border-radius:40px;
+            background-color: white;
+            border: 1px solid #00fffe;
+            padding: 5px;
+            width: 150px;
+            font-weight: bold;
+            transition:0.5s;
+        }
+        .signupbutton:hover{
+            background-color: #00fffe;
+            color:white;
+        }
+        .form{
+        {#text-align:center;#}
+            font-family: Aller;
+        }
+        .signup_title{
+        {#text-align:center;#}
+            margin-top:70px;
+            font-size:48px;
+            font-weight: bold;
+        }
+       .field{
+           background-color: white;
+           text-align:right;
+           padding-right:15%;
+           padding-left:10px;
+        }
+       input{
+           border: 2px solid white;
+           border-bottom: 2px solid black;
+       }
+        {
+            border:2px solid;
+        }
+
+    </style>
+    <div class="signupwrap">
+        {% if user.is_authenticated %}
+            <script type="text/javascript">
+                alert('Log out required for sign up.')
+            </script>
+        {% else %}
+
+            {#    {% for label in form %}#}
+            {#        {% if label.errors %}#}
+            {#            {% for error in label.errors %}#}
+            {#                <div>{{ error }}</div>#}
+            {#            {% endfor %}#}
+            {#        {% endif %}#}
+            {#    {% endfor %}#}
+
+            <form action="" method="POST" class="form">
+                {% csrf_token %}
+                <h2 class="signup_title">Sign up</h2>
                 {{ field.label }}
-                {{ field }}
-            </div>
-            <br/>
-        {% endfor %}
-        <button type="submit">회원가입</button>
-    </form>
-{% endif %}
+                {% for field in form  %}
+                    <div class="field">
+                        {{ field.label}}
+                        {{ field }}
+                    </div>
+                    <br/>
+                {% endfor %}
+                <button type="submit" class="signupbutton">Sign up</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
 

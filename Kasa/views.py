@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from Kasa.models import Songs, Lyrics, Explanations
+# from hitcount.views import HitCountMixin
 
 
 def search_live(request):
@@ -18,11 +19,16 @@ def search_live(request):
 
     """
 
+# class HitcountMixin(object):
+#     @classmethod
+#     def hit_count(self, request, hitcount):
+#       U
+
     raise NotImplementedError
+def select_top_5_songs(request):
 
-
-def select_top_5_songs():
     """
+    method :GET
     5개의 노래를 뽑아서 리턴하세요.
     :return: a list of songs
     """
