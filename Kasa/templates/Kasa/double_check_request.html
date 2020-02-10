@@ -1,0 +1,14 @@
+<div id="checking">
+    {% for lyrics_line in lyrics_all %}
+        {% for lang, lyrics in lyrics_line.items %}
+            {% if lang == 'part' %}
+                {% for member in lyrics %}
+                    <span>{{ member }}</span>
+                {% endfor %}
+                <br/>
+            {% else %}
+                <span>{{ lyrics }}</span>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</div>

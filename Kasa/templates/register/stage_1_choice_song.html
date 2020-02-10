@@ -1,0 +1,67 @@
+<form action="" method="POST">
+    {% csrf_token %}
+    <div style="border: 1px solid black">
+        <div id="wrapper" class="wrapper">
+            <input type="text" id="search" name="search" autocomplete="off">
+        </div>
+        <div class="list-group" id="result" class="result" style="border:1px solid black"></div>
+
+        <input type="submit" class="submit" value="제출">
+    </div>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script>
+    $('html').click(function (e) {
+        if (!$(e.target).hasClass("result")) {
+            $('#result').html('');
+        }
+    })
+
+    function complete(kwd, id) {
+        $('#search').val(kwd);
+        $('#wrapper').append('<input type="hidden" class="id" name="id" value="'+id+'">')
+    }
+
+    function delay(callback, ms) {
+        var timer = 0;
+        return function () {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                callback.apply(context, args);
+            }, ms || 0);
+        };
+    }
+
+    $(document).ready(function () {
+        $('#search').keyup(delay(function () {
+            $('#result').html('');
+            var searchField = $('#search').val();
+            //var expression = new RegExp(searchField, "i");
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Kasa:search_group' %}",
+                data: {'kwd': searchField, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                dataType: "json",
+                async: true,
+                success: function (response) {
+                    $.each(response, function (key, value) {
+                        if (!value.length) {
+                            $('#result').append('<div class="list-group-item">검색 결과가 없습니다.</div>');
+                        } else {
+                            for (var i in value) {
+                                $('#result').append('<div class="list-group-item">' +
+                                    '<button onclick="javascript:complete(\'' + value[i]['name'] + '\', '+value[i]['id']+')">' +
+                                    value[i]['name'] + '</button></div>');
+                            }
+                        }
+                    })
+                }
+            })
+        }, 200));
+    })
+</script>
+

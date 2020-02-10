@@ -1,0 +1,121 @@
+<form action="{% url "Kasa:modify_and_create_each_lyrics" song.pk %}" method="POST">
+    {% csrf_token %}
+    노래: {{ song.sname }}
+    <div>
+        <button type="button" class="check" onclick="javascript:doDisplay()">검토</button>
+        <input type="submit" name="submit" value="제출">
+    </div>
+    <div id="wrapper" class="wrapper">
+        <input type="hidden" name="length" value="{{ length }}">
+
+        {% for index, lang_dict in all_lang_dict.items %}
+            <div>{{ index }}</div>
+
+            <div class="division">
+                <div>한국어: <input type="text" id=kor{{ index }} name="kor{{ index }}" class="kor_lyrics_part"
+                                 value="{{ lang_dict.kor }}"
+                                 style="width:500px;"></div>
+            </div>
+            <div class="division">
+                <div>영어: <input type="text" id=eng{{ index }} name="eng{{ index }}" class="kor_lyrics_part"
+                                value="{{ lang_dict.eng }}"
+                                style="width:500px;"></div>
+            </div>
+            <div class="division">
+                <div>로마자: <input type="text" id=rom{{ index }} name="rom{{ index }}" class="kor_lyrics_part"
+                                 value="{{ lang_dict.rom }}"
+                                 style="width:500px;"></div>
+            </div>
+            <div class="division">
+                <label for="all">
+                    <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}all"
+                           class="chk_all{{ index }}" value=""
+                           onclick="javascript:check_all({{ index }}, this.checked)"
+                    >
+                    <label for="part{{ index }}all">전체</label>
+                </label>
+                {% for singer in singers %}
+                    <input type="checkbox" name="part{{ index }}[]" id="part{{ index }}{{ singer }}"
+                           class="chk{{ index }}"
+                           value="{{ singer }}">
+                    <label for="part{{ index }}{{ singer }}">{{ singer }}</label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <div id="load_check" style="display:none;">
+        <div id="load_check_wrapper" style="display:flex; flex-direction: row;">
+            <div id="load_check_part" style="border-right:1px solid black; padding:0 30px;">part</div>
+            <div id="load_check_kor" style="border-right:1px solid black; padding:0 30px;">kor</div>
+            <div id="load_check_eng" style="border-right:1px solid black; padding:0 30px;">eng</div>
+            <div id="load_check_rom" style="border-right:1px solid black; padding:0 30px;">rom</div>
+        </div>
+    </div>
+
+</form>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script type="text/javascript" language="javascript">
+    function doDisplay() {
+        var check = document.getElementById("wrapper");
+        var input = document.getElementById("load_check");
+
+        if (check.style.display == 'none') {
+            check.style.display = 'block';
+            input.style.display = 'none';
+
+        } else {
+            check.style.display = 'none';
+            checking_input()
+            input.style.display = 'block';
+        }
+    }
+
+    function catch_value(value) {
+        return document.getElementById(value).value;
+    }
+
+    function check_all(index, is_checked) {
+        var box = document.getElementsByClassName('chk' + index);
+        for (var chk = 0; chk < box.length; chk++) {
+            box[chk].checked = is_checked;
+        }
+    }
+
+
+    function checking_input() {
+        var kor_list = new Array();
+        var eng_list = new Array();
+        var rom_list = new Array();
+        var part_list = new Array();
+        for (var loc = 1; loc <= {{ length }}; loc++) {
+            kor_list[loc] = catch_value('kor' + loc);
+            eng_list[loc] = catch_value('eng' + loc);
+            rom_list[loc] = catch_value('rom' + loc);
+
+            var box = document.getElementsByClassName('chk' + loc);
+            var attend = new Array();
+            for (var chk = 0; chk < box.length; chk++) {
+                if (!box[chk].checked) {
+                    continue;
+                }
+                attend.push(box[chk].value);
+            }
+            part_list[loc] = attend;
+        }
+
+        $(function () {
+            $('#load_check_kor').html('');
+            $('#load_check_eng').html('');
+            $('#load_check_rom').html('');
+            $('#load_check_part').html('');
+
+            for (var loc = 1; loc <={{ length }}; loc++) {
+                $('#load_check_kor').append('<div style="height:21.6px;">' + kor_list[loc] + '</div>');
+                $('#load_check_eng').append('<div style="height:21.6px;">' + eng_list[loc] + '</div>');
+                $('#load_check_rom').append('<div style="height:21.6px;">' + rom_list[loc] + '</div>');
+                $('#load_check_part').append('<div style="height:21.6px;">' + part_list[loc] + '</div>');
+            }
+        })
+    }
+</script>
