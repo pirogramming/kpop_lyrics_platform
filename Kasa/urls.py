@@ -11,9 +11,6 @@ urlpatterns = [
 
 
 
-
-
-
     path('choice_group/', views.choice_group, name='choice_group'),
     path('search_group/', views.search_group, name='search_group'),
 ]
