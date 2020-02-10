@@ -2,10 +2,11 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from Kasa.convert_url import convert_youtube
-from Kasa.models import Groups, Songs, Singers, Lyrics, Comments
+from Kasa.models import *
+from django.db.models import Q
 
 
-def detail_song(request, song_pk):
+def song_detail(request, song_pk):
     song = get_object_or_404(Songs, pk=song_pk)
     album = song.album
     sns = song.album.group.sns_url
@@ -21,14 +22,14 @@ def detail_song(request, song_pk):
         'sns': sns,
         'all_lyrics': all_lyrics,
     }
-    return render(request, 'Kasa/detail_song.html', context)
+    return render(request, 'Kasa/song_detail.html', context)
 
 
 def write_new_comment(request):
     if request.method == "POST":
         song = get_object_or_404(Songs, pk=request.POST.get('song_id', None))
         Comments.objects.create(content=request.POST.get('comment_content', ''), user=request.user, song=song)
-        return redirect('Kasa:detail_song', song.pk)
+        return redirect('Kasa:song_detail', song.pk)
 
 
 def choice_group(request):
@@ -165,4 +166,101 @@ def modify_and_create_each_lyrics(request, song_id):
                             new_lyrics.singer.add(member)
                 new_lyrics.save()
 
-    return redirect('Kasa:detail_song', song.pk)
+    return redirect('Kasa:song_detail', song.pk)
+
+
+def search(request):
+    print(request.GET)
+    kwd = request.GET.get('kwd', None)
+    print(kwd)
+    if not kwd:
+        context = {
+            'noresult': '검색 결과가 없습니다.'
+        }
+        return render(request, 'Kasa/search_detail.html', context)
+
+    singers_list = []
+    songs_list = []
+    lyrics_list = []
+
+    singers = Singers.objects.filter(sname__icontains=kwd)
+    songs = Songs.objects.filter(sname__icontains=kwd)
+    lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
+
+    if len(singers) > 5:
+        for singers_count in range(5):
+            singers_list.append(singers[singers_count])
+    else:
+        singers_list = singers
+
+    if len(songs) > 5:
+        for songs_count in range(5):
+            songs_list.append(songs[songs_count])
+    else:
+        songs_list = songs
+
+    if len(lyrics) > 5:
+        for lyrics_count in range(5):
+            lyrics_list.append(lyrics[lyrics_count])
+    else:
+        lyrics_list = lyrics
+    return render(request, 'Kasa/search_detail.html', {
+        'singers': singers_list,
+        'songs': songs_list,
+        'lyrics': lyrics_list,
+        'kwd': kwd,
+    })
+
+
+def singer_detail(request, singer_pk):
+    singer = get_object_or_404(Singers, pk=singer_pk)
+    return render(request, 'Kasa/singer_detail.html', {
+        'singer': singer
+    })
+
+
+def group_detail(request, group_pk):
+    group = get_object_or_404(Groups, pk=group_pk)
+    return render(request, 'Kasa/group_detail.html', {
+        'group': group
+    })
+
+
+def album_detail(request, album_pk):
+    album = get_object_or_404(Albums, pk=album_pk)
+    return render(request, 'Kasa/album_detail.html', {
+        'album': album
+    })
+
+
+def select_top_5_songs():
+    """
+    5개의 노래를 뽑아서 리턴하세요.
+    :return: a list of songs
+    """
+    # raise NotImplementedError
+
+
+def pick_one_group_by_user(user=None):
+    """
+    만약 로그인이면, 관심사 그룹을 보여주고 아니면 랜덤픽
+    :return:
+    """
+    # raise NotImplementedError
+
+
+def main(request):
+    """
+    method: GET
+    :param request:
+    :return:
+    render_template('main.html')
+    five_songs = [Songs]; length 5
+    group = Group  # group.singers
+    """
+    five_songs = select_top_5_songs()
+    group = pick_one_group_by_user(request.user)
+    return render(request, 'main_revised_second_version.html', context={
+        'five_songs': five_songs,
+        'group': group
+    })
