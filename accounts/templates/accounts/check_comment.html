@@ -3,7 +3,7 @@
         <div>{{ comment.content }}</div>
         <div>{{ comment.created_at }}</div>
         <div>{{ comment.song.sname }}</div>
-        <a href="{% url 'accounts:delete_comment' %}">삭제버튼</a>
+        <a href="{% url 'accounts:delete_comment' comment.pk %}">삭제버튼</a>
     </div>
 {% endfor %}
 

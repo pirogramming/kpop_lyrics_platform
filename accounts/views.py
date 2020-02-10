@@ -1,12 +1,12 @@
 from allauth.account.views import PasswordResetView, PasswordResetDoneView, PasswordResetFromKeyView, \
     PasswordResetFromKeyDoneView
 from django.contrib.auth import authenticate
-from django.contrib import auth, messages
+from django.contrib import messages, auth
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from Kasa.models import Comments
-from accounts.forms import UserForm, InfoForm
+from accounts.forms import UserForm, InfoForm, ResetPasswordForm
 from accounts.models import User
 
 
@@ -41,10 +41,15 @@ def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            new_user = User.objects.create_user(**form.cleaned_data)
-            user = authenticate(username=new_user.username, password=new_user.password)
-            auth.login(request, user)
-            return redirect('login')
+            new_user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'],
+                                                form.cleaned_data['password'])
+            new_user.alias = form.cleaned_data['alias']
+            new_user.interest = form.cleaned_data['interest']
+            new_user.save()
+            user = authenticate(username=new_user.username, password=request.POST['verify_password'])
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+
+            return redirect('accounts:login')
         else:
             form = UserForm(request.POST)
             context = {
@@ -87,6 +92,7 @@ def change_pw(request):
 # 비밀번호 초기화 뷰
 class reset_pw(PasswordResetView):
     template_name = "accounts/reset_pw.html"
+    form_class = ResetPasswordForm
     success_url = reverse_lazy('accounts:reset_pw_done')
 
     def form_valid(self, form):
