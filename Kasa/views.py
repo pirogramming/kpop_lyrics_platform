@@ -293,11 +293,16 @@ def pick_one_group_by_user(user=None):
             if not interest:
                 continue
             sets = Groups.objects.filter(gname__icontains=interest)
+            if not set:
+                return None
             for query in sets:
                 group_list.append(query)
         return random.choice(group_list)
     else:
-        return random.choice(Groups.objects.all())
+        groups = Groups.objects.all()
+        if groups:
+            return random.choice(groups)
+        return None
 
 
 def main(request):
