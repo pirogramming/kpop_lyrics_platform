@@ -1,13 +1,21 @@
 import json
+import random
+import requests
+from bs4 import BeautifulSoup
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from Kasa.convert_url import convert_youtube
 from Kasa.models import *
 from django.db.models import Q
 
+from accounts.decorators import login_required
+
 
 def song_detail(request, song_pk):
     song = get_object_or_404(Songs, pk=song_pk)
+    song.view_count += 1
+    song.save()
+
     album = song.album
     sns = song.album.group.sns_url
     youtube_url = convert_youtube(song.youtube_url)
@@ -38,7 +46,7 @@ def choice_group(request):
         context = {
             'group_id': group_id
         }
-        # return render(request, 'Kasa'/)
+        return render(request, 'Kasa', context)
     else:
         return render(request, 'Kasa/choice_group.html')
 
@@ -204,63 +212,85 @@ def search(request):
             lyrics_list.append(lyrics[lyrics_count])
     else:
         lyrics_list = lyrics
-    return render(request, 'Kasa/search_detail.html', {
+
+    context = {
         'singers': singers_list,
         'songs': songs_list,
         'lyrics': lyrics_list,
         'kwd': kwd,
-    })
+    }
+    return render(request, 'Kasa/search_detail.html', context)
 
 
 def singer_detail(request, singer_pk):
     singer = get_object_or_404(Singers, pk=singer_pk)
-    return render(request, 'Kasa/singer_detail.html', {
+    context = {
         'singer': singer
-    })
+    }
+    return render(request, 'Kasa/singer_detail.html', context)
 
 
 def group_detail(request, group_pk):
     group = get_object_or_404(Groups, pk=group_pk)
-    return render(request, 'Kasa/group_detail.html', {
+    context = {
         'group': group
-    })
+    }
+    return render(request, 'Kasa/group_detail.html', context)
 
 
 def album_detail(request, album_pk):
     album = get_object_or_404(Albums, pk=album_pk)
-    return render(request, 'Kasa/album_detail.html', {
+    context = {
         'album': album
-    })
+    }
+    return render(request, 'Kasa/album_detail.html', context)
 
 
 def select_top_5_songs():
-    """
-    5개의 노래를 뽑아서 리턴하세요.
-    :return: a list of songs
-    """
-    # raise NotImplementedError
+    top_5_songs = []
+    view_count_all = []
+    song_and_view_count = {}
+
+    songs = Songs.objects.all()
+    for song in songs:
+        view_count = song.view_count
+        song_and_view_count[song.id] = view_count
+        view_count_all.append(view_count)
+    view_count_all.sort()
+    for view_count in view_count_all[:-6:-1]:
+        for song_id, value in song_and_view_count.items():
+            if value == view_count:
+                top_5_songs.append(songs.get(pk=song_id))
+                songs = songs.exclude(pk=song_id)
+                del song_and_view_count[song_id]
+                break
+
+    return top_5_songs
 
 
 def pick_one_group_by_user(user=None):
-    """
-    만약 로그인이면, 관심사 그룹을 보여주고 아니면 랜덤픽
-    :return:
-    """
-    # raise NotImplementedError
+    if user.is_authenticated and user.interest:
+        user_info = user.interest
+        interests = user_info.replace(',', ' ')
+        interests = interests.replace('/', ' ')
+        interests = interests.split(' ')
+        group_list = []
+        for interest in interests:
+            if not interest:
+                continue
+            sets = Groups.objects.filter(gname__icontains=interest)
+            for query in sets:
+                group_list.append(query)
+        return random.choice(group_list)
+    else:
+        return random.choice(Groups.objects.all())
 
 
 def main(request):
-    """
-    method: GET
-    :param request:
-    :return:
-    render_template('main.html')
-    five_songs = [Songs]; length 5
-    group = Group  # group.singers
-    """
     five_songs = select_top_5_songs()
     group = pick_one_group_by_user(request.user)
-    return render(request, 'main_revised_second_version.html', context={
+    context = {
         'five_songs': five_songs,
         'group': group
-    })
+    }
+    return render(request, 'Kasa/main.html', context)

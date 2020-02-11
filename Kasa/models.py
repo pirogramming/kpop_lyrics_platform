@@ -38,6 +38,7 @@ class Songs(models.Model):
     dance_url = models.URLField(blank=True, verbose_name='무대영상')
     album = models.ForeignKey(Albums, on_delete=models.CASCADE, verbose_name='앨범', related_name='album_song')
     singer = models.ManyToManyField(Singers, verbose_name='가수', related_name='singer_song')
+    view_count = models.IntegerField(default=0, verbose_name='조회수')
 
     def __str__(self):
         return self.sname
