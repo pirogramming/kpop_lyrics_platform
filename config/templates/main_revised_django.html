@@ -1,8 +1,26 @@
-{% load static %}
 <!doctype html>
 <html lang="en">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"> -->
+    <title>Navbar_with_searchbar</title>
+    <link rel="favicon" href="../config/static/hnet.com-image.ico">
     <style>
+        html {
+            font-family: "Aller Light";
+            position: relative;
+            min-height: 100%;
+            margin: 0;
+            background:white;
+        }
+        body {
+            min-height: 100%;
+            margin:0 0 10px 0;
+            padding-bottom: 100px;
+        }
         nav {
             width:100%;
             background: black;
@@ -11,7 +29,7 @@
         nav .navlist{
             display:flex;
             flex-direction:row;
-            {#padding:0px 40px 0px 0px;#}
+        {#padding:0px 40px 0px 0px;#}
             margin:0;
             list-style:none;
             list-style-type:none;
@@ -57,18 +75,18 @@
             text-decoration:none;
             color:white;
             text-align:center;
-            }
+        }
 
         nav .navlist .search-box{
             margin-right: 50px;
             padding: 5px;
-            {#position: absolute;#}
-            {#top: 8px;#}
-            {#right:220px;#}
-            height: 30px;
+        {#position: absolute;#}
+        {#top: 8px;#}
+        {#right:220px;#}
+            height: 25px;
             background-color: #ffffff;
             border: 2px solid #00fffe;
-            border-radius: 3em;
+            border-radius: 30px;
             transition: 0.4s;
             width:30px;
         }
@@ -90,7 +108,6 @@
             justify-content: center;
             align-items: center;
             color: #00fffe;
-            border-bottom-color: #00fffe;
         }
         nav .navlist .search-box:hover > .search-btn{
             background-color: #ffffff;
@@ -116,12 +133,17 @@
 </head>
 <body>
 
+
 <nav>
     <div class = "navlist">
-        <div class="title"><a id="title_a_tag" href="#"> <img src="{% static 'KakaoTalk_20200204_155442069.png'%}"></a></div>
+        <div class="title"><a id="title_a_tag" href="#"> <img src="../config/static/KakaoTalk_20200204_155442069.png"></a></div>
         <div class="search-box">
-            <input type="text" class="search-txt" name="" placeholder=" Search">
-           <input type="image" src="{% static 'KakaoTalk_20200206_174558346-1.png' %}" alt="submit" class="search-btn">
+            <form method="GET" action="{% url 'kasa:search' %}">
+                <!-- {% csrf_token %} -->
+                <input type="text" class="search-txt" name="kwd" value="{{ kwd }}" placeholder="Search">
+                <input type="image" src="../config/static/KakaoTalk_20200206_174558346-1.png" alt="submit" class="search-btn">
+                <!-- <i class="fas fa-search"></i> -->
+            </form>
         </div>
         <div class="signin"><a href="#">Sign in</a></div>
         <div class="signup"><a href="#">Sign up</a></div>
