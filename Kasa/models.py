@@ -69,10 +69,10 @@ class Lyrics(models.Model):
     fanchant = models.TextField(blank=True, verbose_name='응원법')
     order = models.IntegerField(verbose_name='순서')
     song = models.ForeignKey(Songs, on_delete=models.CASCADE, verbose_name='노래', related_name='song_lyrics')
-    singer = models.ManyToManyField(Singers, verbose_name='파트', related_name='singer_lyrics')
+    singer = models.ManyToManyField(Singers, blank=True, verbose_name='파트', related_name='singer_lyrics')
 
     def __str__(self):
-        return self.song.sname, str(self.order)
+        return self.song.sname + str(self.order)
 
 
 class Explanations(models.Model):

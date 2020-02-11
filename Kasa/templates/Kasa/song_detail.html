@@ -1,0 +1,41 @@
+{{ album.aname }}
+{{ album.release_date }}
+{{ album.album_art }}
+
+
+<div class="lyrics">
+    {% for lyrics in all_lyrics %}
+        <div>
+            {{ lyrics.kor }}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="twitter_url" style="height:500px; width: 300px; overflow-y: scroll; border: 1px solid black" ;>
+    <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<iframe width="500" height="250" src="{{ youtube_url }}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+{% for comment in comments %}
+    <div>{{ comment.content }}</div>
+    <div>{{ comment.user.username }}</div>
+    <div>{{ comment.created_at }}</div>
+    <br/>
+{% endfor %}
+
+
+{% if user.is_authenticated %}
+    <form action="{% url "Kasa:write_new_comment" %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="comment_content" name="comment_content" placeholder="댓글 작성" autocomplete="off">
+        <input type="submit" class="submit" value="작성">
+        <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
+    </form>
+{% else %}
+    <a href="{% url "accounts:login" %}">로그인</a>
+{% endif %}
