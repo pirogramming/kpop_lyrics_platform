@@ -1,0 +1,113 @@
+nav {
+    width: 100%;
+    background: black;
+    font-weight: bold;
+}
+
+nav .navlist {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    list-style: none;
+    list-style-type: none;
+    align-items: center;
+}
+
+nav .navlist .title {
+    font-size: 3em;
+    padding: 0px 0px 0px 50px;
+}
+
+nav .navlist .signin:hover, nav .navlist .signup:hover {
+    border-bottom: 2px solid;
+}
+
+nav .navlist .title, .signin, .signup {
+    float: left;
+}
+
+nav .navlist .title {
+    margin-right: auto;
+}
+
+nav .navlist .title a, nav .navlist .signin a, nav .navlist .signup a {
+    width: 60px;
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+nav .navlist .signup a {
+    margin-right: 50px;
+}
+
+nav .navlist .signin a {
+    margin-right: 10px;
+}
+
+nav .navlist #title_a_tag {
+    width: 138px;
+    height: 45px;
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+nav .navlist .search-box {
+    margin-right: 50px;
+    padding: 5px;
+    height: 30px;
+    background-color: #ffffff;
+    border: 2px solid #00fffe;
+    border-radius: 3em;
+    transition: 0.4s;
+    width: 30px;
+}
+
+nav .navlist .search-box:hover {
+    box-shadow: 0px 0px 7px 1px #51e3d4;
+    border: 2px solid #00fffe;
+    width: 300px;
+}
+
+nav .navlist .search-box .search-btn {
+    text-decoration: none;
+    float: right;
+    padding-top: 3px;
+    padding-right: 1px;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00fffe;
+    border-bottom-color: #00fffe;
+}
+
+nav .navlist .search-box:hover > .search-btn {
+    background-color: #ffffff;
+}
+
+nav .navlist .search-box .search-txt {
+    display: flex;
+    padding: 0;
+    width: 0px;
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    font-size: 1rem;
+    line-height: 30px;
+    transition: .4s;
+}
+
+nav .navlist .search-box:hover > .search-txt {
+    width: 240px;
+    padding: 0 6px;
+}

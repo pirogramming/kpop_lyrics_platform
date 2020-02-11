@@ -1,6 +1,41 @@
 {% extends 'base.html' %}
-{#{% load widget_tweaks %}#}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/signup.css" %}"/>
+{% endblock %}
+{% block content %}
+    <div class="signupwrap">
+        {% if user.is_authenticated %}
+            <script type="text/javascript">
+                alert('Sign out required for sign up.')
+            </script>
+        {% else %}
+            <div class="signup_title">Sign up to Kasa</div>
+            <form action="" method="POST" class="form">
+                {% csrf_token %}
+                <div class="signup_wrap_2">
+                    {{ field.label }}
+                    {% for field in form %}
+                        <div class="field_wrap">
+                            <div class="field_label">{{ field.label }}</div>
+                            <div class="field_specific">{{ field }}</div>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="signupbutton">Sign up</button>
+                </div>
+            </form>
+            {% for label in form %}
+                {% if label.errors %}
+                    {% for error in label.errors %}
+                        <div class="signup_error">Error : {{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
 
+<<<<<<<
 {% block content %}
     <style>
         .signupwrap {
@@ -110,3 +145,7 @@
     </div>
 {% endblock %}
 
+
+=======
+
+>>>>>>>

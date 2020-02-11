@@ -5,7 +5,10 @@ from django.utils.translation import gettext as _
 
 
 class UserForm(forms.ModelForm):
+
     verify_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+
+
 
     class Meta:
         model = User
@@ -13,19 +16,21 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email', 'password', 'alias', 'interest']
         widgets = {
             'username': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Enter up to 15 characters', 'autocomplete': 'off'}),
+                attrs={'class': 'form-control', 'placeholder': 'Within 15 characters', 'autocomplete': 'off'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'alias': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Enter up to 10 characters', 'autocomplete': 'off'}),
+                attrs={'class': 'form-control', 'placeholder': 'Within 10 characters', 'autocomplete': 'off'}),
+
             'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
         }
         labels = {
             'username': 'ID',
-            'email': 'Email',
+            'email': 'E-mail',
             'password': 'Password',
             'alias': 'Nickname',
             'interest': 'Favorite Group',
+
         }
     field_order = ['username', 'email', 'password', 'verify_password', 'alias', 'interest']
 
@@ -37,20 +42,27 @@ class UserForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError('Same ID already in use')
+            raise forms.ValidationError('Id already exsists.')
+
         return username
 
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
+<<<<<<<
             raise forms.ValidationError('Same nickname already in use')
+=======
+            raise forms.ValidationError('Nickname already exsists.')
+
+>>>>>>>
         return alias
 
     def clean_verify_password(self):
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('verify_password')
         if password1 != password2:
-            raise forms.ValidationError('비밀번호가 다릅니다.')
+
+            raise forms.ValidationError('Passwords must match')
         return password2
 
 
@@ -60,7 +72,8 @@ class InfoForm(forms.ModelForm):
         fields = ['alias', 'interest']
         widgets = {
             'alias': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Enter up to 10 characters', 'autocomplete': 'off'}),
+                attrs={'class': 'form-control', 'placeholder': 'Within 10 characters', 'autocomplete': 'off'}),
+
             'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
 
         }
@@ -76,7 +89,7 @@ class InfoForm(forms.ModelForm):
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
-            raise forms.ValidationError('Nickname already in use')
+            raise forms.ValidationError('Nickname already exsists.')
         return alias
 
 
