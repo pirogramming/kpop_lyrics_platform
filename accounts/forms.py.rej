@@ -1,9 +1,0 @@
-diff a/accounts/forms.py b/accounts/forms.py	(rejected hunks)
-@@ -4,7 +4,6 @@
- 
- 
- class UserForm(forms.ModelForm):
--    verify_password = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
-     verify_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
- 
-     class Meta:
