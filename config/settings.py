@@ -138,7 +138,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'config', 'static')
+    os.path.join(BASE_DIR, 'static'),
+    'accounts/static/image',
+    'accounts/static/css',
+    'Kasa/static/image',
+    'Kasa/static/css',
 ]
 
 # Social Login

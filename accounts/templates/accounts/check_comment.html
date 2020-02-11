@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/check_comment.css" %}"/>
+{% endblock %}
 
 {% block content %}
 {% for comment in comments %}

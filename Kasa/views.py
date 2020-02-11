@@ -261,9 +261,6 @@ def main(request):
     five_songs = [Songs]; length 5
     group = Group  # group.singers
     """
-    five_songs = select_top_5_songs()
-    group = pick_one_group_by_user(request.user)
-    return render(request, 'main_revised_second_version.html', context={
-        'five_songs': five_songs,
-        'group': group
-    })
+    # five_songs = select_top_5_songs()
+    # group = pick_one_group_by_user(request.user)
+    return render(request, 'Kasa/main.html')

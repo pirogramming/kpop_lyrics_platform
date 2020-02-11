@@ -1,86 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/change_info.css" %}"/>
+{% endblock %}
+
 {% block content %}
-    <style>
-        .change_info_wrap {
-            text-align: center;
-            margin: 25px auto 0 auto;
-            border: 0.1rem solid #e6e8eb;
-            box-shadow: 0 1.2rem 2.4rem -1rem rgba(0, 0, 0, 0.1);
-            width: 450px;
-            min-height: 450px;
-            background: white;
-            min-width: 400px;
-        }
-
-        .change_info_title {
-            padding-top: 30px;
-            font-size: 36px;
-            font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-            font-weight: bold;
-        }
-
-        .field_wrap {
-            text-align: left;
-            padding-left: 30px;
-            margin-bottom: 10px;
-            margin-top: 20px;
-        }
-
-        .field_label {
-            font-family: Aller;
-            padding-bottom: 5px;
-        }
-
-        .field_specific input {
-            border: 0.1rem solid #d3d3d3;
-            font-family: "Nunito Sans";
-            width: 375px;
-            height: 35px;
-            padding-left: 10px;
-        }
-
-        .change_info_table input {
-            border: 0.1rem solid #d3d3d3;
-            font-family: "Nunito Sans";
-            width: 375px;
-            height: 35px;
-            padding-left: 10px;
-        }
-
-        .change_info_submit {
-            margin-top: 50px;
-            margin-bottom: 40px;
-            border: 0.1rem solid #00fffe;
-            border-radius: 5px;
-            background: #00fffe;
-            color: #000000;
-            padding: 10px;
-            width: 200px;
-            transition: 0.5s;
-            font-size: 20px;
-            font-family: Aller;
-            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-        }
-
-        .change_info_submit:hover {
-            border: 0.1rem solid #00b8ff;
-            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-            color: #000000;
-            background-color: #00b8ff;
-        }
-
-        .change_info_error {
-            text-align: center;
-            display: block;
-            margin-top: -5px;
-            margin-bottom: -5px;
-            font-size: 20px;
-            font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-        }
-
-    </style>
-
-
+    <div class="flexwrap">
     <div class="change_info_wrap">
         <div class="change_info_title">
             Change Information
@@ -102,5 +27,6 @@
                 {% endfor %}
             {% endif %}
         {% endfor %}
+    </div>
     </div>
 {% endblock %}
