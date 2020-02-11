@@ -16,6 +16,8 @@ nav .navlist {
 nav .navlist .title {
     font-size: 3em;
     padding: 0px 0px 0px 50px;
+    margin-right: auto;
+
 }
 
 nav .navlist .signin:hover, nav .navlist .signup:hover {
@@ -26,14 +28,9 @@ nav .navlist .title, .signin, .signup {
     float: left;
 }
 
-nav .navlist .title {
-    margin-right: auto;
-}
-
 nav .navlist .title a, nav .navlist .signin a, nav .navlist .signup a {
     width: 60px;
     display: block;
-    padding: 10px 10px;
     text-decoration: none;
     color: white;
     text-align: center;
@@ -45,16 +42,6 @@ nav .navlist .signup a {
 
 nav .navlist .signin a {
     margin-right: 10px;
-}
-
-nav .navlist #title_a_tag {
-    width: 138px;
-    height: 45px;
-    display: block;
-    padding: 10px 10px;
-    text-decoration: none;
-    color: white;
-    text-align: center;
 }
 
 nav .navlist .search-box {
