@@ -1,5 +1,7 @@
 import json
 import random
+import re
+
 import requests
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
@@ -240,8 +242,20 @@ def group_detail(request, group_pk):
 
 def album_detail(request, album_pk):
     album = get_object_or_404(Albums, pk=album_pk)
+    url = 'https://www.genie.co.kr/detail/albumInfo?axnm=81097317'
+    response = requests.get(url)
+    html = response.text
+    print(html)
+    soup = BeautifulSoup(html, 'html.parser')
+    items = soup.find("div", "db-insert")
+    # a = str(items)
+    # prd_names = re.sub('<.+?>', '', a, 0).strip()
+    # print(prd_names)
     context = {
-        'album': album
+        'album': album,
+        'items': items,
+
+        # 'prd_names': prd_names,
     }
     return render(request, 'Kasa/album_detail.html', context)
 

@@ -15,6 +15,7 @@ class Albums(models.Model):
     aname = models.CharField(max_length=255, verbose_name='앨범이름')
     release_date = models.DateField(verbose_name='발매일')
     album_art = models.ImageField(verbose_name='자켓사진')
+    content = models.TextField(blank=True, verbose_name='앨범소개')
     group = models.ForeignKey(Groups, on_delete=models.CASCADE, verbose_name='그룹이름', related_name='group_album')
 
     def __str__(self):

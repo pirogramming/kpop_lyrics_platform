@@ -1,5 +1,9 @@
-{{ group }}
-{% for song in five_songs %}
-    <div>{{ song.sname }}</div>
-{% endfor %}
+{% extends 'base.html' %}
+{% block content %}
+    {{ group }}
+    {% for song in five_songs %}
+        <div id="name">{{ song.sname }}</div>
+    {% endfor %}
+{% endblock %}
+
 

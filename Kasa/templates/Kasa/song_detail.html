@@ -15,10 +15,12 @@
     <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+<button type="button" id="media_open">open</button>
+<button type="button" id="media_close">close</button>
 
-<iframe width="500" height="250" src="{{ youtube_url }}" frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<div id="media">
+    <object type="text/html" width="500" height="250" data="{{ youtube_url }}" allowFullScreen></object>
+</div>
 
 
 {% for comment in comments %}
@@ -39,3 +41,11 @@
 {% else %}
     <a href="{% url "accounts:login" %}">로그인</a>
 {% endif %}
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+    function pop_close() {
+        $("#layer_pop").hide(); // 반대는 당연히 show();
+    }
+</script>
