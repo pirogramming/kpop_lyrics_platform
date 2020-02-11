@@ -49,12 +49,8 @@ class UserForm(forms.ModelForm):
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
-<<<<<<<
-            raise forms.ValidationError('Same nickname already in use')
-=======
             raise forms.ValidationError('Nickname already exsists.')
 
->>>>>>>
         return alias
 
     def clean_verify_password(self):
