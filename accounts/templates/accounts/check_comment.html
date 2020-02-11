@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 {% for comment in comments %}
     <div class="comment_wrapper">
         <div>{{ comment.content }}</div>
@@ -7,5 +10,4 @@
     </div>
 {% endfor %}
 
-노래 제목 누르면 이동
-
+{% endblock %}

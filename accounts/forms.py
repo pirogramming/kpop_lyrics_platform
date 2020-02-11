@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 
 class UserForm(forms.ModelForm):
-    verify_password = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    verify_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -13,20 +13,19 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email', 'password', 'alias', 'interest']
         widgets = {
             'username': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': '15자 이내로 입력 가능', 'autocomplete': 'off'}),
+                attrs={'class': 'form-control', 'placeholder': 'Enter up to 15 characters', 'autocomplete': 'off'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'alias': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': '10자 이내로 입력 가능', 'autocomplete': 'off'}),
+                attrs={'class': 'form-control', 'placeholder': 'Enter up to 10 characters', 'autocomplete': 'off'}),
             'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
         }
         labels = {
-            'username': '아이디',
-            'email': '이메일',
-            'password': '비밀번호',
-            # 'verify_password': '비밀번호확인',
-            'alias': '닉네임',
-            'interest': '관심사',
+            'username': 'ID',
+            'email': 'Email',
+            'password': 'Password',
+            'alias': 'Nickname',
+            'interest': 'Favorite Group',
         }
     field_order = ['username', 'email', 'password', 'verify_password', 'alias', 'interest']
 
@@ -38,13 +37,13 @@ class UserForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError('아이디가 이미 사용중입니다.')
+            raise forms.ValidationError('Same ID already in use')
         return username
 
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
-            raise forms.ValidationError('닉네임이 이미 사용중입니다.')
+            raise forms.ValidationError('Same nickname already in use')
         return alias
 
     def clean_verify_password(self):
@@ -61,9 +60,13 @@ class InfoForm(forms.ModelForm):
         fields = ['alias', 'interest']
         widgets = {
             'alias': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': '10자 이내로 입력 가능', 'autocomplete': 'off'}),
+                attrs={'class': 'form-control', 'placeholder': 'Enter up to 10 characters', 'autocomplete': 'off'}),
             'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
 
+        }
+        labels = {
+            'alias': 'Nickname',
+            'interest': 'Favorite Group',
         }
 
     def __init__(self, *args, **kwargs):
@@ -73,7 +76,7 @@ class InfoForm(forms.ModelForm):
     def clean_alias(self):
         alias = self.cleaned_data['alias']
         if User.objects.filter(alias=alias).exists():
-            raise forms.ValidationError('닉네임이 이미 사용중입니다.')
+            raise forms.ValidationError('Nickname already in use')
         return alias
 
 
