@@ -1,14 +1,12 @@
-from allauth.account.forms import ResetPasswordForm as DefaultResetPasswordForm
 from django import forms
+from django.contrib.auth import password_validation
+from django.contrib.auth.forms import PasswordResetForm as DefaultPasswordResetForm, SetPasswordForm as DefaultSetPasswordForm
 from accounts.models import User
-from django.utils.translation import gettext as _
+from django.utils.translation import     gettext_lazy as _
 
 
 class UserForm(forms.ModelForm):
-
     verify_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
-
-
 
     class Meta:
         model = User
@@ -32,6 +30,7 @@ class UserForm(forms.ModelForm):
             'interest': 'Favorite Group',
 
         }
+
     field_order = ['username', 'email', 'password', 'verify_password', 'alias', 'interest']
 
     def __init__(self, *args, **kwargs):
@@ -57,7 +56,6 @@ class UserForm(forms.ModelForm):
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('verify_password')
         if password1 != password2:
-
             raise forms.ValidationError('Passwords must match')
         return password2
 
@@ -65,15 +63,16 @@ class UserForm(forms.ModelForm):
 class InfoForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['alias', 'interest']
+        fields = ['email', 'alias', 'interest']
         widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
             'alias': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Within 10 characters', 'autocomplete': 'off'}),
-
             'interest': forms.TextInput(attrs={'class': 'form-control', 'autocomplete': 'off'}),
 
         }
         labels = {
+            'email': 'Email',
             'alias': 'Nickname',
             'interest': 'Favorite Group',
         }
@@ -89,16 +88,32 @@ class InfoForm(forms.ModelForm):
         return alias
 
 
-class ResetPasswordForm(DefaultResetPasswordForm):
+class PasswordResetForm(DefaultPasswordResetForm):
+    email = forms.EmailField(label="E-mail", max_length=254)
 
-    email = forms.EmailField(
-        label=_("E-mail"),
-        required=True,
-        widget=forms.TextInput(attrs={
-            "type": "email",
-            "size": "30",
-        })
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError(_("The e-mail address is not assigned"
+                                          " to any user account"))
+        return self.cleaned_data["email"]
+
+class SetPasswordForm(DefaultSetPasswordForm):
+    """
+    A form that lets a user change set their password without entering the old
+    password
+    """
+    error_messages = {
+        'password_mismatch': "The two password fields didn't match.",
+    }
+    new_password1 = forms.CharField(
+        label="New password",
+        widget=forms.PasswordInput,
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
     )
-
-
-
+    new_password2 = forms.CharField(
+        label="New password confirmation",
+        strip=False,
+        widget=forms.PasswordInput,
+    )

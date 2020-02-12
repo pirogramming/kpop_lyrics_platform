@@ -70,7 +70,9 @@
 .rpw_error {
     text-align: center;
     display: block;
-    margin-bottom: 10px;
-    font-size: 20px;
+    color: #00b8ff;
+    font-weight: bold;
+    padding: 0 30px;
+    font-size: 15px;
     font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }

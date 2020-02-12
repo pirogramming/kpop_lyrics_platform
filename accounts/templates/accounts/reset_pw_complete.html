@@ -7,16 +7,13 @@
     <dev class="flexwrap">
         <div class="rpw_complete_wrap">
             <div class="rpw_complete_title">Reset Successfully</div>
-            <form method="POST" class="form">
-                {% csrf_token %}
-                <div class="rpw_complete_explanation">
-                    Your password has been successfully reset. Please sign in again with your new password.
-                </div>
-                <input type="submit" class="rpw_complete_submit" value="Sign in">
-
-                {{ form.as_p }}
-            </form>
+            <div class="rpw_complete_explanation">
+                Please sign in again
+            </div>
+            <input type="submit" class="rpw_complete_submit" value="Sign in">
+            <div class="line"></div>
+            <div class="logo"><a id="logo" href="{% url 'Kasa:main' %}"> <img
+                    src="{% static 'image/logo.png' %}"></a></div>
         </div>
     </dev>
 {% endblock %}
-

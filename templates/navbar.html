@@ -12,6 +12,7 @@
             <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit" class="search-btn">
         </div>
         {% if user.is_authenticated %}
+            <div class="signin"><a href="{% url 'accounts:login' %}">Edit</a></div>
             <div class="signup"><a href="{% url 'accounts:logout' %}">Logout</a></div>
         {% else %}
             <div class="signin"><a href="{% url 'accounts:login' %}">Sign in</a></div>

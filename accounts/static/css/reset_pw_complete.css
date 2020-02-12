@@ -1,4 +1,4 @@
-.flexwrap{
+.flexwrap {
     display: flex;
     justify-content: center;
 }
@@ -22,7 +22,7 @@
 }
 
 .rpw_complete_explanation {
-    text-align: left;
+    text-align: center;
     font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     padding-left: 30px;
     padding-right: 30px;
@@ -51,4 +51,10 @@
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
     color: #000000;
     background-color: #00b8ff;
+}
+
+.line {
+    width: 80%;
+    border-top: 1px solid lightgrey;
+    margin: 40px auto;
 }

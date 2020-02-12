@@ -1,14 +1,18 @@
-from allauth.account.views import PasswordResetView, PasswordResetDoneView, PasswordResetFromKeyView, \
-    PasswordResetFromKeyDoneView
 from django.contrib.auth import authenticate
-from django.contrib import messages, auth
+from django.contrib import auth
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordChangeDoneView
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from Kasa.models import Comments
-from accounts.forms import UserForm, InfoForm, ResetPasswordForm
+from accounts.forms import InfoForm, UserForm, PasswordResetForm, SetPasswordForm
 from accounts.models import User
+from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth import get_user_model
 
+UserModel = get_user_model()
 
 # 로그인 뷰
 def login(request):
@@ -92,31 +96,42 @@ def change_pw(request):
 # 비밀번호 초기화 뷰
 class reset_pw(PasswordResetView):
     template_name = "accounts/reset_pw.html"
-    form_class = ResetPasswordForm
+    form_class = PasswordResetForm
     success_url = reverse_lazy('accounts:reset_pw_done')
-
-    def form_valid(self, form):
-        messages.info(self.request, '암호 변경 메일을 발송했습니다.')
-        return super().form_valid(form)
+    email_template_name = 'accounts/password_reset_email.html'
+    # html_email_template_name = 'accounts/password_reset_email.html'
 
 
-# 비밀번호 초기화 완료 뷰 / 메일발송 후
+# 비밀번호 초기화 완료 뷰 / 메일 발송 완료
 class reset_pw_done(PasswordResetDoneView):
     template_name = "accounts/reset_pw_done.html"
 
 
-# 비밀번호 초기화 메일로 들어온 URL 처리
-# 새로운 비밀번호 설정 뷰
-class reset_pw_confirm(PasswordResetFromKeyView):
-    template_name = "accounts/reset_pw_confirm.html"
+# # 비밀번호 초기화 메일로 들어온 URL 처리
+# # 새로운 비밀번호 설정 뷰
+class reset_pw_confirm(PasswordResetConfirmView):
+    template_name = 'accounts/reset_pw_confirm.html'
     success_url = reverse_lazy("accounts:reset_pw_complete")
+    form_class = SetPasswordForm
+
+
+    def get_user(self, uidb64):
+        try:
+            # urlsafe_base64_decode() decodes to bytestring
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = UserModel.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist, ValidationError):
+            user = None
+        return user
 
 
 # 새로운 비밀번호 설정 완료 뷰
-class reset_pw_complete(PasswordResetFromKeyDoneView):
+class reset_pw_complete(PasswordChangeDoneView):
     template_name = "accounts/reset_pw_complete.html"
+    # success_url = reverse_lazy("accounts:reset_pw_done")
 
 
+#
 # 닉네임, 관심사에 대한 정보 변경 뷰
 def change_info(request):
     if request.method == "POST":
