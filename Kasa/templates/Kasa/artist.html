@@ -1,11 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+{% extends 'base.html' %}
     <style>
 
         body {
@@ -153,8 +146,7 @@
 
 
     </style>
-</head>
-<body>
+{% block content %}
 <div class="wrapall">
     <div class="artist_data">Artist</div>
     <br><br>
@@ -163,6 +155,20 @@
 
     </div>
     <br><br><br><br>
+
+    <div class="middle">
+        <div class="artist_data">Artist Information</div>
+        <br><br>
+        <div class="group">그룹명</div>
+        <br>
+        <div class="group">소속사</div>
+        <br>
+        <div class="group">데뷔</div>
+        <br>
+        <div class="group">팬덤</div>
+        <br>
+        <div class="group">공식사이트</div>
+    </div>
 
     <div class="artist_data">Member Information</div>
     <br><br>
@@ -217,19 +223,7 @@
         </div>
     </div>
 
-    <div class="middle">
-        <div class="artist_data">Artist Information</div>
-        <br><br>
-        <div class="group">그룹명</div>
-        <br>
-        <div class="group">소속사</div>
-        <br>
-        <div class="group">데뷔</div>
-        <br>
-        <div class="group">팬덤</div>
-        <br>
-        <div class="group">공식사이트</div>
-    </div>
+
     <br><br>
     <div class="album_data">Album</div>
     <br><br>
@@ -240,6 +234,4 @@
         <img src="album4.jpg"/>
     </div>
 </div>
-
-</body>
-</html>
+{% endblock %}

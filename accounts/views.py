@@ -155,7 +155,7 @@ def change_info(request):
 
 # 사용자가 작성한 댓글들 확인하는 뷰
 def check_comment(request):
-    comments = Comments.objects.filter(user=request.user)
+    comments = Comments.objects.filter(user=request.user).order_by('-created_at')
     context = {
         'comments': comments
     }

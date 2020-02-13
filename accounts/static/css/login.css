@@ -1,5 +1,6 @@
 .logincenter_wrap {
-    display:flex; justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .loginwrap {
@@ -74,9 +75,9 @@
 .submit {
     margin-top: 15px;
     margin-bottom: 20px;
-    border: 0.1rem solid #00fffe;
+    border: 0 solid #00fffe;
     border-radius: 5px;
-    background: #00fffe;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
     color: #000000;
     padding: 10px;
     width: 200px;
@@ -87,10 +88,10 @@
 }
 
 .submit:hover {
-    border: 0.1rem solid #00b8ff;
+    border: 0 solid #00b8ff;
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
     color: #000000;
-    background-color: #00b8ff;
+    background: linear-gradient(to right, #06c9ff, #009cc9);
 }
 
 .findp {
@@ -169,6 +170,17 @@
     background: #dbab0b;
 }
 
+.google, .kakao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google > img, .kakao > img {
+    width: 20px;
+    height: 20px;
+}
+
 .signupbutton {
     padding-top: 50px;
     display: flex;
@@ -219,9 +231,8 @@
 
 .signup_buttons {
     margin: 10px auto;
-    border: 0.1rem solid #00fffe;
     border-radius: 5px;
-    background: #00fffe;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
     padding: 10px;
     width: 200px;
     transition: 0.5s;
@@ -230,8 +241,7 @@
 }
 
 .signup_buttons:hover {
-    border: 0.1rem solid #00b8ff;
+    background: linear-gradient(to right, #06c9ff, #009cc9);
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
     color: #000000;
-    background-color: #00b8ff;
 }
