@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        body {
+            display: block;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background: white;
+            text-align: center;
+        }
+
+        body .wrapall {
+            position: relative;
+            min-height: 78vh;
+            width: 80%;
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .wrap2 {
+            height: 220px;
+            overflow-x: scroll;
+            white-space: nowrap;
+            overflow-y: hidden;
+            text-align: center;
+        }
+
+        .wrap3 {
+            height: 220px;
+            overflow-x: scroll;
+            white-space: nowrap;
+            overflow-y: hidden;
+            text-align: center;
+        }
+
+
+        .wrap1 {
+            height: 700px
+        }
+
+        .middle {
+            text-align: left;
+            padding-top: 30px;
+
+        }
+
+        .group {
+            width: 100px;
+            border: 2px solid black;
+            border-radius: 200px;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+
+
+        }
+
+        .middle .artist_data {
+            font-size: 40px;
+            text-align: left;
+            border-bottom: 1px solid lightgrey;
+            height: 60px;
+            font-weight: bold;
+            line-height: 60px;
+            padding-bottom: 5px;
+        }
+
+        .album_data {
+            font-size: 40px;
+            text-align: left;
+            border-bottom: 1px solid lightgrey;
+            height: 60px;
+            font-weight: bold;
+            line-height: 60px;
+            padding-bottom: 5px;
+            color: #00b8ff;
+        }
+
+        .wrapall .wrap1 img {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrap2 {
+            padding: 5px 10px;
+            text-align: center;
+            display: flex;
+            -ms-overflow-style: none;
+        }
+
+        .wrap2::-webkit-scrollbar {
+            display: none
+        }
+
+        .wrap3 {
+            padding: 5px 10px;
+            text-align: center;
+            -ms-overflow-style: none;
+
+        }
+
+        .wrap3::-webkit-scrollbar {
+            display: none
+        }
+
+
+        .f {
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            white-space: nowrap;
+            padding: 5px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .wrapall .wrap2 .f img {
+            width: 150px;
+            height: 95%;
+            text-align: center;
+        }
+
+        .wrapall .wrap3 img {
+            width: 170px;
+            height: 100%;
+            text-align: center;
+            padding: 5px;
+
+        }
+
+
+        .artist_data {
+            font-size: 40px;
+            text-align: left;
+            border-bottom: 1px solid lightgrey;
+            height: 60px;
+            font-weight: bold;
+            line-height: 60px;
+            color: #00b8ff;
+            padding-bottom: 5px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="wrapall">
+    <div class="artist_data">Artist</div>
+    <br><br>
+    <div class="wrap1">
+        <img src="IMG_1927 (1).jpg"/>
+
+    </div>
+    <br><br><br><br>
+
+    <div class="artist_data">Member Information</div>
+    <br><br>
+    <div class="wrap2">
+        <div class="f">
+            <img src="member1.jpg" style="display: block"/>
+            장원영
+        </div>
+        <div class="f">
+            <img src="member2.jpg" style="display: block"/>
+            사쿠라
+        </div>
+        <div class="f">
+            <img src="member3.jpg" style="display: block"/>
+            조유리
+        </div>
+        <div class="f">
+            <img src="member4.jpg" style="display: block"/>
+            최예나
+        </div>
+        <div class="f">
+            <img src="member5.jpg" style="display: block"/>
+            안유진
+        </div>
+        <div class="f">
+            <img src="member6.jpg" style="display: block"/>
+            나코
+        </div>
+        <div class="f">
+            <img src="member7.jpg" style="display: block"/>
+            권은비
+        </div>
+        <div class="f">
+            <img src="member8.jpg" style="display: block"/>
+            강혜원
+        </div>
+        <div class="f">
+            <img src="member9.jpg" style="display: block"/>
+            히토미
+        </div>
+        <div class="f">
+            <img src="member10.jpg" style="display: block"/>
+            김채원
+        </div>
+        <div class="f">
+            <img src="member11.jpg" style="display: block"/>
+            김민주
+        </div>
+        <div class="f">
+            <img src="member12.jpg" style="display: block"/>
+            이채연
+        </div>
+    </div>
+
+    <div class="middle">
+        <div class="artist_data">Artist Information</div>
+        <br><br>
+        <div class="group">그룹명</div>
+        <br>
+        <div class="group">소속사</div>
+        <br>
+        <div class="group">데뷔</div>
+        <br>
+        <div class="group">팬덤</div>
+        <br>
+        <div class="group">공식사이트</div>
+    </div>
+    <br><br>
+    <div class="album_data">Album</div>
+    <br><br>
+    <div class="wrap3">
+        <img src="album1.jpg"/>
+        <img src="album2.jpg"/>
+        <img src="album3.jpg"/>
+        <img src="album4.jpg"/>
+    </div>
+</div>
+
+</body>
+</html>
