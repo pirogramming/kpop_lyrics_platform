@@ -1,5 +1,56 @@
 {% extends 'base.html' %}
+{%  load static %}
 {% block content %}
+    <style>
+        .main-searchbarwrap{
+            display:flex;
+            justify-content: center;
+            width:100%;
+            height:800px;
+            {#background-image: url("{% static 'image/KakaoTalk_20200212_172715814.jpg' %}");#}
+            background-size: 1037px 800px;
+        }
+        .main-searchbox{
+            margin: 350px 100px;
+            width: 80%;
+            height:50px;
+            display:flex;
+            justify-content: space-between;
+            border: 0.5px solid black;
+            border-radius: 40px;
+            transition:1s;
+            background:white;
+        }
+        .main-searchtxt{
+            margin:5px 0 5px 20px;
+            border: none;
+            width: 100%;
+            height:40px;
+            font-size:20px;
+        }
+        .main-searchbtn{
+            margin:10px 20px 5px 0;
+            right:10px;
+            height: 30px;
+        }
+
+        input[type=text]:focus {
+            outline:none;
+        }
+        .main-searchbox:hover {
+            box-shadow: rgba(0,0,0,0.5) 0 0 0 2000px;
+            border:0.5px solid black;
+            z-index:100;
+        }
+        {#}#}
+    </style>
+    <div class="main-searchbarwrap">
+        <div class="main-searchbox">
+
+            <input type="text" class="main-searchtxt" placeholder="which contents do you want to search?">
+            <input type="image"  src="{% static 'image/magnifying_glass.png' %}" alt="submit" class="main-searchbtn">
+        </div>
+    </div>
     {{ group }}
     {% for song in five_songs %}
         <div id="name">{{ song.sname }}</div>

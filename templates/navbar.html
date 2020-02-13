@@ -9,7 +9,7 @@
                 src="{% static 'image/logo.png' %}"></a></div>
         <div class="search-box">
             <input type="text" class="search-txt" name="" placeholder=" Search">
-            <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit" class="search-btn">
+            <input type="image"  src="{% static 'image/magnifying_glass.png' %}" alt="submit" class="search-btn">
         </div>
         {% if user.is_authenticated %}
             <div class="signin"><a href="{% url 'accounts:login' %}">Edit</a></div>
