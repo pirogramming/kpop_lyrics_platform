@@ -7,8 +7,9 @@
 .group_image {
     width: 80%;
     overflow: hidden;
-    box-shadow: 0px 0px 7px 1px #00b8ff;
-    border: 2px solid #00b8ff;
+    box-shadow: 0px 0px 10px 3px grey;
+    /*box-shadow: 0px 0px 7px 1px #00b8ff;*/
+    border: 2px solid grey;
     border-radius: 30px;
 
 }
@@ -151,21 +152,33 @@
 }
 
 .singer_img {
-    box-shadow: 0px 0px 4px 1px #00b8ff;
-    border: 2px solid #00b8ff;
+    box-shadow: 0px 0px 7px 2px grey;
 }
 
 .album_img {
-    box-shadow: 0px 0px 4px 1px #00b8ff;
-    border: 2px solid #00b8ff;
+    box-shadow: 0px 0px 5px 2px grey;
+    border: 1px solid grey
 }
 
 .singer_name {
     width: 150px;
     white-space: normal;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    bottom: 44px;
+    background-color: black;
+    height: 40px;
+    opacity: 60%;
+    line-height: 40px;
+
+
 }
 
 .album_name {
-    width: 180px;
+    width: 100%;
     white-space: normal;
+    text-align: center;
+    color:grey;
 }

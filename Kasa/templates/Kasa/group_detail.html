@@ -1,6 +1,3 @@
-{#<h3>{{ group.gname }}</h3>#}
-{#<h3>{{ group.agency }}</h3>#}
-{#<h3><a href="{{ group.sns_url }}">{{ group.sns_url }}</a></h3>#}
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
@@ -10,11 +7,13 @@
 
     <div class="wrapall">
         <div class="artist_data">Artist - {{ group.gname }}</div>
-    <div class="wrap1">
-        <div class="group_image">
-            <img src="{{ group.group_image.url }}"/>
+        <div class="wrap1">
+            {% if group.group_image %}
+                <div class="group_image">
+                    <img src="{{ group.group_image.url }}"/>
+                </div>
+            {% endif %}
         </div>
-    </div>
 
         <div class="middle">
             <div class="artist_data">Artist Information</div>
@@ -28,12 +27,14 @@
         <div class="artist_data">Member Information</div>
         <div class="wrap2">
             {% for singer in singers %}
-                <a class="singer_detail" href="{% url 'Kasa:singer_detail' singer.pk %}">
-                    <div class="f">
-                        <div><img class="singer_img" src="{{ singer.image.url }}" /></div>
-                        <div class="singer_name">{{ singer.sname }}</div>
-                    </div>
-                </a>
+                {% if singer.image %}
+                    <a class="singer_detail" href="{% url 'Kasa:singer_detail' singer.pk %}">
+                        <div class="f">
+                            <div><img class="singer_img" src="{{ singer.image.url }}"/></div>
+                            <div class="singer_name">{{ singer.sname }}</div>
+                        </div>
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -41,12 +42,14 @@
         <div class="album_data">Album</div>
         <div class="album_wrap">
             {% for album in albums %}
-                <a class="album_detail" href="{% url 'Kasa:album_detail' album.pk %}">
-                    <div class="album_art">
-                        <div><img class="album_img" src="{{ album.album_art.url }}"/></div>
-                        <div class="album_name">{{ album.aname }}</div>
-                    </div>
-                </a>
+                {% if album.album_art %}
+                    <a class="album_detail" href="{% url 'Kasa:album_detail' album.pk %}">
+                        <div class="album_art">
+                            <div><img class="album_img" src="{{ album.album_art.url }}"/></div>
+                            <div class="album_name">{{ album.aname }}</div>
+                        </div>
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
