@@ -18,7 +18,9 @@ body .wrap {
     min-height: 78vh;
     width: 70%;
     display: block;
-    margin: 20px auto;
+    text-align: center;
+    margin: 20px auto 135px auto;
+    background-color: white;
 }
 
 input[type=text]:focus {
