@@ -1,0 +1,101 @@
+.result {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.result > .kwd {
+    color: #00b8ff;
+}
+
+.result_title {
+    color: #00b8ff;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0 40px 0;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 5px;
+    height: 60px;
+    line-height: 60px;
+}
+
+.result_albums_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.each_album {
+    width: 31%;
+    margin: 10px 2% 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.album_art {
+    flex: 4;
+    object-fit: cover;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+}
+
+.album_image {
+    width: 100%;
+    object-fit: cover;
+    box-shadow: 0px 0px 5px 2px grey;
+    border: 1px solid grey
+}
+
+.album_info {
+    flex: 5;
+    padding: 10px 0 10px 15px;
+}
+
+.album_name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.album_group_name {
+    margin-bottom: 15px;
+}
+.album_group_name > a {
+    text-decoration: none;
+    color: black;
+}
+
+.album_date_count_wrap {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 7px;
+}
+
+.album_date_count {
+    font-size: 10px;
+    color: grey;
+    border-right: 1px solid lightgrey;
+    padding: 0 5px;
+}
+
+.album_detail_btn {
+    border-radius: 5px;
+    width: 50px;
+    height: 25px;
+    text-align: center;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+}
+
+.album_detail_btn:hover {
+    background: linear-gradient(to right, #06c9ff, #009cc9);
+}
+
+.album_detail_btn > a {
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 13px;
+
+}

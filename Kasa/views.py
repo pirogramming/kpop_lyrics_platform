@@ -182,21 +182,28 @@ def modify_and_create_each_lyrics(request, song_id):
 def search(request):
     kwd = request.GET.get('kwd', None)
     if not kwd:
-        noresult = True
+        # noresult = True
+        noresult = False
+
         context = {
             'kwd': kwd,
             'noresult': noresult,
+            'albums': Albums.objects.all(),
         }
         return render(request, 'Kasa/search_detail.html', context)
 
     singers_list = []
     songs_list = []
     lyrics_list = []
+    albums_list = []
+    groups_list = []
 
     singers = Singers.objects.filter(sname__icontains=kwd)
     songs = Songs.objects.filter(sname__icontains=kwd)
     lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
-    print(singers, songs, lyrics)
+    albums = Albums.objects.filter(aname__icontains=kwd)
+    groups = Groups.objects.filter(Q(gname__icontains=kwd) | Q(agency__icontains=kwd))
+
     if len(singers) > 5:
         for singers_count in range(5):
             singers_list.append(singers[singers_count])
@@ -209,6 +216,18 @@ def search(request):
     else:
         songs_list = songs
 
+    if len(albums) > 5:
+        for albums_count in range(5):
+            albums_list.append(albums[albums_count])
+    else:
+        albums_list = albums
+
+    if len(groups) > 5:
+        for groups_count in range(5):
+            groups_list.append(groups[groups_count])
+    else:
+        groups_list = groups
+
     for overlap_check in lyrics:
         if overlap_check in lyrics_list:
             continue
@@ -218,10 +237,8 @@ def search(request):
         else:
             lyrics_list.append(lyrics[lyrics_count])
 
-    print(singers_list, songs_list, lyrics_list)
-
-    if len(singers_list) <= 0 and len(songs_list) <= 0 and len(lyrics_list) <= 0:
-        print('a')
+    if len(singers_list) <= 0 and len(songs_list) <= 0 and len(lyrics_list) <= 0 \
+            and len(albums_list) <= 0 and len(groups_list) <= 0:
         noresult = False
         context = {
             'kwd': kwd,
@@ -234,7 +251,8 @@ def search(request):
         'singers': singers_list,
         'songs': songs_list,
         'lyrics': lyrics_list,
-        'kwd': kwd,
+        'albums': albums_list,
+        'groups': groups_list,
     }
     return render(request, 'Kasa/search_detail.html', context)
 
