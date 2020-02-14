@@ -1,11 +1,16 @@
+body .wrap {
+    display:flex;
+    justify-content: center;
+}
+
 .changepw_wrap {
     text-align: center;
     border: 0.1rem solid #e6e8eb;
     box-shadow: 0 1.2rem 2.4rem -1rem rgba(0, 0, 0, 0.1);
-    width: 450px;
-    min-height: 450px;
+
     background: white;
-    min-width: 400px;
+    min-width: 450px;
+    height:500px;
 }
 
 .chagepwtitle {
@@ -35,10 +40,9 @@
 .login_btn {
     margin-top: 20px;
     margin-bottom: 40px;
-    border: 0.1rem solid #00fffe;
+    border: 0 solid #00fffe;
     border-radius: 5px;
-    background: #00fffe;
-    color: #000000;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
     padding: 10px;
     width: 200px;
     transition: 0.5s;
@@ -48,11 +52,9 @@
 }
 
 .login_btn:hover {
-    border: 0.1rem solid #00b8ff;
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
     color: #000000;
-    background-color: #00b8ff;
-}
+    background: linear-gradient(to right, #06c9ff, #009cc9);}
 
 .change_pw_username, .change_pw_password {
     font-family: Aller;

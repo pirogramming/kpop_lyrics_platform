@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <form action="" method="POST">
     {% csrf_token %}
     <div style="border: 1px solid black">
@@ -9,6 +12,7 @@
         <input type="submit" class="submit" value="제출">
     </div>
 </form>
+
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -36,7 +40,8 @@
             if (!$(e.target).hasClass("result")) {
                 $('#result').html('');
             }
-        })
+        }}
+
 
         $('#search').keyup(delay(function () {
             $('#result').html('');
@@ -66,3 +71,4 @@
     })
 </script>
 
+{% endblock %}
