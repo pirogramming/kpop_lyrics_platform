@@ -1,16 +1,26 @@
+{% extends 'base.html' %}
+{%  load static %}
+{% block content %}
+<style>
+
+</style>
+
 <form action="" method="POST">
+      <meta charset="UTF-8">
     {% csrf_token %}
-    <div id="all_kor">
-        <h2>한국어 가사</h2>
-        <textarea name="all_kor" cols="40" rows="30"></textarea>
-    </div>
-    <div id="all_eng" style="display:none;">
-        <h2>영어 가사</h2>
-        <textarea name="all_eng" cols="40" rows="30"></textarea>
-    </div>
-    <div id="all_rom" style="display:none;">
-        <h2>로마자 가사</h2>
-        <textarea name="all_rom" cols="40" rows="30"></textarea>
+    <div class="inputlyricswrap">
+        <div id="all_kor">
+            <h2>한국어 가사</h2>
+            <textarea name="all_kor" cols="40" rows="30"></textarea>
+        </div>
+        <div id="all_eng" style="display:none;">
+            <h2>영어 가사</h2>
+            <textarea name="all_eng" cols="40" rows="30"></textarea>
+        </div>
+        <div id="all_rom" style="display:none;">
+            <h2>로마자 가사</h2>
+            <textarea name="all_rom" cols="40" rows="30"></textarea>
+        </div>
     </div>
     <!--
     <h2>영어 가사</h2>
@@ -46,3 +56,4 @@
         }
     }
 </script>
+{% endblock %}

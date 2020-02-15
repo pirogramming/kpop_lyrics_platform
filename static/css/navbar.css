@@ -69,16 +69,12 @@ nav .navlist .search-box .search-btn {
     width: 25px;
     height: 25px;
     background-color: white;
-    border-radius: 50%;
+    border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #00fffe;
     border-bottom-color: #00fffe;
-}
-
-nav .navlist .search-box:hover > .search-btn {
-    background-color: #ffffff;
 }
 
 nav .navlist .search-box .search-txt {
@@ -96,5 +92,6 @@ nav .navlist .search-box .search-txt {
 
 nav .navlist .search-box:hover > .search-txt {
     width: 240px;
-    padding: 0 6px;
+    padding: 0px;
+    padding-left: 30px;
 }

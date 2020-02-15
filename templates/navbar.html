@@ -1,15 +1,35 @@
 {% load static %}
+
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/navbar.css" %}"/>
+
+    <style>
+        #result {
+            position: absolute;
+            top: 60px;
+            border: 1px solid red;
+            border-radius: 30px;
+            background-color: red;
+            width: 300px;
+            display: none;
+        }
+    </style>
 {% endblock style %}
 
 <nav>
     <div class="navlist">
         <div class="title"><a id="title_a_tag" href="{% url 'Kasa:main' %}"> <img
                 src="{% static 'image/logo.png' %}"></a></div>
-        <div class="search-box">
-            <input type="text" class="search-txt" name="" placeholder=" Search">
-            <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit" class="search-btn">
+        <div class="search-box-wrapper">
+            <form action="{% url 'Kasa:search' %}" method="GET">
+                {% csrf_token %}
+                <div class="search-box">
+                    <input type="text" id="search" class="search-txt" name="kwd" placeholder="Search" autocomplete="off">
+                    <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit" name="submit"
+                           value="submit"
+                           class="search-btn">
+                </div>
+            </form>
         </div>
         {% if user.is_authenticated %}
             <div class="signin"><a href="{% url 'accounts:login' %}">Edit</a></div>
@@ -18,6 +38,5 @@
             <div class="signin"><a href="{% url 'accounts:login' %}">Sign in</a></div>
             <div class="signup"><a href="{% url 'accounts:signup' %}">Sign up</a></div>
         {% endif %}
-
     </div>
 </nav>

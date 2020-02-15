@@ -180,12 +180,12 @@ def modify_and_create_each_lyrics(request, song_id):
 
 
 def search(request):
-    print(request.GET)
     kwd = request.GET.get('kwd', None)
-    print(kwd)
     if not kwd:
+        noresult = True
         context = {
-            'noresult': '검색 결과가 없습니다.'
+            'kwd': kwd,
+            'noresult': noresult,
         }
         return render(request, 'Kasa/search_detail.html', context)
 
@@ -196,7 +196,7 @@ def search(request):
     singers = Singers.objects.filter(sname__icontains=kwd)
     songs = Songs.objects.filter(sname__icontains=kwd)
     lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
-
+    print(singers, songs, lyrics)
     if len(singers) > 5:
         for singers_count in range(5):
             singers_list.append(singers[singers_count])
@@ -209,13 +209,28 @@ def search(request):
     else:
         songs_list = songs
 
-    if len(lyrics) > 5:
-        for lyrics_count in range(5):
+    for overlap_check in lyrics:
+        if overlap_check in lyrics_list:
+            continue
+        if len(lyrics) > 5:
+            for lyrics_count in range(5):
+                lyrics_list.append(lyrics[overlap_check])
+        else:
             lyrics_list.append(lyrics[lyrics_count])
-    else:
-        lyrics_list = lyrics
+
+    print(singers_list, songs_list, lyrics_list)
+
+    if len(singers_list) <= 0 and len(songs_list) <= 0 and len(lyrics_list) <= 0:
+        print('a')
+        noresult = False
+        context = {
+            'kwd': kwd,
+            'noresult': noresult,
+        }
+        return render(request, 'Kasa/search_detail.html', context)
 
     context = {
+        'kwd': kwd,
         'singers': singers_list,
         'songs': songs_list,
         'lyrics': lyrics_list,
@@ -234,8 +249,12 @@ def singer_detail(request, singer_pk):
 
 def group_detail(request, group_pk):
     group = get_object_or_404(Groups, pk=group_pk)
+    singers = group.group_singer.all()
+    albums = group.group_album.all()
     context = {
-        'group': group
+        'group': group,
+        'singers': singers,
+        'albums': albums,
     }
     return render(request, 'Kasa/group_detail.html', context)
 
@@ -293,11 +312,14 @@ def pick_one_group_by_user(user=None):
             if not interest:
                 continue
             sets = Groups.objects.filter(gname__icontains=interest)
-            if not set:
+            if not sets:
+                groups = Groups.objects.all()
+                if groups:
+                    return random.choice(groups)
                 return None
             for query in sets:
                 group_list.append(query)
-        return random.choice(group_list)
+            return random.choice(group_list)
     else:
         groups = Groups.objects.all()
         if groups:

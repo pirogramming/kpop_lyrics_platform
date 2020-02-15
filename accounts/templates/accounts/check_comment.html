@@ -6,13 +6,34 @@
 {% endblock %}
 
 {% block content %}
-{% for comment in comments %}
-    <div class="comment_wrapper">
-        <div>{{ comment.content }}</div>
-        <div>{{ comment.created_at }}</div>
-        <div>{{ comment.song.sname }}</div>
-        <a href="{% url 'accounts:delete_comment' comment.pk %}">삭제버튼</a>
-    </div>
-{% endfor %}
+    <div class="comments_field">
+        <div class="comment_wrap">
+            <div class="comment_title">
+                My comment
+            </div>
+            {% if comments %}
+                <div class="each_comment">
+                    {% for comment in comments %}
+                        <div class="each_comment_wrap">
+                            <div class="song_name">
+                                {{ comment.song.sname }}
+                            </div>
+                            <div class="content">
+                                {{ comment.content }}
+                            </div>
+                            <div class="created_at">
+                                {{ comment.created_at }}</div>
+                            <div class="delete_btn">
+                                <a class="delete_btn_a"
+                                   href="{% url 'accounts:delete_comment' comment.pk %}">Delete</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="change_pw_password">작성한 댓글이 없습니다.</div>
+            {% endif %}
 
+        </div>
+    </div>
 {% endblock %}

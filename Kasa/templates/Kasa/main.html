@@ -1,9 +1,273 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    {#    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>#}
+    <style>
+        #wrap {
+            width: 100%;
+            height:250%;
+            margin: 0;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #main_wrap {
+            background-image: url({% static 'image/KakaoTalk_20200212_172715814.jpg' %});
+            display:flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            height: 50%;
+            text-align: center;
+
+        }
+
+        #main_wrap_2 {
+            display: inline-block;
+            position: relative;
+        {#text-align: center;#}{#display:flex;#} justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mainword {
+            display: inline-block;
+            margin-top: 100px;
+            width: 70%;
+            text-align: center;
+            font-size: 70px;
+            height: 10%;
+        }
+
+        .main-searchbox {
+            vertical-align: center;
+            margin: 10vh 0 49vh 10%;
+            text-align: center;
+            width: 80%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+        {#border: 0.5px solid black;#} border-radius: 40px;
+            transition-duration: 1s;
+            background: white;
+        }
+
+        .main-searchtxt {
+            margin: 5px 0 5px 20px;
+            border: none;
+            width: 100%;
+            height: 40px;
+            font-size: 20px;
+        }
+
+        .main-searchbtn {
+            margin: 10px 20px 5px 0;
+            right: 10px;
+            height: 30px;
+        }
+
+        input[type=text]:focus {
+            outline: none;
+        }
+
+        #main_wrap_2 {
+            transition-duration: 1s;
+        }
+        .viewtitle{
+            text-align: center;
+            color: #00b8ff;
+            font-size: 40px;
+            font-weight: bold;
+            {#border-bottom: 1px solid lightgrey;#}
+            padding-bottom: 5px;
+            height: 60px;
+            line-height: 60px;
+            margin:30px 0 20px 0;
+        }
+        }
+        .hitcountwrap {
+            background:skyblue;
+            margin-top: 80px;
+            width: 90%;
+            height: 25%;
+            border: 3px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .top5hit {
+            margin-left:10%;
+            margin-top: 20px;
+            margin_bottem: 20px;
+            width: 80%;
+            height: 270px;
+            {#border: 2px solid blue;#}
+            display: flex;
+            justify-content: center;
+
+        }
+        .hita{
+            text-decoration: none;
+        }
+        .song1, .song2, .song3, .song4, .song5 {
+            text-decoration: none;
+            margin: 0 10px 0 10px;
+            width: 200px;
+            height: 200px;
+            min-height:100px;
+            min-width:100px;
+            background-color: #00fffe;
+            transition: 1s;
+        }
+
+        .song5:hover, .song4:hover, .song3:hover, .song2:hover, .song1:hover {
+            {#position:absolute;#}
+            top:10px;
+            box-shadow: 0 0 10px gray;
+        }
+        .randomtitle{
+            text-align: center;
+            color: #00b8ff;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            {#border-bottom: 1px solid lightgrey;#}
+            padding-bottom: 5px;
+            height: 60px;
+            line-height: 60px;
+            margin:100px 0 20px 0;
+
+        }
+        .randomwrap{
+            margin-left:15%;
+            margin-right: 15%;
+            margin-top: 10px;
+            margin-bottom: 200px;
+            width:70%;
+            height:25%;
+            border:3px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    .random_group, .random_group_name{
+        {#flex-direction: column;#}
+        margin:3% 3% 3% 3%;
+        border:2px solid blue;
+        width:30%;
+        height:30%;
+        left:20%;
+        text-align: center;
+    }
+    .random_group_name{
+        width:30%;
+        height:50px;
+    }
+    </style>
+{% endblock %}
+
 {% block content %}
-    {{ group }}
-    {% for song in five_songs %}
-        <div id="name">{{ song.sname }}</div>
-    {% endfor %}
+    <div id="main_wrap">
+        <div id="main_wrap_2">
+            <div class="mainword">KASA<br>Search Kpop lyrics!!!!</div>
+            <div class="main-searchbox" id="searchbox">
+                <input type="text" id="search" class="main-searchtxt"
+                       placeholder="which contents do you want to search?" autocomplete="off">
+                <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
+                       class="main-searchbtn">
+            </div>
+        </div>
+    </div>
+    <div class="hitcountwrap">
+        <div class="viewtitle">top 5 view</div>
+        <div class="top5hit">
+            <a class="hita"href="#"><div class="song1">1</div></a>
+            <a class="hita"href="#"><div class="song2">2</div></a>
+            <a class="hita"href="#"><div class="song3">3</div></a>
+            <a class="hita"href="#"><div class="song4">4</div></a>
+            <a class="hita"href="#"><div class="song5">5</div></a>
+
+{#            {% for song in five_songs %}#}
+{#                <div class="name"><img src="{{ song.album_song.album_art.url }}" /></div>#}
+{#            {% endfor %}#}
+
+        </div>
+        </div>
+    <div class="randomtitle">recommend</div>
+    <div class="randomwrap">
+        <div class="random_group">{{ albums.album_art }}</div>
+        <div class="random_group_name">{{ albums.group }}</div>
+    </div>
+
+
+
+
+
+{#    {{ group }}#}
+{#    {% for song in five_songs %}#}
+{#        <div class="name">{{ song.sname }}</div>#}
+{#    {% endfor %}#}
+
+
+{% endblock %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    {#    <script src="{% static "javascript/main.js" %}"></script>#}
+    <script>
+        $('.main-searchbox').hover(
+            function () {
+                $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.5'});
+            }, function () {
+                $('#main_wrap_2').css({'background-color': 'transparent', 'opacity': '1'});
+                $(this).css("background-color", "white");
+
+            })
+        $('.song1').hover(
+            function () {
+                $('.song2, .song3, .song4, .song5').css({'width': '100px', 'height': '100px',});
+                $('.song1').css({'width': '350px', 'height': '350px',});
+            }, function () {
+                $('.song2, .song3, .song4, .song5').css({'width': '200px', 'height': '200px'});
+                $('.song1').css({'width': '200px', 'height': '200px',});
+
+            });
+        $('.song2').hover(
+            function () {
+                $('.song1, .song3, .song4, .song5').css({'width': '100px', 'height': '100px',});
+                $('.song2').css({'width': '350px', 'height': '350px',});
+            }, function () {
+                $('.song1, .song3, .song4, .song5').css({'width': '200px', 'height': '200px'});
+                $('.song2').css({'width': '200px', 'height': '200px',});
+            });
+        $('.song3').hover(
+            function () {
+                $('.song2, .song1, .song4, .song5').css({'width': '100px', 'height': '100px',});
+                $('.song3').css({'width': '350px', 'height': '350px',});
+            }, function () {
+                $('.song2, .song1, .song4, .song5').css({'width': '200px', 'height': '200px'});
+                $('.song3').css({'width': '200px', 'height': '200px',});
+
+            });
+        $('.song4').hover(
+            function () {
+                $('.song2, .song3, .song1, .song5').css({'width': '100px', 'height': '100px',});
+                $('.song4').css({'width': '350px', 'height': '350px',});
+            }, function () {
+                $('.song2, .song3, .song1, .song5').css({'width': '200px', 'height': '200px'});
+                $('.song4').css({'width': '200px', 'height': '200px',});
+            });
+        $('.song5').hover(
+            function () {
+                $('.song2, .song3, .song4, .song1').css({'width': '100px', 'height': '100px',});
+                $('.song5').css({'width': '350px', 'height': '350px',});
+            }, function () {
+                $('.song2, .song3, .song4, .song1').css({'width': '200px', 'height': '200px'});
+                $('.song5').css({'width': '200px', 'height': '200px',});
+            });
+    </script>
 {% endblock %}
 
 

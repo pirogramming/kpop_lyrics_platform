@@ -11,15 +11,16 @@
     {% endblock %}
 </head>
 <body>
-    {% include 'navbar.html' %}
-    <div class="wrap">
-        {% block content %}
+{% include 'navbar.html' %}
 
-        {% endblock %}
-    </div>
-    {% include 'footer.html' %}
+<div class="wrap" id="wrap">
+    {% block content %}
 
-    {% block script %}
     {% endblock %}
+</div>
+{% include 'footer.html' %}
+
+{% block script %}
+{% endblock %}
 </body>
 </html>
