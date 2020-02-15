@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    background: white;
+    /*background: white;*/
 }
 
 body .wrap {
@@ -20,7 +20,7 @@ body .wrap {
     display: block;
     text-align: center;
     margin: 20px auto 135px auto;
-    background-color: white;
+    /*background-color: none;*/
 }
 
 input[type=text]:focus {

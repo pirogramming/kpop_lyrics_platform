@@ -5,16 +5,19 @@
     <style>
         #wrap {
             width: 100%;
-            height:200%;
+            height:250%;
             margin: 0;
             display:flex;
             flex-direction: column;
+            justify-content: center;
             text-align: center;
         }
 
         #main_wrap {
             background-image: url({% static 'image/KakaoTalk_20200212_172715814.jpg' %});
-        {#display:flex;#}{#justify-content: center;#} flex-direction: column;
+            display:flex;
+            justify-content: center;
+            flex-direction: column;
             width: 100%;
             height: 50%;
             text-align: center;
@@ -125,22 +128,6 @@
             top:10px;
             box-shadow: 0 0 10px gray;
         }
-        .score{
-            margin-top:40px;
-            height:100px;
-            width:40%;
-            border:2px solid black;
-            display: flex;
-            justify-content: space-around;
-            margin-left:30%
-        }
-        .artist, .songtitle{
-            margin:25px;
-            font-size:100%;
-            width:50%
-            height:80px;
-            border: 2px solid black;
-        }
         .randomtitle{
             text-align: center;
             color: #00b8ff;
@@ -156,22 +143,28 @@
         }
         .randomwrap{
             margin-left:15%;
+            margin-right: 15%;
             margin-top: 10px;
+            margin-bottom: 200px;
             width:70%;
             height:25%;
             border:3px solid black;
             display: flex;
+            flex-direction: column;
             justify-content: center;
         }
     .random_group, .random_group_name{
+        {#flex-direction: column;#}
         margin:3% 3% 3% 3%;
         border:2px solid blue;
         width:30%;
-        height:80%;
+        height:30%;
+        left:20%;
         text-align: center;
     }
-    .random_group{
-        width:60%
+    .random_group_name{
+        width:30%;
+        height:50px;
     }
     </style>
 {% endblock %}
@@ -197,6 +190,10 @@
             <a class="hita"href="#"><div class="song4">4</div></a>
             <a class="hita"href="#"><div class="song5">5</div></a>
 
+{#            {% for song in five_songs %}#}
+{#                <div class="name"><img src="{{ song.album_song.album_art.url }}" /></div>#}
+{#            {% endfor %}#}
+
         </div>
         </div>
     <div class="randomtitle">recommend</div>
@@ -209,10 +206,10 @@
 
 
 
-    {{ group }}
-    {% for song in five_songs %}
-        <div class="name">{{ song.sname }}</div>
-    {% endfor %}
+{#    {{ group }}#}
+{#    {% for song in five_songs %}#}
+{#        <div class="name">{{ song.sname }}</div>#}
+{#    {% endfor %}#}
 
 
 {% endblock %}
