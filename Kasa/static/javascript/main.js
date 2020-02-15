@@ -22,6 +22,7 @@ $('.song1').hover(
     function () {
         clearTimeout(myTimeout);
         $('.song2, .song3, .song4, .song5').css({'width': '100px', 'height': '100px'});
+        $('.buffer2, .buffer3, .buffer4, .buffer5').css({'width': '125px', 'height': '125px'});
         $('.song1').css({'width': '350px', 'height': '350px',});
         $('.song1_name').css({'display': 'block', 'opacity': '0'});
         myTimeout = setTimeout(function () {
@@ -30,6 +31,7 @@ $('.song1').hover(
     }, function () {
         clearTimeout(myTimeout);
         $('.song2, .song3, .song4, .song5').css({'width': '200px', 'height': '200px'});
+        $('.buffer2, .buffer3, .buffer4, .buffer5').css({'width': '0px', 'height': '0px'});
         $('.song1').css({'width': '200px', 'height': '200px',});
         $('.song1_name').css({'opacity': '0', 'display': 'none'});
     });
@@ -37,6 +39,7 @@ $('.song2').hover(
     function () {
         clearTimeout(myTimeout);
         $('.song1, .song3, .song4, .song5').css({'width': '100px', 'height': '100px',});
+        $('.buffer1, .buffer3, .buffer4, .buffer5').css({'width': '125px', 'height': '125px'});
         $('.song2').css({'width': '350px', 'height': '350px',});
         $('.song2_name').css({'display': 'block', 'opacity': '0'});
         myTimeout = setTimeout(function () {
@@ -45,6 +48,7 @@ $('.song2').hover(
     }, function () {
         clearTimeout(myTimeout);
         $('.song1, .song3, .song4, .song5').css({'width': '200px', 'height': '200px'});
+        $('.buffer1, .buffer3, .buffer4, .buffer5').css({'width': '0px', 'height': '0px'});
         $('.song2').css({'width': '200px', 'height': '200px',});
         $('.song2_name').css({'opacity': '0', 'display': 'none'});
     });
@@ -52,6 +56,7 @@ $('.song3').hover(
     function () {
         clearTimeout(myTimeout);
         $('.song2, .song1, .song4, .song5').css({'width': '100px', 'height': '100px',});
+        $('.buffer1, .buffer2, .buffer4, .buffer5').css({'width': '125px', 'height': '125px'});
         $('.song3').css({'width': '350px', 'height': '350px',});
         $('.song3_name').css({'display': 'block', 'opacity': '0'});
         myTimeout = setTimeout(function () {
@@ -60,6 +65,7 @@ $('.song3').hover(
     }, function () {
         clearTimeout(myTimeout);
         $('.song2, .song1, .song4, .song5').css({'width': '200px', 'height': '200px'});
+        $('.buffer1, .buffer2, .buffer4, .buffer5').css({'width': '0px', 'height': '0px'});
         $('.song3').css({'width': '200px', 'height': '200px',});
         $('.song3_name').css({'opacity': '0', 'display': 'none'});
     });
@@ -68,6 +74,7 @@ $('.song4').hover(
     function () {
         clearTimeout(myTimeout);
         $('.song2, .song3, .song1, .song5').css({'width': '100px', 'height': '100px',});
+        $('.buffer1, .buffer2, .buffer3, .buffer5').css({'width': '125px', 'height': '125px'});
         $('.song4').css({'width': '350px', 'height': '350px',});
         $('.song4_name').css({'display': 'block', 'opacity': '0'});
         myTimeout = setTimeout(function () {
@@ -76,6 +83,7 @@ $('.song4').hover(
     }, function () {
         clearTimeout(myTimeout);
         $('.song2, .song3, .song1, .song5').css({'width': '200px', 'height': '200px'});
+        $('.buffer1, .buffer2, .buffer3, .buffer5').css({'width': '0px', 'height': '0px'});
         $('.song4').css({'width': '200px', 'height': '200px',});
         $('.song4_name').css({'opacity': '0', 'display': 'none'});
     });
@@ -83,6 +91,7 @@ $('.song5').hover(
     function () {
         clearTimeout(myTimeout);
         $('.song2, .song3, .song4, .song1').css({'width': '100px', 'height': '100px',});
+        $('.buffer1, .buffer2, .buffer3, .buffer4').css({'width': '125px', 'height': '125px'});
         $('.song5').css({'width': '350px', 'height': '350px',});
         $('.song5_name').css({'display': 'block', 'opacity': '0'});
         myTimeout = setTimeout(function () {
@@ -91,6 +100,7 @@ $('.song5').hover(
     }, function () {
         clearTimeout(myTimeout);
         $('.song2, .song3, .song4, .song1').css({'width': '200px', 'height': '200px'});
+        $('.buffer1, .buffer2, .buffer3, .buffer4').css({'width': '0px', 'height': '0px'});
         $('.song5').css({'width': '200px', 'height': '200px',});
         $('.song5_name').css({'opacity': '0', 'display': 'none'});
     });
