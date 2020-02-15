@@ -94,8 +94,6 @@ def enter_all_lyrics(request, song_id):
                 location = all_lang_dict.get(str(index + 1), None)
                 location['rom'] = lyrics
 
-        print(all_lang_dict)
-
         context = {
             'song': song,
             'singers': singers,
@@ -109,7 +107,6 @@ def enter_all_lyrics(request, song_id):
 
 def modify_and_create_each_lyrics(request, song_id):
     if request.method == "POST":
-        print(request.POST)
         request_dict = request.POST
         song = Songs.objects.get(pk=song_id)
         singers = song.singer.all()
@@ -117,7 +114,6 @@ def modify_and_create_each_lyrics(request, song_id):
         length = int(request.POST['length'])
         if all_lyrics:
             # DB에 저장된 노래가사들이 있을 경우
-            print('있음')
             existing_lyrics_length = len(all_lyrics)
             if existing_lyrics_length > length:
                 # 새로 들어온 가사가 기존의 가사의 길이보다 작을 경우 삭제
@@ -189,6 +185,8 @@ def search(request):
             'kwd': kwd,
             'noresult': noresult,
             'albums': Albums.objects.all(),
+            'singers': Singers.objects.all(),
+
         }
         return render(request, 'Kasa/search_detail.html', context)
 

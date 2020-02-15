@@ -3,6 +3,7 @@
 
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/search_detail.css" %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 {% endblock %}
 
 
@@ -43,15 +44,32 @@
         {#        {% endif %}#}
         {#        {% if singers %}#}
         <div class="result_title">Singers</div>
-        <div class="result_content">
+        <div class="result_singer_content">
             {% for singer in singers %}
                 <div class="each_singer">
-                    <div>{{ forloop.counter }}</div>
-                    <div><a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.sname }}</a></div>
-                    <div><a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.image }}</a></div>
-                    {% for group in singer.group.all %}
-                        <div><a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a></div>
-                    {% endfor %}
+                    {% if singer.image %}
+                        <div class="singer_image_wrap"><a href="{% url 'Kasa:singer_detail' singer.pk %}">
+                            <img class="singer_image" src="{{ singer.image.url }}"/>
+                        </a></div>
+                    {% endif %}
+                    <div class="singer_info">
+                        <div class="singer_name">
+                            <a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.sname }}</a>
+                        </div>
+
+                        <div class="singer_groups">
+                            {% for group in singer.group.all %}
+                                <a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a>
+                            {% endfor %}
+                            {% if singer.singer_song.first %}
+                                <div>
+                                    <a href="{% url 'Kasa:song_detail' singer.singer_song.first.pk %}">
+                                        <i class="fas fa-play-circle"></i>
+                                        {{ singer.singer_song.first }}</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>

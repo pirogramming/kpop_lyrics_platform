@@ -151,8 +151,19 @@
     color: black;
 }
 
+.singer_img_wrap {
+    width: 150px;
+    height: 188px;
+
+}
+
 .singer_img {
     box-shadow: 0px 0px 7px 2px grey;
+    object-fit: cover;
+    width: 150px;
+    height: 188px;
+
+
 }
 
 .album_img {
@@ -167,7 +178,7 @@
     color: white;
     font-weight: bold;
     position: relative;
-    bottom: 44px;
+    bottom: 49px;
     background-color: black;
     height: 40px;
     opacity: 60%;
@@ -180,5 +191,5 @@
     width: 100%;
     white-space: normal;
     text-align: center;
-    color:grey;
+    color: grey;
 }
