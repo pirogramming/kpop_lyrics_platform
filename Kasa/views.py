@@ -184,8 +184,10 @@ def search(request):
         context = {
             'kwd': kwd,
             'noresult': noresult,
+            'artist_length': 0,
             'albums': Albums.objects.all(),
             'singers': Singers.objects.all(),
+            'groups': Groups.objects.all(),
 
         }
         return render(request, 'Kasa/search_detail.html', context)
@@ -201,46 +203,69 @@ def search(request):
     lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
     albums = Albums.objects.filter(aname__icontains=kwd)
     groups = Groups.objects.filter(Q(gname__icontains=kwd) | Q(agency__icontains=kwd))
+    if singers:
+        for singer in singers:
+            singers_list.append(singer)
+    if songs:
+        for song in songs:
+            songs_list.append(song)
+    if albums:
+        for album in albums:
+            albums_list.append(album)
+    if groups:
+        for group in groups:
+            groups_list.append(group)
+    if lyrics:
+        for overlap_check in lyrics:
+            if overlap_check in lyrics_list:
+                continue
+            lyrics_list.append(overlap_check)
 
-    if len(singers) > 5:
-        for singers_count in range(5):
-            singers_list.append(singers[singers_count])
-    else:
-        singers_list = singers
+    # 그룹을 검색했을 때 해당 그룹의 앨범,노래,가수
+    if groups:
+        for group in groups:
+            for group_singer in group.group_singer.all():
+                singers_list.append(group_singer)
+            for group_album in group.group_album.all():
+                albums_list.append(group_album)
+                for group_song in group_album.album_song.all():
+                    songs_list.append(group_song)
 
-    if len(songs) > 5:
-        for songs_count in range(5):
-            songs_list.append(songs[songs_count])
-    else:
-        songs_list = songs
+    # 가수를 검색했을 때 해당 가수의 그룹,앨범
+    if singers:
+        for singer in singers:
+            for singer_group in singer.group.all():
+                groups_list.append(singer_group)
+                for singer_album in singer_group.group_album.all():
+                    albums_list.append(singer_album)
 
-    if len(albums) > 5:
-        for albums_count in range(5):
-            albums_list.append(albums[albums_count])
-    else:
-        albums_list = albums
+    # 앨범을 검색했을 때 해당 앨범의 그룹,노래
+    if albums:
+        for album in albums:
+            for album_group in album.group.all():
+                groups_list.append(album_group)
+            for album_song in album.album_song.all():
+                songs_list.append(album_song)
 
-    if len(groups) > 5:
-        for groups_count in range(5):
-            groups_list.append(groups[groups_count])
-    else:
-        groups_list = groups
-
-    for overlap_check in lyrics:
-        if overlap_check in lyrics_list:
-            continue
-        if len(lyrics) > 5:
-            for lyrics_count in range(5):
-                lyrics_list.append(lyrics[overlap_check])
-        else:
-            lyrics_list.append(lyrics[lyrics_count])
+    # 노래를 검색했을 때 해당 노래의 앨범과 그룹
+    if songs:
+        for song in songs:
+            if song.album in albums_list:
+                pass
+            else:
+                albums_list.append(song.album)
+            if song.album.group in groups_list:
+                pass
+            else:
+                groups_list.append(song.album.group)
 
     if len(singers_list) <= 0 and len(songs_list) <= 0 and len(lyrics_list) <= 0 \
             and len(albums_list) <= 0 and len(groups_list) <= 0:
-        noresult = False
+        noresult = True
         context = {
             'kwd': kwd,
             'noresult': noresult,
+            'artist_length': 0,
         }
         return render(request, 'Kasa/search_detail.html', context)
 
@@ -251,6 +276,7 @@ def search(request):
         'lyrics': lyrics_list,
         'albums': albums_list,
         'groups': groups_list,
+        'artist_length': len(groups_list) + len(singers_list),
     }
     return render(request, 'Kasa/search_detail.html', context)
 

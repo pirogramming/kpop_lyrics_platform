@@ -25,6 +25,7 @@ class Albums(models.Model):
 
 class Singers(models.Model):
     sname = models.CharField(max_length=255, verbose_name='가수이름')
+    birth = models.DateField(blank=True, verbose_name='생일')
     image = models.ImageField(upload_to='singer_image', blank=True, verbose_name='가수사진')
     wiki_url = models.URLField(blank=True, verbose_name='가수정보')
     group = models.ManyToManyField(Groups, verbose_name='소속그룹', related_name='group_singer')

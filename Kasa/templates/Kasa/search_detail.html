@@ -19,63 +19,100 @@
             <span class="kwd">'{{ kwd }}'</span>
             에 대한 검색결과
         </div>
-        {#        {% if songs %}#}
-        <div class="result_title">Songs</div>
-        <div class="result_content">
-            {% for song in songs %}
-                <div class="each_song">
-                    <div>{{ forloop.counter }}</div>
-                    <div><a href="{% url 'Kasa:album_detail' song.album.pk %}">{{ song.album.album_art }}</a></div>
-                    <div><a href="{% url 'Kasa:song_detail' song.pk %}">{{ song.sname }}</a></div>
-                </div>
-            {% endfor %}
-        </div>
+
         {#        {% endif %}#}
         {#        {% if groups %}#}
-        <div class="result_title">Groups</div>
-        <div class="result_content">
+        <div class="result_title">Artists <span class="result_length">({{ artist_length }})</span></div>
+        <div class="result_artist_content">
             {% for group in groups %}
-                <div class="each_group">
-                    <div>{{ forloop.counter }}</div>
-                    <div>{{ group.gname }}</div>
-                </div>
-            {% endfor %}
-        </div>
-        {#        {% endif %}#}
-        {#        {% if singers %}#}
-        <div class="result_title">Singers</div>
-        <div class="result_singer_content">
-            {% for singer in singers %}
-                <div class="each_singer">
-                    {% if singer.image %}
-                        <div class="singer_image_wrap"><a href="{% url 'Kasa:singer_detail' singer.pk %}">
-                            <img class="singer_image" src="{{ singer.image.url }}"/>
+                <div class="each_artist">
+                    {% if group.group_image %}
+                        <div class="singer_artist_wrap"><a href="{% url 'Kasa:group_detail' group.pk %}">
+                            <img class="artist_image artist_group_image" src="{{ group.group_image.url }}"/>
                         </a></div>
                     {% endif %}
-                    <div class="singer_info">
-                        <div class="singer_name">
-                            <a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.sname }}</a>
+                    <div class="artist_info">
+                        <div class="artist_name">
+                            <a href="{% url 'Kasa:group_detail' group.pk %}">{{ group.gname }}</a>
+                            {#                            <div class="singer_birth">/ {{ singer.birth }}</div>#}
                         </div>
 
-                        <div class="singer_groups">
+                        <div class="artist_agency">
+                            {{ group.agency }}
+                        </div>
+                        {% if group.sns_url %}
+                            <div class="artist_song">
+                                <a href="{{ group.sns_url }}">
+                                    <i class="fab fa-twitter"></i>
+                                    <span>Twitter</span>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            {#        {% endif %}#}
+            {#        {% if singers %}#}
+            {% for singer in singers %}
+                <div class="each_artist">
+                    {% if singer.image %}
+                        <div class="singer_artist_wrap"><a href="{% url 'Kasa:singer_detail' singer.pk %}">
+                            <img class="artist_image" src="{{ singer.image.url }}"/>
+                        </a></div>
+                    {% endif %}
+                    <div class="artist_info">
+                        <div class="artist_name">
+                            <a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.sname }}</a>
+                            <div class="artist_birth">/ {{ singer.birth }}</div>
+                        </div>
+
+                        <div class="artist_groups">
                             {% for group in singer.group.all %}
                                 <a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a>
                             {% endfor %}
-                            {% if singer.singer_song.first %}
-                                <div>
-                                    <a href="{% url 'Kasa:song_detail' singer.singer_song.first.pk %}">
-                                        <i class="fas fa-play-circle"></i>
-                                        {{ singer.singer_song.first }}</a>
-                                </div>
-                            {% endif %}
                         </div>
+                        {% if singer.singer_song.first %}
+                            <div class="artist_song">
+                                <a href="{% url 'Kasa:song_detail' singer.singer_song.first.pk %}">
+                                    <i class="fas fa-play-circle"></i>
+                                    <span>{{ singer.singer_song.first.sname }}</span>
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
         </div>
+        {#{% endif %}#}
+        {#        {% if songs %}#}
+        <div class="result_title result_title_song">Songs <span class="result_length">({{ songs|length }})</span></div>
+        <div class="result_content">
+            <div class="songs_category">
+                <span>번호</span><span>곡정보</span><span>아티스트</span><span>가사</span>
+            </div>
+            {% for song in songs %}
+                <div class="each_song">
+                    <div>{{ forloop.counter }}</div>
+                    <div>
+                        <a class="song_album_img" href="{% url 'Kasa:album_detail' song.album.pk %}">
+                            <img class="song_mini_album_size" src="{{ song.album.album_art.url }}"/>
+                        </a>
+                        <a class="song_title" href="{% url 'Kasa:song_detail' song.pk %}">
+                            {{ song.sname }}</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'Kasa:group_detail' song.album.group.pk %}">{{ song.album.group.gname }}</a>
+                    </div>
+                    <div><i class="far fa-file-alt"></i></div>
+                </div>
+            {% endfor %}
+            <div class="each_song_buffer"></div>
+        </div>
+
         {#        {% endif %}#}
         {#        {% if albums %}#}
-        <div class="result_title">Albums</div>
+        <div class="result_title">Albums <span class="result_length">({{ albums|length }})</span></div>
         <div class="result_albums_content">
 
             {% for album in albums %}
@@ -103,7 +140,7 @@
         </div>
         {#        {% endif %}#}
         {#        {% if lyrics %}#}
-        <div class="result_title">Lyrics</div>
+        <div class="result_title">Lyrics <span class="result_length">({{ lyrics|length }})</span></div>
         <div class="result_content">
             {% for lyric in lyrics %}
                 <div class="each_lyric">

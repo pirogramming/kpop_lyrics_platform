@@ -17,7 +17,7 @@ body .wrap {
     min-height: 78vh;
     width: 70%;
     display: block;
-    text-align: center;
+    /*text-align: center;*/
     margin: 20px auto 135px auto;
     /*background-color: none;*/
 }
