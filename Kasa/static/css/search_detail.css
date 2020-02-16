@@ -13,15 +13,27 @@ a {
     color: #00b8ff;
 }
 
+.result_title_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid lightgrey;
+    margin: 40px 0 40px 0;
+    padding-bottom: 5px;
+}
+
+.opener {
+    color: #777;
+    font-size: 13px;
+}
+
 .result_title {
     color: #00b8ff;
     font-size: 30px;
-    font-weight: bold;
-    margin: 20px 0 40px 0;
-    border-bottom: 1px solid lightgrey;
-    padding-bottom: 5px;
     height: 60px;
-    line-height: 60px;
+    font-weight: bold;
 }
 
 .result_length {
@@ -71,6 +83,7 @@ a {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
+    text-shadow: 1px 1px 2px gray;
 }
 
 .artist_birth {
@@ -226,7 +239,7 @@ a {
 
 .album_art {
     flex: 4;
-    object-fit: cover;
+    object-fit: contain;
     height: 100%;
     display: flex;
     align-items: center;
@@ -235,7 +248,7 @@ a {
 
 .album_image {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     box-shadow: 0px 0px 5px 2px grey;
     border: 1px solid grey
 }
@@ -248,6 +261,8 @@ a {
 .album_name {
     font-weight: bold;
     margin-bottom: 5px;
+    text-shadow: 1px 1px 3px gray;
+
 }
 
 .album_group_name {
@@ -290,5 +305,123 @@ a {
     color: darkblue;
     font-weight: bold;
     font-size: 13px;
+}
 
+.result_title_lyric {
+    margin-bottom: 0px;
+}
+
+.result_lyrics_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.each_lyric {
+    border-bottom: 1px solid lightgrey;
+    padding: 20px 10px 10px 10px;
+    /*padding: 20px 30px;*/
+    margin-bottom: 10px;
+}
+
+.lyrics_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.lyrics_album {
+    display: flex;
+    flex-direction: row;
+}
+
+.lyrics_album_img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    box-shadow: 0px 0px 7px 2px grey;
+}
+
+.lyric_song {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.lyric_group {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    font-size: 12px;
+}
+
+.lyric_order {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.lyric_song_all {
+    width: 100%;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.4em;
+    height: 4.2em;
+
+    /*height:100px;*/
+    /*overflow: ;*/
+    /*text-overflow: ellipsis;*/
+    /*  white-space: ;*/
+}
+
+.eli {
+    color: grey;
+}
+
+.lyrics_buffer {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+.paginator_wrap {
+    display: none;
+    margin-top: 10px;
+}
+
+.paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginator_btn {
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    color: #00b8ff;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.paginator_btn:hover {
+    background-color: #00b8ff;
+    color: white;
+}
+
+.prevent_page {
+    background-color: #00b8ff;
+    color: white;
 }

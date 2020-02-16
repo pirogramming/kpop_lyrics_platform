@@ -1,7 +1,5 @@
 import json
 import random
-import re
-
 import requests
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
@@ -9,8 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from Kasa.convert_url import convert_youtube
 from Kasa.models import *
 from django.db.models import Q
-
-from accounts.decorators import login_required
+from django.core.paginator import Paginator
 
 
 def song_detail(request, song_pk):
@@ -178,19 +175,15 @@ def modify_and_create_each_lyrics(request, song_id):
 def search(request):
     kwd = request.GET.get('kwd', None)
     if not kwd:
-        # noresult = True
-        noresult = False
+        noresult = True
 
         context = {
             'kwd': kwd,
             'noresult': noresult,
-            'artist_length': 0,
-            'albums': Albums.objects.all(),
-            'singers': Singers.objects.all(),
-            'groups': Groups.objects.all(),
-
         }
         return render(request, 'Kasa/search_detail.html', context)
+
+    target = request.GET.get('target', '')
 
     singers_list = []
     songs_list = []
@@ -203,6 +196,7 @@ def search(request):
     lyrics = Lyrics.objects.filter(Q(kor__icontains=kwd) | Q(rom__icontains=kwd) | Q(eng__icontains=kwd))
     albums = Albums.objects.filter(aname__icontains=kwd)
     groups = Groups.objects.filter(Q(gname__icontains=kwd) | Q(agency__icontains=kwd))
+
     if singers:
         for singer in singers:
             singers_list.append(singer)
@@ -242,8 +236,7 @@ def search(request):
     # 앨범을 검색했을 때 해당 앨범의 그룹,노래
     if albums:
         for album in albums:
-            for album_group in album.group.all():
-                groups_list.append(album_group)
+            groups_list.append(album.group)
             for album_song in album.album_song.all():
                 songs_list.append(album_song)
 
@@ -259,8 +252,10 @@ def search(request):
             else:
                 groups_list.append(song.album.group)
 
-    if len(singers_list) <= 0 and len(songs_list) <= 0 and len(lyrics_list) <= 0 \
-            and len(albums_list) <= 0 and len(groups_list) <= 0:
+    artists_list = groups_list + singers_list
+
+    if len(singers_list) <= 0 and len(artists_list) <= 0 and len(lyrics_list) <= 0 \
+            and len(albums_list) <= 0:
         noresult = True
         context = {
             'kwd': kwd,
@@ -269,14 +264,74 @@ def search(request):
         }
         return render(request, 'Kasa/search_detail.html', context)
 
+    double_prev_page = None
+    double_next_page = None
+
+    # Artist 페이지네이션
+    artists_length = len(artists_list)
+    artists_paginator = Paginator(artists_list, 6)
+    if request.GET.get('target') == 'artist':
+        if request.GET.get('artist_page'):
+            present_page = int(request.GET.get('artist_page'))
+            if present_page - 2 > 1:
+                double_prev_page = present_page - 2
+            if present_page + 2 < artists_paginator.num_pages:
+                double_next_page = present_page + 2
+    artist_post = request.GET.get('song_page', 1)
+    artists_posts = artists_paginator.get_page(artist_post)
+
+    # Song 페이지네이션
+    songs_length = len(songs_list)
+    songs_paginator = Paginator(songs_list, 10)
+    if request.GET.get('target') == 'song':
+        if request.GET.get('song_page'):
+            present_page = int(request.GET.get('song_page'))
+            if present_page - 2 > 1:
+                double_prev_page = present_page - 2
+            if present_page + 2 < songs_paginator.num_pages:
+                double_next_page = present_page + 2
+    song_post = request.GET.get('song_page', 1)
+    songs_posts = songs_paginator.get_page(song_post)
+
+    # Album 페이지네이션
+    albums_length = len(albums_list)
+    albums_paginator = Paginator(albums_list, 6)
+    if request.GET.get('target') == 'album':
+        if request.GET.get('album_page'):
+            present_page = int(request.GET.get('album_page'))
+            if present_page - 2 > 1:
+                double_prev_page = present_page - 2
+            if present_page + 2 < albums_paginator.num_pages:
+                double_next_page = present_page + 2
+    album_post = request.GET.get('album_page', 1)
+    albums_posts = albums_paginator.get_page(album_post)
+
+    # Lyric 페이지네이션
+    lyrics_length = len(lyrics_list)
+    lyrics_paginator = Paginator(lyrics_list, 5)
+    if request.GET.get('target') == 'lyric':
+        if request.GET.get('lyric_page'):
+            present_page = int(request.GET.get('lyric_page'))
+            if present_page - 2 > 1:
+                double_prev_page = present_page - 2
+            if present_page + 2 < lyrics_paginator.num_pages:
+                double_next_page = present_page + 2
+    lyric_post = request.GET.get('lyric_page', 1)
+    lyrics_posts = lyrics_paginator.get_page(lyric_post)
+
     context = {
         'kwd': kwd,
-        'singers': singers_list,
-        'songs': songs_list,
-        'lyrics': lyrics_list,
-        'albums': albums_list,
-        'groups': groups_list,
-        'artist_length': len(groups_list) + len(singers_list),
+        'artists': artists_posts,
+        'songs': songs_posts,
+        'albums': albums_posts,
+        'lyrics': lyrics_posts,
+        'artists_length': artists_length,
+        'songs_length': songs_length,
+        'albums_length': albums_length,
+        'lyrics_length': lyrics_length,
+        'double_prev_page': double_prev_page,
+        'double_next_page': double_next_page,
+        'target': target,
     }
     return render(request, 'Kasa/search_detail.html', context)
 

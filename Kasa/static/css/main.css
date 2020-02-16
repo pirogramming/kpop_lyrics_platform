@@ -262,6 +262,7 @@ input[type=text]:focus {
     /*bottom: 8px;*/
     width: 100%;
     text-align: center;
+    text-shadow: 1px 1px 2px gray;
 }
 
 
@@ -343,5 +344,6 @@ input[type=text]:focus {
 }
 
 .active, .dot:hover {
-    background-color: #717171;
+    /*background-color: #717171;*/
+    background-color: #00b8ff;
 }
