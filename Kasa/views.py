@@ -324,22 +324,52 @@ def pick_one_group_by_user(user=None):
         interests = interests.replace('/', ' ')
         interests = interests.split(' ')
         group_list = []
+        kwd_group_list = []
+        choice_group = None
         for interest in interests:
             if not interest:
                 continue
             sets = Groups.objects.filter(gname__icontains=interest)
             if not sets:
-                groups = Groups.objects.all()
-                if groups:
-                    return random.choice(groups)
-                return None
+                continue
             for query in sets:
-                group_list.append(query)
-            return random.choice(group_list)
+                kwd_group_list.append(query)
+        if kwd_group_list:
+            group = random.choice(kwd_group_list)
+            while not group.group_image:
+                kwd_group_list.remove(group)
+                if not kwd_group_list:
+                    group = None
+                    break
+                group = random.choice(kwd_group_list)
+            choice_group = group
+            if choice_group:
+                return choice_group
+
+        group_list = list(Groups.objects.all())
+        if not group_list:
+            return None
+
+        group = random.choice(group_list)
+        while not group.group_image:
+            group_list.remove(group)
+            if not group_list:
+                return None
+            group = random.choice(group_list)
+        return group
+
     else:
         groups = Groups.objects.all()
+        groups = list(groups)
+
         if groups:
-            return random.choice(groups)
+            group = random.choice(groups)
+            while not group.group_image:
+                groups.remove(group)
+                if not groups:
+                    return None
+                group = random.choice(groups)
+            return group
         return None
 
 
@@ -348,6 +378,6 @@ def main(request):
     group = pick_one_group_by_user(request.user)
     context = {
         'five_songs': five_songs,
-        'group': group
+        'group': group,
     }
     return render(request, 'Kasa/main.html', context)

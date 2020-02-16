@@ -1,47 +1,231 @@
-{{ album.aname }}
-{{ album.release_date }}
-{{ album.album_art }}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+    body #wrap{
+        text-align:left;
+    }
+    .songinfowrap{
+        display:flex;
+        {#border:1px solid black;#}
+        height:220px;
+        min-width:100%;
+        min-height:100px;
+        margin-bottom:50px;
 
+    }
+    .album-art{
+        box-shadow: 0 0 5px gray;
+        margin:5px 15px 5px 5px;
+        height:200px;
+        width:200px;
+        transition:1s;
+    }
+     .album-art:hover{
+         height:230px;
+         width:230px;
 
-<div class="lyrics">
-    {% for lyrics in all_lyrics %}
-        <div>
-            {{ lyrics.kor }}
+    }
+    .album-jacket{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .infowrap {
+        {#border:1px solid black;#}
+    }
+    .songtitle{
+        font-size:30px;
+        font-weight: bold;
+        padding:0;
+        line-height: 100px;
+    }
+    .albumname{
+        font-size: 13px;
+        margin:2px 2px;
+        margin-bottom:20px;
+    }
+    .song-artist{
+        font-weight: bold;
+    }
+    .buttonwrap{
+        {#border:2px solid black;#}
+        margin-bottom: 30px;
+    }
+    .koreanlyric, .Englishlyric, .Romlyric, .member, .fan{
+        background: none;
+        border:none;
+        border-radius: 10px;
+        margin:10px;
+        height:40px;
+        width:120px;
+        font-weight: bold;
+        background: linear-gradient(to right, #00fffe, #00b8ff);
+        transition: 0.5s;
+        {#font-size: 20px;#}
+        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    }
+    .koreanlyric:hover, .Englishlyric:hover, .Romlyric:hover, .member:hover, .fan:hover{
+        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+        color: #000000;
+        background: linear-gradient(to right, #06c9ff, #009cc9);
+    }
+    .middlewrap{
+        {#border:2px solid black;#}
+        display: flex;
+        justify-content: space-around;
+        {#flex-wrap: wrap;#}
+    }
+    .lyrics{
+        width:60%;
+        flex:auto;
+    }
+    .rightwrap{
+        {#border:1px solid black;#}
+        flex-direction: column;
+        float:right;
+    }
+    .twitter_url{
+        margin-top: 100px;
+        height:500px;
+        width: 300px;
+        overflow-y: scroll;
+        {#border: 1px solid black;#}
+        margin-left:190px;
+        margin-bottom: 40px;
+        box-shadow: 0 0 5px gray;
+    }
+    .mediabutton *{
+        margin:30px 20px 30px 0;
+        float:right;
+        border:none;
+        width:70px;
+        height:30px;
+        border-radius: 5px;
+        background: linear-gradient(to right, #00fffe, #00b8ff);
+        transition: 0.5s;
+        font-size: 20px;
+        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    }
+    .mediabutton *:hover{
+        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+        color: #000000;
+        background: linear-gradient(to right, #06c9ff, #009cc9);
+    }
+    .bottomwrap{
+        min-width: 100%;
+        width:100%;
+        height:400px;
+        margin: 100px 0 200px 0;
+    }
+    .commenttitle{
+        text-align: center;
+        color: #00b8ff;
+        font-size: 40px;
+        font-weight: bold;
+        padding-bottom: 5px;
+        height: 60px;
+        line-height: 60px;
+        margin: 30px 0 30px 0;
+    }
+    .commentbox{
+        width:100%;
+        height:10%;
+        display: flex;
+        justify-content: center;
+    }
+    .comment_contents{
+        {#border:1px solid black;#}
+        border-bottom:3px dashed lightgrey;
+        margin:10px;
+        width:100%;
+        height:20px;
+    }
+    .username{
+        text-align: center;
+        border-bottom:3px solid lightgrey;
+        margin:10px;
+        width:10%;
+        height:20px;
+    }
+    .comment-time{
+        border-bottom:3px solid lightgrey;
+        margin:10px;
+        width:20%;
+        height:20px;
+    }
+    .comment-login{
+        font-size: 10px;
+        color:gray;
+        height:20px;
+        width:10%;
+        text-decoration: none;
+        margin-top: 14px;
+    }
+    </style>
+    <div class="songinfowrap">
+        <div class="album-art">
+           <img class="album-jacket" src="{{ song.album.album_art.url }}"/>
         </div>
-    {% endfor %}
-</div>
+        <div class="infowrap">
+            <div class="songtitle">{{ song.sname }}</div>
+            <div class="albumname">{{ album.aname }}</div>
+            <div class="song-artist">{{ album.group }}</div>
+        </div>
+    </div>
+    <div class="buttonwrap">
+        <button type="button" class="koreanlyric" onclick="">Korean</button>
+        <button type="button" class="Englishlyric" onclick="">English</button>
+        <button type="button" class="Romlyric" onclick="">Rom</button>
+{#        <button type="button" class="member" onclick="">Member part</button>#}
+{#        <button type="button" class="fan" onclick="">Fanchant</button>#}
+    </div>
+    <div class="middlewrap">
+        <div class="lyrics">
+            {% for lyrics in all_lyrics %}
+                <div>
+                    {{ lyrics.kor }}
+                </div>
+            {% endfor %}
+        </div>
 
-<div class="twitter_url" style="height:500px; width: 300px; overflow-y: scroll; border: 1px solid black" ;>
-    <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div>
-<button type="button" id="media_open">open</button>
-<button type="button" id="media_close">close</button>
+        <div class="rightwrap">
+            <div id="media">
+                <object type="text/html" width="500" height="250" data="{{ youtube_url }}" allowFullScreen></object>
+            </div>
+            <div class="mediabutton">
+                <button type="button" id="media_open">open</button>
+                <button type="button" id="media_close">close</button>
+            </div>
+            <div class="twitter_url">
+                <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </div>
+    <div class="bottomwrap">
+        <div class="commenttitle">comments</div>
+        <div class="commentbox">
+            {% for comment in comments %}
+                <div class="comment_contents">{{ comment.content }}</div>
+                <div class="username">{{ comment.user.username }}</div>
+                <div class="comment-time">{{ comment.created_at }}</div>
+                <br/>
+            {% endfor %}
 
-<div id="media">
-    <object type="text/html" width="500" height="250" data="{{ youtube_url }}" allowFullScreen></object>
-</div>
 
-
-{% for comment in comments %}
-    <div>{{ comment.content }}</div>
-    <div>{{ comment.user.username }}</div>
-    <div>{{ comment.created_at }}</div>
-    <br/>
-{% endfor %}
-
-
-{% if user.is_authenticated %}
-    <form action="{% url "Kasa:write_new_comment" %}" method="POST">
-        {% csrf_token %}
-        <input type="text" class="comment_content" name="comment_content" placeholder="댓글 작성" autocomplete="off">
-        <input type="submit" class="submit" value="작성">
-        <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
-    </form>
-{% else %}
-    <a href="{% url "accounts:login" %}">로그인</a>
-{% endif %}
-
+            {% if user.is_authenticated %}
+                <form action="{% url "Kasa:write_new_comment" %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="comment_content" name="comment_content" placeholder="댓글 작성" autocomplete="off">
+                    <input type="submit" class="submit" value="작성">
+                    <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
+                </form>
+            {% else %}
+                <a class="comment-login" href="{% url "accounts:login" %}">로그인</a>
+            {% endif %}
+        </div>
+    </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
@@ -49,3 +233,4 @@
         $("#layer_pop").hide(); // 반대는 당연히 show();
     }
 </script>
+{% endblock %}
