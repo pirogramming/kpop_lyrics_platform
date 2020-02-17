@@ -28,12 +28,9 @@
                     <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit" name="submit"
                            value="submit"
                            class="search-btn">
-
                 </div>
             </form>
-
         </div>
-
         {% if user.is_authenticated %}
             <div class="signin"><a href="{% url 'accounts:login' %}">Edit</a></div>
             <div class="signup"><a href="{% url 'accounts:logout' %}">Logout</a></div>
@@ -41,6 +38,5 @@
             <div class="signin"><a href="{% url 'accounts:login' %}">Sign in</a></div>
             <div class="signup"><a href="{% url 'accounts:signup' %}">Sign up</a></div>
         {% endif %}
-
     </div>
 </nav>
