@@ -1,17 +1,18 @@
-$('#searchbox').hover(function () {
-    // $('#main_wrap_2').css({'background': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))'});
-}, function () {
-    // $('#main_wrap_2').css({'background': 'transparent'})
-});
-
-$('.main-searchbox').hover(
+$('.main-searchtxt').focus(
     function () {
-        $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.5'});
-        $(this).css({'box-shadow': '0px 0px 7px 2px white'})
-    }, function () {
+        $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.7'});
+        $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white'})
+    });
+
+$('.main-searchtxt').blur(
+    function () {
         $('#main_wrap_2').css({'background-color': 'transparent', 'opacity': '1'});
+        $('.main-searchbox').css({'box-shadow': '0px 0px 0px 0px'});
         $(this).css("background-color", "white");
-        $(this).css({'box-shadow': 'none'})
+        $(this).css({'box-shadow': 'none'});
+        setTimeout(function() {
+            $('#livesearch_item_wrapper').css("display", "none");
+        },200);
 
     });
 

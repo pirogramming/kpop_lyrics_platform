@@ -52,6 +52,7 @@ def choice_group(request):
 
 def search_group(request):
     kwd = request.POST.get('kwd', None)
+
     data = {
         'content': list()
     }
@@ -174,6 +175,7 @@ def modify_and_create_each_lyrics(request, song_id):
 
 def search(request):
     kwd = request.GET.get('kwd', None)
+
     if not kwd:
         noresult = True
 
@@ -252,9 +254,7 @@ def search(request):
             else:
                 groups_list.append(song.album.group)
 
-    artists_list = groups_list + singers_list
-
-    if len(singers_list) <= 0 and len(artists_list) <= 0 and len(lyrics_list) <= 0 \
+    if len(singers_list) <= 0 and len(singers_list) <= 0 and len(groups_list) and len(lyrics_list) <= 0 \
             and len(albums_list) <= 0:
         noresult = True
         context = {
@@ -263,6 +263,39 @@ def search(request):
             'artist_length': 0,
         }
         return render(request, 'Kasa/search_detail.html', context)
+
+    if request.GET.get('is_livesearch', None):
+        data = {
+            'groups': list(),
+            'singers': list(),
+            'songs': list(),
+        }
+        for group_limit_in in groups_list[:2]:
+            data['groups'].append({
+                'id': group_limit_in.id,
+                'name': group_limit_in.gname,
+                'image': group_limit_in.group_image.url,
+                'agency': group_limit_in.agency,
+            })
+        for singer_limit_in in singers_list[:4-len(groups_list[:2])]:
+            data['singers'].append({
+                'id': singer_limit_in.id,
+                'name': singer_limit_in.sname,
+                'image': singer_limit_in.image.url,
+                'group': singer_limit_in.group.first().gname,
+            })
+
+        for song_limit_in in songs_list[:4]:
+            data['songs'].append({
+                'id': song_limit_in.id,
+                'name': song_limit_in.sname,
+                'image': song_limit_in.album.album_art.url,
+                'group': song_limit_in.album.group.gname,
+            })
+
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+    artists_list = groups_list + singers_list
 
     double_prev_page = None
     double_next_page = None
@@ -277,7 +310,7 @@ def search(request):
                 double_prev_page = present_page - 2
             if present_page + 2 < artists_paginator.num_pages:
                 double_next_page = present_page + 2
-    artist_post = request.GET.get('song_page', 1)
+    artist_post = request.GET.get('artist_page', 1)
     artists_posts = artists_paginator.get_page(artist_post)
 
     # Song 페이지네이션
