@@ -367,6 +367,7 @@ def album_detail(request, album_pk):
     # a = str(items)
     # prd_names = re.sub('<.+?>', '', a, 0).strip()
     # print(prd_names)
+    print(album.content)
     context = {
         'album': album,
         'items': items,
