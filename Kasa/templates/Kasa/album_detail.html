@@ -1,10 +1,134 @@
-<h3>{{ album.aname }}</h3>
-<h3>{{ album.release_date }}</h3>
-<h3>{{ album.album_art }}</h3>
-<h3>{{ album.group }}</h3>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
 
+<style>
+    .album_data {
+        font-size: 40px;
+        text-align: left;
+        border-bottom: 1px solid lightgrey;
+        height: 60px;
+        font-weight: bold;
+        line-height: 60px;
+        padding-bottom: 5px;
+        color: #00b8ff;
+        margin-bottom: 0px;
+         margin-top: 30px
+    }
+     .song_data {font-size: 40px;
+        text-align: left;
+        border-bottom: 1px solid lightgrey;
+        height: 60px;
+        font-weight: bold;
+        line-height: 60px;
+        padding-bottom: 5px;
+        color: #00b8ff;
+        margin-bottom: 0px;
+         margin-top: 30px;
+
+    }
 
 
+.info img{width:200px; height: 200px;}
+.info .p{display: inline-block;}
+.info .a{display:flex;width:500px;height: 200px; float:right;flex-direction: column;
+    justify-content: center; align-items: center }
+.info .a .b{text-align: left; width:100%;line-height: 70px; font-weight: bold  }
+.c{border-bottom:1px solid black; width:100%; height:80px; text-align: left;
+}
+.c img{height:100%;width:80px; float: left}
+    .content_wrap {
+            clear:both;
+            display:block;
+            overflow:hidden;
+            margin:10px 20px 0 20px;
+            padding:5px;
+            font-size: 20px;
+            line-height:130%;
+            height:100%;
+            min-height:160px;
 
 
+    }
+
+    .btn_more {
+            display:block;
+            padding:10px 0 0 0;
+            margin:10px 0 0 0;
+            text-align:right;
+            font-size:20px;
+            color:#000;
+}
+    .SynopsisText {
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+
+    </style>
+
+<div class="album_data">Album</div>
+<div class="info">
+    <div class="p"><img src="{{ album.album_art.url}}"></div>
+    <div class="a">
+        <div class="b"> 그룹명:{{ album.group }}</div>
+        <div class="b">앨범명:{{ album.aname }}</div>
+        <div class="b">발매일:{{ album.release_date }}</div>
+   </div>
+</div>
+        <div class="song_data">Song list</div>
+         <div style="overflow-y:scroll; width:100%; height:300px; padding: 0;">
+             <div class="c"><img src="{{ album.album_art.url}}"> <div class="in"> 해바라기</div>    </div>
+             <div class="c"><img src="{{ album.album_art.url}}">    </div>
+             <div class="c"><img src="{{ album.album_art.url}}">    </div>
+             <div class="c"><img src="{{ album.album_art.url}}">    </div>
+             <div class="c"><img src="{{ album.album_art.url}}">    </div>
+         </div>
+<div class="album_data">Album information</div>
+
+<h3 class="hidden"></h3>
+    <article class="content_wrap" id="synopsis">
+        <div id="SynopsisDiv" class="SynopsisText">
+            <b> </b><br/>
+             {{ album.content|linebreaksbr }}
+        </div>
+        <a href="javascript:showplay();" class="btn_more" id="synopMore">펼쳐보기</a>
+        <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
+    </article>
+{% endblock %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+ <script>
+    //더보기 토글
+    function showplay() {
+        var flag = $('#hidTempSynopsis');
+        var SynopsisDiv = $('#SynopsisDiv');
+        var flagValue = flag.val();
+        if (flag != null) {
+            if (flagValue == "0") {
+                SynopsisDiv.css("height", "auto");
+                SynopsisDiv.css("font-size", "20px");
+                SynopsisDiv.css("display", "block");
+                $("#synopMore").text("닫기");
+                flag.val("1");
+            }
+            else {
+                SynopsisDiv.css("height", "100px");
+                SynopsisDiv.css("display", "-webkit-box");
+                $("#synopMore").text("펼쳐보기");
+                flag.val("0");
+            }
+        }
+        else {
+            alert("추가 정보가 없습니다.");
+        }
+    }
+    </script>
+
+{% endblock %}
