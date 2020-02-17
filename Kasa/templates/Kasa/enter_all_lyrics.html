@@ -1,47 +1,16 @@
-{% extends 'base.html' %}
-{%  load static %}
-{% block content %}
-<style>
-
-.inputlyricswrap{
-    display: flex;
-    justify-content: center;
-    width:95%;
-}
-.all_eng, .all_kor, .all_rom{
-    margin:10px;
-    box-shadow: 0 0 5px gray;
-}
-#add_eng,#add_rom,.submitlyric{
-    width:100px;
-    height:40px;
-    margin:10px;
-    background: linear-gradient(to right, #00fffe, #00b8ff);
-    border:none;
-    border-radius: 5px;
-}
-.submitlyric{
-    width:220px;
-}
-
-</style>
-
 <form action="" method="POST">
-      <meta charset="UTF-8">
     {% csrf_token %}
-    <div class="inputlyricswrap">
-        <div id="all_kor">
-            <h2>Korean lyrics</h2>
-            <textarea name="all_kor" class="all_kor"cols="40" rows="30"></textarea>
-        </div>
-        <div id="all_eng" style="display:none;">
-            <h2>English lyrics</h2>
-            <textarea name="all_eng"class="all_eng" cols="40" rows="30"></textarea>
-        </div>
-        <div id="all_rom" style="display:none;">
-            <h2>Rom lyrics</h2>
-            <textarea name="all_rom" class="all_rom"cols="40" rows="30"></textarea>
-        </div>
+    <div id="all_kor">
+        <h2>한국어 가사</h2>
+        <textarea name="all_kor" cols="40" rows="30"></textarea>
+    </div>
+    <div id="all_eng" style="display:none;">
+        <h2>영어 가사</h2>
+        <textarea name="all_eng" cols="40" rows="30"></textarea>
+    </div>
+    <div id="all_rom" style="display:none;">
+        <h2>로마자 가사</h2>
+        <textarea name="all_rom" cols="40" rows="30"></textarea>
     </div>
     <!--
     <h2>영어 가사</h2>
@@ -49,11 +18,10 @@
     <h2>로마자 가사</h2>
     <textarea name="all_rom" cols="40" rows="30"></textarea>
     -->
-    <button type="button" id="add_eng" onclick="doDisplay_eng()">Add English</button>
-    <button type="button" id="add_rom" onclick="doDisplay_rom()">Add Rom</button>
-    <div class="submitlyricwrap">
-        <input type="submit" class="submitlyric" value="입력">
-    </div>
+    <button type="button" id="add_eng" onclick="doDisplay_eng()">영어가사추가</button>
+    <button type="button" id="add_rom" onclick="doDisplay_rom()">로마자가사추가</button>
+
+    <input type="submit" value="입력">
 </form>
 
 <script type="text/javascript" language="javascript">
@@ -78,4 +46,3 @@
         }
     }
 </script>
-{% endblock %}

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,21 +9,18 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}"/>
     {% block style %}
     {% endblock %}
-
 </head>
 <body>
-
 {% include 'navbar.html' %}
 
-<div class="wrap" id="wrap">
+<div class="wrap">
     {% block content %}
+
     {% endblock %}
 </div>
-
 {% include 'footer.html' %}
 
 {% block script %}
 {% endblock %}
-
 </body>
 </html>

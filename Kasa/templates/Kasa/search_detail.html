@@ -3,7 +3,6 @@
 
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/search_detail.css" %}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 {% endblock %}
 
 
@@ -19,416 +18,85 @@
             <span class="kwd">'{{ kwd }}'</span>
             에 대한 검색결과
         </div>
-
-        <!--Artists-->
-        <div id="artist_box">
-            <div class="result_title_wrapper">
-                <div class="result_title">Artists <span class="result_length">({{ artists_length }})</span></div>
-                <a id="artist_paginator_open" class="opener" href="?target=artist&artist_page=1&kwd={{ kwd }}">
-                    아티스트 결과 전체보기 <i class="fas fa-caret-right"></i>
-                </a>
-            </div>
-            <div class="result_artist_content">
-
-                {% for artist in artists %}
-                    {% if artist.gname %}
-                        <div class="each_artist">
-                            {% if artist.group_image %}
-                                <div class="singer_artist_wrap"><a href="{% url 'Kasa:group_detail' artist.pk %}">
-                                    <img class="artist_image artist_group_image" src="{{ artist.group_image.url }}"/>
-                                </a></div>
-                            {% endif %}
-                            <div class="artist_info">
-                                <div class="artist_name">
-                                    <a href="{% url 'Kasa:group_detail' artist.pk %}">{{ artist.gname }}</a>
-                                </div>
-
-                                <div class="artist_agency">
-                                    {{ artist.agency }}
-                                </div>
-                                {% if artist.sns_url %}
-                                    <div class="artist_song">
-                                        <a href="{{ artist.sns_url }}">
-                                            <i class="fab fa-twitter"></i>
-                                            <span>Twitter</span>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% else %}
-
-                        <div class="each_artist">
-                            {% if artist.image %}
-                                <div class="singer_artist_wrap"><a href="{% url 'Kasa:singer_detail' artist.pk %}">
-                                    <img class="artist_image" src="{{ artist.image.url }}"/>
-                                </a></div>
-                            {% endif %}
-                            <div class="artist_info">
-                                <div class="artist_name">
-                                    <a href="{% url 'Kasa:singer_detail' artist.pk %}">{{ artist.sname }}</a>
-                                    <div class="artist_birth">/ {{ artist.birth }}</div>
-                                </div>
-
-                                <div class="artist_groups">
-                                    {% for group in artist.group.all %}
-                                        <a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a>
-                                    {% endfor %}
-                                </div>
-                                {% if artist.singer_song.first %}
-                                    <div class="artist_song">
-                                        <a href="{% url 'Kasa:song_detail' artist.singer_song.first.pk %}">
-                                            <i class="fas fa-play-circle"></i>
-                                            <span>{{ artist.singer_song.first.sname }}</span>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+        {#        {% if songs %}#}
+        <div class="result_title">Songs</div>
+        <div class="result_content">
+            {% for song in songs %}
+                <div class="each_song">
+                    <div>{{ forloop.counter }}</div>
+                    <div><a href="{% url 'Kasa:album_detail' song.album.pk %}">{{ song.album.album_art }}</a></div>
+                    <div><a href="{% url 'Kasa:song_detail' song.pk %}">{{ song.sname }}</a></div>
+                </div>
+            {% endfor %}
         </div>
-
-        <!--Artists 페이지네이션-->
-        <div class="paginator_wrap" id="paginator_wrap_artist">
-            <div class="paginator">
-                {% if double_prev_page %}
-                    <span class="paginator_btn paginator_btn_allow">
-                    <a class="paginator_btn" href="?target=artist&artist_page=1&kwd={{ kwd }}">
-                        <i class="fas fa-angle-double-left"></i>
-                    </a>
-                </span>
-                    <span class="paginator_btn"><a class="paginator_btn"
-                                                   href="?target=artist&artist_page={{ double_prev_page }}&kwd={{ kwd }}">{{ double_prev_page }}</a></span>
-                {% else %}
-                    {% if artists.number == 3 %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=artist&artist_page=1&kwd={{ kwd }}">1</a></span>
-                    {% endif %}
-                {% endif %}
-                {% if artists.has_previous %}
-                    <span class="paginator_btn">
-                    <a class="paginator_btn"
-                       href="?target=artist&artist_page={{ artists.previous_page_number }}&kwd={{ kwd }}">
-                        {{ artists.previous_page_number }}</a>
-                </span>
-                {% endif %}
-                <span class="paginator_btn prevent_page">{{ artists.number }}</span>
-                {% if artists.has_next %}
-                    <span class="paginator_btn"><a class="paginator_btn"
-                                                   href="?target=artist&artist_page={{ artists.next_page_number }}&kwd={{ kwd }}">{{ artists.next_page_number }}</a></span>
-                {% endif %}
-                {% if double_next_page %}
-                    <span class="paginator_btn"><a class="paginator_btn"
-                                                   href="?target=artist&artist_page={{ double_next_page }}&kwd={{ kwd }}">{{ double_next_page }}</a></span>
-                    <span class="paginator_btn paginator_btn_allow"><a class="paginator_btn"
-                                                                       href="?target=artist&artist_page={{ artists.paginator.num_pages }}&kwd={{ kwd }}">
-                    <i class="fas fa-angle-double-right"></i>
-                </a></span>
-                {% else %}
-                    {% if artists.has_next %}
-                        {% if artists.next_page_number != artists.paginator.num_pages %}
-                            <span>
-                            <a class="paginator_btn"
-                               href="?target=artist&artist_page={{ artists.paginator.num_pages }}&kwd={{ kwd }}">
-                                {{ artists.paginator.num_pages }}</a>
-                        </span>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            </div>
+        {#        {% endif %}#}
+        {#        {% if groups %}#}
+        <div class="result_title">Groups</div>
+        <div class="result_content">
+            {% for group in groups %}
+                <div class="each_group">
+                    <div>{{ forloop.counter }}</div>
+                    <div>{{ group.gname }}</div>
+                </div>
+            {% endfor %}
         </div>
+        {#        {% endif %}#}
+        {#        {% if singers %}#}
+        <div class="result_title">Singers</div>
+        <div class="result_content">
+            {% for singer in singers %}
+                <div class="each_singer">
+                    <div>{{ forloop.counter }}</div>
+                    <div><a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.sname }}</a></div>
+                    <div><a href="{% url 'Kasa:singer_detail' singer.pk %}">{{ singer.image }}</a></div>
+                    {% for group in singer.group.all %}
+                        <div><a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a></div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {#        {% endif %}#}
+        {#        {% if albums %}#}
+        <div class="result_title">Albums</div>
+        <div class="result_albums_content">
 
-        <!--Songs-->
-        <div id="song_box">
-            <div class="result_title_wrapper result_title_song">
-                <div class="result_title">Songs <span
-                        class="result_length">({{ songs_length }})</span>
-                </div>
-                <div>
-                    <a id="song_paginator_open" class="opener" href="?target=song&song_page=1&kwd={{ kwd }}">
-                        노래 결과 전체보기 <i class="fas fa-caret-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="result_content">
-                <div class="songs_category">
-                    <span>번호</span><span>곡정보</span><span>아티스트</span><span>가사</span>
-                </div>
-                {% for song in songs %}
-                    <div class="each_song">
-                        <div>{{ forloop.counter }}</div>
-                        <div>
-                            <a class="song_album_img" href="{% url 'Kasa:album_detail' song.album.pk %}">
-                                <img class="song_mini_album_size" src="{{ song.album.album_art.url }}"/>
-                            </a>
-                            <a class="song_title" href="{% url 'Kasa:song_detail' song.pk %}">
-                                {{ song.sname }}</a>
-                        </div>
-                        <div>
-                            <a href="{% url 'Kasa:group_detail' song.album.group.pk %}">{{ song.album.group.gname }}</a>
-                        </div>
-                        <div><a href="{% url 'Kasa:song_detail' song.pk %}"><i class="far fa-file-alt"></i></a></div>
+            {% for album in albums %}
+                <div class="each_album">
+                    <div class="album_art">
+                        <a href="{% url 'Kasa:album_detail' album.pk %}">
+                            <img class="album_image" src="{{ album.album_art.url }}"/>
+                        </a>
                     </div>
-                {% endfor %}
-                <div class="each_song_buffer"></div>
-            </div>
-
-            <!--Songs 페이지네이션-->
-            <div class="paginator_wrap" id="paginator_wrap_song">
-                <div class="paginator">
-                    {% if double_prev_page %}
-                        <span class="paginator_btn paginator_btn_allow">
-                    <a class="paginator_btn" href="?target=song&song_page=1&kwd={{ kwd }}">
-                        <i class="fas fa-angle-double-left"></i>
-                    </a>
-                </span>
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=song&song_page={{ double_prev_page }}&kwd={{ kwd }}">{{ double_prev_page }}</a></span>
-                    {% else %}
-                        {% if songs.number == 3 %}
-                            <span class="paginator_btn"><a class="paginator_btn"
-                                                           href="?target=song&song_page=1&kwd={{ kwd }}">1</a></span>
-                        {% endif %}
-                    {% endif %}
-                    {% if songs.has_previous %}
-                        <span class="paginator_btn">
-                    <a class="paginator_btn"
-                       href="?target=song&song_page={{ songs.previous_page_number }}&kwd={{ kwd }}">
-                        {{ songs.previous_page_number }}</a>
-                </span>
-                    {% endif %}
-                    <span class="paginator_btn prevent_page">{{ songs.number }}</span>
-                    {% if songs.has_next %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=song&song_page={{ songs.next_page_number }}&kwd={{ kwd }}">{{ songs.next_page_number }}</a></span>
-                    {% endif %}
-                    {% if double_next_page %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=song&song_page={{ double_next_page }}&kwd={{ kwd }}">{{ double_next_page }}</a></span>
-                        <span class="paginator_btn paginator_btn_allow"><a class="paginator_btn"
-                                                                           href="?target=song&song_page={{ songs.paginator.num_pages }}&kwd={{ kwd }}">
-                    <i class="fas fa-angle-double-right"></i>
-                </a></span>
-                    {% else %}
-                        {% if songs.has_next %}
-                            {% if songs.next_page_number != songs.paginator.num_pages %}
-                                <span>
-                            <a class="paginator_btn"
-                               href="?target=song&song_page={{ songs.paginator.num_pages }}&kwd={{ kwd }}">
-                                {{ songs.paginator.num_pages }}</a>
-                        </span>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <!--Albums-->
-        <div id="album_box">
-            <div class="result_title_wrapper">
-                <div class="result_title">Albums <span class="result_length">({{ albums_length }})</span></div>
-                <div>
-                    <a id="album_paginator_open" class="opener" href="?target=album&album_page=1&kwd={{ kwd }}">
-                        앨범 검색 전체보기 <i class="fas fa-caret-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="result_albums_content">
-
-                {% for album in albums %}
-                    <div class="each_album">
-                        <div class="album_art">
-                            <a href="{% url 'Kasa:album_detail' album.pk %}">
-                                <img class="album_image" src="{{ album.album_art.url }}"/>
-                            </a>
+                    <div class="album_info">
+                        <div class="album_name">{{ album.aname }}</div>
+                        <div class="album_group_name">
+                            <a href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a>
                         </div>
-                        <div class="album_info">
-                            <div class="album_name">{{ album.aname }}</div>
-                            <div class="album_group_name">
-                                <a href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a>
-                            </div>
-                            <div class="album_date_count_wrap">
-                                <div class="album_date_count">{{ album.release_date }}</div>
-                                <div class="album_date_count">{{ album.album_song.all|length }}곡</div>
-                            </div>
-                            <div class="album_detail_btn">
-                                <a href="{% url 'Kasa:album_detail' album.pk %}">Info</a></a>
-                            </div>
+                        <div class="album_date_count_wrap">
+                            <div class="album_date_count">{{ album.release_date }}</div>
+                            <div class="album_date_count">{{ album.album_song.all|length }}곡</div>
+                        </div>
+                        <div class="album_detail_btn">
+                            <a href="{% url 'Kasa:album_detail' album.pk %}">Info</a></a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-
-
-            <!--Albums 페이지네이션-->
-            <div class="paginator_wrap" id="paginator_wrap_album">
-                <div class="paginator">
-                    {% if double_prev_page %}
-                        <span class="paginator_btn paginator_btn_allow">
-                    <a class="paginator_btn" href="?target=album&album_page=1&kwd={{ kwd }}">
-                        <i class="fas fa-angle-double-left"></i>
-                    </a>
-                </span>
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=album&album_page={{ double_prev_page }}&kwd={{ kwd }}">{{ double_prev_page }}</a></span>
-                    {% else %}
-                        {% if albums.number == 3 %}
-                            <span class="paginator_btn"><a class="paginator_btn"
-                                                           href="?target=album&album_page=1&kwd={{ kwd }}">1</a></span>
-                        {% endif %}
-                    {% endif %}
-                    {% if albums.has_previous %}
-                        <span class="paginator_btn">
-                    <a class="paginator_btn"
-                       href="?target=album&album_page={{ albums.previous_page_number }}&kwd={{ kwd }}">
-                        {{ albums.previous_page_number }}</a>
-                </span>
-                    {% endif %}
-                    <span class="paginator_btn prevent_page">{{ albums.number }}</span>
-                    {% if albums.has_next %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=album&album_page={{ albums.next_page_number }}&kwd={{ kwd }}">{{ albums.next_page_number }}</a></span>
-                    {% endif %}
-                    {% if double_next_page %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=album&album_page={{ double_next_page }}&kwd={{ kwd }}">{{ double_next_page }}</a></span>
-                        <span class="paginator_btn paginator_btn_allow"><a class="paginator_btn"
-                                                                           href="?target=album&album_page={{ albums.paginator.num_pages }}&kwd={{ kwd }}">
-                    <i class="fas fa-angle-double-right"></i>
-                </a></span>
-                    {% else %}
-                        {% if albums.has_next %}
-                            {% if albums.next_page_number != albums.paginator.num_pages %}
-                                <span>
-                            <a class="paginator_btn"
-                               href="?target=album&album_page={{ albums.paginator.num_pages }}&kwd={{ kwd }}">
-                                {{ albums.paginator.num_pages }}</a>
-                        </span>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
                 </div>
-            </div>
+            {% endfor %}
         </div>
-
-        <!--Lyrics-->
-        <div id="lyric_box">
-            <div class="result_title_wrapper result_title_lyric">
-                <div class="result_title">Lyrics <span class="result_length">({{ lyrics_length }})</span></div>
-                <div>
-                    <a id="lyric_paginator_open" class="opener" href="?target=lyric&lyric_page=1&kwd={{ kwd }}">
-                        가사 검색 전체보기 <i class="fas fa-caret-right"></i>
-                    </a>
+        {#        {% endif %}#}
+        {#        {% if lyrics %}#}
+        <div class="result_title">Lyrics</div>
+        <div class="result_content">
+            {% for lyric in lyrics %}
+                <div class="each_lyric">
+                    <div>{{ forloop.counter }}</div>
+                    <div>{{ lyric.song.album.album_art }}</div>
+                    <div>{{ lyric.song }}</div>
+                    <div>{{ lyric.kor }}</div>
                 </div>
-            </div>
-            <div class="result_lyrics_content">
-                {% for lyric in lyrics %}
-                    <div class="each_lyric">
-                        <div class="lyrics_info">
-                            <div class="lyrics_album">
-                                <a href="{% url 'Kasa:album_detail' lyric.song.album.pk %}">
-                                    <img class="lyrics_album_img" src="{{ lyric.song.album.album_art.url }}"/>
-                                </a>
-                                <div class="lyric_song">
-                                    <a href="{% url 'Kasa:song_detail' lyric.song.pk %}">{{ lyric.song.sname }}</a>
-                                </div>
-                                <div class="lyric_group">
-                                    <a href="{% url 'Kasa:group_detail' lyric.song.album.group.pk %}">
-                                        /{{ lyric.song.album.group.gname }}</a>
-                                </div>
-                            </div>
-                            <div class="lyric_order">
-                                {{ lyric.order }} Line
-                            </div>
-                        </div>
-
-                        <div class="lyric_song_all">
-                            <a href="{% url 'Kasa:song_detail' lyric.song.pk %}">
-                                {% for part in lyric.song.song_lyrics.all %}
-                                    <span class="eli">{{ part.kor }}</span>
-                                {% endfor %}
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
-            <div class="lyrics_buffer"></div>
-            </div>
-
-            <!--Lyrics 페이지네이션-->
-            <div class="paginator_wrap" id="paginator_wrap_lyric">
-                <div class="paginator">
-                    {% if double_prev_page %}
-                        <span class="paginator_btn paginator_btn_allow">
-                    <a class="paginator_btn" href="?target=lyric&lyric_page=1&kwd={{ kwd }}">
-                        <i class="fas fa-angle-double-left"></i>
-                    </a>
-                </span>
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=lyric&lyric_page={{ double_prev_page }}&kwd={{ kwd }}">{{ double_prev_page }}</a></span>
-                    {% else %}
-                        {% if lyrics.number == 3 %}
-                            <span class="paginator_btn"><a class="paginator_btn"
-                                                           href="?target=lyric&lyric_page=1&kwd={{ kwd }}">1</a></span>
-                        {% endif %}
-                    {% endif %}
-                    {% if lyrics.has_previous %}
-                        <span class="paginator_btn">
-                    <a class="paginator_btn"
-                       href="?target=lyric&lyric_page={{ lyrics.previous_page_number }}&kwd={{ kwd }}">
-                        {{ lyrics.previous_page_number }}</a>
-                </span>
-                    {% endif %}
-                    <span class="paginator_btn prevent_page">{{ lyrics.number }}</span>
-                    {% if lyrics.has_next %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=lyric&lyric_page={{ lyrics.next_page_number }}&kwd={{ kwd }}">{{ lyrics.next_page_number }}</a></span>
-                    {% endif %}
-                    {% if double_next_page %}
-                        <span class="paginator_btn"><a class="paginator_btn"
-                                                       href="?target=lyric&lyric_page={{ double_next_page }}&kwd={{ kwd }}">{{ double_next_page }}</a></span>
-                        <span class="paginator_btn paginator_btn_allow"><a class="paginator_btn"
-                                                                           href="?target=lyric&lyric_page={{ lyrics.paginator.num_pages }}&kwd={{ kwd }}">
-                    <i class="fas fa-angle-double-right"></i>
-                </a></span>
-                    {% else %}
-                        {% if lyrics.has_next %}
-                            {% if lyrics.next_page_number != lyrics.paginator.num_pages %}
-                                <span>
-                            <a class="paginator_btn"
-                               href="?target=lyric&lyric_page={{ lyrics.paginator.num_pages }}&kwd={{ kwd }}">
-                                {{ lyrics.paginator.num_pages }}</a>
-                        </span>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
+            {% endfor %}
         </div>
-
+        {#        {% endif %}#}
     {% endif %}
-{% endblock %}
-
-{% block script %}
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var target = '{{ target }}';
-            $('#paginator_wrap_' + target).css('display', 'block');
-            if (target) {
-                $('#' + target + '_paginator_open').css('display', 'none');
-                var boxes = ['artist_box', 'song_box', 'album_box', 'lyric_box'];
-                for (var box of boxes) {
-                    if (box.includes(target)) {
-                        continue;
-                    }
-                    $('#' + box).css('display', 'none');
-                }
-            }
-        });
-    </script>
 
 {% endblock %}

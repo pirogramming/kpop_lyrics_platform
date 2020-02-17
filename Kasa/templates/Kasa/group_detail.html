@@ -30,7 +30,7 @@
                 {% if singer.image %}
                     <a class="singer_detail" href="{% url 'Kasa:singer_detail' singer.pk %}">
                         <div class="f">
-                            <div class="singer_img_wrap"><img class="singer_img" src="{{ singer.image.url }}"/></div>
+                            <div><img class="singer_img" src="{{ singer.image.url }}"/></div>
                             <div class="singer_name">{{ singer.sname }}</div>
                         </div>
                     </a>
