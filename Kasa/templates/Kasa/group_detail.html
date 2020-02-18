@@ -2,26 +2,27 @@
 {% load static %}
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/group_detail.css" %}"/>
+    <link rel="stylesheet" href="{% static 'javascript/jquery.mCustomScrollbar.css' %}"/>
+
 {% endblock %}
 {% block content %}
 
     <div class="wrapall">
-        <div class="artist_data">Artist - {{ group.gname }}</div>
+        <div class="artist_data">Artist</div>
         <div class="wrap1">
             {% if group.group_image %}
-                <div class="group_image">
-                    <img src="{{ group.group_image.url }}"/>
+                <div class="group_image_wrapper">
+                    <img class="group_image" src="{{ group.group_image.url }}"/>
                 </div>
             {% endif %}
-        </div>
-
-        <div class="middle">
-            <div class="artist_data">Artist Information</div>
-            <div class="group">그룹명</div>
-            <div class="group">소속사</div>
-            <div class="group">데뷔</div>
-            <div class="group">팬덤</div>
-            <div class="group">공식사이트</div>
+            <div class="group_info_wrapper">
+                <div class="group_name">{{ group.gname }}</div>
+                <div class="group_info">
+                    <div class="group_info_debut">데뷔 : {{ group.debut|date:"Y.m.d" }}</div>
+                    <div class="group_info_agency">소속사 : {{ group.agency }}</div>
+                    <div class="group_info_sns">SNS : <a href="{{ group.sns_url }}">{{ group.sns_url }}</a></div>
+                </div>
+            </div>
         </div>
 
         <div class="artist_data">Member Information</div>
@@ -54,9 +55,6 @@
         </div>
     </div>
 {% endblock %}
-
-
-
 
 
 

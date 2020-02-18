@@ -7,13 +7,24 @@
 
 {% block content %}
     <div id="main_wrap" style="background-image: url({% static 'image/main_background.jpg' %});">
-        <div id="main_wrap_2">
+        <div id="main_wrap_2" style="z-index:1;">
             <div class="mainword">KASA<br>Search Kpop lyrics!!!!</div>
-            <div class="main-searchbox" id="searchbox">
-                <input type="text" id="search" class="main-searchtxt"
-                       placeholder="Which contents do you want to search?" autocomplete="off">
-                <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
-                       class="main-searchbtn">
+            <form action="{% url 'Kasa:search' %}" method="GET">
+
+                {% csrf_token %}
+                <div class="main-searchbox" id="searchbox">
+                    <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
+                           placeholder="Which contents do you want to search?" autocomplete="off">
+                    <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
+                           class="main-searchbtn">
+                </div>
+            </form>
+
+            <div id="livesearch_item_wrapper">
+                <div id="livesearch">
+                    <div id="livesearch_content">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -66,7 +77,7 @@
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
-            <div style="text-align:center">
+            <div>
                 {% for count in group.group_singer.all %}
                     <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
                 {% endfor %}
@@ -74,35 +85,96 @@
         </div>
     </div>
 
-    {#    <div class="slideshow-container">#}
-    {#        {% for singer in group.group_singer.all %}#}
-    {#            <div class="mySlides fade">#}
-    {#                <div class="numbertext">{{ forloop.counter }}</div>#}
-    {#                <img src="{{ singer.image.url }}" style="width:100%">#}
-    {#                <div class="text">Caption One</div>#}
-    {#            </div>#}
-    {#        {% endfor %}#}
-    {#    </div>#}
-    {#    <br>#}
-    {#    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>#}
-    {#    <a class="next" onclick="plusSlides(1)">&#10095;</a>#}
-    {#    <div style="text-align:center">#}
-    {#        {% for count in group.group_singer.all %}#}
-    {#            <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>#}
-    {#        {% endfor %}#}
-    {#    </div>#}
-
-
-
-
-
-
 
 
 {% endblock %}
 {% block script %}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="{% static "javascript/main.js" %}"></script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function delay(callback, ms) {
+                var timer = 0;
+                return function () {
+                    var context = this, args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        callback.apply(context, args);
+                    }, ms || 0);
+                };
+            }
+
+            $('.main-searchtxt').keyup(delay(function () {
+                $('#livesearch_content').html('');
+                $('#livesearch_content').append('<div id="livesearch_content_artists"></div>');
+                $('#livesearch_content').append('<div id="livesearch_content_songs"></div>');
+
+                var searchField = $('.main-searchtxt').val();
+
+                if (!searchField) {
+                    $('#livesearch_item_wrapper').css("display", "none");
+                }
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'Kasa:search' %}",
+                    data: {'kwd': searchField, 'csrfmiddlewaretoken': '{{ csrf_token }}', 'is_livesearch': 'True'},
+                    dataType: "json",
+                    async: true,
+                    success: function (response) {
+                        //alert('success')
+                        {#$('#livesearch').css({"height":"auto"});#}
+                        $.each(response, function (key, value) {
+                                //alert(key, value)
+                                if (value.length) {
+                                    $('#livesearch_item_wrapper').css("display", "block");
+                                    if (key === 'groups') {
+                                        if (value.length) {
+                                            $('#livesearch_content_artists').before('<div class="livesearch_item_title">Artists</div>');
+                                            for (var item in value) {
+                                                var link = 'group/' + value[item]['id'];
+                                                var image = value[item]['image'];
+                                                $('#livesearch_content_artists').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_extenal">' + value[item]['agency'] + '</div></div></a>')
+                                            }
+                                        }
+                                    }
+                                    if (key === 'singers') {
+                                        if (value.length) {
+                                            if (!'#livesearch_item_title'.length)
+                                                $('#livesearch_content_artists').before('<div class="livesearch_item_title">Artists</div>');
+                                            for (var item in value) {
+                                                var link = 'singer/' + value[item]['id'];
+                                                var image = value[item]['image'];
+                                                $('#livesearch_content_artists').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_external">' + value[item]['group'] + '</div></div></a>')
+                                            }
+                                        }
+                                    }
+                                    if (key === 'songs') {
+                                        if (value.length) {
+                                            $('#livesearch_content_songs').before('<div class="livesearch_item_title">Songs</div>');
+                                            for (var item in value) {
+                                                var link = 'song/' + value[item]['id'];
+                                                var image = value[item]['image'];
+                                                $('#livesearch_content_songs').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_external">' + value[item]['group'] + '</div></div></a>')
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        )
+                    }
+                })
+            }, 300))
+        })
+    </script>
 {% endblock %}
 
 
