@@ -323,13 +323,13 @@
             <div class="lyricstitle">Lyrics</div>
 
             <div class="buttonwrap">
-                <button type="button" class="koreanlyric" value="on" onclick="Displaylyrics('Klyric', 'koreanlyric')">
+                <button type="button" id="Klyric" class="koreanlyric" value="on" onclick="Displaylyrics(this)">
                     Korean
                 </button>
-                <button type="button" class="Englishlyric" value="off"
-                        onclick="Displaylyrics('Elyric', 'Englishlyric')">English
+                <button type="button" id="Elyric" class="Englishlyric" value="off"
+                        onclick="Displaylyrics(this)">English
                 </button>
-                <button type="button" class="Romlyric" value="off" onclick="Displaylyrics('Rlyric', 'Romlyric')">Rom
+                <button type="button" id="Rlyric" class="Romlyric" value="off" onclick="Displaylyrics(this)">Rom
                 </button>
                 <button type="button" class="member" value="off" onclick="">Part</button>
                 <button type="button" class="fan" value="off" onclick="">Fanchant</button>
@@ -416,9 +416,12 @@
 
         var length = '{{ all_lyrics|length }}';
 
-        function Displaylyrics(lang, classname) {
+        function Displaylyrics(obj) {
+            var lang = obj.id;
+            var cname = obj.className;
+
             for (i = 1; i <= length; i++) {
-                var check = $('#' + lang + i).css("display");
+                var check = $("#" +lang + i).css("display");
                 if (check === 'none') {
                     $("#" + lang + i).css({'display': 'block'});
                     $("#" + lang + i).stop().animate({
@@ -431,12 +434,12 @@
                     $("#" + lang + i).css({'display': 'none'});
                 }
             }
-            if ($('.' + classname).attr('value') === 'off') {
-                $('.' + classname).attr('value', 'on');
-                $('.' + classname).css({"background": "#00b8ff", "color": "white"});
-            } else if ($('.' + classname).attr('value') === 'on') {
-                $('.' + classname).attr('value', 'off');
-                $('.' + classname).css({"background": "#00fffe", "color": "black"});
+            if ($('.' + cname).attr('value') === 'off') {
+                $('.' + cname).attr('value', 'on');
+                $('.' + cname).css({"background": "#00b8ff", "color": "white"});
+            } else if ($('.' + cname).attr('value') === 'on') {
+                $('.' + cname).attr('value', 'off');
+                $('.' + cname).css({"background": "#00fffe", "color": "black"});
             }
         }
 
