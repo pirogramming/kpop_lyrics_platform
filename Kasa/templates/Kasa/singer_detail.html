@@ -1,104 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block style %}
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+ <link rel="stylesheet" type="text/css" href="{% static "css/singer_detail.css" %}"/>
+{% endblock %}
 {% block content %}
-<style>
-.content_wrap {
-        overflow: hidden;
-        margin: 10px 20px 0 20px;
-        padding: 5px;
-        font-size: 12px;
-        height: 130%;
-        /*line-height: 100%;*/
-        /*min-height: 160px;*/
-
-    }
-
-    .btn_more {
-        display: block;
-        padding: 10px 0 0 0;
-        margin: 10px 0 0 0;
-        text-align: right;
-        font-size: 12px;
-        color: rgb(7,7,7);
-    }
-
-    .SynopsisText {
-        width: 100%;
-        height: 120px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        line-height: 30px;
-    }
-.wrap1 {
-    display: flex;
-    justify-content: center;
-
-
-}
-
-.singer_image_wrapper {
-    width: 230px;
-    height: 300px;
-}
-
-.singer_image {
-    width: 100%;
-    object-fit: contain;
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 10px;
-}
-
-.singer_info_wrapper {
-    margin-left:70px;
-   align-items: center;
-}
-
-.singer_info {
-    /*border:1px solid black;*/
-    margin-top: 0px; width:250px;height:250px;
-}
-
-.singer_info > div {
-    margin-top: 15px;
-    font-size:15px;
-}
-.singer_name {
-    font-size: 40px;
-    font-weight: bold;
-    color: #00b8ff;}
-
-
-.artist_data {
-    font-size: 40px;
-    text-align: left;
-    border-bottom: 1px solid lightgrey;
-    height: 60px;
-    font-weight: bold;
-    line-height: 60px;
-    color: #00b8ff;
-    padding-bottom: 5px;
-}
-.data{width:100%;
-    height:200px;
-    font-size: 12px;
-    line-height:1.5em;
-
-}
-.singer_info * {
-    font-weight: bold;
-    font-size: 25px;
-}
-.artist_data_wrap{
-    margin-bottom: 100px;
-
-
-
-}
-</style>
 
 <div class="wrapall">
-    <div class="artist_data">Artist</div>
+    <div class="singer_data">Artist</div>
     <div class="wrap1">
         <div class="singer_image_wrapper">
             <img class="singer_image" src="{{singer.image.url}}"/>
@@ -118,26 +27,31 @@
         </div>
     </div>
 </div>
-<div class="artist_data_wrap">
-    <div class="artist_data">Artist information</div>
-
-    <div class="data">
-<!--        <h3 class="hidden"></h3>-->
-        <article class="content_wrap" id="synopsis">
-            <div id="SynopsisDiv" class="SynopsisText">
-                <b> </b><br/>
-                RM은 빅히트 엔터테인먼트에 소속된 7인조 보이그룹 방탄소년단의 멤버로 그룹의 리더와 메인 래퍼를 맡고 있다. 2013년 학교 3부작 시리즈의 시작인 싱글 [2 COOL 4 SKOOL]로 데뷔함과 동시에 각종 신인상을 수상하며 주목을 받았으며 2년간 선보인 학교 시리즈 이후 정규 앨범 [DARK&WILD]와 화양연화 시리즈로 인지도를 올림은 물론 네 번째 EP [화양연화 pt.2]로 빌보드 200에 첫 진입하는 쾌거를 이뤘다.
-
-                이후 [WINGS], 'DNA', 'MIC Drop'으로 빌보드 뮤직 어워드 "톱 소셜 아티스트" 부문을 수상하면서 전 세계적인 영향력을 증명했으며, [LOVE YOURSELF 轉‘Tear]로 빌보드 앨범 차트 1위, 싱글 차트 10위라는 대기록을 세워낸 보이 그룹으로 독보적인 인기를 구가하고 있다.
-
-                팀에서 가장 많은 프로듀싱 및 작사를 겸하고 있는 RM은 은유적 표현이 돋보이는 가사와 다양한 사운드 소스를 활용한 편곡 기법을 특징으로 하는 프로듀서이자 중저음의 목소리로 라임과 비트와의 조합이 강점으로 꼽히는 래퍼이다. 각종 예능과 수상 소감으로 자신의 생각을 뚜렷이 전달하며, 영어 구사가 가능한 멤버로 2018년 유엔 총회 연설에서 방탄소년단의 메시지를 전달한 바 있다.
-
-            </div>
-            <a href="javascript:showplay();" class="btn_more" id="synopMore">펼쳐보기</a>
-            <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
-        </article>
+    <div class="singer_data">Artist information</div>
+    <h3 class="hidden"></h3>
+    <div class="content_wrap" id="synopsis">
+        <div id="SynopsisDiv" class="SynopsisText">
+             RM은 빅히트 엔터테인먼트에 소속된 7인조 보이그룹 방탄소년단의 멤버로 그룹의 리더와 메인 래퍼를 맡고 있다.
+            2013년 학교 3부작 시리즈의 시작인 싱글 [2 COOL 4 SKOOL]로 데뷔함과 동시에
+            각종 신인상을 수상하며 주목을 받았으며 2년간 선보인 학교 시리즈 이후 정규 앨범
+            [DARK&WILD]와 화양연화 시리즈로 인지도를 올림은 물론 네 번째 EP [화양연화 pt.2]로 빌보드 200에 첫 진입하는 쾌거를 이뤘다.
+            이후 [WINGS], 'DNA', 'MIC Drop'으로 빌보드 뮤직 어워드 "톱 소셜 아티스트" 부문을 수상하면서
+            전 세계적인 영향력을 증명했으며, [LOVE YOURSELF 轉‘Tear]로 빌보드 앨범 차트 1위,
+            싱글 차트 10위라는 대기록을 세워낸 보이 그룹으로 독보적인 인기를 구가하고 있다.
+            팀에서 가장 많은 프로듀싱 및 작사를 겸하고 있는 RM은 은유적 표현이 돋보이는 가사와 다양한 사운드 소스를 활용한 편곡 기
+            법을 특징으로 하는 프로듀서이자 중저음의 목소리로 라임과 비트와의 조합이 강점으로 꼽히는 래퍼이다. 각종 예능과 수
+            상 소감으로 자신의 생각을 뚜렷이 전달하며, 영어 구사가 가능한 멤버로 2018년 유엔 총회 연설에서 방탄소년단의 메시지를 전달한 바 있다.
+        </div>
+        <a href="javascript:showplay();" class="btn_more" id="synopMore">
+            <div>내리기</div>
+            <div><i class="fas fa-chevron-down"></i></div>
+        </a>
+        <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
     </div>
-</div>
+
+
+
+
 {% endblock %}
 
 
@@ -145,28 +59,30 @@
 {% block script %}
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
-    //더보기 토글
-    function showplay() {
-        var flag = $('#hidTempSynopsis');
-        var SynopsisDiv = $('#SynopsisDiv');
-        var flagValue = flag.val();
-        if (flag != null) {
-            if (flagValue == "0") {
-                SynopsisDiv.css({"height":"auto", "font-size":"12px","display":"block",
-                    "line-height":"30px","color":"rgb(7,7,7)",});
-                $("#synopMore").text("닫기");
-                flag.val("1");
+  //더보기 토글
+        function showplay() {
+            var flag = $('#hidTempSynopsis');
+            var SynopsisDiv = $('#SynopsisDiv');
+            var flagValue = flag.val();
+            if (flag != null) {
+                if (flagValue == "0") {
+                    SynopsisDiv.css({
+                        "display": "block",
+                        "line-height": "30px"
+                    });
+                    $("#synopMore").html('');
+                    $("#synopMore").append('<div><i class="fas fa-chevron-up"></i></div><div>올리기</div>');
+                    flag.val("1");
+                } else {
+                    SynopsisDiv.css("display", "-webkit-box");
+                    $("#synopMore").html('');
+                    $("#synopMore").append('<div>내리기</div><div><i class="fas fa-chevron-down"></i></div>');
+                    flag.val("0");
+                }
             } else {
-                SynopsisDiv.css("height", "120px");
-                SynopsisDiv.css("display", "-webkit-box");
-                $("#synopMore").text("펼쳐보기");
-                flag.val("0");
+                alert("추가 정보가 없습니다.");
             }
-        } else {
-            alert("추가 정보가 없습니다.");
         }
-    }
+
 </script>
-
-
 {% endblock %}
