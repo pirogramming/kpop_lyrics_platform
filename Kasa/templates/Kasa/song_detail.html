@@ -100,7 +100,6 @@
         .romlyrics {
             display: none;
             color: lightgrey;
-
         }
 
 
@@ -301,14 +300,6 @@
             background: linear-gradient(to right, #06c9ff, #009cc9);
         }
 
-        .lyrics_container {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .lyrics_buffer {
-            width: 30px;
-        }
 
     </style>
     <div class="songinfowrap">
@@ -343,19 +334,15 @@
                 <button type="button" class="member" value="off" onclick="">Part</button>
                 <button type="button" class="fan" value="off" onclick="">Fanchant</button>
             </div>
-
             {% for lyrics in all_lyrics %}
-                <div class="korlyrics lyrics_line" id="Klyric{{ forloop.counter }}">{{ lyrics.kor }}</div>
-                <div class="englyriscs lyrics_line" id="Elyric{{ forloop.counter }}">
-                    <div class="lyrics_container">
-                        <div class="lyrics_buffer"></div>
-                        {{ lyrics.eng }}</div>
+                <div class="korlyrics" id="Klyric{{ forloop.counter }}">
+                    {{ lyrics.kor }}
                 </div>
-                <div class="romlyrics  lyrics_line" id="Rlyric{{ forloop.counter }}">
-                    <div class="lyrics_container">
-                        <div class="lyrics_buffer"></div>
-                        <div class="lyrics_buffer"></div>
-                        {{ lyrics.rom }}</div>
+                <div class="englyriscs" id="Elyric{{ forloop.counter }}">
+                    {{ lyrics.eng }}
+                </div>
+                <div class="romlyrics" id="Rlyric{{ forloop.counter }}">
+                    {{ lyrics.rom }}
                 </div>
             {% endfor %}
         </div>
@@ -428,24 +415,87 @@
         }
     </script>
     <script language="JavaScript" type="text/javascript">
-
-        var length = '{{ all_lyrics|length }}';
-
         function Displaylyrics(obj) {
+            var length = '{{ all_lyrics|length }}';
+            var id_list = ['Klyric', 'Elyric', 'Rlyric'];
+
             var lang = obj.id;
             var cname = obj.className;
 
-            for (i = 1; i <= length; i++) {
+            var buffer_count = $('#' + lang + '1').prev().css('padding-left');
+            if (!buffer_count)
+                buffer_count = '0px';
+            var buffer = Number(buffer_count.replace('px', ''));
+            var inner = String(buffer + 20) + 'px';
+
+            var refill_buffer = []
+            var target = "#" + lang + '1';
+            var next_classname = $(target).next().attr('class');
+            while (next_classname !== 'korlyrics') {
+                buffer_count = $(target).next().css('padding-left');
+                refill_buffer.push(Number(buffer_count.replace('px', '')));
+                target = "#" + $(target).next().attr('id');
+                next_classname = $(target).next().attr('class');
+            }
+
+            for (var i = 1; i <= length; i++) {
                 var check = $("#" + lang + i).css("display");
+
                 if (check === 'none') {
+                    $("#" + lang + i).css({"padding-left": inner});
+                    // lyrics animate
                     $("#" + lang + i).css({'display': 'block'});
                     $("#" + lang + i).stop().animate({
                         'line-height': '1.5em', 'opacity': '1'
-                    }, 500);
+                    }, {
+                        queue: false,
+                        duration: 500,
+                    });
+
+                    var round = 0;
+                    var index = id_list.indexOf(lang);
+                    for (var order = index + 1; order < id_list.length; order++) {
+                        var value = refill_buffer[round];
+                        if (value <= 0) {
+                            round += 1;
+                            continue;
+                        }
+                        var outer = String(value + 20) + 'px';
+
+                        $('#' + id_list[order] + i).stop().animate({
+                            'padding-left': outer,
+                        }, {
+                            queue: false,
+                            duration: 500,
+                        });
+                        round += 1;
+                    }
                 } else {
                     $("#" + lang + i).stop().animate({
-                        'line-height': '0', 'opacity': '0'
-                    }, 500);
+                        'line-height': '0',
+                        'opacity': '0',
+                        'padding-left': '0',
+                    }, {
+                        queue: false,
+                        duration: 500,
+                    });
+
+                    var round = 0;
+                    var index = id_list.indexOf(lang);
+                    for (var order = index + 1; order < id_list.length; order++) {
+                        var value = refill_buffer[round];
+                        if (value <= 0) {
+                            round += 1;
+                            continue;
+                        }
+                        $('#' + id_list[order] + i).stop().animate({
+                            'padding-left': String(value - 20) + 'px',
+                        }, {
+                            queue: false,
+                            duration: 500,
+                        });
+                        round += 1;
+                    }
                     $("#" + lang + i).css({'display': 'none'});
                 }
             }
@@ -457,7 +507,6 @@
                 $('.' + cname).css({"background": "#00fffe", "color": "black"});
             }
         }
-
-
     </script>
+
 {% endblock %}
