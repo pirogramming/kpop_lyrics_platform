@@ -64,7 +64,7 @@
 .wrap2 {
     padding: 5px 10px;
     display: flex;
-    -ms-overflow-style: none;
+    /*-ms-overflow-style: none;*/
     height: 280px;
     overflow-x: scroll;
     white-space: nowrap;
@@ -73,8 +73,8 @@
 }
 
 
-.wrap2::-webkit-scrollbar {
-    display: none
+.wrap2::-webkit-scrollbar-thumb {
+    /*display: none*/
 }
 
 

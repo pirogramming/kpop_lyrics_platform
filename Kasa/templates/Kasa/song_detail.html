@@ -2,170 +2,282 @@
 {% load static %}
 {% block content %}
     <style>
-    body #wrap{
-        text-align:left;
-    }
-    .songinfowrap{
-        display:flex;
-        {#border:1px solid black;#}
-        height:220px;
-        min-width:100%;
-        min-height:100px;
-        margin-bottom:50px;
+        body {
+        {#background-image:url({% static 'image/main_background.jpg' %});#}
+        }
 
-    }
-    .album-art{
-        box-shadow: 0 0 5px gray;
-        margin:5px 15px 5px 5px;
-        height:200px;
-        width:200px;
-        transition:1s;
-    }
-     .album-art:hover{
-         height:230px;
-         width:230px;
+        body #wrap {
+            text-align: left;
+        {#background-color: rgba( 255, 255, 255, 0.7 );#}{#padding:5px;#}
 
-    }
-    .album-jacket{
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-    .infowrap {
+        }
+
+        .songinfowrap {
+            display: flex;
+        {#border:1px solid black;#} height: 220px;
+            min-width: 100%;
+            min-height: 100px;
+            margin-bottom: 50px;
+
+        }
+
+        .album-art {
+            box-shadow: 0 0 5px gray;
+            margin: 5px 15px 5px 5px;
+            height: 200px;
+            width: 200px;
+            transition: 1s;
+        }
+
+        .album-art:hover {
+            height: 230px;
+            width: 230px;
+
+        }
+
+        .album-jacket {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .infowrap {
         {#border:1px solid black;#}
-    }
-    .songtitle{
-        font-size:30px;
-        font-weight: bold;
-        padding:0;
-        line-height: 100px;
-    }
-    .albumname{
-        font-size: 13px;
-        margin:2px 2px;
-        margin-bottom:20px;
-    }
-    .song-artist{
-        font-weight: bold;
-    }
-    .buttonwrap{
-        {#border:2px solid black;#}
-        margin-bottom: 30px;
-    }
-    .koreanlyric, .Englishlyric, .Romlyric, .member, .fan{
-        background: none;
-        border:none;
-        border-radius: 10px;
-        margin:10px;
-        height:40px;
-        width:120px;
-        font-weight: bold;
-        background: linear-gradient(to right, #00fffe, #00b8ff);
-        transition: 0.5s;
-        {#font-size: 20px;#}
-        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-    }
-    .koreanlyric:hover, .Englishlyric:hover, .Romlyric:hover, .member:hover, .fan:hover{
-        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-        color: #000000;
-        background: linear-gradient(to right, #06c9ff, #009cc9);
-    }
-    .middlewrap{
-        {#border:2px solid black;#}
-        display: flex;
-        justify-content: space-around;
+        }
+
+        .songtitle {
+            font-size: 30px;
+            font-weight: bold;
+            padding: 0;
+            line-height: 100px;
+        }
+
+        .albumname {
+            font-size: 13px;
+            margin: 2px 2px;
+            margin-bottom: 20px;
+        }
+
+        .song-artist {
+            font-weight: bold;
+        }
+
+        .buttonwrap {
+        {#border:2px solid black;#} margin-bottom: 30px;
+        }
+
+        .koreanlyric, .Englishlyric, .Romlyric, .member, .fan {
+            background: none;
+            border: none;
+            border-radius: 10px;
+            margin: 10px;
+            height: 40px;
+            width: 120px;
+            font-weight: bold;
+            background: linear-gradient(to right, #00fffe, #00b8ff);
+            transition: 0.5s;
+        {#font-size: 20px;#} box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+        }
+
+        .koreanlyric:hover, .Englishlyric:hover, .Romlyric:hover, .member:hover, .fan:hover {
+            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+            color: #000000;
+            background: linear-gradient(to right, #06c9ff, #009cc9);
+        }
+
+        .middlewrap {
+        {#border:2px solid black;#} display: flex;
+            justify-content: space-around;
         {#flex-wrap: wrap;#}
-    }
-    .lyrics{
-        width:60%;
-        flex:auto;
-    }
-    .rightwrap{
-        {#border:1px solid black;#}
-        flex-direction: column;
-        float:right;
-    }
-    .twitter_url{
-        margin-top: 100px;
-        height:500px;
-        width: 300px;
-        overflow-y: scroll;
-        {#border: 1px solid black;#}
-        margin-left:190px;
-        margin-bottom: 40px;
-        box-shadow: 0 0 5px gray;
-    }
-    .mediabutton *{
-        margin:30px 20px 30px 0;
-        float:right;
-        border:none;
-        width:70px;
-        height:30px;
-        border-radius: 5px;
-        background: linear-gradient(to right, #00fffe, #00b8ff);
-        transition: 0.5s;
-        font-size: 20px;
-        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-    }
-    .mediabutton *:hover{
-        box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-        color: #000000;
-        background: linear-gradient(to right, #06c9ff, #009cc9);
-    }
-    .bottomwrap{
-        min-width: 100%;
-        width:100%;
-        height:400px;
-        margin: 100px 0 200px 0;
-    }
-    .commenttitle{
-        text-align: center;
-        color: #00b8ff;
-        font-size: 40px;
-        font-weight: bold;
-        padding-bottom: 5px;
-        height: 60px;
-        line-height: 60px;
-        margin: 30px 0 30px 0;
-    }
-    .commentbox{
-        width:100%;
-        height:10%;
-        display: flex;
-        justify-content: center;
-    }
-    .comment_contents{
-        {#border:1px solid black;#}
-        border-bottom:3px dashed lightgrey;
-        margin:10px;
-        width:100%;
-        height:20px;
-    }
-    .username{
-        text-align: center;
-        border-bottom:3px solid lightgrey;
-        margin:10px;
-        width:10%;
-        height:20px;
-    }
-    .comment-time{
-        border-bottom:3px solid lightgrey;
-        margin:10px;
-        width:20%;
-        height:20px;
-    }
-    .comment-login{
-        font-size: 10px;
-        color:gray;
-        height:20px;
-        width:10%;
-        text-decoration: none;
-        margin-top: 14px;
-    }
+        }
+
+        .lyrics {
+            padding-top: 20px;
+            width: 60%;
+            flex: auto;
+        }
+
+        .forcount {
+            display: none;
+        }
+
+        .korlyrics {
+        {#background: blue;#}
+        }
+
+        .englyriscs {
+        {#background:red;#}
+        {#display: none;#}
+        }
+
+        .romlyrics {
+        {#background:green;#}{#display: none;#}
+        }
+
+        .rightwrap {
+            display: flex;
+            width: 39%;
+        {#border:1px solid black;#} flex-direction: column;
+            align-items: center;
+        }
+
+        .musictitle, .stagetitle, .mediatitle {
+            width: 90%;
+            margin: 5px 0 10px 0;
+            font-size: 20px;
+            color: #5b80b2;
+            text-align: center;
+            font-weight: bold;
+            padding-bottom: 4px;
+            border-bottom: 2px dashed lightgrey;
+        }
+
+        #media {
+            width: 100%;
+            height: 200px;
+        }
+
+        .youtube_1 {
+            width: 100%;
+            height: 100%;
+        }
+
+        .twitterwrap {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .twitter_url {
+            margin-top: 10px;
+            height: 500px;
+            width: 70%;
+            overflow-y: scroll;
+        {#border: 1px solid black;#} margin-bottom: 40px;
+            box-shadow: 0 0 5px gray;
+        }
+
+        .mediabutton {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+
+        }
+
+        .mediabutton * {
+            margin: 30px 20px 30px 0;
+            float: right;
+            border: none;
+            width: 70px;
+            height: 30px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #00fffe, #00b8ff);
+            transition: 0.5s;
+            font-size: 20px;
+            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+        }
+
+        .mediabutton *:hover {
+            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+            color: #000000;
+            background: linear-gradient(to right, #06c9ff, #009cc9);
+        }
+
+        .bottomwrap {
+            min-width: 100%;
+            width: 100%;
+            height: 400px;
+            margin: 100px 0 200px 0;
+        }
+
+        .commenttitle {
+            text-align: center;
+            color: #00b8ff;
+            font-size: 40px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            height: 60px;
+            line-height: 60px;
+            margin: 30px 0 30px 0;
+        }
+
+        .commentbox {
+            border: 3px dashed gray;
+            width: 100%;
+            height: 70%;
+            -ms-overflow-style: none;
+            overflow-x: hidden;
+            white-space: nowrap;
+            overflow-y: scroll;
+        {#display: flex;#}{#justify-content: center;#}
+        }
+
+        .userinfo {
+            display: flex;
+            margin: 0px;
+        }
+
+        .comment_contents {
+        {#border-bottom:3px dashed lightgrey;#} margin: 10px 0 10px 0;
+            width: 100%;
+        {#height:20px;#}{#text-decoration: underline lightgrey;#}
+        }
+
+        .username {
+        {#border:1px solid black;#} margin: 10px 0 0 0;
+            width: 7%;
+            height: 20px;
+            font-weight: bold;
+        }
+
+        .comment-time {
+        {#border:1px solid black;#} margin: 12px 0 0 0;
+            width: 18%;
+            height: 20px;
+            font-size: 10px;
+        }
+
+        .comment-login {
+            font-size: 10px;
+            color: gray;
+            height: 20px;
+            width: 10%;
+            text-decoration: none;
+            margin-top: 14px;
+        }
+
+        .submit-comment {
+            display: flex;
+        {#border:1px solid black;#} margin-top: 30px;
+        }
+
+        .comment_content {
+            width: 93%;
+            height: 40px;
+            resize: none;
+        }
+
+        .submit {
+            margin: 0 10px 50px 1%;
+            border: none;
+            width: 7%;
+            background: linear-gradient(to right, #00fffe, #00b8ff);
+            transition: 0.5s;
+            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+
+        }
+
+        .submit:hover {
+            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+            color: #000000;
+            background: linear-gradient(to right, #06c9ff, #009cc9);
+
+        }
     </style>
     <div class="songinfowrap">
         <div class="album-art">
-           <img class="album-jacket" src="{{ song.album.album_art.url }}"/>
+            <img class="album-jacket" src="{{ song.album.album_art.url }}"/>
         </div>
         <div class="infowrap">
             <div class="songtitle">{{ song.sname }}</div>
@@ -174,32 +286,43 @@
         </div>
     </div>
     <div class="buttonwrap">
-        <button type="button" class="koreanlyric" onclick="">Korean</button>
-        <button type="button" class="Englishlyric" onclick="">English</button>
-        <button type="button" class="Romlyric" onclick="">Rom</button>
-{#        <button type="button" class="member" onclick="">Member part</button>#}
-{#        <button type="button" class="fan" onclick="">Fanchant</button>#}
+        <button type="button" class="koreanlyric" onclick="Displaylyrics_kor('kor')">Korean</button>
+        <button type="button" class="Englishlyric" onclick="Displaylyrics('Elyric')">English</button>
+        <button type="button" class="Romlyric" onclick="Displaylyrics_rom()">Rom</button>
+        {#        <button type="button" class="member" onclick="">Member part</button>#}
+        {#        <button type="button" class="fan" onclick="">Fanchant</button>#}
     </div>
     <div class="middlewrap">
         <div class="lyrics">
             {% for lyrics in all_lyrics %}
-                <div>
-                    {{ lyrics.kor }}
-                </div>
+                <div class="korlyrics" id="Klyric{{ forloop.counter }}">{{ lyrics.kor }}</div>
+                <div class="englyriscs" id="Elyric{{ forloop.counter }}">&nbsp; &nbsp;&nbsp; &nbsp&nbsp &nbsp&nbsp
+                    &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp{{ lyrics.eng }}</div>
+                <div class="romlyrics" id="Rlyric{{ forloop.counter }}">&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+                    &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+                    &nbsp&nbsp &nbsp{{ lyrics.rom }}</div>
             {% endfor %}
         </div>
 
         <div class="rightwrap">
+            <div class="mediatitle">official movie</div>
             <div id="media">
-                <object type="text/html" width="500" height="250" data="{{ youtube_url }}" allowFullScreen></object>
+                <object class="youtube_1" type="text/html" data="{{ youtube_url }}" allowFullScreen></object>
             </div>
+            <div class="stagetitle">stage movie</div>
+            <div id="media">
+                <object class="youtube_1" type="text/html" data="{{ youtube_url }}" allowFullScreen></object>
+            </div>
+            <div class="musictitle">music</div>
             <div class="mediabutton">
                 <button type="button" id="media_open">open</button>
                 <button type="button" id="media_close">close</button>
             </div>
-            <div class="twitter_url">
-                <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div class="twitterwrap">
+                <div class="twitter_url">
+                    <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
             </div>
         </div>
     </div>
@@ -207,30 +330,78 @@
         <div class="commenttitle">comments</div>
         <div class="commentbox">
             {% for comment in comments %}
+                <div class="userinfo">
+                    <div class="username">{{ comment.user.username }}</div>
+                    <div class="comment-time">{{ comment.created_at }}</div>
+                </div>
                 <div class="comment_contents">{{ comment.content }}</div>
-                <div class="username">{{ comment.user.username }}</div>
-                <div class="comment-time">{{ comment.created_at }}</div>
-                <br/>
             {% endfor %}
-
-
-            {% if user.is_authenticated %}
-                <form action="{% url "Kasa:write_new_comment" %}" method="POST">
-                    {% csrf_token %}
-                    <input type="text" class="comment_content" name="comment_content" placeholder="댓글 작성" autocomplete="off">
-                    <input type="submit" class="submit" value="작성">
-                    <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
-                </form>
-            {% else %}
-                <a class="comment-login" href="{% url "accounts:login" %}">로그인</a>
-            {% endif %}
         </div>
-    </div>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<script>
-    function pop_close() {
-        $("#layer_pop").hide(); // 반대는 당연히 show();
-    }
-</script>
+        {% if user.is_authenticated %}
+            <form action="{% url "Kasa:write_new_comment" %}" method="POST" class="submit-comment">
+                {% csrf_token %}
+                <textarea class="comment_content" name="comment_content" placeholder="write comments"
+                          wrap="physical"></textarea>
+                <input type="submit" class="submit" value="submit">
+                <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
+            </form>
+        {% else %}
+            <a class="comment-login" href="{% url "accounts:login" %}">로그인</a>
+        {% endif %}
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+        function pop_close() {
+            $("#layer_pop").hide(); // 반대는 당연히 show();
+        }
+    </script>
+    <script language="JavaScript" type="text/javascript">
+        var length = '{{ all_lyrics|length }}';
+
+        function Displaylyrics_kor() {
+
+            var check = document.getElementsById("Klyrics{{ forloop.counter }}");
+
+            if (check.style.display == 'none') {
+                check.style.display = 'block';
+
+            } else {
+                check.style.display = 'none';
+            }
+        }
+
+        function Displaylyrics(lang) {
+            x=document.getElementById(lang);
+            console.log(x);
+            for (i = 1; i <= length; i++) {
+                console.log("lang"+String(i))
+                var check = $('#'+lang+i).css("display");
+                console.log(check);
+                if (check == 'none') {
+                    console.log(1);
+                    {#alert($('#x'+i).css("display")+'aaaa')#}
+                    $("x"+i).css({'display':'block'});
+                    {#alert('디스플레이 블록변환 완료');#}
+                } else {
+                    console.log(2);
+                    $("x"+i).css({'display':'none'});
+                    {#alert('디스플레이 논변환 완료');#}
+                }
+            }
+        }
+
+
+        function Displaylyrics_rom() {
+            var check = document.getElementById("Rlyric{{ forloop.counter }}");
+
+            if (check.style.display == 'none') {
+                check.style.display = 'block';
+            } else {
+                check.style.display = 'none';
+            }
+        }
+
+    </script>
 {% endblock %}
