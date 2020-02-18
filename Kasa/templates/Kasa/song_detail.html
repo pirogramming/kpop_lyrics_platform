@@ -13,17 +13,17 @@
         }
 
         .songinfowrap {
+            margin-top: 40px;
             display: flex;
-        {#border:1px solid black;#} height: 220px;
+            height: 220px;
             min-width: 100%;
             min-height: 100px;
             margin-bottom: 50px;
-
         }
 
         .album-art {
             box-shadow: 0 0 5px gray;
-            margin: 5px 15px 5px 5px;
+            margin: 5px 80px 5px 80px;
             height: 200px;
             width: 200px;
             transition: 1s;
@@ -60,6 +60,7 @@
 
         .song-artist {
             font-weight: bold;
+            color: #00b8ff;
         }
 
         .buttonwrap {
@@ -70,66 +71,84 @@
             background: none;
             border: none;
             border-radius: 10px;
-            margin: 10px;
+            margin: 5px;
             height: 40px;
-            width: 120px;
+            width: 80px;
             font-weight: bold;
-            background: linear-gradient(to right, #00fffe, #00b8ff);
+            background: #00fffe;
             transition: 0.5s;
-        {#font-size: 20px;#} box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
         }
 
-        .koreanlyric:hover, .Englishlyric:hover, .Romlyric:hover, .member:hover, .fan:hover {
-            box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
-            color: #000000;
-            background: linear-gradient(to right, #06c9ff, #009cc9);
+        .koreanlyric {
+            margin-left: 0;
+            background: #00b8ff;
+            color: white;
         }
+
+        .lyrics_line {
+            line-height: 1.5em;
+        }
+
+        .korlyrics {
+            display: block;
+            color: black;
+        }
+
+        .englyriscs {
+            display: none;
+            color: #777;
+
+        }
+
+        .romlyrics {
+            display: none;
+            color: lightgrey;
+
+        }
+
 
         .middlewrap {
-        {#border:2px solid black;#} display: flex;
+            display: flex;
             justify-content: space-around;
-        {#flex-wrap: wrap;#}
         }
 
         .lyrics {
-            padding-top: 20px;
             width: 60%;
             flex: auto;
+            margin-right: 20px;
         }
 
         .forcount {
             display: none;
         }
 
-        .korlyrics {
-        {#background: blue;#}
-        }
-
-        .englyriscs {
-        {#background:red;#}
-        {#display: none;#}
-        }
-
-        .romlyrics {
-        {#background:green;#}{#display: none;#}
-        }
-
         .rightwrap {
             display: flex;
             width: 39%;
-        {#border:1px solid black;#} flex-direction: column;
+            flex-direction: column;
             align-items: center;
         }
 
-        .musictitle, .stagetitle, .mediatitle {
-            width: 90%;
-            margin: 5px 0 10px 0;
-            font-size: 20px;
-            color: #5b80b2;
-            text-align: center;
+        .musictitle, .stagetitle, .mediatitle, .snstitle, .lyricstitle {
+            width: 100%;
+            margin: 30px 0 20px 0;
+            font-size: 25px;
+            color: #00b8ff;
+            text-align: left;
             font-weight: bold;
             padding-bottom: 4px;
-            border-bottom: 2px dashed lightgrey;
+            border-bottom: 1px solid lightgrey;
+        }
+
+        .lyricstitle {
+            margin: 0 0 20px 0;
+            border: 0px;
+            font-size: 40px;
+        }
+
+        .info_a {
+            text-decoration: none;
         }
 
         #media {
@@ -145,15 +164,14 @@
         .twitterwrap {
             width: 100%;
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
         }
 
         .twitter_url {
-            margin-top: 10px;
             height: 500px;
             width: 70%;
             overflow-y: scroll;
-        {#border: 1px solid black;#} margin-bottom: 40px;
+            margin-bottom: 40px;
             box-shadow: 0 0 5px gray;
         }
 
@@ -272,8 +290,8 @@
             box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
             color: #000000;
             background: linear-gradient(to right, #06c9ff, #009cc9);
-
         }
+
     </style>
     <div class="songinfowrap">
         <div class="album-art">
@@ -281,43 +299,67 @@
         </div>
         <div class="infowrap">
             <div class="songtitle">{{ song.sname }}</div>
-            <div class="albumname">{{ album.aname }}</div>
-            <div class="song-artist">{{ album.group }}</div>
+            <div class="song-artist"><a class="song-artist info_a"
+                                        href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group }}</a></div>
+            <div class="albumname"><a class="albumname info_a"
+                                      href="{% url 'Kasa:album_detail' album.pk %}">{{ album.aname }}</a></div>
         </div>
     </div>
-    <div class="buttonwrap">
-        <button type="button" class="koreanlyric" onclick="Displaylyrics_kor('kor')">Korean</button>
-        <button type="button" class="Englishlyric" onclick="Displaylyrics('Elyric')">English</button>
-        <button type="button" class="Romlyric" onclick="Displaylyrics_rom()">Rom</button>
-        {#        <button type="button" class="member" onclick="">Member part</button>#}
-        {#        <button type="button" class="fan" onclick="">Fanchant</button>#}
-    </div>
+
+
     <div class="middlewrap">
         <div class="lyrics">
+            <div class="lyricstitle">Lyrics</div>
+
+            <div class="buttonwrap">
+                <button type="button" class="koreanlyric" value="on" onclick="Displaylyrics('Klyric', 'koreanlyric')">
+                    Korean
+                </button>
+                <button type="button" class="Englishlyric" value="off"
+                        onclick="Displaylyrics('Elyric', 'Englishlyric')">English
+                </button>
+                <button type="button" class="Romlyric" value="off" onclick="Displaylyrics('Rlyric', 'Romlyric')">Rom
+                </button>
+                <button type="button" class="member" value="off" onclick="">Part</button>
+                <button type="button" class="fan" value="off" onclick="">Fanchant</button>
+            </div>
+
             {% for lyrics in all_lyrics %}
-                <div class="korlyrics" id="Klyric{{ forloop.counter }}">{{ lyrics.kor }}</div>
-                <div class="englyriscs" id="Elyric{{ forloop.counter }}">&nbsp; &nbsp;&nbsp; &nbsp&nbsp &nbsp&nbsp
+                <div class="korlyrics lyrics_line" id="Klyric{{ forloop.counter }}">{{ lyrics.kor }}</div>
+                <div class="englyriscs lyrics_line" id="Elyric{{ forloop.counter }}">
                     &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp{{ lyrics.eng }}</div>
-                <div class="romlyrics" id="Rlyric{{ forloop.counter }}">&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
-                    &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
+                <div class="romlyrics  lyrics_line" id="Rlyric{{ forloop.counter }}">
+                    &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
                     &nbsp&nbsp &nbsp{{ lyrics.rom }}</div>
             {% endfor %}
         </div>
 
         <div class="rightwrap">
-            <div class="mediatitle">official movie</div>
-            <div id="media">
-                <object class="youtube_1" type="text/html" data="{{ youtube_url }}" allowFullScreen></object>
-            </div>
-            <div class="stagetitle">stage movie</div>
-            <div id="media">
-                <object class="youtube_1" type="text/html" data="{{ youtube_url }}" allowFullScreen></object>
-            </div>
-            <div class="musictitle">music</div>
-            <div class="mediabutton">
-                <button type="button" id="media_open">open</button>
-                <button type="button" id="media_close">close</button>
-            </div>
+            {% if youtube_url %}
+                <div class="mediatitle">Official movie</div>
+                <div id="media">
+                    <object class="youtube_1" type="text/html" data="{{ youtube_url }}" allowFullScreen></object>
+                </div>
+            {% endif %}
+            {% if dance_url %}
+                <div class="stagetitle">Stage movie</div>
+                <div id="media">
+                    <object class="youtube_1" type="text/html" data="{{ dance_url }}" allowFullScreen></object>
+                </div>
+            {% endif %}
+            {% if soundcloud_url %}
+                <div class="musictitle">Music</div>
+                <div id="media">
+                    <object class="youtube_1" type="text/html" data="{{ soundcloud_url }}" allowFullScreen></object>
+                </div>
+            {% endif %}
+
+            {#            <div class="mediabutton">#}
+            {#                <button type="button" id="media_open">open</button>#}
+            {#                <button type="button" id="media_close">close</button>#}
+            {#            </div>#}
+
+            <div class="snstitle">Twitter</div>
             <div class="twitterwrap">
                 <div class="twitter_url">
                     <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
@@ -358,50 +400,27 @@
         }
     </script>
     <script language="JavaScript" type="text/javascript">
+
         var length = '{{ all_lyrics|length }}';
 
-        function Displaylyrics_kor() {
-
-            var check = document.getElementsById("Klyrics{{ forloop.counter }}");
-
-            if (check.style.display == 'none') {
-                check.style.display = 'block';
-
-            } else {
-                check.style.display = 'none';
-            }
-        }
-
-        function Displaylyrics(lang) {
-            x=document.getElementById(lang);
-            console.log(x);
+        function Displaylyrics(lang, classname) {
             for (i = 1; i <= length; i++) {
-                console.log("lang"+String(i))
-                var check = $('#'+lang+i).css("display");
-                console.log(check);
+                var check = $('#' + lang + i).css("display");
                 if (check == 'none') {
-                    console.log(1);
-                    {#alert($('#x'+i).css("display")+'aaaa')#}
-                    $("x"+i).css({'display':'block'});
-                    {#alert('디스플레이 블록변환 완료');#}
+                    $("#" + lang + i).css({'display': 'block'});
                 } else {
-                    console.log(2);
-                    $("x"+i).css({'display':'none'});
-                    {#alert('디스플레이 논변환 완료');#}
+                    $("#" + lang + i).css({'display': 'none'});
                 }
             }
-        }
-
-
-        function Displaylyrics_rom() {
-            var check = document.getElementById("Rlyric{{ forloop.counter }}");
-
-            if (check.style.display == 'none') {
-                check.style.display = 'block';
-            } else {
-                check.style.display = 'none';
+            if ($('.' + classname).attr('value') === 'off') {
+                $('.' + classname).attr('value', 'on');
+                $('.' + classname).css({"background": "#00b8ff", "color": "white"});
+            } else if ($('.' + classname).attr('value') === 'on') {
+                $('.' + classname).attr('value', 'off');
+                $('.' + classname).css({"background": "#00fffe", "color": "black"});
             }
         }
+
 
     </script>
 {% endblock %}

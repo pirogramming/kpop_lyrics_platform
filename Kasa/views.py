@@ -18,6 +18,8 @@ def song_detail(request, song_pk):
     album = song.album
     sns = song.album.group.sns_url
     youtube_url = convert_youtube(song.youtube_url)
+    soundcloud_url = convert_youtube(song.soundcloud_url)
+    dance_url = convert_youtube(song.dance_url)
     all_lyrics = song.song_lyrics.all()
     comments = song.song_comment.all().order_by('-created_at')
 
@@ -26,6 +28,8 @@ def song_detail(request, song_pk):
         'album': album,
         'comments': comments,
         'youtube_url': youtube_url,
+        'dance_url': dance_url,
+        'soundcloud_url': soundcloud_url,
         'sns': sns,
         'all_lyrics': all_lyrics,
     }
@@ -227,7 +231,7 @@ def search(request):
             else:
                 groups_list.append(song.album.group)
 
-    if len(singers_list) <= 0 and len(singers_list) <= 0 and len(groups_list) and len(lyrics_list) <= 0 \
+    if len(singers_list) <= 0 and len(singers_list) <= 0 and len(groups_list) <= 0 and len(lyrics_list) <= 0 \
             and len(albums_list) <= 0:
         noresult = True
         context = {

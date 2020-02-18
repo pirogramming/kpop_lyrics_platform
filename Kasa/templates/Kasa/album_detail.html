@@ -19,7 +19,8 @@
         <div class="album_info_wrapper">
             <div class="album_name">{{ album.aname }}</div>
             <div class="album_info">
-                <div class="album_info_agency">그룹 : <a href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a></div>
+                <div class="album_info_agency">그룹 : <a
+                        href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a></div>
                 <div class="album_info_release">발매일 : {{ album.release_date|date:"Y.m.d" }}</div>
             </div>
         </div>
@@ -56,7 +57,10 @@
         <div id="SynopsisDiv" class="SynopsisText">
             {{ album.content|linebreaksbr }}
         </div>
-        <a href="javascript:showplay();" class="btn_more" id="synopMore">펼쳐보기</a>
+        <a href="javascript:showplay();" class="btn_more" id="synopMore">
+            <div>내리기</div>
+            <div><i class="fas fa-chevron-down"></i></div>
+        </a>
         <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
     </div>
 
@@ -77,11 +81,13 @@
                         "display": "block",
                         "line-height": "1.5em"
                     });
-                    $("#synopMore").text("닫기");
+                    $("#synopMore").html('');
+                    $("#synopMore").append('<div><i class="fas fa-chevron-up"></i></div><div>올리기</div>');
                     flag.val("1");
                 } else {
                     SynopsisDiv.css("display", "-webkit-box");
-                    $("#synopMore").text("펼쳐보기");
+                    $("#synopMore").html('');
+                    $("#synopMore").append('<div>내리기</div><div><i class="fas fa-chevron-down"></i></div>');
                     flag.val("0");
                 }
             } else {
