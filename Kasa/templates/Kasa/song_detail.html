@@ -141,6 +141,11 @@
             border-bottom: 1px solid lightgrey;
         }
 
+        .snstitle {
+            border: 0px;
+            margin-bottom: 0px;
+        }
+
         .lyricstitle {
             margin: 0 0 20px 0;
             border: 0px;
@@ -160,19 +165,26 @@
             width: 100%;
             height: 100%;
         }
+        .twitter_container {
+            width:100%;
+
+        }
 
         .twitterwrap {
-            width: 100%;
+            width: 300px;
             display: flex;
             justify-content: flex-start;
+            padding-top: 20px;
+            border-top: 1px solid lightgrey;
         }
 
         .twitter_url {
             height: 500px;
-            width: 70%;
+            width: 100%;
             overflow-y: scroll;
             margin-bottom: 40px;
             box-shadow: 0 0 5px gray;
+
         }
 
         .mediabutton {
@@ -360,10 +372,12 @@
             {#            </div>#}
 
             <div class="snstitle">Twitter</div>
-            <div class="twitterwrap">
-                <div class="twitter_url">
-                    <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div class="twitter_container">
+                <div class="twitterwrap">
+                    <div class="twitter_url">
+                        <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
                 </div>
             </div>
         </div>
