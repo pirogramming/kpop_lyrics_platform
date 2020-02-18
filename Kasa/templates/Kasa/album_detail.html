@@ -50,19 +50,22 @@
         <div class="each_song_buffer"></div>
     </div>
 
-    <div class="album_data">Album information</div>
 
-    <h3 class="hidden"></h3>
-    <div class="content_wrap" id="synopsis">
-        <div id="SynopsisDiv" class="SynopsisText">
-            {{ album.content|linebreaksbr }}
+    {% if album.content %}
+        <div class="album_data">Album information</div>
+
+        <h3 class="hidden"></h3>
+        <div class="content_wrap" id="synopsis">
+            <div id="SynopsisDiv" class="SynopsisText">
+                {{ album.content|linebreaksbr }}
+            </div>
+            <a href="javascript:showplay();" class="btn_more" id="synopMore">
+                <div>내리기</div>
+                <div><i class="fas fa-chevron-down"></i></div>
+            </a>
+            <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
         </div>
-        <a href="javascript:showplay();" class="btn_more" id="synopMore">
-            <div>내리기</div>
-            <div><i class="fas fa-chevron-down"></i></div>
-        </a>
-        <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
-    </div>
+    {% endif %}
 
 
 {% endblock %}

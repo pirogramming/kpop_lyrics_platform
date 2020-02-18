@@ -1,54 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
- <link rel="stylesheet" type="text/css" href="{% static "css/singer_detail.css" %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/singer_detail.css" %}"/>
 {% endblock %}
 {% block content %}
 
-<div class="wrapall">
-    <div class="singer_data">Artist</div>
-    <div class="wrap1">
-        <div class="singer_image_wrapper">
-            <img class="singer_image" src="{{singer.image.url}}"/>
-        </div>
+    <div class="wrapall">
+        <div class="singer_data">Artist</div>
+        <div class="wrap1">
+            <div class="singer_image_wrapper">
+                <img class="singer_image" src="{{ singer.image.url }}"/>
+            </div>
 
-        <div class="singer_info_wrapper">
-            <div class="singer_name">{{ singer.sname }}</div>
-            <div class="singer_info">
-                <div class="singer_info_debut">생일: {{singer.birth}}</div>
-                <div class="singer_info_group">소속그룹: {{singer.group }}</div>
-                <div class="singer_info_type">유형: 솔로/여성</div>
-                <div class="singer_info_year">활동년대: 2010년대</div>
-                <div class="singer_info_nation">국적: 대한민국</div>
-                <div class="singer_info_star">별자리: 처녀자리</div>
+            <div class="singer_info_wrapper">
+                <div class="singer_name">{{ singer.sname }}</div>
+                <div class="singer_info">
+                    <div class="singer_info_debut">생일: {{ singer.birth|date:"Y.m.d" }}</div>
+                    {#                <div class="singer_info_group">소속그룹: {{singer.group. }}</div>#}
+                    <div class="singer_info_year">활동년대: {{ singer.active_date|date:"Y" }}</div>
+                    <div class="singer_info_nation">국적: {{ singer.nationality }}</div>
+                    <div class="singer_info_star">별자리: {{ singer.constallation }}</div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-    <div class="singer_data">Artist information</div>
-    <h3 class="hidden"></h3>
-    <div class="content_wrap" id="synopsis">
-        <div id="SynopsisDiv" class="SynopsisText">
-             RM은 빅히트 엔터테인먼트에 소속된 7인조 보이그룹 방탄소년단의 멤버로 그룹의 리더와 메인 래퍼를 맡고 있다.
-            2013년 학교 3부작 시리즈의 시작인 싱글 [2 COOL 4 SKOOL]로 데뷔함과 동시에
-            각종 신인상을 수상하며 주목을 받았으며 2년간 선보인 학교 시리즈 이후 정규 앨범
-            [DARK&WILD]와 화양연화 시리즈로 인지도를 올림은 물론 네 번째 EP [화양연화 pt.2]로 빌보드 200에 첫 진입하는 쾌거를 이뤘다.
-            이후 [WINGS], 'DNA', 'MIC Drop'으로 빌보드 뮤직 어워드 "톱 소셜 아티스트" 부문을 수상하면서
-            전 세계적인 영향력을 증명했으며, [LOVE YOURSELF 轉‘Tear]로 빌보드 앨범 차트 1위,
-            싱글 차트 10위라는 대기록을 세워낸 보이 그룹으로 독보적인 인기를 구가하고 있다.
-            팀에서 가장 많은 프로듀싱 및 작사를 겸하고 있는 RM은 은유적 표현이 돋보이는 가사와 다양한 사운드 소스를 활용한 편곡 기
-            법을 특징으로 하는 프로듀서이자 중저음의 목소리로 라임과 비트와의 조합이 강점으로 꼽히는 래퍼이다. 각종 예능과 수
-            상 소감으로 자신의 생각을 뚜렷이 전달하며, 영어 구사가 가능한 멤버로 2018년 유엔 총회 연설에서 방탄소년단의 메시지를 전달한 바 있다.
+    {% if singer.content %}
+        <div class="singer_data">Artist information</div>
+        <h3 class="hidden"></h3>
+        <div class="content_wrap" id="synopsis">
+            <div id="SynopsisDiv" class="SynopsisText">
+                {{ singer.content }}
+            </div>
+            <a href="javascript:showplay();" class="btn_more" id="synopMore">
+                <div>내리기</div>
+                <div><i class="fas fa-chevron-down"></i></div>
+            </a>
+            <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
         </div>
-        <a href="javascript:showplay();" class="btn_more" id="synopMore">
-            <div>내리기</div>
-            <div><i class="fas fa-chevron-down"></i></div>
-        </a>
-        <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
-    </div>
+    {% endif %}
 
+    <div class="singer_group_data">Groups</div>
+    <div class="singer_group_wrap">
+        {% for group in singer.group.all %}
+            {% if group.group_image %}
+                <a class="singer_group_detail" href="{% url 'Kasa:group_detail' group.pk %}">
+                    <div class="singer_group_image">
+                        <img class="singer_group_img" src="{{ group.group_image.url }}"/>
+                        <div class="singer_group_name">{{ group.gname }}</div>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
 
 
 
@@ -57,9 +62,9 @@
 
 
 {% block script %}
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-  //더보기 토글
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        //더보기 토글
         function showplay() {
             var flag = $('#hidTempSynopsis');
             var SynopsisDiv = $('#SynopsisDiv');
@@ -68,7 +73,7 @@
                 if (flagValue == "0") {
                     SynopsisDiv.css({
                         "display": "block",
-                        "line-height": "30px"
+                        "line-height": "1.5em"
                     });
                     $("#synopMore").html('');
                     $("#synopMore").append('<div><i class="fas fa-chevron-up"></i></div><div>올리기</div>');
@@ -84,5 +89,5 @@
             }
         }
 
-</script>
+    </script>
 {% endblock %}

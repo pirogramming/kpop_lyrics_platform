@@ -30,6 +30,12 @@ class Singers(models.Model):
     image = models.ImageField(upload_to='singer_image', blank=True, verbose_name='가수사진')
     wiki_url = models.URLField(blank=True, verbose_name='가수정보')
     group = models.ManyToManyField(Groups, verbose_name='소속그룹', related_name='group_singer')
+    active_date = models.DateField(blank=True, null=True, verbose_name='활동년대')
+    nationality = models.CharField(max_length=255, blank=True, verbose_name='국적')
+    constellation = models.CharField(max_length=255, blank=True, verbose_name='별자리')
+    content = models.TextField(blank=True, verbose_name='가수소개')
+
+
     def __str__(self):
         return self.sname
 
