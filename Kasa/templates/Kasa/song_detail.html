@@ -76,7 +76,6 @@
             width: 80px;
             font-weight: bold;
             background: #00fffe;
-            transition: 0.5s;
             box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
         }
 
@@ -86,13 +85,10 @@
             color: white;
         }
 
-        .lyrics_line {
-            line-height: 1.5em;
-        }
-
         .korlyrics {
             display: block;
             color: black;
+            line-height: 1.5em;
         }
 
         .englyriscs {
@@ -165,8 +161,9 @@
             width: 100%;
             height: 100%;
         }
+
         .twitter_container {
-            width:100%;
+            width: 100%;
 
         }
 
@@ -307,7 +304,9 @@
     </style>
     <div class="songinfowrap">
         <div class="album-art">
-            <img class="album-jacket" src="{{ song.album.album_art.url }}"/>
+            <a href="{% url 'Kasa:album_detail' song.album.pk %}">
+                <img class="album-jacket" src="{{ song.album.album_art.url }}"/>
+            </a>
         </div>
         <div class="infowrap">
             <div class="songtitle">{{ song.sname }}</div>
@@ -420,9 +419,15 @@
         function Displaylyrics(lang, classname) {
             for (i = 1; i <= length; i++) {
                 var check = $('#' + lang + i).css("display");
-                if (check == 'none') {
+                if (check === 'none') {
                     $("#" + lang + i).css({'display': 'block'});
+                    $("#" + lang + i).stop().animate({
+                        'line-height': '1.5em', 'opacity': '1'
+                    }, 500);
                 } else {
+                    $("#" + lang + i).stop().animate({
+                        'line-height': '0', 'opacity': '0'
+                    }, 500);
                     $("#" + lang + i).css({'display': 'none'});
                 }
             }
