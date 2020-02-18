@@ -301,6 +301,15 @@
             background: linear-gradient(to right, #06c9ff, #009cc9);
         }
 
+        .lyrics_container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .lyrics_buffer {
+            width: 30px;
+        }
+
     </style>
     <div class="songinfowrap">
         <div class="album-art">
@@ -338,10 +347,16 @@
             {% for lyrics in all_lyrics %}
                 <div class="korlyrics lyrics_line" id="Klyric{{ forloop.counter }}">{{ lyrics.kor }}</div>
                 <div class="englyriscs lyrics_line" id="Elyric{{ forloop.counter }}">
-                    &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp{{ lyrics.eng }}</div>
+                    <div class="lyrics_container">
+                        <div class="lyrics_buffer"></div>
+                        {{ lyrics.eng }}</div>
+                </div>
                 <div class="romlyrics  lyrics_line" id="Rlyric{{ forloop.counter }}">
-                    &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp
-                    &nbsp&nbsp &nbsp{{ lyrics.rom }}</div>
+                    <div class="lyrics_container">
+                        <div class="lyrics_buffer"></div>
+                        <div class="lyrics_buffer"></div>
+                        {{ lyrics.rom }}</div>
+                </div>
             {% endfor %}
         </div>
 
@@ -421,7 +436,7 @@
             var cname = obj.className;
 
             for (i = 1; i <= length; i++) {
-                var check = $("#" +lang + i).css("display");
+                var check = $("#" + lang + i).css("display");
                 if (check === 'none') {
                     $("#" + lang + i).css({'display': 'block'});
                     $("#" + lang + i).stop().animate({
