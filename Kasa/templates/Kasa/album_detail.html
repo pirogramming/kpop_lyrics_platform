@@ -1,293 +1,93 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
 {% block style %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/album_detail.css" %}"/>
 {% endblock %}
-<style>
-    .album_data {
-        font-size: 40px;
-        text-align: left;
-        border-bottom: 1px solid lightgrey;
-        height: 60px;
-        font-weight: bold;
-        line-height: 60px;
-        padding-bottom: 5px;
-        color: #00b8ff;
-        margin-bottom: 0px;
-        margin-top: 30px
-    }
 
-    .song_data {
-        font-size: 40px;
-        text-align: left;
-        border-bottom: 1px solid lightgrey;
-        height: 60px;
-        font-weight: bold;
-        line-height: 60px;
-        padding-bottom: 5px;
-        color: #00b8ff;
-        margin-bottom: 0px;
-        margin-top: 30px;
-
-    }
+{% block content %}
 
 
-    .info img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .info .p {
-        display: inline-block;
-    }
-
-    .info .a {
-        display: flex;
-        width: 500px;
-        height: 200px;
-        float: right;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center
-    }
-
-    .info .a .b {
-        text-align: left;
-        width: 100%;
-        line-height: 70px;
-        font-weight: bold
-    }
-
-    .c {
-        border-bottom: 1px solid black;
-        width: 100%;
-        height: 80px;
-        text-align: left;
-    }
-
-    .c img {
-        height: 100%;
-        width: 80px;
-        float: left
-    }
-
-    .content_wrap {
-        clear: both;
-        display: block;
-        overflow: hidden;
-        margin: 10px 20px 0 20px;
-        padding: 5px;
-        font-size: 12px;
-        line-height: 130%;
-        height: 100%;
-        min-height: 160px;
-
-
-    }
-
-    .btn_more {
-        display: block;
-        padding: 10px 0 0 0;
-        margin: 10px 0 0 0;
-        text-align: right;
-        font-size: 12px;
-        color: #000;
-    }
-
-    .SynopsisText {
-        width: 100%;
-        height: 100px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-    }
-
-
-
-    .artist_groups > a {
-        color: grey;
-    }
-
-
-
-    .artist_song > a {
-        color: #0268e9;
-    }
-
-    .artist_song > a:hover {
-        color: #00b1ff;
-    }
-
-
-
-    .songs_category {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        border-bottom: 2px solid #00b8ff;
-    }
-
-    .songs_category > span {
-        text-align: center;
-        margin: 10px;
-        color: #00b8ff;
-    }
-
-    .songs_category > span:nth-child(1) {
-        flex: 1;
-    }
-
-    .songs_category > span:nth-child(2) {
-        flex: 10;
-    }
-
-    .songs_category > span:nth-child(3) {
-        flex: 6
-    }
-
-    .songs_category > span:nth-child(4) {
-        flex: 2;
-    }
-
-    .each_song > div {
-        margin: 0 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #777;
-    }
-
-    .each_song > div:nth-child(1) {
-        flex: 1;
-        font-weight: bold;
-        color: #00b8ff;
-    }
-
-    .each_song > div:nth-child(2) {
-        flex: 10;
-        justify-content: flex-start;
-    }
-
-    .each_song > div:nth-child(3) {
-        flex: 6;
-
-    }
-
-    .each_song > div:nth-child(4) {
-        flex: 2;
-
-    }
-
-    .each_song_buffer {
-        width: 100%;
-        border-bottom: 2px solid #00b8ff;
-    }
-
-    .each_song {
-        display: flex;
-        flex-direction: row;
-        border-bottom: 1px solid lightgrey;
-        padding: 5px 0;
-    }
-
-    .song_album_img {
-        padding: 0 30px;
-
-    }
-
-    .song_mini_album_size {
-        width: 48px;
-        height: 48px;
-        object-fit: cover;
-        box-shadow: 0px 0px 7px 2px grey;
-    }
-
-    .fa-file-alt {
-        color: #00b8ff;
-    }
-
-
-</style>
-
-<div class="album_data">Album</div>
-<div class="info">
-    <div class="p"><img src="{{ album.album_art.url}}"></div>
-    <div class="a">
-        <div class="b"> 그룹명:{{ album.group }}</div>
-        <div class="b">앨범명:{{ album.aname }}</div>
-        <div class="b">발매일:{{ album.release_date }}</div>
-    </div>
-</div>
-<div class="song_data">Song list</div>
-<div class="songs_category">
-    <span>번호</span><span>곡정보</span><span>아티스트</span><span>가사</span>
-</div>
-
-<div >
-
-    {% for song in album.album_song.all %}
-    <div class="each_song">
-        <div>{{ forloop.counter }}</div>
-        <div>
-            <a class="song_album_img" href="{% url 'Kasa:album_detail' song.album.pk %}">
-                <img class="song_mini_album_size" src="{{ song.album.album_art.url }}"/>
-            </a>
-            <a class="song_title" href="{% url 'Kasa:song_detail' song.pk %}">
-                {{ song.sname }}</a>
+    <div class="album_data">Album</div>
+    <div class="info">
+        {% if album.album_art %}
+            <div class="album_image_wrapper">
+                <img class="album_image" src="{{ album.album_art.url }}"/>
+            </div>
+        {% endif %}
+        <div class="album_info_wrapper">
+            <div class="album_name">{{ album.aname }}</div>
+            <div class="album_info">
+                <div class="album_info_agency">그룹 : <a href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a></div>
+                <div class="album_info_release">발매일 : {{ album.release_date|date:"Y.m.d" }}</div>
+            </div>
         </div>
-        <div>
-            <a href="{% url 'Kasa:group_detail' song.album.group.pk %}">{{ song.album.group.gname }}</a>
+    </div>
+
+    <div class="song_data">Song list</div>
+    <div class="songs_category">
+        <span>번호</span><span>곡정보</span><span>아티스트</span><span>가사</span>
+    </div>
+
+    <div class="each_song_wrapper">
+        {% for song in album.album_song.all %}
+            <div class="each_song">
+                <div>{{ forloop.counter }}</div>
+                <div>
+
+                    <a class="song_title" href="{% url 'Kasa:song_detail' song.pk %}">
+                        {{ song.sname }}</a>
+                </div>
+                <div>
+                    <a class="song_group"
+                       href="{% url 'Kasa:group_detail' song.album.group.pk %}">{{ song.album.group.gname }}</a>
+                </div>
+                <div><a href="{% url 'Kasa:song_detail' song.pk %}"><i class="far fa-file-alt"></i></a></div>
+            </div>
+        {% endfor %}
+        <div class="each_song_buffer"></div>
+    </div>
+
+    <div class="album_data">Album information</div>
+
+    <h3 class="hidden"></h3>
+    <div class="content_wrap" id="synopsis">
+        <div id="SynopsisDiv" class="SynopsisText">
+            {{ album.content|linebreaksbr }}
         </div>
-        <div><a href="{% url 'Kasa:song_detail' song.pk %}"><i class="far fa-file-alt"></i></a></div>
+        <a href="javascript:showplay();" class="btn_more" id="synopMore">펼쳐보기</a>
+        <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
     </div>
-    {% endfor %}
-    <div class="each_song_buffer"></div>
-</div>
-
-<div class="album_data">Album information</div>
-
-<h3 class="hidden"></h3>
-<article class="content_wrap" id="synopsis">
-    <div id="SynopsisDiv" class="SynopsisText">
-        <b> </b><br/>
-        {{ album.content|linebreaksbr }}
-    </div>
-    <a href="javascript:showplay();" class="btn_more" id="synopMore">펼쳐보기</a>
-    <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
-</article>
 
 
 {% endblock %}
 
 {% block script %}
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-    //더보기 토글
-    function showplay() {
-        var flag = $('#hidTempSynopsis');
-        var SynopsisDiv = $('#SynopsisDiv');
-        var flagValue = flag.val();
-        if (flag != null) {
-            if (flagValue == "0") {
-                SynopsisDiv.css({"height":"auto", "font-size":"12px","display":"block", "line-height":"1.5em"});
-                $("#synopMore").text("닫기");
-                flag.val("1");
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        //더보기 토글
+        function showplay() {
+            var flag = $('#hidTempSynopsis');
+            var SynopsisDiv = $('#SynopsisDiv');
+            var flagValue = flag.val();
+            if (flag != null) {
+                if (flagValue == "0") {
+                    SynopsisDiv.css({
+                        "display": "block",
+                        "line-height": "1.5em"
+                    });
+                    $("#synopMore").text("닫기");
+                    flag.val("1");
+                } else {
+                    SynopsisDiv.css("display", "-webkit-box");
+                    $("#synopMore").text("펼쳐보기");
+                    flag.val("0");
+                }
             } else {
-                SynopsisDiv.css("height", "100px");
-                SynopsisDiv.css("display", "-webkit-box");
-                $("#synopMore").text("펼쳐보기");
-                flag.val("0");
+                alert("추가 정보가 없습니다.");
             }
-        } else {
-            alert("추가 정보가 없습니다.");
         }
-    }
-</script>
+    </script>
 
 {% endblock %}
