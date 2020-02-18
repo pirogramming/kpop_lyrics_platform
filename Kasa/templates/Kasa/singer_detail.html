@@ -1,3 +1,313 @@
-<h3>{{ singer.sname }}</h3>
-<h3>{{ singer.image }}</h3>
-<h1></h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+ .artist_data {
+    font-size: 30px;
+    text-align: left;
+    border-bottom: 1px solid lightgrey;
+    height: 60px;
+    font-weight: bold;
+    line-height: 60px;
+    padding-bottom: 5px;
+}
+
+.group p{
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 200px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 30px;
+
+}
+
+.wrap_dtl_atist {
+    border: 1px solid #bbbbbb;
+    border-top: 2px solid #808080;
+}
+
+ .wrap_dtl_atist .dtl_atist {
+    position: relative;
+    padding: 23px 23px;
+    background-color: #fff;
+}
+.clfix {
+    zoom: 1;
+}
+.clfix {
+    display: block;
+}
+
+.clfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+}
+.wrap_dtl_atist .wrap_thumb {
+    float: left;
+    position: relative;
+    width: 208px;
+}
+#cont_wrap{  margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+	display:block;
+}
+.wrap_dtl_atist .wrap_atist_info {
+    float: left;
+    width: 350px;
+    margin-left: 22px;
+}
+.dtl_atist .wrap_atist_info .title_atist {
+    margin-top: -2px;
+    color: #000;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    font-family: "맑은 고딕", "Malgun Gothic", "Apple Gothic", sans-serif;
+    letter-spacing: -1px;
+    word-break: break-all;
+
+}
+	.dtl_atist dl.atist_info {
+    margin-top: 19px;
+}
+.clfix {
+    zoom: 1;
+}
+.clfix {
+    display: block;
+}
+	dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+}
+.clfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+}
+.dtl_atist .wrap_atist_info dt {
+    clear: left;
+    float: left;
+    width: 70px;
+    padding-left: 2px;
+    color: #666;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Dotum, "Apple Gothic", sans-serif;
+}
+	.dtl_atist .wrap_atist_info dd {
+    float: left;
+    width: 100px;
+    color: #1a1a1a;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Dotum, "Apple Gothic", sans-serif;
+}
+dd {
+    display: block;
+    margin-inline-start: 40px;
+	margin:0;
+}
+
+dt {
+    display: block;
+}
+.f_tit {
+	font-size: 30px;
+	text-align: left;
+	border-bottom: 1px solid lightgrey;
+	height: 60px;
+	font-weight: bold;
+	line-height: 60px;
+	padding-bottom: 5px;
+}
+ .wrap_dtl_atist .wrap_intst {
+    float: left;
+    position: relative;
+    width: 200px;
+    min-height: 208px;
+    margin-left: 25px;
+    padding-left: 24px;
+    border-left: 1px solid #e6e6e6;}
+
+
+.result_albums_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.each_album {
+    width: 31%;
+    margin: 10px 2% 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.album_art {
+    flex: 4;
+    object-fit: contain;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+}
+
+.album_image {
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 0px 0px 5px 2px grey;
+    border: 1px solid grey
+}
+
+.album_info {
+    flex: 5;
+    padding: 10px 0 10px 15px;
+}
+
+.album_name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 3px gray;
+
+}
+
+.album_group_name {
+    margin-bottom: 15px;
+}
+
+.album_group_name > a {
+    text-decoration: none;
+    color: black;
+}
+
+.album_date_count_wrap {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 7px;
+}
+
+.album_date_count {
+    font-size: 10px;
+    color: grey;
+    border-right: 1px solid lightgrey;
+    padding: 0 5px;
+}
+
+.album_detail_btn {
+    border-radius: 5px;
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+    text-align: center;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+}
+
+.album_detail_btn:hover {
+    background: linear-gradient(to right, #06c9ff, #009cc9);
+}
+
+.album_detail_btn > a {
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 13px;
+}
+</style>
+
+ <div id="cont_wrap" class="clfix">
+		<div id="conts_section" class="my_fold">
+
+
+
+            <div id="conts">
+
+
+            <h2 class="f_tit">Artist</h2>
+
+
+
+
+                <div class="wrap_dtl_atist">
+
+
+	    <div class="dtl_atist clfix">
+
+
+		    <div class="wrap_thumb" title="프로필 이미지">
+			    <span class="thumb">
+                    <span class="thumb_frame"></span>
+				<span id="artistImgArea"><img onerror="WEBPOCIMG.defaultArtistImg(this, 208);" width="208" height="208" src="{{singer.image.url}}"></span>
+			    </span>
+		    </div>
+
+		    <div class="wrap_atist_info">
+			    <p class="title_atist"><strong class="none"></strong>{{singer.sname}}</p>
+
+			    <dl class="atist_info clfix">
+
+
+				    <dt>생일</dt>
+				    <dd>{{singer.birth}}</dd>
+
+
+				    <dt>소속그룹</dt>
+				    <dd>{{singer.group}}</dd>
+                </dl>
+		    </div>
+            <div class="wrap_intst">
+            </div>
+	    </div>
+</div>
+</div>
+
+
+<div class="result_albums_content">
+  {% for album in singer_group.group_album.all %}
+     <div class="each_album">
+                        <div class="album_art">
+                            <a href="{% url 'Kasa:album_detail' album.pk %}">
+                                <img class="album_image" src="{{ album.album_art.url }}"/>
+                            </a>
+                        </div>
+                        <div class="album_info">
+                            <div class="album_name">{{ album.aname }}</div>
+                            <div class="album_group_name">
+                                <a href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a>
+                            </div>
+                            <div class="album_date_count_wrap">
+                                <div class="album_date_count">{{ album.release_date }}</div>
+                                <div class="album_date_count">{{ album.album_song.all|length }}곡</div>
+                            </div>
+                            <div class="album_detail_btn">
+                                <a href="{% url 'Kasa:album_detail' album.pk %}">Info</a></a>
+                            </div>
+                        </div>
+     </div>
+  {% endfor %}
+</div>
+
+
+</div>
+</div>
+{% endblock %}

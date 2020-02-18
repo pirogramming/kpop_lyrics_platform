@@ -6,7 +6,6 @@ html {
 
 body {
     display: block;
-    height: 100%;
     margin: 0;
     padding: 0;
     position: relative;
@@ -17,7 +16,7 @@ body .wrap {
     min-height: 78vh;
     width: 70%;
     display: block;
-    text-align: center;
+    /*text-align: center;*/
     margin: 20px auto 135px auto;
     /*background-color: none;*/
 }

@@ -1,10 +1,99 @@
-<h3>{{ album.aname }}</h3>
-<h3>{{ album.release_date }}</h3>
-<h3>{{ album.album_art }}</h3>
-<h3>{{ album.group }}</h3>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/album_detail.css" %}"/>
+{% endblock %}
+
+{% block content %}
 
 
+    <div class="album_data">Album</div>
+    <div class="info">
+        {% if album.album_art %}
+            <div class="album_image_wrapper">
+                <img class="album_image" src="{{ album.album_art.url }}"/>
+            </div>
+        {% endif %}
+        <div class="album_info_wrapper">
+            <div class="album_name">{{ album.aname }}</div>
+            <div class="album_info">
+                <div class="album_info_agency">그룹 : <a
+                        href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a></div>
+                <div class="album_info_release">발매일 : {{ album.release_date|date:"Y.m.d" }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="song_data">Song list</div>
+    <div class="songs_category">
+        <span>번호</span><span>곡정보</span><span>아티스트</span><span>가사</span>
+    </div>
+
+    <div class="each_song_wrapper">
+        {% for song in album.album_song.all %}
+            <div class="each_song">
+                <div>{{ forloop.counter }}</div>
+                <div>
+
+                    <a class="song_title" href="{% url 'Kasa:song_detail' song.pk %}">
+                        {{ song.sname }}</a>
+                </div>
+                <div>
+                    <a class="song_group"
+                       href="{% url 'Kasa:group_detail' song.album.group.pk %}">{{ song.album.group.gname }}</a>
+                </div>
+                <div><a href="{% url 'Kasa:song_detail' song.pk %}"><i class="far fa-file-alt"></i></a></div>
+            </div>
+        {% endfor %}
+        <div class="each_song_buffer"></div>
+    </div>
+
+    <div class="album_data">Album information</div>
+
+    <h3 class="hidden"></h3>
+    <div class="content_wrap" id="synopsis">
+        <div id="SynopsisDiv" class="SynopsisText">
+            {{ album.content|linebreaksbr }}
+        </div>
+        <a href="javascript:showplay();" class="btn_more" id="synopMore">
+            <div>내리기</div>
+            <div><i class="fas fa-chevron-down"></i></div>
+        </a>
+        <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
+    </div>
 
 
+{% endblock %}
 
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        //더보기 토글
+        function showplay() {
+            var flag = $('#hidTempSynopsis');
+            var SynopsisDiv = $('#SynopsisDiv');
+            var flagValue = flag.val();
+            if (flag != null) {
+                if (flagValue == "0") {
+                    SynopsisDiv.css({
+                        "display": "block",
+                        "line-height": "1.5em"
+                    });
+                    $("#synopMore").html('');
+                    $("#synopMore").append('<div><i class="fas fa-chevron-up"></i></div><div>올리기</div>');
+                    flag.val("1");
+                } else {
+                    SynopsisDiv.css("display", "-webkit-box");
+                    $("#synopMore").html('');
+                    $("#synopMore").append('<div>내리기</div><div><i class="fas fa-chevron-down"></i></div>');
+                    flag.val("0");
+                }
+            } else {
+                alert("추가 정보가 없습니다.");
+            }
+        }
+    </script>
 
+{% endblock %}

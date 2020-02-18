@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .result {
     font-size: 20px;
     font-weight: bold;
@@ -8,69 +13,215 @@
     color: #00b8ff;
 }
 
+.result_title_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid lightgrey;
+    margin: 40px 0 40px 0;
+    padding-bottom: 5px;
+}
+
+.opener {
+    color: #777;
+    font-size: 13px;
+}
+
 .result_title {
     color: #00b8ff;
     font-size: 30px;
-    font-weight: bold;
-    margin: 20px 0 40px 0;
-    border-bottom: 1px solid lightgrey;
-    padding-bottom: 5px;
     height: 60px;
-    line-height: 60px;
+    font-weight: bold;
 }
 
+.result_length {
+    font-size: 25px;
+}
 
-.result_singer_content {
+.result_artist_content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 
 }
 
 
-.each_singer {
+.each_artist {
     display: flex;
-    /*flex-direction: row;*/
-    border: 1px solid black;
-    width:45%;
-    margin:2%;
+    width: 45%;
+    margin: 2%;
 }
 
-.singer_image_wrap {
+.singer_artist_wrap {
     width: 120px;
     height: 120px;
 }
 
-.singer_image {
+.artist_image {
     box-shadow: 0px 0px 7px 2px grey;
     width: 120px;
     height: 120px;
     object-fit: cover;
 }
 
-.singer_info {
+.artist_group_image {
+    object-fit: contain;
+}
+
+.artist_info {
     padding: 10px 0 10px 15px;
 }
 
-.singer_name {
+.artist_name {
     font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    text-shadow: 1px 1px 2px gray;
 }
 
-.singer_name > a, .singer_group > a {
-    text-decoration: none;
-    color: black;
+.artist_birth {
+    color: grey;
+    font-weight: normal;
+    font-size: 10px;
 }
 
-.singer_groups {
+.artist_groups {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border: 1px solid black;
-    width:250px;
+    width: 250px;
 }
 
+.artist_groups > a {
+    color: grey;
+}
+
+.artist_agency {
+    color: grey;
+}
+
+.artist_song {
+    position: relative;
+    top: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.artist_song > a {
+    color: #0268e9;
+}
+
+.artist_song > a:hover {
+    color: #00b1ff;
+}
+
+
+/** {*/
+/*    border: 1px solid black;*/
+/*}*/
+.result_title_song {
+    margin-bottom: 0px;
+}
+
+.songs_category {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid #00b8ff;
+}
+
+.songs_category > span {
+    text-align: center;
+    margin: 10px;
+    color: #00b8ff;
+}
+
+.songs_category > span:nth-child(1) {
+    flex: 1;
+}
+
+.songs_category > span:nth-child(2) {
+    flex: 10;
+}
+
+.songs_category > span:nth-child(3) {
+    flex: 6
+}
+
+.songs_category > span:nth-child(4) {
+    flex: 2;
+}
+
+.each_song > div {
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+}
+
+.each_song > div:nth-child(1) {
+    flex: 1;
+    font-weight: bold;
+    color: #00b8ff;
+}
+
+.each_song > div:nth-child(2) {
+    flex: 10;
+    justify-content: flex-start;
+}
+
+.each_song > div:nth-child(3) {
+    flex: 6;
+
+}
+
+.each_song > div:nth-child(4) {
+    flex: 2;
+
+}
+
+.each_song_buffer {
+    width: 100%;
+    border-bottom: 2px solid #00b8ff;
+}
+
+.each_song {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgrey;
+    padding: 5px 0;
+}
+
+.song_album_img {
+    padding: 0 30px;
+
+}
+
+.song_mini_album_size {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    box-shadow: 0px 0px 7px 2px grey;
+}
+
+.fa-file-alt {
+    color: #00b8ff;
+}
+
+.song_title {
+}
 
 .result_albums_content {
     display: flex;
@@ -88,7 +239,7 @@
 
 .album_art {
     flex: 4;
-    object-fit: cover;
+    object-fit: contain;
     height: 100%;
     display: flex;
     align-items: center;
@@ -97,7 +248,7 @@
 
 .album_image {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     box-shadow: 0px 0px 5px 2px grey;
     border: 1px solid grey
 }
@@ -110,6 +261,8 @@
 .album_name {
     font-weight: bold;
     margin-bottom: 5px;
+    text-shadow: 1px 1px 3px gray;
+
 }
 
 .album_group_name {
@@ -152,5 +305,123 @@
     color: darkblue;
     font-weight: bold;
     font-size: 13px;
+}
 
+.result_title_lyric {
+    margin-bottom: 0px;
+}
+
+.result_lyrics_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.each_lyric {
+    border-bottom: 1px solid lightgrey;
+    padding: 20px 10px 10px 10px;
+    /*padding: 20px 30px;*/
+    margin-bottom: 10px;
+}
+
+.lyrics_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.lyrics_album {
+    display: flex;
+    flex-direction: row;
+}
+
+.lyrics_album_img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    box-shadow: 0px 0px 7px 2px grey;
+}
+
+.lyric_song {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.lyric_group {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    font-size: 12px;
+}
+
+.lyric_order {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.lyric_song_all {
+    width: 100%;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.4em;
+    height: 4.2em;
+
+    /*height:100px;*/
+    /*overflow: ;*/
+    /*text-overflow: ellipsis;*/
+    /*  white-space: ;*/
+}
+
+.eli {
+    color: grey;
+}
+
+.lyrics_buffer {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+.paginator_wrap {
+    display: none;
+    margin-top: 10px;
+}
+
+.paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginator_btn {
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    color: #00b8ff;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.paginator_btn:hover {
+    background-color: #00b8ff;
+    color: white;
+}
+
+.prevent_page {
+    background-color: #00b8ff;
+    color: white;
 }

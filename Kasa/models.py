@@ -7,6 +7,7 @@ class Groups(models.Model):
     agency = models.CharField(max_length=255, blank=True, verbose_name='소속사')
     sns_url = models.URLField(verbose_name='SNS', blank=True)
     group_image = models.ImageField(upload_to='group_image', blank=True, verbose_name='그룹사진')
+    debut = models.DateField(verbose_name='데뷔일')
 
     def __str__(self):
         return self.gname
@@ -25,10 +26,10 @@ class Albums(models.Model):
 
 class Singers(models.Model):
     sname = models.CharField(max_length=255, verbose_name='가수이름')
+    birth = models.DateField(blank=True, verbose_name='생일')
     image = models.ImageField(upload_to='singer_image', blank=True, verbose_name='가수사진')
     wiki_url = models.URLField(blank=True, verbose_name='가수정보')
     group = models.ManyToManyField(Groups, verbose_name='소속그룹', related_name='group_singer')
-
     def __str__(self):
         return self.sname
 
@@ -54,16 +55,6 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.content
-
-
-class Fandoms(models.Model):
-    fname = models.CharField(max_length=255, verbose_name='팬덤명')
-    official_url = models.URLField(blank=True, verbose_name='팬카페')
-    group = models.OneToOneField(Groups, on_delete=models.CASCADE, verbose_name='그룹', related_name='group_fandom')
-
-    def __str__(self):
-        return self.fname
-
 
 class Lyrics(models.Model):
     kor = models.TextField(verbose_name='한국어')
