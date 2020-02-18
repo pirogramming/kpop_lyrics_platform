@@ -147,10 +147,7 @@
                     dataType: "json",
                     async: true,
                     success: function (response) {
-                        //alert('success')
-                        {#$('#livesearch').css({"height":"auto"});#}
                         $.each(response, function (key, value) {
-                                //alert(key, value)
                                 if (value.length) {
                                     $('#livesearch_item_wrapper').css("display", "block");
                                     if (key === 'groups') {
