@@ -13,6 +13,4 @@ urlpatterns = [
     path('comment/new/', views.write_new_comment, name='write_new_comment'),
     path('edit/<int:song_id>/stage1/', views.enter_all_lyrics, name='enter_all_lyrics'),
     path('edit/<int:song_id>/stage2/', views.modify_and_create_each_lyrics, name='modify_and_create_each_lyrics'),
-    path('choice_group/', views.choice_group, name='choice_group'),
-    path('search_group/', views.search_group, name='search_group'),
 ]

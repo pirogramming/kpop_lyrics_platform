@@ -39,33 +39,6 @@ def write_new_comment(request):
         return redirect('Kasa:song_detail', song.pk)
 
 
-def choice_group(request):
-    if request.method == "POST":
-        group_id = request.POST['id']
-        context = {
-            'group_id': group_id
-        }
-        return render(request, 'Kasa', context)
-    else:
-        return render(request, 'Kasa/choice_group.html')
-
-
-def search_group(request):
-    kwd = request.POST.get('kwd', None)
-
-    data = {
-        'content': list()
-    }
-    if kwd:
-        groups = Groups.objects.filter(gname__icontains=kwd)
-        for group in groups:
-            data['content'].append({
-                'id': group.id,
-                'name': group.gname,
-            })
-    return HttpResponse(json.dumps(data), content_type="application/json")
-
-
 def enter_all_lyrics(request, song_id):
     if request.method == "POST":
         song = Songs.objects.get(pk=song_id)
@@ -277,7 +250,7 @@ def search(request):
                 'image': group_limit_in.group_image.url,
                 'agency': group_limit_in.agency,
             })
-        for singer_limit_in in singers_list[:4-len(groups_list[:2])]:
+        for singer_limit_in in singers_list[:4 - len(groups_list[:2])]:
             data['singers'].append({
                 'id': singer_limit_in.id,
                 'name': singer_limit_in.sname,

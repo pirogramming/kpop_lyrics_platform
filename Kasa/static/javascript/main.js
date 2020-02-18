@@ -12,7 +12,7 @@ $('.main-searchtxt').blur(
         $(this).css({'box-shadow': 'none'});
         setTimeout(function() {
             $('#livesearch_item_wrapper').css("display", "none");
-        },200);
+        },300);
 
     });
 

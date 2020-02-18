@@ -1,16 +1,52 @@
 .wrap1 {
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    margin-bottom: 40px;
+}
 
+/** {*/
+/*    border: 1px solid black*/
+/*}*/
+
+.group_image_wrapper {
+    width: 400px;
+    height: 250px;
 }
 
 .group_image {
-    width: 80%;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px 3px grey;
-    border: 2px solid grey;
-    border-radius: 30px;
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 0px 0px 5px 2px grey;
+    border-radius: 10px;
+}
 
+.group_info_wrapper {
+    margin-left:70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.group_info {
+    margin-top: 30px;
+}
+
+.group_info > div {
+    margin-top: 15px;
+    font-size:15px;
+}
+
+.group_info_sns > a {
+    text-decoration: none;
+    color: #00b8ff;
+
+}
+
+.group_name {
+    font-size: 30px;
+    font-weight: bold;
+    color: #00b8ff;
 }
 
 .middle {
@@ -64,34 +100,23 @@
 .wrap2 {
     padding: 5px 10px;
     display: flex;
-    -ms-overflow-style: none;
-    height: 280px;
+    height: 230px;
     overflow-x: scroll;
     white-space: nowrap;
     overflow-y: hidden;
-
+    margin-bottom: 40px;
 }
-
-
-.wrap2::-webkit-scrollbar {
-    display: none
-}
-
 
 .album_wrap {
     padding: 5px 10px;
     text-align: center;
     -ms-overflow-style: none;
-    height: 270px;
+    height: 230px;
     overflow-x: scroll;
     white-space: nowrap;
     overflow-y: hidden;
-    text-align: center;
+    margin-bottom: 200px;
 
-}
-
-.album_wrap::-webkit-scrollbar {
-    display: none
 }
 
 
