@@ -2,312 +2,171 @@
 {% load static %}
 {% block content %}
 <style>
- .artist_data {
-    font-size: 30px;
+.content_wrap {
+        overflow: hidden;
+        margin: 10px 20px 0 20px;
+        padding: 5px;
+        font-size: 12px;
+        height: 130%;
+        /*line-height: 100%;*/
+        /*min-height: 160px;*/
+
+    }
+
+    .btn_more {
+        display: block;
+        padding: 10px 0 0 0;
+        margin: 10px 0 0 0;
+        text-align: right;
+        font-size: 12px;
+        color: rgb(7,7,7);
+    }
+
+    .SynopsisText {
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        line-height: 30px;
+    }
+.wrap1 {
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.singer_image_wrapper {
+    width: 230px;
+    height: 300px;
+}
+
+.singer_image {
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 0px 0px 5px 2px grey;
+    border-radius: 10px;
+}
+
+.singer_info_wrapper {
+    margin-left:70px;
+   align-items: center;
+}
+
+.singer_info {
+    /*border:1px solid black;*/
+    margin-top: 0px; width:250px;height:250px;
+}
+
+.singer_info > div {
+    margin-top: 15px;
+    font-size:15px;
+}
+.singer_name {
+    font-size: 40px;
+    font-weight: bold;
+    color: #00b8ff;}
+
+
+.artist_data {
+    font-size: 40px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
     font-weight: bold;
     line-height: 60px;
+    color: #00b8ff;
     padding-bottom: 5px;
 }
-
-.group p{
-    width: 100px;
-    border: 2px solid black;
-    border-radius: 200px;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 30px;
-
-}
-
-.wrap_dtl_atist {
-    border: 1px solid #bbbbbb;
-    border-top: 2px solid #808080;
-}
-
- .wrap_dtl_atist .dtl_atist {
-    position: relative;
-    padding: 23px 23px;
-    background-color: #fff;
-}
-.clfix {
-    zoom: 1;
-}
-.clfix {
-    display: block;
-}
-
-.clfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-    font-size: 0;
-    line-height: 0;
-}
-.wrap_dtl_atist .wrap_thumb {
-    float: left;
-    position: relative;
-    width: 208px;
-}
-#cont_wrap{  margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-	display:block;
-}
-.wrap_dtl_atist .wrap_atist_info {
-    float: left;
-    width: 350px;
-    margin-left: 22px;
-}
-.dtl_atist .wrap_atist_info .title_atist {
-    margin-top: -2px;
-    color: #000;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 30px;
-    font-family: "맑은 고딕", "Malgun Gothic", "Apple Gothic", sans-serif;
-    letter-spacing: -1px;
-    word-break: break-all;
-
-}
-	.dtl_atist dl.atist_info {
-    margin-top: 19px;
-}
-.clfix {
-    zoom: 1;
-}
-.clfix {
-    display: block;
-}
-	dl {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-
-}
-.clfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-    font-size: 0;
-    line-height: 0;
-}
-.dtl_atist .wrap_atist_info dt {
-    clear: left;
-    float: left;
-    width: 70px;
-    padding-left: 2px;
-    color: #666;
+.data{width:100%;
+    height:200px;
     font-size: 12px;
-    line-height: 20px;
-    font-family: Dotum, "Apple Gothic", sans-serif;
-}
-	.dtl_atist .wrap_atist_info dd {
-    float: left;
-    width: 100px;
-    color: #1a1a1a;
-    font-size: 12px;
-    line-height: 20px;
-    font-family: Dotum, "Apple Gothic", sans-serif;
-}
-dd {
-    display: block;
-    margin-inline-start: 40px;
-	margin:0;
-}
-
-dt {
-    display: block;
-}
-.f_tit {
-	font-size: 30px;
-	text-align: left;
-	border-bottom: 1px solid lightgrey;
-	height: 60px;
-	font-weight: bold;
-	line-height: 60px;
-	padding-bottom: 5px;
-}
- .wrap_dtl_atist .wrap_intst {
-    float: left;
-    position: relative;
-    width: 200px;
-    min-height: 208px;
-    margin-left: 25px;
-    padding-left: 24px;
-    border-left: 1px solid #e6e6e6;}
-
-
-.result_albums_content {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.each_album {
-    width: 31%;
-    margin: 10px 2% 20px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.album_art {
-    flex: 4;
-    object-fit: contain;
-    height: 100%;
-    display: flex;
-    align-items: center;
+    line-height:1.5em;
 
 }
-
-.album_image {
-    width: 100%;
-    object-fit: contain;
-    box-shadow: 0px 0px 5px 2px grey;
-    border: 1px solid grey
-}
-
-.album_info {
-    flex: 5;
-    padding: 10px 0 10px 15px;
-}
-
-.album_name {
+.singer_info * {
     font-weight: bold;
-    margin-bottom: 5px;
-    text-shadow: 1px 1px 3px gray;
-
+    font-size: 25px;
 }
+.artist_data_wrap{
+    margin-bottom: 100px;
 
-.album_group_name {
-    margin-bottom: 15px;
-}
 
-.album_group_name > a {
-    text-decoration: none;
-    color: black;
-}
 
-.album_date_count_wrap {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 7px;
-}
-
-.album_date_count {
-    font-size: 10px;
-    color: grey;
-    border-right: 1px solid lightgrey;
-    padding: 0 5px;
-}
-
-.album_detail_btn {
-    border-radius: 5px;
-    width: 50px;
-    height: 23px;
-    line-height: 23px;
-    text-align: center;
-    background: linear-gradient(to right, #00fffe, #00b8ff);
-}
-
-.album_detail_btn:hover {
-    background: linear-gradient(to right, #06c9ff, #009cc9);
-}
-
-.album_detail_btn > a {
-    text-decoration: none;
-    color: darkblue;
-    font-weight: bold;
-    font-size: 13px;
 }
 </style>
 
- <div id="cont_wrap" class="clfix">
-		<div id="conts_section" class="my_fold">
+<div class="wrapall">
+    <div class="artist_data">Artist</div>
+    <div class="wrap1">
+        <div class="singer_image_wrapper">
+            <img class="singer_image" src="{{singer.image.url}}"/>
+        </div>
 
+        <div class="singer_info_wrapper">
+            <div class="singer_name">{{ singer.sname }}</div>
+            <div class="singer_info">
+                <div class="singer_info_debut">생일: {{singer.birth}}</div>
+                <div class="singer_info_group">소속그룹: {{singer.group }}</div>
+                <div class="singer_info_type">유형: 솔로/여성</div>
+                <div class="singer_info_year">활동년대: 2010년대</div>
+                <div class="singer_info_nation">국적: 대한민국</div>
+                <div class="singer_info_star">별자리: 처녀자리</div>
 
-
-            <div id="conts">
-
-
-            <h2 class="f_tit">Artist</h2>
-
-
-
-
-                <div class="wrap_dtl_atist">
-
-
-	    <div class="dtl_atist clfix">
-
-
-		    <div class="wrap_thumb" title="프로필 이미지">
-			    <span class="thumb">
-                    <span class="thumb_frame"></span>
-				<span id="artistImgArea"><img onerror="WEBPOCIMG.defaultArtistImg(this, 208);" width="208" height="208" src="{{singer.image.url}}"></span>
-			    </span>
-		    </div>
-
-		    <div class="wrap_atist_info">
-			    <p class="title_atist"><strong class="none"></strong>{{singer.sname}}</p>
-
-			    <dl class="atist_info clfix">
-
-
-				    <dt>생일</dt>
-				    <dd>{{singer.birth}}</dd>
-
-
-				    <dt>소속그룹</dt>
-				    <dd>{{singer.group}}</dd>
-                </dl>
-		    </div>
-            <div class="wrap_intst">
             </div>
-	    </div>
+        </div>
+    </div>
 </div>
+<div class="artist_data_wrap">
+    <div class="artist_data">Artist information</div>
+
+    <div class="data">
+<!--        <h3 class="hidden"></h3>-->
+        <article class="content_wrap" id="synopsis">
+            <div id="SynopsisDiv" class="SynopsisText">
+                <b> </b><br/>
+                RM은 빅히트 엔터테인먼트에 소속된 7인조 보이그룹 방탄소년단의 멤버로 그룹의 리더와 메인 래퍼를 맡고 있다. 2013년 학교 3부작 시리즈의 시작인 싱글 [2 COOL 4 SKOOL]로 데뷔함과 동시에 각종 신인상을 수상하며 주목을 받았으며 2년간 선보인 학교 시리즈 이후 정규 앨범 [DARK&WILD]와 화양연화 시리즈로 인지도를 올림은 물론 네 번째 EP [화양연화 pt.2]로 빌보드 200에 첫 진입하는 쾌거를 이뤘다.
+
+                이후 [WINGS], 'DNA', 'MIC Drop'으로 빌보드 뮤직 어워드 "톱 소셜 아티스트" 부문을 수상하면서 전 세계적인 영향력을 증명했으며, [LOVE YOURSELF 轉‘Tear]로 빌보드 앨범 차트 1위, 싱글 차트 10위라는 대기록을 세워낸 보이 그룹으로 독보적인 인기를 구가하고 있다.
+
+                팀에서 가장 많은 프로듀싱 및 작사를 겸하고 있는 RM은 은유적 표현이 돋보이는 가사와 다양한 사운드 소스를 활용한 편곡 기법을 특징으로 하는 프로듀서이자 중저음의 목소리로 라임과 비트와의 조합이 강점으로 꼽히는 래퍼이다. 각종 예능과 수상 소감으로 자신의 생각을 뚜렷이 전달하며, 영어 구사가 가능한 멤버로 2018년 유엔 총회 연설에서 방탄소년단의 메시지를 전달한 바 있다.
+
+            </div>
+            <a href="javascript:showplay();" class="btn_more" id="synopMore">펼쳐보기</a>
+            <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
+        </article>
+    </div>
 </div>
+{% endblock %}
 
 
-<div class="result_albums_content">
-  {% for album in singer_group.group_album.all %}
-     <div class="each_album">
-                        <div class="album_art">
-                            <a href="{% url 'Kasa:album_detail' album.pk %}">
-                                <img class="album_image" src="{{ album.album_art.url }}"/>
-                            </a>
-                        </div>
-                        <div class="album_info">
-                            <div class="album_name">{{ album.aname }}</div>
-                            <div class="album_group_name">
-                                <a href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group.gname }}</a>
-                            </div>
-                            <div class="album_date_count_wrap">
-                                <div class="album_date_count">{{ album.release_date }}</div>
-                                <div class="album_date_count">{{ album.album_song.all|length }}곡</div>
-                            </div>
-                            <div class="album_detail_btn">
-                                <a href="{% url 'Kasa:album_detail' album.pk %}">Info</a></a>
-                            </div>
-                        </div>
-     </div>
-  {% endfor %}
-</div>
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    //더보기 토글
+    function showplay() {
+        var flag = $('#hidTempSynopsis');
+        var SynopsisDiv = $('#SynopsisDiv');
+        var flagValue = flag.val();
+        if (flag != null) {
+            if (flagValue == "0") {
+                SynopsisDiv.css({"height":"auto", "font-size":"12px","display":"block",
+                    "line-height":"30px","color":"rgb(7,7,7)",});
+                $("#synopMore").text("닫기");
+                flag.val("1");
+            } else {
+                SynopsisDiv.css("height", "120px");
+                SynopsisDiv.css("display", "-webkit-box");
+                $("#synopMore").text("펼쳐보기");
+                flag.val("0");
+            }
+        } else {
+            alert("추가 정보가 없습니다.");
+        }
+    }
+</script>
 
 
-</div>
-</div>
 {% endblock %}
