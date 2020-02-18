@@ -29,7 +29,6 @@ class Singers(models.Model):
     image = models.ImageField(upload_to='singer_image', blank=True, verbose_name='가수사진')
     wiki_url = models.URLField(blank=True, verbose_name='가수정보')
     group = models.ManyToManyField(Groups, verbose_name='소속그룹', related_name='group_singer')
-
     def __str__(self):
         return self.sname
 
