@@ -1,6 +1,7 @@
 .logincenter_wrap {
     display: flex;
     justify-content: center;
+    padding-top:70px;
 }
 
 .loginwrap {

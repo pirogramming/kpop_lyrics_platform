@@ -180,7 +180,7 @@ input[type=text]:focus {
 .top5hit {
     margin-left: 10%;
     margin-top: 20px;
-    margin_bottem: 20px;
+    margin_bottom: 20px;
     width: 80%;
     height: 270px;
     display: flex;
