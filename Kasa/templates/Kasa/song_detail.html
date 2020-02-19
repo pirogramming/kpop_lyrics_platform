@@ -426,7 +426,12 @@
             if (!buffer_count)
                 buffer_count = '0px';
             var buffer = Number(buffer_count.replace('px', ''));
+            var inner = '0px';
+
             var inner = String(buffer + 20) + 'px';
+            if (($('#'+id_list[0]).attr('value') === 'off' && $('#'+lang).prev().attr('value') === 'off') || (!$('#'+lang).prev().attr('value')) ){
+                inner = '0px';
+            }
 
             var refill_buffer = []
             var target = "#" + lang + '1';
@@ -437,7 +442,6 @@
                 target = "#" + $(target).next().attr('id');
                 next_classname = $(target).next().attr('class');
             }
-
             for (var i = 1; i <= length; i++) {
                 var check = $("#" + lang + i).css("display");
 
@@ -456,7 +460,7 @@
                     var index = id_list.indexOf(lang);
                     for (var order = index + 1; order < id_list.length; order++) {
                         var value = refill_buffer[round];
-                        if (value <= 0) {
+                        if (value <= 0 && $('#' + id_list[order]).attr('value') === 'off') {
                             round += 1;
                             continue;
                         }
