@@ -17,4 +17,5 @@
     height:440px;
     background-repeat: no-repeat;
     min-height: 440px;
+    background-size: 100% 440px;
 }
