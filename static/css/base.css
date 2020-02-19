@@ -24,3 +24,8 @@ body .wrap {
 input[type=text]:focus {
     outline: 0.1rem solid #00b8ff;
 }
+
+button {
+    outline: 0;
+    border: 0;
+}
