@@ -22,6 +22,7 @@ def song_detail(request, song_pk):
     dance_url = convert_youtube(song.dance_url)
     all_lyrics = song.song_lyrics.all()
     comments = song.song_comment.all().order_by('-created_at')
+    members = song.album.group.group_singer.all()
 
     context = {
         'song': song,
@@ -32,6 +33,7 @@ def song_detail(request, song_pk):
         'soundcloud_url': soundcloud_url,
         'sns': sns,
         'all_lyrics': all_lyrics,
+        'members':members,
     }
     return render(request, 'Kasa/song_detail.html', context)
 
