@@ -1,12 +1,11 @@
 html {
-    font-family: "Aller Light";
+    font-family: "Nunito Sans","Noto Sans KR";
     height: 100%;
     margin: 0;
     font-family: 'Nanum Gothic', sans-serif;
 }
 
 body {
-    display: block;
     margin: 0;
     padding: 0;
     position: relative;
@@ -17,7 +16,7 @@ body .wrap {
     min-height: 78vh;
     width: 70%;
     display: block;
-    margin: 20px auto 135px auto;
+    margin:20px auto 135px auto;
 }
 
 input[type=text]:focus {
