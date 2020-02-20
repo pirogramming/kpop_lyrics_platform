@@ -17,7 +17,6 @@
 .change_info_title {
     padding-top: 30px;
     font-size: 36px;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
 }
 
@@ -29,13 +28,11 @@
 }
 
 .field_label {
-    font-family: Aller, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     padding-bottom: 5px;
 }
 
 .field_specific input {
     border: 0.1rem solid #d3d3d3;
-    font-family: Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     width: 375px;
     height: 35px;
     padding-left: 10px;
@@ -43,7 +40,6 @@
 
 .change_info_table input {
     border: 0.1rem solid #d3d3d3;
-    font-family: Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     width: 375px;
     height: 35px;
     padding-left: 10px;
@@ -60,7 +56,6 @@
     width: 200px;
     transition: 0.5s;
     font-size: 20px;
-    font-family: Aller;
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
 }
 
@@ -76,5 +71,4 @@
     margin-top: -5px;
     margin-bottom: -5px;
     font-size: 20px;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
