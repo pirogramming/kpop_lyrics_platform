@@ -6,9 +6,8 @@
 {% endblock %}
 
 {% block content %}
-    <div id="main_wrap" style="background-image: url({% static 'image/main_background.jpg' %});">
-        <div id="main_wrap_2" style="z-index:1;">
-            <div class="mainword">KASA<br>Search Kpop lyrics!!!!</div>
+    <div id="main_wrap" style="background-image: url({% static 'concert-1742309.jpg' %});">
+        <div id="main_wrap_2">
             <form action="{% url 'Kasa:search' %}" method="GET">
 
                 {% csrf_token %}

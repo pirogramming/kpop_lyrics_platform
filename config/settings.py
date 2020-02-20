@@ -142,6 +142,7 @@ STATICFILES_DIRS = [
     'accounts/static/css',
     'Kasa/static/image',
     'Kasa/static/css',
+    'kasa/static/scss',
 ]
 
 # Social Login

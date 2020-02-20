@@ -1,6 +1,6 @@
 $('.main-searchtxt').focus(
     function () {
-        $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.7'});
+        $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.8'});
         $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white'})
     });
 
