@@ -155,6 +155,13 @@ STATICFILES_DIRS = [
     'kasa/static/scss',
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 # Social Login
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
