@@ -27,7 +27,8 @@
         <div class="lyrics">
             <div class="lyrictitlewrap">
                 <div class="lyricstitle">Lyrics</div>
-                <div class="lyric-a"><a class="editlyric" href="{% url 'Kasa:enter_all_lyrics' song.id %}">Edit+</a></div>
+                <div class="lyric-a"><a class="editlyric" href="{% url 'Kasa:enter_all_lyrics' song.id %}">Edit+</a>
+                </div>
             </div>
             <div class="buttonwrap">
                 <button type="button" id="Klyric" class="koreanlyric" value="on" onclick="Displaylyrics(this)">
@@ -133,12 +134,12 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{% static "javascript/song_detail.js" %}"></script>
     <script language="JavaScript" type="text/javascript">
+        /*
+                function active_explanation(btn) {
+                    if (btn.getAttribute('value') === 'off') {
+                        btn.setAttribute('value', 'on');
 
-        function active_explanation(btn) {
-            if (btn.getAttribute('value') === 'off') {
-                btn.setAttribute('value', 'on');
-
-                var have_explain = '{% for lyrics in all_lyrics %}{% for explain in lyrics.lyrics_explanation.all %}{{ lyrics.order }}.{% if explain %}{% endif %}{% endfor %}{% endfor %}';
+                        var have_explain = '{% for lyrics in all_lyrics %}{% for explain in lyrics.lyrics_explanation.all %}{{ lyrics.order }}.{% if explain %}{% endif %}{% endfor %}{% endfor %}';
                 var have_explain_list = have_explain.split('.');
                 console.log(have_explain_list);
 
@@ -150,6 +151,7 @@
 
             }
         }
+        */
 
 
         function active_button(target) {
