@@ -50,3 +50,10 @@
 .submit_lyrics {
     text-align: center;
 }
+
+.error {
+    font-size:20px;
+    color: #00b8ff;
+    text-align: center;
+    font-weight: bold;
+}
