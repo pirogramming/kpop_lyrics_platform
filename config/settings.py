@@ -146,21 +146,25 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     'accounts/static/image',
+#     'accounts/static/css',
+#     'Kasa/static/image',
+#     'Kasa/static/css',
+#     'kasa/static/scss',
+# ]
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    'accounts/static/image',
-    'accounts/static/css',
-    'Kasa/static/image',
-    'Kasa/static/css',
-    'kasa/static/scss',
+    os.path.join(BASE_DIR, 'accounts/static'),
+    os.path.join(BASE_DIR, 'Kasa/static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'config/collectstatic')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
 # Social Login
 AUTHENTICATION_BACKENDS = (
