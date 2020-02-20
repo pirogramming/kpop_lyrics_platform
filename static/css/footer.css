@@ -19,3 +19,14 @@
     min-height: 440px;
     background-size: 100% 440px;
 }
+
+.developer {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.developer> a {
+    text-decoration: none;
+    color: gray;
+}

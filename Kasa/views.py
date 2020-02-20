@@ -50,7 +50,6 @@ def enter_all_lyrics(request, song_id):
         song = Songs.objects.get(pk=song_id)
         singers = Singers.objects.filter(singer_song=song_id)
         all_kor = request.POST.get('all_kor', None).split('\r\n')
-
         all_lang_dict = {}
         length = len(all_kor)
 
@@ -60,6 +59,15 @@ def enter_all_lyrics(request, song_id):
         eng_request = request.POST.get('all_eng', None)
         if eng_request:
             all_eng = eng_request.split('\r\n')
+            if len(all_eng) > length:
+                context = {
+                    'error': 'English lyrics too Long!',
+                    'all_kor': request.POST['all_kor'],
+                    'all_eng': request.POST['all_eng'],
+                    'all_rom': request.POST['all_rom'],
+                }
+                return render(request, 'Kasa/enter_all_lyrics.html', context)
+
             for index, lyrics in enumerate(all_eng):
                 location = all_lang_dict.get(str(index + 1), None)
                 location['eng'] = lyrics
@@ -67,6 +75,14 @@ def enter_all_lyrics(request, song_id):
         rom_request = request.POST.get('all_rom', None)
         if rom_request:
             all_rom = rom_request.split('\r\n')
+            if len(all_rom) > length:
+                context = {
+                    'error': 'Romanized lyrics too Long!',
+                    'all_kor': request.POST['all_kor'],
+                    'all_eng': request.POST['all_eng'],
+                    'all_rom': request.POST['all_rom'],
+                }
+                return render(request, 'Kasa/enter_all_lyrics.html', context)
             for index, lyrics in enumerate(all_rom):
                 location = all_lang_dict.get(str(index + 1), None)
                 location['rom'] = lyrics

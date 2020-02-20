@@ -20,20 +20,17 @@
     margin-top: -5px;
     margin-bottom: -5px;
     font-size: 20px;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .sign_in_talk {
     padding-top: 30px;
     font-size: 36px;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
 }
 
 .sign_in_talk_2 {
     padding-bottom: 10px;
     font-size: 20px;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
 }
 
@@ -49,13 +46,11 @@
 }
 
 .id_notation, .password_notation {
-    font-family: Aller;
     padding-bottom: 5px;
 }
 
 .id_text, .password_text {
     border: 0.1rem solid #d3d3d3;
-    font-family: "Nunito Sans";
     width: 375px;
     height: 35px;
     padding-left: 10px;
@@ -84,7 +79,6 @@
     width: 200px;
     transition: 0.5s;
     font-size: 20px;
-    font-family: Aller;
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
 }
 
@@ -119,7 +113,6 @@
 }
 
 .google {
-    font-family: "Nunito Sans";
     width: 375px;
     height: 35px;
     line-height: 35px;
@@ -202,13 +195,11 @@
 .signup_welcome {
     padding-top: 30px;
     font-size: 36px;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
 }
 
 .signup_explanation {
     text-align: left;
-    font-family: Regular Patch, Regular Bold, Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 30px;
@@ -227,7 +218,6 @@
 .signup_buttons > a {
     text-decoration: none;
     color: #000000;
-    font-family: Aller;
     font-size: 20px;
 }
 
