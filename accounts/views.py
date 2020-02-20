@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from Kasa.models import Comments
+from accounts.decorators import login_required
 from accounts.forms import InfoForm, UserForm, PasswordResetForm, SetPasswordForm
 from accounts.models import User
 from django.utils.http import urlsafe_base64_decode
@@ -43,6 +44,7 @@ def login(request):
 
 
 # 로그아웃 뷰
+@login_required
 def logout(request):
     next_url = request.GET.get('next', 'accounts:login')
     if next_url == '/search/':
@@ -80,6 +82,7 @@ def signup(request):
 
 
 # 비밀번호 변경 뷰
+@login_required
 def change_pw(request):
     context = {}
     if request.method == "POST":
@@ -143,6 +146,7 @@ class reset_pw_complete(PasswordChangeDoneView):
 
 #
 # 닉네임, 관심사에 대한 정보 변경 뷰
+@login_required
 def change_info(request):
     if request.method == "POST":
         form = InfoForm(data=request.POST, instance=request.user)
@@ -164,6 +168,7 @@ def change_info(request):
 
 
 # 사용자가 작성한 댓글들 확인하는 뷰
+@login_required
 def check_comment(request):
     comments = Comments.objects.filter(user=request.user).order_by('-created_at')
     context = {
@@ -174,6 +179,7 @@ def check_comment(request):
 
 
 # 특정 댓글 삭제 뷰
+@login_required
 def delete_comment(request, comment_pk):
     comment = get_object_or_404(Comments, pk=comment_pk)
 
