@@ -1,5 +1,6 @@
 body #wrap {
     text-align: left;
+    width:75%;
 }
 
 .songinfowrap {
@@ -29,12 +30,18 @@ body #wrap {
     width: 100%;
     height: 100%;
 }
+.infowrap{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 
 .songtitle {
     font-size: 40px;
     font-weight: bold;
     padding: 0;
-    line-height: 100px;
+    line-height: 50px;
+    margin-bottom: 50px;
 }
 
 .albumname {
@@ -79,12 +86,12 @@ body #wrap {
 
 .englyriscs {
     display: none;
-    color: #777;
+    color: darkslategray;
 }
 
 .romlyrics {
     display: none;
-    color: lightgrey;
+    color: gray;
 }
 
 
@@ -131,7 +138,7 @@ body #wrap {
 
 #media {
     width: 100%;
-    height: 200px;
+    height: 248px;
 }
 
 .youtube_1 {
@@ -347,7 +354,7 @@ body {
 .resvid iframe {
     position: absolute;
     width: 100%;
-    height: 100%
+    height: 248px;
 }
 
 .resvid.alt {
