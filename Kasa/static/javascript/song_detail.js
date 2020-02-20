@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function(){
   1 === youtubevid.length && 0 === notsticker.length && (
     wrapper.className = "video-sticker",
     remover.className = "video-sticker-remover",
-    remover.addEventListener("click", function (a) {
-      a.parentNode.removeAttribute("class")
+    remover.addEventListener("click", function () {
+      this.parentNode.removeAttribute("class")
     }),
     iframe.parentNode.insertBefore(wrapper, iframe),
     wrapper.appendChild(iframe),
