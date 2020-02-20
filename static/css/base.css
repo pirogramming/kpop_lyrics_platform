@@ -1,5 +1,5 @@
 html {
-    font-family: "Aller Light";
+    font-family: "Nunito Sans","Noto Sans KR";
     height: 100%;
     margin: 0;
 }
@@ -14,7 +14,7 @@ body {
 body .wrap {
     position: relative;
     min-height: 78vh;
-    width: 70%;
+    width: 80%;
     display: block;
     /*text-align: center;*/
     margin: 20px auto 135px auto;
