@@ -33,7 +33,7 @@ def song_detail(request, song_pk):
         'soundcloud_url': soundcloud_url,
         'sns': sns,
         'all_lyrics': all_lyrics,
-        'members':members,
+        'members': members,
     }
     return render(request, 'Kasa/song_detail.html', context)
 
@@ -95,7 +95,23 @@ def enter_all_lyrics(request, song_id):
         }
         return render(request, 'Kasa/modify_and_create_each_lyrics.html', context)
     else:
-        return render(request, 'Kasa/enter_all_lyrics.html')
+        song = Songs.objects.get(id=song_id)
+        all_lyrics = song.song_lyrics.all()
+        all_kor = ''
+        all_eng = ''
+        all_rom = ''
+        if len(all_lyrics):
+            for lyrics in all_lyrics:
+                all_kor += lyrics.kor + '\n'
+                all_eng += lyrics.eng + '\n'
+                all_rom += lyrics.rom + '\n'
+
+        context = {
+            'all_kor': all_kor,
+            'all_eng': all_eng,
+            'all_rom': all_rom,
+        }
+        return render(request, 'Kasa/enter_all_lyrics.html', context)
 
 
 def modify_and_create_each_lyrics(request, song_id):

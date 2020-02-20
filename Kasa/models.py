@@ -81,7 +81,7 @@ class Explanations(models.Model):
     content = models.TextField(verbose_name='내용')
     image = models.ImageField(upload_to='explanation_image', blank=True, verbose_name='사진')
     likes = models.IntegerField(default=0, editable=False, verbose_name='좋아요')
-    lyrics = models.ForeignKey(Lyrics, on_delete=models.CASCADE, verbose_name='가사', related_name='lyrics_explanation')
+    lyrics = models.OneToOneField(Lyrics, on_delete=models.CASCADE, verbose_name='가사', related_name='lyrics_explanation')
 
     def __str__(self):
         return self.content

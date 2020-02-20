@@ -58,6 +58,7 @@
         </div>
 
         <div class="rightwrap">
+            <div class="explanation_box"></div>
             <div class="selection_part">
                 {% for member in members %}
                     <div class="target{{ forloop.counter0 }}">{{ member.sname }}</div>
@@ -109,7 +110,7 @@
                     </form>
                 </div>
             {% else %}
-                <a class="comment-login" href="{% url "accounts:login" %}">로그인</a>
+                <a class="comment-login" href="{% url "accounts:login" %}?next={{ request.path }}">로그인</a>
             {% endif %}
         </div>
         <div class="commentbox">
@@ -132,6 +133,24 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{% static "javascript/song_detail.js" %}"></script>
     <script language="JavaScript" type="text/javascript">
+
+        function active_explanation(btn) {
+            if (btn.getAttribute('value') === 'off') {
+                btn.setAttribute('value', 'on');
+
+                var have_explain = '{% for lyrics in all_lyrics %}{% for explain in lyrics.lyrics_explanation.all %}{{ lyrics.order }}.{% if explain %}{% endif %}{% endfor %}{% endfor %}';
+                var have_explain_list = have_explain.split('.');
+                console.log(have_explain_list);
+
+
+                $('.explanation_box').css('display','block');
+                $('.explanation_box').stop().animate({
+                    'height':'100px',
+                },500)
+
+            }
+        }
+
 
         function active_button(target) {
             if (target.getAttribute('value') === 'off') {
