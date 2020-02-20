@@ -3,12 +3,17 @@
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Bebas+Neue&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <div id="main_wrap" style="background-image: url({% static 'concert-1742309.jpg' %});">
+    <div id="main_wrap" style="background-image: url({% static 'image/concert3.jpg' %});">
         <div id="main_wrap_2">
-            <form action="{% url 'Kasa:search' %}" method="GET">
+            <div class="mainword_container">
+                <div class="mainword" id="mainword_main">KASA</div>
+                <div class="mainword" id="mainword_sub">Now enjoy Kpop music through lyrics</div>
+            </div>
+            <form action="{% url 'Kasa:search' %}" method="GET">;
 
                 {% csrf_token %}
                 <div class="main-searchbox" id="searchbox">
