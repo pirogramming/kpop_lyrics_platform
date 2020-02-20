@@ -25,8 +25,10 @@
     <div class="middlewrap">
 
         <div class="lyrics">
-            <div class="lyricstitle">Lyrics</div>
-
+            <div class="lyrictitlewrap">
+                <div class="lyricstitle">Lyrics</div>
+                <div class="lyric-a"><a class="editlyric" href="{% url 'Kasa:enter_all_lyrics' song.id %}">Edit+</a></div>
+            </div>
             <div class="buttonwrap">
                 <button type="button" id="Klyric" class="koreanlyric" value="on" onclick="Displaylyrics(this)">
                     Korean
@@ -36,8 +38,8 @@
                 </button>
                 <button type="button" id="Rlyric" class="Romlyric" value="off" onclick="Displaylyrics(this)">Rom
                 </button>
-                <!--<button type="button" class="fan" value="off" onclick="">Fanchant</button>-->
                 <button type="button" class="member" value="off" onclick="active_button(this)">Part</button>
+
             </div>
             {% for lyrics in all_lyrics %}
                 <div class="korlyrics" id="Klyric{{ forloop.counter }}"

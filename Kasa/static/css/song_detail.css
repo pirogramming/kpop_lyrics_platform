@@ -55,7 +55,7 @@
     margin-bottom: 30px;
 }
 
-.koreanlyric, .Englishlyric, .Romlyric, .member, .fan {
+.koreanlyric, .Englishlyric, .Romlyric, .member{
     background: none;
     border: none;
     border-radius: 10px;
@@ -89,6 +89,21 @@
     color: gray;
 }
 
+.lyric-a {
+    /*border: 1px solid black;*/
+    margin-right:270px;
+    padding-top: 25px;
+}
+
+.editlyric {
+    text-decoration: none;
+    /*border:1px solid black;*/
+    background:none;
+    color: lightgray;
+    font-size15px;
+    font-weight: bold;
+    /*!*border:none;*/
+}
 
 .middlewrap {
     display: flex;
@@ -104,6 +119,11 @@
 .rightwrap {
     width: 39%;
 }
+.lyrictitlewrap{
+    display:flex;
+    width:50%%;
+    justify-content: space-between;
+}
 .musictitle, .stagetitle, .mediatitle, .snstitle, .lyricstitle {
     width: 100%;
     margin: 30px 0 20px 0;
@@ -114,7 +134,9 @@
     padding-bottom: 4px;
     border-bottom: 1px solid lightgrey;
 }
-
+.lyricstitle{
+    width:50%;
+}
 .snstitle {
     border: 0px;
     margin-bottom: 0px;
@@ -128,6 +150,7 @@
 
 .info_a {
     text-decoration: none;
+    color:black;
 }
 
 #media {
