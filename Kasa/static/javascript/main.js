@@ -1,7 +1,8 @@
 $('.main-searchtxt').focus(
     function () {
         $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.7'});
-        $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white'})
+        $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white'});
+        $('.mainword').css({'color': 'white'});
     });
 
 $('.main-searchtxt').blur(
@@ -10,10 +11,10 @@ $('.main-searchtxt').blur(
         $('.main-searchbox').css({'box-shadow': '0px 0px 0px 0px'});
         $(this).css("background-color", "white");
         $(this).css({'box-shadow': 'none'});
-        setTimeout(function() {
+        $('.mainword').css({'color': 'black'});
+        setTimeout(function () {
             $('#livesearch_item_wrapper').css("display", "none");
-        },300);
-
+        }, 300);
     });
 
 
