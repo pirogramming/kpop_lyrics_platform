@@ -1,3 +1,7 @@
+nav .navlist .search-box {
+    display: none;
+}
+
 #wrap {
     width: 100%;
     display: flex;
@@ -15,7 +19,7 @@
     width: 100%;
     height: 92vh;
     text-align: center;
-    background-size:cover;
+    background-size: cover;
 }
 
 #main_wrap_2 {
@@ -28,20 +32,35 @@
 
 }
 
-.mainword {
-    margin-top: 50px;
-    margin-bottom: 50px;
+.container_wrapper {
     width: 70%;
-    text-align: center;
-    font-size: 70px;
+}
+
+.mainword_container {
+    width: 100%;
+    margin-top: 10vh;
+    letter-spacing: -1px;
+}
+
+.mainword {
+    text-align: left;
+    font-size: 80px;
+    font-family: 'Anton', sans-serif;
+    color: black;
+}
+
+
+#mainword_sub {
+    width: 1000px;
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1.5px;
 }
 
 .main-searchbox {
-    margin-top: 35vh;
     vertical-align: center;
-    /*margin: 10vh 0 49vh 10%;*/
-    text-align: center;
-    width: 1200px;
+    width: 100%;
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -68,15 +87,14 @@
 #livesearch_item_wrapper {
     display: none;
     margin-top: 15px;
-    width: 1200px;
+    width: 100%;
 }
 
 #livesearch {
     padding: 10px 0px;
     width: 100%;
     border-radius: 20px;
-    background-color: white;
-    box-shadow: 0px 0px 5px 2px white;
+    background-color:white;
     transition-duration: 1s;
 }
 
@@ -85,11 +103,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*width:92%;*/
 }
 
 .livesearch_item {
-    /*border: 1px solid black;*/
     display: flex;
     justify-content: flex-start;
     overflow: hidden;
@@ -123,7 +139,7 @@
     align-items: flex-start;
     padding-bottom: 5px;
     color: #00b8ff;
-    font-size:17px;
+    font-size: 17px;
     font-weight: bold;
 }
 
@@ -140,13 +156,12 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    /*justify-content: space-between;*/
 }
 
 .item_name {
     font-weight: bold;
     text-overflow: ellipsis;
-    max-width:55%;
+    max-width: 55%;
     white-space: nowrap;
     overflow: hidden
 }
@@ -434,7 +449,9 @@ input[type=text]:focus {
 .next {
     left: 73px;
 }
-
+#target1:hover{
+    background-color:yellow;
+}
 .prev:hover, .next:hover {
     color: grey;
 }

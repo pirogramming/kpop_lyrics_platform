@@ -3,25 +3,31 @@
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Bebas+Neue&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <div id="main_wrap" style="background-image: url({% static 'concert-1742309.jpg' %});">
+    <div id="main_wrap" style="background-image: url({% static 'image/main_background_image.jpg' %});">
         <div id="main_wrap_2">
-            <form action="{% url 'Kasa:search' %}" method="GET">
-
-                {% csrf_token %}
-                <div class="main-searchbox" id="searchbox">
-                    <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
-                           placeholder="Which contents do you want to search?" autocomplete="off">
-                    <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
-                           class="main-searchbtn">
+            <div class="container_wrapper">
+                <div class="mainword_container">
+                    <div class="mainword" id="mainword_main">KASA</div>
+                    <div class="mainword" id="mainword_sub">Now enjoy Kpop music through lyrics</div>
                 </div>
-            </form>
+                <form action="{% url 'Kasa:search' %}" method="GET">
+                    {% csrf_token %}
+                    <div class="main-searchbox" id="searchbox">
+                        <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
+                               placeholder="Which contents do you want to search?" autocomplete="off">
+                        <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
+                               class="main-searchbtn">
+                    </div>
+                </form>
 
-            <div id="livesearch_item_wrapper">
-                <div id="livesearch">
-                    <div id="livesearch_content">
+                <div id="livesearch_item_wrapper">
+                    <div id="livesearch">
+                        <div id="livesearch_content">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,25 +89,6 @@
             </div>
         </div>
     </div>
-
-    {#    <div class="slideshow-container">#}
-    {#        {% for singer in group.group_singer.all %}#}
-    {#            <div class="mySlides fade">#}
-    {#                <div class="numbertext">{{ forloop.counter }}</div>#}
-    {#                <img src="{{ singer.image.url }}" style="width:100%">#}
-    {#                <div class="text">Caption One</div>#}
-    {#            </div>#}
-    {#        {% endfor %}#}
-    {#    </div>#}
-    {#    <br>#}
-    {#    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>#}
-    {#    <a class="next" onclick="plusSlides(1)">&#10095;</a>#}
-    {#    <div style="text-align:center">#}
-    {#        {% for count in group.group_singer.all %}#}
-    {#            <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>#}
-    {#        {% endfor %}#}
-    {#    </div>#}
-
 
 {% endblock %}
 {% block script %}
@@ -184,5 +171,4 @@
         })
     </script>
 {% endblock %}
-
 

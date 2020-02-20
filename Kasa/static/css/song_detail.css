@@ -40,8 +40,8 @@ body #wrap {
     font-size: 40px;
     font-weight: bold;
     padding: 0;
-    line-height: 50px;
-    margin-bottom: 50px;
+    line-height: 40px;
+    margin-bottom: 30px;
 }
 
 .albumname {
@@ -109,7 +109,6 @@ body #wrap {
 .rightwrap {
     width: 39%;
 }
-
 .musictitle, .stagetitle, .mediatitle, .snstitle, .lyricstitle {
     width: 100%;
     margin: 30px 0 20px 0;

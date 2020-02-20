@@ -41,3 +41,5 @@ document.addEventListener("DOMContentLoaded", function(){
   ),
   sticker()
 });
+
+
