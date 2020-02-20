@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/change_pw.css" %}"/>
+{% endblock %}
+{% block content %}
+    <div class="changepw_wrap">
+        <div class="error_message">
+            {{ error }}
+        </div>
+
+        <div class="chagepwtitle">
+            Change password
+        </div>
+        <form action="" method="POST" class="form">
+            {% csrf_token %}
+            <div class="wrap_2">
+                <div class="username_form_text">
+                    <div class="change_pw_username">Origin Password</div>
+                    <input class="login_input" name="origin_password" type="password"
+                           placeholder="Enter your Origin Password">
+                </div>
+                <div class="password_form_text">
+                    <div class="change_pw_password">New Password</div>
+                    <input class="login_input" name="password1" type="password" placeholder="Enter your New Password">
+                </div>
+                <div class="password_form_text">
+                    <div class="change_pw_password">Confirm Password</div>
+                    <input class="login_input" name="password2" type="password" placeholder="Please Confirm">
+                </div>
+                <input type="submit" class="login_btn" value="Change password">
+            </div>
+        </form>
+    </div>
+{% endblock %}

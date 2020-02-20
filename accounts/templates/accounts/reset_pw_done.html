@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/reset_pw_done.css" %}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="rpw_done_wrap">
+        <div class="rpw_done_title">Sent you an email</div>
+        <div class="rpw_done_explanation">We've sent you an Email.</div>
+        <div class="rpw_done_explanation">Please check your mailbox.</div>
+        <div class ="line"></div>
+        <div class="logo"><a id="logo" href="{% url 'Kasa:main' %}"> <img
+                src="{% static 'image/logo.png' %}"></a></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/enter_all_lyrics.css" %}"/>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="error">{{ error }}</div>
+
+        <div class="inputlyricswrap">
+            <div id="all_kor">
+                <h2>Korean lyrics</h2>
+                <textarea name="all_kor" class="all_kor">{{ all_kor }}</textarea>
+            </div>
+            <div id="all_eng" style="display:none;">
+                <h2>English lyrics</h2>
+                <textarea name="all_eng" class="all_eng" cols="40" rows="30">{{ all_eng }}</textarea>
+            </div>
+            <div id="all_rom" style="display:none;">
+                <h2>Romanized lyrics</h2>
+                <textarea name="all_rom" class="all_rom" cols="40" rows="30">{{ all_rom }}</textarea>
+            </div>
+        </div>
+        <div class="button_wrap">
+            <div class="buttons_add_lyrics">
+                <div>
+                    <button type="button" id="add_eng">Add ENG</button>
+                    <button type="button" id="add_rom">Add ROM</button>
+                </div>
+                <div class="submit_lyrics">
+                    <input type="submit" class="submitlyric" value="Next">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{% static "javascript/enter_all_lyrics.js" %}"></script>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,239 @@
+.logincenter_wrap {
+    display: flex;
+    justify-content: center;
+    padding-top:70px;
+}
+
+.loginwrap {
+    text-align: center;
+    /*margin: 0 auto;*/
+    border: 0.1rem solid #e6e8eb;
+    width: 450px;
+    min-height: 600px;
+    min-width: 400px;
+    box-shadow: 0 1.2rem 2.4rem -1rem rgba(0, 0, 0, 0.1);
+}
+
+.unmatch {
+    text-align: center;
+    display: block;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    font-size: 20px;
+}
+
+.sign_in_talk {
+    padding-top: 30px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.sign_in_talk_2 {
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.memeberlogin {
+    margin-top: 15px;
+}
+
+
+.id_wrap {
+    text-align: left;
+    padding-left: 30px;
+    margin-bottom: 5px;
+}
+
+.id_notation, .password_notation {
+    padding-bottom: 5px;
+}
+
+.id_text, .password_text {
+    border: 0.1rem solid #d3d3d3;
+    width: 375px;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.password_wrap {
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+}
+
+.password_and_find {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 0 solid #00fffe;
+    border-radius: 5px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    color: #000000;
+    padding: 10px;
+    width: 200px;
+    transition: 0.5s;
+    font-size: 20px;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+}
+
+.submit:hover {
+    border: 0 solid #00b8ff;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    color: #000000;
+        background: linear-gradient(to right, #06c9ff, #009cc9);
+}
+
+
+.findp {
+    color: #00a5e2;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.empty_line {
+    margin: auto auto 10px auto;
+    height: 10px;
+    width: 350px;
+    border-bottom: 0.1rem solid #e6e8eb;
+}
+
+.findpassword {
+    margin: 0 40px 0 0;
+}
+
+.sociallogin > a {
+    text-decoration: none;
+}
+
+.google {
+    width: 375px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    background-color: #ff5c4f;
+    border: 2px solid #ff5c4f;
+    font-weight: bold;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    outline: none;
+    color: black;
+    border-radius: 5px;
+    transition: 0.25s;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.google:hover {
+    border: 2px solid #cd4940;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    color: #000000;
+    background-color: #cd4940;
+}
+
+.kakao {
+    width: 375px;
+    height: 35px;
+    line-height: 35px;
+    background: #ffe812;
+    border: 2px solid #ffe812;
+    font-weight: bold;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    padding-left: 10px;
+    outline: none;
+    color: black;
+    border-radius: 5px;
+    transition: 0.25s;
+    cursor: pointer;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.kakao:hover {
+    border: 2px solid #dbab0b;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    color: #000000;
+    background: #dbab0b;
+}
+
+.google, .kakao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google > img, .kakao > img {
+    width: 20px;
+    height: 20px;
+}
+
+.signupbutton {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.signb {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    padding-left: 10px;
+    color: #00a5e2;
+    font-size: 15px;
+}
+
+.signup_welcome {
+    padding-top: 30px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.signup_explanation {
+    text-align: left;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.signup_btns_wrap {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.signup_buttons > a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 20px;
+}
+
+.signup_buttons {
+    margin: 10px auto;
+    border-radius: 5px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    padding: 10px;
+    width: 200px;
+    transition: 0.5s;
+    font-size: 20px;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+}
+
+.signup_buttons:hover {
+    background: linear-gradient(to right, #06c9ff, #009cc9);
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    color: #000000;
+}

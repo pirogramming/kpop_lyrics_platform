@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/reset_pw_complete.css" %}"/>
+{% endblock %}
+{% block content %}
+    <dev class="flexwrap">
+        <div class="rpw_complete_wrap">
+            <div class="rpw_complete_title">Reset Successfully</div>
+            <div class="rpw_complete_explanation">
+                Please sign in again
+            </div>
+            <input type="submit" class="rpw_complete_submit" value="Sign in">
+            <div class="line"></div>
+            <div class="logo"><a id="logo" href="{% url 'Kasa:main' %}"> <img
+                    src="{% static 'image/logo.png' %}"></a></div>
+        </div>
+    </dev>
+{% endblock %}

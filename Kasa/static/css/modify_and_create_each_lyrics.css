@@ -1,0 +1,214 @@
+.modify_snames {
+    text-align: center;
+}
+
+.modify_sname, .modify_sname_by {
+    display: inline;
+}
+
+.modify_sname_by {
+    margin: 0 10px;
+}
+
+.modify_buttons_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.modify_buttons {
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modify_index {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: solid 1px black;
+}
+
+.division_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modify_section {
+    display: flex;
+    justify-content: center;
+    height: 25px;
+    line-height: 25px;
+}
+
+.modify_section input {
+    border: dotted 1px #777777;
+    height: 20px;
+    border-radius: 10px;
+    padding-left: 5px;
+}
+
+.inner_division {
+    align-items: center;
+}
+
+.division {
+    margin: 5px 0;
+}
+
+.kor_lyrics_part {
+    width: 500px;
+}
+
+#load_check {
+    display: none;
+}
+
+#load_check_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#load_check_part, #load_check_eng, #load_check_kor, #load_check_rom {
+    border-right: 1px solid black;
+    padding: 0 30px;
+    min-width: 150px;
+}
+
+#load_check_part {
+    border-left: 1px solid black;
+}
+
+#load_check_line {
+    border-right: 1px solid black;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.lyric_lang {
+    margin-right: 5px;
+    width: 45px;
+}
+
+.check {
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    border: none;
+    border-radius: 5px;
+}
+
+.submit {
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    border: none;
+    border-radius: 5px;
+}
+
+.division_outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.container {
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-right: 5px;
+  min-width: 50px;
+}
+
+.container:first-child {
+    text-decoration: underline;
+    margin-right : 80px;
+}
+
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #00b8ff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 3px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.newly_created_div, .newly_created_div_part, .newly_created_div_line, .newly_created_div_part {
+    height:21.6px;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.newly_created_div_line {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.check_title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

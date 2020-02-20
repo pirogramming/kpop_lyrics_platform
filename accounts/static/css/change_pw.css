@@ -1,0 +1,66 @@
+body .wrap {
+    display:flex;
+    justify-content: center;
+}
+
+.changepw_wrap {
+    text-align: center;
+    border: 0.1rem solid #e6e8eb;
+    box-shadow: 0 1.2rem 2.4rem -1rem rgba(0, 0, 0, 0.1);
+
+    background: white;
+    min-width: 450px;
+    height:500px;
+}
+
+.chagepwtitle {
+    padding-top: 30px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.wrap_2 {
+    margin-top: 30px;
+}
+
+.username_form_text {
+    text-align: left;
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+
+.password_form_text {
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login_btn {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border: 0 solid #00fffe;
+    border-radius: 5px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    padding: 10px;
+    width: 200px;
+    transition: 0.5s;
+    font-size: 20px;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+}
+
+.login_btn:hover {
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    color: #000000;
+    background: linear-gradient(to right, #06c9ff, #009cc9);}
+
+.change_pw_username, .change_pw_password {
+    padding-bottom: 5px;
+}
+
+.login_input {
+    border: 0.1rem solid #d3d3d3;
+    width: 375px;
+    height: 35px;
+    padding-left: 10px;
+}

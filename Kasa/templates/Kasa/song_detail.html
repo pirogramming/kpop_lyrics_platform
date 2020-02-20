@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/song_detail.css" %}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="songinfowrap">
+        <div class="album-art">
+            <a href="{% url 'Kasa:album_detail' song.album.pk %}">
+                <img class="album-jacket" src="{{ song.album.album_art.url }}"/>
+            </a>
+        </div>
+        <div class="infowrap">
+            <div class="songtitle">{{ song.sname }}</div>
+            <div class="song-artist"><a class="song-artist info_a"
+                                        href="{% url 'Kasa:group_detail' album.group.pk %}">{{ album.group }}</a></div>
+            <div class="albumname"><a class="albumname info_a"
+                                      href="{% url 'Kasa:album_detail' album.pk %}">{{ album.aname }}</a></div>
+        </div>
+    </div>
+
+
+    <div class="middlewrap">
+
+        <div class="lyrics">
+            <div class="lyrictitlewrap">
+                <div class="lyricstitle">Lyrics</div>
+                <div class="lyric-a"><a class="editlyric" href="{% url 'Kasa:enter_all_lyrics' song.id %}">Edit+</a>
+                </div>
+            </div>
+            <div class="buttonwrap">
+                <button type="button" id="Klyric" class="koreanlyric" value="on" onclick="Displaylyrics(this)">
+                    Korean
+                </button>
+                <button type="button" id="Elyric" class="Englishlyric" value="off"
+                        onclick="Displaylyrics(this)">English
+                </button>
+                <button type="button" id="Rlyric" class="Romlyric" value="off" onclick="Displaylyrics(this)">Rom
+                </button>
+                <button type="button" class="member" value="off" onclick="active_button(this)">Part</button>
+
+            </div>
+            {% for lyrics in all_lyrics %}
+                <div class="korlyrics" id="Klyric{{ forloop.counter }}"
+                     value="{% for each in lyrics.singer.all %}{{ each }}.{% endfor %}">
+                    {{ lyrics.kor }}
+                </div>
+                <div class="englyriscs" id="Elyric{{ forloop.counter }}"
+                     value="{% for each in lyrics.singer.all %}{{ each }}.{% endfor %}">
+                    {{ lyrics.eng }}
+                </div>
+                <div class="romlyrics" id="Rlyric{{ forloop.counter }}"
+                     value="{% for each in lyrics.singer.all %}{{ each }}.{% endfor %}">
+                    {{ lyrics.rom }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="rightwrap">
+            <div class="selection_part">
+                {% for member in members %}
+                    <div class="target{{ forloop.counter0 }}">{{ member.sname }}</div>
+                {% endfor %}
+            </div>
+            {% if youtube_url %}
+                <div class="mediatitle">Official movie</div>
+                <iframe width="100%" height="200px" src="{{ youtube_url }}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            {% endif %}
+            {% if dance_url %}
+                <div class="stagetitle">Stage movie</div>
+                <div id="media">
+                    <object class="youtube_1" type="text/html" data="{{ dance_url }}" allowFullScreen></object>
+                </div>
+            {% endif %}
+            {% if soundcloud_url %}
+                <div class="musictitle">Music</div>
+                <div id="media">
+                    <object class="youtube_1" type="text/html" data="{{ soundcloud_url }}" allowFullScreen></object>
+                </div>
+            {% endif %}
+
+            <div class="snstitle">Twitter</div>
+            <div class="twitter_container">
+                <div class="twitterwrap">
+                    <div class="twitter_url">
+                        <a class="twitter-timeline" href="{{ sns }}">Tweets by BTS_twt</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottomwrap">
+        <div class="commenttitle">Comments</div>
+        <div>
+            {% if user.is_authenticated %}
+                <div class="comment_wrapper">
+                    <form action="{% url "Kasa:write_new_comment" %}" method="POST" class="">
+                        <div class="submit-comment">
+                            {% csrf_token %}
+                            <input class="comment_content" name="comment_content"
+                                   placeholder="write comments" autocomplete="off">
+                            <input type="submit" class="submit" value="Write">
+                            <input type="hidden" class="song_id" name="song_id" value="{{ song.id }}">
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <a class="comment-login" href="{% url "accounts:login" %}?next={{ request.path }}">로그인</a>
+            {% endif %}
+        </div>
+        <div class="commentbox">
+            {% for comment in comments %}
+                <div class="each_comment">
+                    <div class="userinfo">
+                        <div class="username">{{ comment.user.username }}</div>
+                        <div class="comment-time">{{ comment.created_at }}</div>
+                    </div>
+                    <div class="comment_contents">{{ comment.content }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{% static "javascript/song_detail.js" %}"></script>
+    <script language="JavaScript" type="text/javascript">
+        /*
+                function active_explanation(btn) {
+                    if (btn.getAttribute('value') === 'off') {
+                        btn.setAttribute('value', 'on');
+
+                        var have_explain = '{% for lyrics in all_lyrics %}{% for explain in lyrics.lyrics_explanation.all %}{{ lyrics.order }}.{% if explain %}{% endif %}{% endfor %}{% endfor %}';
+                var have_explain_list = have_explain.split('.');
+                console.log(have_explain_list);
+
+
+                $('.explanation_box').css('display','block');
+                $('.explanation_box').stop().animate({
+                    'height':'100px',
+                },500)
+
+            }
+        }
+        */
+
+
+        function active_button(target) {
+            if (target.getAttribute('value') === 'off') {
+                var singer_name = {}
+                var length = '{{ members|length }}'
+                var member_list = '{% for member in members %}{{ member.sname }},{% endfor %}'.split(',');
+                for (member in member_list) {
+                    singer_name[member_list[member]] = member;
+                }
+
+                target.setAttribute('value', 'on')
+                $('.' + target.className).css({"background": "#00b8ff", "color": "white"})
+                $('.selection_part').css('display', 'block');
+                $('.korlyrics, .englyriscs, .romlyrics').mouseover(this,
+                    function () {
+                        var members = this.getAttribute('value')
+                        var parts = members.split('.');
+                        for (var part of parts) {
+                            $('.target' + singer_name[part]).css({
+                                "background": "#00b8ff",
+                                "color": "white",
+                            });
+
+                        }
+                    }
+                )
+                $('.korlyrics, .englyriscs, .romlyrics').mouseout(this,
+                    function () {
+                        $('.selection_part > div').css({"background": "white"});
+                        $('.selection_part > div').css({"color": "black"});
+
+
+                    }
+                )
+
+            } else if (target.getAttribute('value') === 'on') {
+                target.setAttribute('value', 'off')
+                $('.' + target.className
+                ).css({"background": "#00fffe", "color": "black"})
+                $('.selection_part').css('display', 'none');
+                $('.korlyrics, .englyriscs, .romlyrics').unbind('mouseover')
+
+            }
+        }
+
+
+        function Displaylyrics(obj) {
+            var length = '{{ all_lyrics|length }}';
+            var id_list = ['Klyric', 'Elyric', 'Rlyric'];
+
+            var lang = obj.id;
+            var cname = obj.className;
+
+            var buffer_count = $('#' + lang + '1').prev().css('padding-left');
+            if (!buffer_count)
+                buffer_count = '0px';
+            var buffer = Number(buffer_count.replace('px', ''));
+            var inner = '0px';
+
+            var inner = String(buffer + 20) + 'px';
+            if (($('#' + id_list[0]).attr('value') === 'off' && $('#' + lang).prev().attr('value') === 'off') || (!$('#' + lang).prev().attr('value'))) {
+                inner = '0px';
+            }
+
+            var refill_buffer = []
+            var target = "#" + lang + '1';
+            var next_classname = $(target).next().attr('class');
+            while (next_classname !== 'korlyrics') {
+                buffer_count = $(target).next().css('padding-left');
+                refill_buffer.push(Number(buffer_count.replace('px', '')));
+                target = "#" + $(target).next().attr('id');
+                next_classname = $(target).next().attr('class');
+            }
+            for (var i = 1; i <= length; i++) {
+                var check = $("#" + lang + i).css("display");
+
+                if (check === 'none') {
+                    $("#" + lang + i).css({"padding-left": inner});
+                    // lyrics animate
+                    $("#" + lang + i).css({'display': 'block'});
+                    $("#" + lang + i).stop().animate({
+                        'line-height': '1.5em', 'opacity': '1'
+                    }, {
+                        queue: false,
+                        duration: 500,
+                    });
+
+                    var round = 0;
+                    var index = id_list.indexOf(lang);
+                    for (var order = index + 1; order < id_list.length; order++) {
+                        var value = refill_buffer[round];
+                        if (value <= 0 && $('#' + id_list[order]).attr('value') === 'off') {
+                            round += 1;
+                            continue;
+                        }
+                        var outer = String(value + 20) + 'px';
+
+                        $('#' + id_list[order] + i).stop().animate({
+                            'padding-left': outer,
+                        }, {
+                            queue: false,
+                            duration: 500,
+                        });
+                        round += 1;
+                    }
+                } else {
+                    $("#" + lang + i).stop().animate({
+                        'line-height': '0',
+                        'opacity': '0',
+                        'padding-left': '0',
+                    }, {
+                        queue: false,
+                        duration: 500,
+                    });
+
+                    var round = 0;
+                    var index = id_list.indexOf(lang);
+                    for (var order = index + 1; order < id_list.length; order++) {
+                        var value = refill_buffer[round];
+                        if (value <= 0) {
+                            round += 1;
+                            continue;
+                        }
+                        $('#' + id_list[order] + i).stop().animate({
+                            'padding-left': String(value - 20) + 'px',
+                        }, {
+                            queue: false,
+                            duration: 500,
+                        });
+                        round += 1;
+                    }
+                    $("#" + lang + i).css({'display': 'none'});
+                }
+            }
+            if ($('.' + cname).attr('value') === 'off') {
+                $('.' + cname).attr('value', 'on');
+                $('.' + cname).css({"background": "#00b8ff", "color": "white"});
+            } else if ($('.' + cname).attr('value') === 'on') {
+                $('.' + cname).attr('value', 'off');
+                $('.' + cname).css({"background": "#00fffe", "color": "black"});
+            }
+        }
+    </script>
+{% endblock %}

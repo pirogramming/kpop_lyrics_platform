@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/reset_pw.css" %}"/>
+{% endblock %}
+{% block content %}
+    <div class="resetpw_wrap">
+        <div class="resetpw_title">
+            Reset Password
+        </div>
+        <form action="" method="POST" , class="form">
+            {% csrf_token %}
+            <div class="resetpw_explanation">
+                Seems like you forgot your password for Kasa! But don't worry. You can reset your password by entering
+                your email address. We will send you an email with temporary password.
+            </div>
+
+            {% for label in form %}
+                {% if label.errors %}
+                    {% for error in label.errors %}
+                        <div class="rpw_error">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
+            {% for field in form %}
+                <div class="field_wrap">
+                    <div class="field_label">{{ field.label }}</div>
+                    <div class="field_specific">{{ field }}</div>
+                </div>
+            {% endfor %}
+            <input type="submit" class="resetpw_submit" value="Send Email">
+        </form>
+
+
+    </div>
+{% endblock %}
+

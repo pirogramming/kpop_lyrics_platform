@@ -1,0 +1,137 @@
+.content_wrap {
+    overflow: hidden;
+    margin: 10px 20px 0 20px;
+    padding: 5px;
+    font-size: 12px;
+    height: 180%;
+}
+
+.btn_more {
+    display: block;
+    padding: 10px 0 0 0;
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+}
+
+.SynopsisText {
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    color: #777;
+    line-height: 1.5em;
+}
+
+.wrap1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.singer_image_wrapper {
+    width: 230px;
+    height: 300px;
+    margin-top: 40px;
+}
+
+.singer_image {
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 0px 0px 5px 2px grey;
+    border-radius: 10px;
+}
+
+.singer_info_wrapper {
+    margin-left: 100px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.singer_info {
+    /*border:1px solid black;*/
+    margin-top: 10px;
+    min-width: 250px;
+}
+
+.singer_info > div {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.singer_name {
+    font-size: 40px;
+    font-weight: bold;
+    color: #00b8ff;
+}
+
+
+.singer_data {
+    font-size: 40px;
+    text-align: left;
+    border-bottom: 1px solid lightgrey;
+    height: 60px;
+    font-weight: bold;
+    line-height: 60px;
+    padding-bottom: 5px;
+    color: #00b8ff;
+    margin-bottom: 40px;
+}
+
+.singer_group_data {
+    font-size: 40px;
+    text-align: left;
+    border-bottom: 1px solid lightgrey;
+    height: 60px;
+    font-weight: bold;
+    line-height: 60px;
+    padding-bottom: 5px;
+    color: #00b8ff;
+    margin-bottom: 40px;
+    margin-top: 30px
+}
+
+.singer_group_wrap {
+    padding: 5px 10px;
+    text-align: center;
+    -ms-overflow-style: none;
+    height: 260px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    overflow-y: hidden;
+    margin-bottom: 200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.singer_group_detail {
+    text-decoration: none;
+    color: black;
+    margin: 0px 20px;
+}
+
+.singer_group_image {
+    width: 100%;
+}
+
+.singer_group_img {
+    box-shadow: 0px 0px 5px 2px grey;
+    border: 1px solid grey;
+    width:200px;
+    height:200px;
+    object-fit: contain;
+}
+
+.singer_group_name {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    color: grey;
+}

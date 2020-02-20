@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/change_info.css" %}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="flexwrap">
+    <div class="change_info_wrap">
+        <div class="change_info_title">
+            Change Information
+        </div>
+        <form action="" method="POST" class="form">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="field_wrap">
+                    <div class="field_label">{{ field.label }}</div>
+                    <div class="field_specific">{{ field }}</div>
+                </div>
+            {% endfor %}
+            <input type="submit" class="change_info_submit" value="Change">
+        </form>
+        {% for label in form %}
+            {% if label.errors %}
+                {% for error in label.errors %}
+                    <div class="change_info_error">Error : {{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

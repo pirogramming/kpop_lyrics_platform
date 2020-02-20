@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Jua|Poor+Story&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <title>Kasa, Best way to find K-pop lyrics</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/navbar.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/footer.css" %}"/>
+    <link rel="icon" href="{% static 'image/favicon.ico' %}">
+    {% block style %}
+    {% endblock %}
+
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="wrap" id="wrap">
+    {% block content %}
+    {% endblock %}
+</div>
+
+{% include 'footer.html' %}
+
+{% block script %}
+{% endblock %}
+
+</body>
+</html>
