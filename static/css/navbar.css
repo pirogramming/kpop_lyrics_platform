@@ -5,6 +5,7 @@ nav {
 }
 
 nav .navlist {
+    height:60px;
     display: flex;
     flex-direction: row;
     margin: 0;
@@ -15,8 +16,10 @@ nav .navlist {
 
 nav .navlist .title {
     font-size: 3em;
-    padding: 0px 0px 0px 50px;
+    padding: 10px 0px 0px 50px;
     margin-right: auto;
+    display: flex;
+    align-items: center;
 
 }
 

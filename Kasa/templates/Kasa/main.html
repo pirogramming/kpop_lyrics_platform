@@ -9,24 +9,25 @@
 {% block content %}
     <div id="main_wrap" style="background-image: url({% static 'image/main_background_image.jpg' %});">
         <div id="main_wrap_2">
-            <div class="mainword_container">
-                <div class="mainword" id="mainword_main">KASA</div>
-                <div class="mainword" id="mainword_sub">Now enjoy Kpop music through lyrics</div>
-            </div>
-            <form action="{% url 'Kasa:search' %}" method="GET">;
-
-                {% csrf_token %}
-                <div class="main-searchbox" id="searchbox">
-                    <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
-                           placeholder="Which contents do you want to search?" autocomplete="off">
-                    <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
-                           class="main-searchbtn">
+            <div class="container_wrapper">
+                <div class="mainword_container">
+                    <div class="mainword" id="mainword_main">KASA</div>
+                    <div class="mainword" id="mainword_sub">Now enjoy Kpop music through lyrics</div>
                 </div>
-            </form>
+                <form action="{% url 'Kasa:search' %}" method="GET">
+                    {% csrf_token %}
+                    <div class="main-searchbox" id="searchbox">
+                        <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
+                               placeholder="Which contents do you want to search?" autocomplete="off">
+                        <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
+                               class="main-searchbtn">
+                    </div>
+                </form>
 
-            <div id="livesearch_item_wrapper">
-                <div id="livesearch">
-                    <div id="livesearch_content">
+                <div id="livesearch_item_wrapper">
+                    <div id="livesearch">
+                        <div id="livesearch_content">
+                        </div>
                     </div>
                 </div>
             </div>
