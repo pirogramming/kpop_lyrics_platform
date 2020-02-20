@@ -2,6 +2,7 @@ html {
     font-family: "Aller Light";
     height: 100%;
     margin: 0;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 body {
@@ -16,9 +17,7 @@ body .wrap {
     min-height: 78vh;
     width: 70%;
     display: block;
-    /*text-align: center;*/
     margin: 20px auto 135px auto;
-    /*background-color: none;*/
 }
 
 input[type=text]:focus {
