@@ -13,7 +13,7 @@
                 {% csrf_token %}
                 <div class="search-box">
                     <input type="text" id="search" class="search-txt" name="kwd" placeholder="Search" autocomplete="off">
-                    <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit" name="submit"
+                    <input type="image" src="   {% static 'image/magnifying_glass.png' %}" alt="submit" name="submit"
                            value="submit"
                            class="search-btn">
                 </div>
@@ -21,9 +21,9 @@
         </div>
         {% if user.is_authenticated %}
             <div class="signin"><a href="{% url 'accounts:login' %}">Edit</a></div>
-            <div class="signup"><a href="{% url 'accounts:logout' %}">Logout</a></div>
+            <div class="signup"><a href="{% url 'accounts:logout' %}?next={{ request.path }}">Logout</a></div>
         {% else %}
-            <div class="signin"><a href="{% url 'accounts:login' %}">Sign in</a></div>
+            <div class="signin"><a href="{% url 'accounts:login' %}?next={{ request.path }}">Sign in</a></div>
             <div class="signup"><a href="{% url 'accounts:signup' %}">Sign up</a></div>
         {% endif %}
     </div>

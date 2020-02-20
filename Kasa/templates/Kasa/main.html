@@ -3,7 +3,7 @@
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Anton|Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Bebas+Neue|Nanum+Gothic|Squada+One&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
                     {% csrf_token %}
                     <div class="main-searchbox" id="searchbox">
                         <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
-                               placeholder="Which contents do you want to search?" autocomplete="off">
+                               placeholder="Which contents are you looking for?" autocomplete="off">
                         <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
                                class="main-searchbtn">
                     </div>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="hitcountwrap">
-        <div class="viewtitle">Top 5 view</div>
+        <div class="viewtitle">TOP 5 VIEWS</div>
         <div class="top5hit">
             {% for song in five_songs %}
                 <a class="hita" href="{% url 'Kasa:song_detail' song.pk %}">
@@ -55,15 +55,15 @@
             {% endfor %}
         </div>
     </div>
-    <div class="randomtitle">K-POP Group</div>
+    <div class="randomtitle">TODAY'S IDOL</div>
     <div class="randomwrap">
+                <div class="buffer"></div>
         <div class="random_group_img_wrap">
             <a href="{% url 'Kasa:group_detail' group.pk %}">
                 <img class="random_group_img" src="{{ group.group_image.url }}"/>
             </a>
         </div>
 
-        <div class="buffer"></div>
         <div class="member_wrap">
             <div class="slideshow-container">
                 {% for singer in group.group_singer.all %}
@@ -88,6 +88,7 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="buffer_right"></div>
     </div>
 
 {% endblock %}

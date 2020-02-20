@@ -1,14 +1,15 @@
 $('.main-searchtxt').focus(
     function () {
-        $('#main_wrap_2').css({'background-color': 'black', 'opacity': '0.7'});
+        $('#main_wrap_2').css({'background': 'rgba(0,0,0, 0.8)'});
         $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white'});
+        $('#livesearch').css({'box-shadow': '0px 0px 7px 2px white'});
         $('.mainword').css({'color': 'white'});
     });
-
 $('.main-searchtxt').blur(
     function () {
-        $('#main_wrap_2').css({'background-color': 'transparent', 'opacity': '1'});
+        $('#main_wrap_2').css({'background': 'transparent'});
         $('.main-searchbox').css({'box-shadow': '0px 0px 0px 0px'});
+        $('#livesearch').css({'box-shadow': '0px 0px 0px 0px'});
         $(this).css("background-color", "white");
         $(this).css({'box-shadow': 'none'});
         $('.mainword').css({'color': 'black'});
@@ -16,7 +17,6 @@ $('.main-searchtxt').blur(
             $('#livesearch_item_wrapper').css("display", "none");
         }, 300);
     });
-
 
 var myTimeout;
 

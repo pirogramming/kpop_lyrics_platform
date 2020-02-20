@@ -183,13 +183,13 @@ input[type=text]:focus {
 .viewtitle {
     text-align: center;
     color: #00b8ff;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: bold;
     padding-bottom: 5px;
     height: 60px;
     line-height: 60px;
-    margin: 30px 0 30px 0;
-    font-family: "Samsung Sharp Sans";
+    margin: 50px 0 50px 0;
+    font-family: 'Squada One', cursive;
 }
 
 
@@ -274,13 +274,13 @@ input[type=text]:focus {
 .randomtitle {
     text-align: center;
     color: #00b8ff;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: bold;
     padding-bottom: 5px;
     height: 60px;
     line-height: 60px;
     margin-bottom: 20px;
-
+    font-family: 'Squada One', cursive;
 }
 
 .randomwrap {
@@ -301,9 +301,12 @@ input[type=text]:focus {
     flex-direction: column;
 }
 
+.buffer{
+    flex:1;
+}
 
-.buffer {
-    flex: 1;
+.buffer_right{
+    flex:1.5;
 }
 
 .member_wrap {
@@ -323,7 +326,6 @@ input[type=text]:focus {
     border-radius: 10px;
     z-index: 10;
 }
-
 
 /* Slideshow container */
 .slideshow-container {
@@ -370,11 +372,9 @@ input[type=text]:focus {
     flex: 9;
     color: grey;
     font-size: 15px;
-    /*position: absolute;*/
-    /*bottom: 8px;*/
     width: 100%;
     text-align: center;
-    text-shadow: 1px 1px 2px gray;
+    font-weight: bold;
 }
 
 
@@ -459,4 +459,9 @@ input[type=text]:focus {
 .active, .dot:hover {
     /*background-color: #717171;*/
     background-color: #00b8ff;
+}
+
+.random_group_img_wrap > a{
+    width:80%;
+    height: 400px;
 }

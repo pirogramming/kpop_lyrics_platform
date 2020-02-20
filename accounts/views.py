@@ -4,9 +4,11 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordChangeDoneView
 from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from Kasa.models import Comments
+from accounts.decorators import login_required
 from accounts.forms import InfoForm, UserForm, PasswordResetForm, SetPasswordForm
 from accounts.models import User
 from django.utils.http import urlsafe_base64_decode
@@ -14,16 +16,20 @@ from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
 
+
 # 로그인 뷰
 def login(request):
     if request.method == 'POST':
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('accounts:login')
+            next_url = request.POST.get('next_url', 'accounts:login')
+            if next_url == '/search/':
+                next_url = '/'
+            return redirect(next_url)
+            # return redirect('accounts:login')
         else:
             errors = True
             context = {
@@ -31,13 +37,20 @@ def login(request):
             }
             return render(request, 'accounts/login.html', context)
     else:
-        return render(request, 'accounts/login.html')
+        context = {
+            'next_url': request.GET.get('next', 'accounts:login'),
+        }
+        return render(request, 'accounts/login.html', context)
 
 
 # 로그아웃 뷰
+@login_required
 def logout(request):
+    next_url = request.GET.get('next', 'accounts:login')
+    if next_url == '/search/':
+        next_url = '/'
     auth.logout(request)
-    return redirect('accounts:login')
+    return redirect(next_url)
 
 
 # 회원가입 뷰
@@ -69,6 +82,7 @@ def signup(request):
 
 
 # 비밀번호 변경 뷰
+@login_required
 def change_pw(request):
     context = {}
     if request.method == "POST":
@@ -114,7 +128,6 @@ class reset_pw_confirm(PasswordResetConfirmView):
     success_url = reverse_lazy("accounts:reset_pw_complete")
     form_class = SetPasswordForm
 
-
     def get_user(self, uidb64):
         try:
             # urlsafe_base64_decode() decodes to bytestring
@@ -133,6 +146,7 @@ class reset_pw_complete(PasswordChangeDoneView):
 
 #
 # 닉네임, 관심사에 대한 정보 변경 뷰
+@login_required
 def change_info(request):
     if request.method == "POST":
         form = InfoForm(data=request.POST, instance=request.user)
@@ -154,6 +168,7 @@ def change_info(request):
 
 
 # 사용자가 작성한 댓글들 확인하는 뷰
+@login_required
 def check_comment(request):
     comments = Comments.objects.filter(user=request.user).order_by('-created_at')
     context = {
@@ -164,6 +179,7 @@ def check_comment(request):
 
 
 # 특정 댓글 삭제 뷰
+@login_required
 def delete_comment(request, comment_pk):
     comment = get_object_or_404(Comments, pk=comment_pk)
 

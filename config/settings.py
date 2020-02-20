@@ -88,6 +88,16 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages"
+)
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
@@ -144,6 +154,13 @@ STATICFILES_DIRS = [
     'Kasa/static/css',
     'kasa/static/scss',
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Social Login
 AUTHENTICATION_BACKENDS = (

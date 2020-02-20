@@ -2,10 +2,10 @@ html {
     font-family: "Nunito Sans","Noto Sans KR";
     height: 100%;
     margin: 0;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 body {
-    display: block;
     margin: 0;
     padding: 0;
     position: relative;
@@ -14,11 +14,9 @@ body {
 body .wrap {
     position: relative;
     min-height: 78vh;
-    width: 80%;
+    width: 70%;
     display: block;
-    /*text-align: center;*/
-    margin: 20px auto 135px auto;
-    /*background-color: none;*/
+    margin:20px auto 135px auto;
 }
 
 input[type=text]:focus {
