@@ -1,0 +1,597 @@
+/* Base */
+html {
+    font-family: "Nunito Sans", "Noto Sans KR";
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+body .wrap {
+    position: relative;
+    min-height: 78vh;
+    width: 70%;
+    display: block;
+    margin: 20px auto 135px auto;
+}
+
+input[type=text]:focus {
+    outline: 0.1rem solid #00b8ff;
+}
+
+button {
+    outline: 0;
+    border: 0;
+}
+
+/* Navbar */
+nav {
+    width: 100%;
+    background: black;
+    font-weight: bold;
+}
+
+nav .navlist {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    list-style: none;
+    list-style-type: none;
+    align-items: center;
+}
+
+nav .navlist .title {
+    padding: 0px 0px 0px 50px;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+
+}
+
+nav .navlist .signin:hover, nav .navlist .signup:hover {
+    border-bottom: 2px solid;
+}
+
+nav .navlist .title, .signin, .signup {
+    float: left;
+}
+
+nav .navlist .title a, nav .navlist .signin a, nav .navlist .signup a {
+    width: 60px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+nav .navlist .signup a {
+    margin-right: 50px;
+}
+
+nav .navlist .signin a {
+    margin-right: 10px;
+}
+
+nav .navlist .search-box {
+    display: none;
+}
+
+#wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto 0 auto;
+
+}
+
+#main_wrap {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 92vh;
+    text-align: center;
+    background-size: cover;
+}
+
+#main_wrap_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+}
+
+.container_wrapper {
+    width: 70%;
+}
+
+.mainword_container {
+    width: 100%;
+    margin-top: 10vh;
+    letter-spacing: -1px;
+}
+
+.mainword {
+    text-align: left;
+    font-size: 80px;
+    font-family: 'Anton', sans-serif;
+    color: black;
+}
+
+
+#mainword_sub {
+    width: 1000px;
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1.5px;
+}
+
+.main-searchbox {
+    vertical-align: center;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 40px;
+    transition-duration: 1s;
+    background: white;
+}
+
+.main-searchtxt {
+
+    margin: 5px 0 5px 50px;
+    border: none;
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+}
+
+.main-searchbtn {
+    margin: 10px 20px 5px 0;
+    right: 10px;
+    height: 30px;
+}
+
+#livesearch_item_wrapper {
+    display: none;
+    margin-top: 15px;
+    width: 100%;
+}
+
+#livesearch {
+    padding: 10px 0px;
+    width: 100%;
+    border-radius: 20px;
+    background-color: white;
+    transition-duration: 1s;
+}
+
+#livesearch_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.livesearch_item {
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    align-items: center;
+    width: 48%;
+    height: 50px;
+    margin-right: 1%;
+    margin-top: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+#livesearch_content_artists {
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#livesearch_content_songs {
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.livesearch_item_title {
+    width: 92%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 5px;
+    color: #00b8ff;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.item_image {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    object-fit: contain;
+    box-shadow: 0px 0px 7px 2px grey;
+}
+
+.item_info {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.item_name {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    max-width: 55%;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.livesearch_item:hover {
+    background-color: black;
+    opacity: 0.7;
+    color: white;
+}
+
+input[type=text]:focus {
+    outline: none;
+}
+
+#main_wrap_2 {
+    transition-duration: 1s;
+}
+
+.viewtitle {
+    text-align: center;
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    height: 60px;
+    line-height: 60px;
+    margin: 50px 0 50px 0;
+    font-family: 'Squada One', cursive;
+}
+
+.bottomwrap {
+    background-size: cover;
+    height: 1400px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.top5hit {
+    margin-left: 10%;
+    margin-top: 20px;
+    margin_bottom: 20px;
+    width: 80%;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.hita {
+    text-decoration: none;
+}
+
+.buffer1, .buffer2, .buffer3, .buffer4, .buffer5 {
+    width: 0px;
+    height: 0px;
+    transition: 1s;
+}
+
+.song1, .song2, .song3, .song4, .song5 {
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+    width: 200px;
+    height: 200px;
+    min-height: 100px;
+    min-width: 100px;
+    transition: 1s;
+    box-shadow: 0px 0px 7px 2px grey;
+
+}
+
+.five_album_img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#song_name {
+    width: 348px;
+    height: 348px;
+    border: 1px solid black;
+    background-color: black;
+    opacity: 0;
+    color: white;
+    position: relative;
+    bottom: 356px;
+    display: none;
+}
+
+.song_info {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+}
+
+.song_info_1 {
+    font-size: 23px;
+    margin-bottom: 30px;
+}
+
+.song_info_play {
+    font-size: 30px;
+}
+
+.song5:hover, .song4:hover, .song3:hover, .song2:hover, .song1:hover {
+    box-shadow: 0px 0px 10px 3px grey;
+}
+
+.hitcountwrap {
+    margin-bottom: 130px;
+}
+
+.randomtitle {
+    text-align: center;
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    height: 60px;
+    line-height: 60px;
+    margin-bottom: 60px;
+    font-family: 'Squada One', cursive;
+}
+
+.randomwrap {
+    margin: 10px 15% 100px 15%;
+    width: 70%;
+    height: 25%;
+    /*border: 3px solid black;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.random_group_img_wrap {
+    /*flex: 10;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    margin-right:150px;
+}
+
+.random_group_img_wrap > a {
+    flex: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.member_wrap {
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.random_group_img {
+    width: 500px;
+    height: 350px;
+    object-fit: contain;
+    overflow: hidden;
+    box-shadow: 0px 0px 4px 3px lightgrey;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    flex: 2;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mySlides {
+    width: 100%;
+    display: none;
+}
+
+.singer_img {
+    width: 100%;
+    box-shadow: 0px 0px 7px 3px lightgrey;
+    vertical-align: middle;
+    object-fit: contain;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+
+.singer_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    /*border: 1px solid grey;*/
+    border-radius: 15px;
+    background-color: white;
+    padding: 2px;
+}
+
+/* Caption text */
+.singer_name {
+    flex: 9;
+    color: grey;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+
+
+/* The dots/bullets/indicators */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px
+    }
+}
+
+.slides_btn {
+    display: flex;
+    flex-direction: row;
+    width: 0;
+    height: 0;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: relative;
+    bottom: 230px;
+    padding: 16px;
+    color: lightgrey;
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    /*background-color: black;*/
+}
+
+.prev {
+    right: 180px;
+}
+
+.next {
+    left: 73px;
+}
+
+#target1:hover {
+    background-color: yellow;
+}
+
+.prev:hover, .next:hover {
+    color: grey;
+}
+
+.active, .dot:hover {
+    /*background-color: #717171;*/
+    background-color: #00b8ff;
+}
+
+
+
+/* Footer */
+.footer {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    color: gray;
+    background-color: black;
+    line-height: 60px;
+}
+
+.background-footer {
+    position: relative;
+    bottom: 500px;
+    z-index: 100;
+    width: 100%;
+    height: 440px;
+    background-repeat: no-repeat;
+    min-height: 440px;
+    background-size: 100% 440px;
+}
+
+.developer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.developer > a {
+    text-decoration: none;
+    color: gray;
+}
+
+/* fullpage.js */
+.section {
+    background-size: cover;
+}

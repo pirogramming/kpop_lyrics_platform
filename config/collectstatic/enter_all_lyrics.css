@@ -1,0 +1,59 @@
+.inputlyrics_form {
+    align-items: center;
+}
+
+.inputlyricswrap{
+    display: flex;
+    justify-content: center;
+    width:100%;
+}
+.all_kor, .all_eng, .all_rom{
+    margin:10px;
+    box-shadow: 0 0 5px gray;
+    width: 25em;
+    height: 35em;
+    border: dotted 1.5px lightgrey;
+    border-radius: 10px;
+    resize: none;
+    padding:5px;
+}
+
+.all_kor, .all_eng, .all_rom {
+    outline: none;
+}
+
+#add_eng,#add_rom,.submitlyric{
+    width:100px;
+    height:40px;
+    margin:10px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    border:none;
+    border-radius: 5px;
+}
+.submitlyric{
+    width:222px;
+}
+
+.button_wrap {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons_add_lyrics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.submit_lyrics {
+    text-align: center;
+}
+
+.error {
+    font-size:20px;
+    color: #00b8ff;
+    text-align: center;
+    font-weight: bold;
+}

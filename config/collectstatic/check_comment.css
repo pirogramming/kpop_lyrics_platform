@@ -1,0 +1,97 @@
+
+.comments_field {
+    width: 100%;
+}
+
+.comment_title {
+    padding-top: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+    color: #00b8ff;
+    padding-bottom: 5px;
+}
+
+.each_comment {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.each_comment_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 0.1rem solid #e6e8eb;
+    box-shadow: 5px 5px 10px 1px #ccc;
+    background-color: white;
+    padding: 20px;
+    width: 250px;
+    margin: 30px;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.each_comment_wrap:hover {
+    box-shadow: 10px 10px 10px 1px #ccc;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+
+.song_name {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.content {
+    text-align: center;
+    height: 180px;
+    width: 250px;
+    text-overflow: ellipsis;
+    overflow-y: scroll;
+    font-size: 20px;
+    -ms-overflow-style: none;
+    margin-bottom: 20px;
+    color: grey;
+}
+
+.content::-webkit-scrollbar {
+    display: none
+}
+
+
+.created_at {
+    font-size: 13px;
+    color: grey;
+    margin-bottom: 10px;
+}
+
+
+.delete_btn {
+    text-align: center;
+    border-radius: 5px;
+    background: linear-gradient(to right, #00fffe, #00b8ff);
+    width: 160px;
+    padding: 3px;
+    font-size: 20px;
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    transition-duration: 0.5s;
+}
+
+.delete_btn_a {
+    text-decoration: none;
+    color: black;
+}
+
+.delete_btn:hover {
+    box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to right, #06c9ff, #009cc9);
+}
+

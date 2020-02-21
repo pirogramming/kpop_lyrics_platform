@@ -1,0 +1,32 @@
+.footer {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    color: gray;
+    background-color: black;
+    line-height:60px;
+}
+.background-footer{
+    position:relative;
+    bottom:500px;
+    z-index:100;
+    width:100%;
+    height:440px;
+    background-repeat: no-repeat;
+    min-height: 440px;
+    background-size: 100% 440px;
+}
+
+.developer {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.developer> a {
+    text-decoration: none;
+    color: gray;
+}
