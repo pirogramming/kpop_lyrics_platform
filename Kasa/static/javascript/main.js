@@ -1,14 +1,14 @@
 $('.main-searchtxt').focus(
     function () {
         $('#main_wrap_2').css({'background': 'rgba(0,0,0, 0.8)'});
-        $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white'});
-        $('#livesearch').css({'box-shadow': '0px 0px 7px 2px white'});
+        $('.main-searchbox').css({'box-shadow': '0px 0px 7px 2px white', 'border':'2px solid #00fffe'});
+        $('#livesearch').css({'box-shadow': '0px 0px 7px 2px white',  'border':'2px solid #00fffe'});
         $('.mainword').css({'color': 'white'});
     });
 $('.main-searchtxt').blur(
     function () {
         $('#main_wrap_2').css({'background': 'transparent'});
-        $('.main-searchbox').css({'box-shadow': '0px 0px 0px 0px'});
+        $('.main-searchbox').css({'box-shadow': '0px 0px 0px 0px', 'border': '0px solid white'});
         $('#livesearch').css({'box-shadow': '0px 0px 0px 0px'});
         $(this).css("background-color", "white");
         $(this).css({'box-shadow': 'none'});

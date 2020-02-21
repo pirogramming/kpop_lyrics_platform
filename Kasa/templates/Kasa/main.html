@@ -1,179 +1,270 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block style %}
-    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Jua|Poor+Story&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <title>Kasa, Best way to find K-pop lyrics</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static " css/footer.css" %}
+    "/>
+    <link rel="icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Anton|Bebas+Neue|Nanum+Gothic|Squada+One&display=swap"
           rel="stylesheet">
-{% endblock %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.6/jquery.fullpage.extensions.min.js">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../../static/javascript/jquery.fullpage.min.js"></script>
+</head>
+<div>
+    <div id="fullpage">
 
-{% block content %}
-    <div id="main_wrap" style="background-image: url({% static 'image/main_background_image.jpg' %});">
-        <div id="main_wrap_2">
-            <div class="container_wrapper">
-                <div class="mainword_container">
-                    <div class="mainword" id="mainword_main">KASA</div>
-                    <div class="mainword" id="mainword_sub">Now enjoy Kpop music through lyrics</div>
-                </div>
-                <form action="{% url 'Kasa:search' %}" method="GET">
-                    {% csrf_token %}
-                    <div class="main-searchbox" id="searchbox">
-                        <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
-                               placeholder="Which contents are you looking for?" autocomplete="off">
-                        <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
-                               class="main-searchbtn">
+        <!-- Navbar -->
+        <div class="section" style="background-image: url({% static 'image/main_background_image.jpg' %});">
+            <nav>
+                <div class="navlist">
+                    <div class="title"><a id="title_a_tag" href="{% url 'Kasa:main' %}"> <img
+                            src="{% static 'image/logo.png' %}"></a></div>
+                    <div class="search-box-wrapper">
+                        <form action="{% url 'Kasa:search' %}" method="GET">
+                            {% csrf_token %}
+                            <div class="search-box">
+                                <input type="text" id="search" class="search-txt" name="kwd" placeholder="Search"
+                                       autocomplete="off">
+                                <input type="image" src="   {% static 'image/magnifying_glass.png' %}" alt="submit"
+                                       name="submit"
+                                       value="submit"
+                                       class="search-btn">
+                            </div>
+                        </form>
                     </div>
-                </form>
+                    {% if user.is_authenticated %}
+                        <div class="signin"><a href="{% url 'accounts:login' %}">Edit</a></div>
+                        <div class="signup"><a href="{% url 'accounts:logout' %}?next={{ request.path }}">Logout</a>
+                        </div>
+                    {% else %}
+                        <div class="signin"><a href="{% url 'accounts:login' %}?next={{ request.path }}">Sign in</a>
+                        </div>
+                        <div class="signup"><a href="{% url 'accounts:signup' %}">Sign up</a></div>
+                    {% endif %}
+                </div>
+            </nav>
 
-                <div id="livesearch_item_wrapper">
-                    <div id="livesearch">
-                        <div id="livesearch_content">
+
+            <div class="wrap" id="wrap">
+                <div id="main_wrap">
+                    <div id="main_wrap_2">
+                        <div class="container_wrapper">
+                            <div class="mainword_container">
+                                <div class="mainword" id="mainword_main">KASA</div>
+                                <div class="mainword" id="mainword_sub">Now enjoy Kpop music through lyrics</div>
+                            </div>
+                            <form action="{% url 'Kasa:search' %}" method="GET">
+                                {% csrf_token %}
+                                <div class="main-searchbox" id="searchbox">
+                                    <input type="text" id="search main-searchtxt" class="main-searchtxt" name="kwd"
+                                           placeholder="Which contents are you looking for?" autocomplete="off">
+                                    <input type="image" src="{% static 'image/magnifying_glass.png' %}" alt="submit"
+                                           class="main-searchbtn">
+                                </div>
+                            </form>
+
+                            <div id="livesearch_item_wrapper">
+                                <div id="livesearch">
+                                    <div id="livesearch_content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" style="background-image: url({% static 'image/bts4.jpg' %})">
+            <div class="wrap" id="wrap">
+                <div class="bottomwrap">
+                    <div class="bottombox">
+                        <div class="hitcountwrap">
+                            <div class="viewtitle">TOP 5 VIEWS</div>
+                            <div class="top5hit">
+                                {% for song in five_songs %}
+                                    <a class="hita" href="{% url 'Kasa:song_detail' song.pk %}">
+                                        <div class="buffer{{ forloop.counter }}"></div>
+                                        <div class="song{{ forloop.counter }}">
+                                            <img class="five_album_img" src="{{ song.album.album_art.url }}"/>
+                                            <div id="song_name" class="song{{ forloop.counter }}_name">
+                                                <div class="song_info">
+                                                    <div>
+                                                        <div class="song_info_1">{{ song.album.group.gname }}</div>
+                                                        <div class="song_info_1">{{ song.sname }}</div>
+                                                        <div class="song_info_play"><i class="fas fa-music"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section" style="background-image: url({% static 'image/changseob_tomorrow_3.jpg' %})">
+
+            <div class="wrap" id="wrap">
+                <div class="bottomwrap">
+                    <div>
+                        <div class="randomtitle">TODAY'S IDOL</div>
+                        <div class="randomwrap">
+                            <div class="random_group_img_wrap">
+                                <a href="{% url 'Kasa:group_detail' group.pk %}">
+                                    <img class="random_group_img" src="{{ group.group_image.url }}"/>
+                                </a>
+                            </div>
+                            <div class="member_wrap">
+                                <div class="slideshow-container">
+                                    {% for singer in group.group_singer.all %}
+                                        <div class="mySlides fade">
+                                            <div class="singer_info">
+                                                <div class="singer_name">{{ singer.sname }}</div>
+                                            </div>
+                                            <a href="{% url 'Kasa:singer_detail' singer.pk %}">
+                                                <img class="singer_img" src="{{ singer.image.url }}"/>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <br>
+                                <div class="slides_btn">
+                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                </div>
+                                <div>
+                                    {% for count in group.group_singer.all %}
+                                        <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="bottomwrap" style="background-image: url({% static 'image/bts4.jpg' %})">
-        <div class="bottombox">
-            <div class="hitcountwrap">
-                <div class="viewtitle">TOP 5 VIEWS</div>
-                <div class="top5hit">
-                    {% for song in five_songs %}
-                        <a class="hita" href="{% url 'Kasa:song_detail' song.pk %}">
-                            <div class="buffer{{ forloop.counter }}"></div>
-                            <div class="song{{ forloop.counter }}">
-                                <img class="five_album_img" src="{{ song.album.album_art.url }}"/>
-                                <div id="song_name" class="song{{ forloop.counter }}_name">
-                                    <div class="song_info">
-                                        <div>
-                                            <div class="song_info_1">{{ song.album.group.gname }}</div>
-                                            <div class="song_info_1">{{ song.sname }}</div>
-                                            <div class="song_info_play"><i class="fas fa-music"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="randomtitle">TODAY'S IDOL</div>
-            <div class="randomwrap">
-                <div class="buffer"></div>
-                <div class="random_group_img_wrap">
-                    <a href="{% url 'Kasa:group_detail' group.pk %}">
-                        <img class="random_group_img" src="{{ group.group_image.url }}"/>
-                    </a>
-                </div>
+</div>
 
-                <div class="member_wrap">
-                    <div class="slideshow-container">
-                        {% for singer in group.group_singer.all %}
-                            <div class="mySlides fade">
-                                <div class="singer_info">
-                                    <div class="singer_name">{{ singer.sname }}</div>
-                                </div>
-                                <a href="{% url 'Kasa:singer_detail' singer.pk %}">
-                                    <img class="singer_img" src="{{ singer.image.url }}"/>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <br>
-                    <div class="slides_btn">
-                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    </div>
-                    <div>
-                        {% for count in group.group_singer.all %}
-                            <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="buffer_right"></div>
-            </div>
+<!-- Footer -->
+<div class="footerwrap">
+    <div class="footer">
+        <div class="developer">&copy; Kasa | &nbsp; &nbsp; &nbsp; &nbsp; Kwon Kusang&nbsp;<a
+                href="https://github.com/rnjsrntkd95"><i class="fab fa-github"></i></a>
+
+            &nbsp; &nbsp; &nbsp; &nbsp; Jung Seunghyun&nbsp;<a href="https://github.com/herrakam"><i
+                    class="fab fa-github"></i></a>
+            &nbsp; &nbsp;
+            &nbsp; &nbsp; Shin Woochul&nbsp;<a href="https://github.com/swc0620"><i class="fab fa-github"></i></a>
+
+            &nbsp; &nbsp; &nbsp; &nbsp; Song Minho&nbsp;<a href="https://github.com/pot1223"><i
+                    class="fab fa-github"></i></a>
         </div>
     </div>
-{% endblock %}
-{% block script %}
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="{% static "javascript/main.js" %}"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="{% static "javascript/main.js" %}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            function delay(callback, ms) {
-                var timer = 0;
-                return function () {
-                    var context = this, args = arguments;
-                    clearTimeout(timer);
-                    timer = setTimeout(function () {
-                        callback.apply(context, args);
-                    }, ms || 0);
-                };
+<script>
+    $(document).ready(function () {
+        function delay(callback, ms) {
+            var timer = 0;
+            return function () {
+                var context = this, args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    callback.apply(context, args);
+                }, ms || 0);
+            };
+        }
+
+        $('.main-searchtxt').keyup(delay(function () {
+            $('#livesearch_content').html('');
+            $('#livesearch_content').append('<div id="livesearch_content_artists"></div>');
+            $('#livesearch_content').append('<div id="livesearch_content_songs"></div>');
+
+            var searchField = $('.main-searchtxt').val();
+
+            if (!searchField) {
+                $('#livesearch_item_wrapper').css("display", "none");
             }
 
-            $('.main-searchtxt').keyup(delay(function () {
-                $('#livesearch_content').html('');
-                $('#livesearch_content').append('<div id="livesearch_content_artists"></div>');
-                $('#livesearch_content').append('<div id="livesearch_content_songs"></div>');
 
-                var searchField = $('.main-searchtxt').val();
-
-                if (!searchField) {
-                    $('#livesearch_item_wrapper').css("display", "none");
-                }
-
-
-                $.ajax({
-                    type: "GET",
-                    url: "{% url 'Kasa:search' %}",
-                    data: {'kwd': searchField, 'csrfmiddlewaretoken': '{{ csrf_token }}', 'is_livesearch': 'True'},
-                    dataType: "json",
-                    async: true,
-                    success: function (response) {
-                        $.each(response, function (key, value) {
-                                if (value.length) {
-                                    $('#livesearch_item_wrapper').css("display", "block");
-                                    if (key === 'groups') {
-                                        if (value.length) {
+            $.ajax({
+                type: "GET",
+                url: "{% url 'Kasa:search' %}",
+                data: {'kwd': searchField, 'csrfmiddlewaretoken': '{{ csrf_token }}', 'is_livesearch': 'True'},
+                dataType: "json",
+                async: true,
+                success: function (response) {
+                    $.each(response, function (key, value) {
+                            if (value.length) {
+                                $('#livesearch_item_wrapper').css("display", "block");
+                                if (key === 'groups') {
+                                    if (value.length) {
+                                        $('#livesearch_content_artists').before('<div class="livesearch_item_title">Artists</div>');
+                                        for (var item in value) {
+                                            var link = 'group/' + value[item]['id'];
+                                            var image = value[item]['image'];
+                                            $('#livesearch_content_artists').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_extenal">' + value[item]['agency'] + '</div></div></a>')
+                                        }
+                                    }
+                                }
+                                if (key === 'singers') {
+                                    if (value.length) {
+                                        if (!'#livesearch_item_title'.length)
                                             $('#livesearch_content_artists').before('<div class="livesearch_item_title">Artists</div>');
-                                            for (var item in value) {
-                                                var link = 'group/' + value[item]['id'];
-                                                var image = value[item]['image'];
-                                                $('#livesearch_content_artists').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_extenal">' + value[item]['agency'] + '</div></div></a>')
-                                            }
+                                        for (var item in value) {
+                                            var link = 'singer/' + value[item]['id'];
+                                            var image = value[item]['image'];
+                                            $('#livesearch_content_artists').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_external">' + value[item]['group'] + '</div></div></a>')
                                         }
                                     }
-                                    if (key === 'singers') {
-                                        if (value.length) {
-                                            if (!'#livesearch_item_title'.length)
-                                                $('#livesearch_content_artists').before('<div class="livesearch_item_title">Artists</div>');
-                                            for (var item in value) {
-                                                var link = 'singer/' + value[item]['id'];
-                                                var image = value[item]['image'];
-                                                $('#livesearch_content_artists').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_external">' + value[item]['group'] + '</div></div></a>')
-                                            }
-                                        }
-                                    }
-                                    if (key === 'songs') {
-                                        if (value.length) {
-                                            $('#livesearch_content_songs').before('<div class="livesearch_item_title">Songs</div>');
-                                            for (var item in value) {
-                                                var link = 'song/' + value[item]['id'];
-                                                var image = value[item]['image'];
-                                                $('#livesearch_content_songs').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_external">' + value[item]['group'] + '</div></div></a>')
-                                            }
+                                }
+                                if (key === 'songs') {
+                                    if (value.length) {
+                                        $('#livesearch_content_songs').before('<div class="livesearch_item_title">Songs</div>');
+                                        for (var item in value) {
+                                            var link = 'song/' + value[item]['id'];
+                                            var image = value[item]['image'];
+                                            $('#livesearch_content_songs').append('<a class="livesearch_item" href="' + link + '"><img class="item_image" src="' + image + '" />' + '<div class="item_info">' + '<div class="item_name">' + value[item]['name'] + '</div>&nbsp;/&nbsp;<div class="item_external">' + value[item]['group'] + '</div></div></a>')
                                         }
                                     }
                                 }
                             }
-                        )
-                    }
-                })
-            }, 300))
-        })
-    </script>
-{% endblock %}
+                        }
+                    )
+                }
+            })
+        }, 300))
+    })
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="{% static 'javascript/jquery.fullpage.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#fullpage').fullpage({
+            scrollingSpeed: 1500
+        });
+    });
 
+</script>
+
+
+</body>
+</html>

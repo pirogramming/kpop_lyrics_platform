@@ -1,3 +1,82 @@
+/* Base */
+html {
+    font-family: "Nunito Sans", "Noto Sans KR";
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+body .wrap {
+    position: relative;
+    min-height: 78vh;
+    width: 70%;
+    display: block;
+    margin: 20px auto 135px auto;
+}
+
+input[type=text]:focus {
+    outline: 0.1rem solid #00b8ff;
+}
+
+button {
+    outline: 0;
+    border: 0;
+}
+
+/* Navbar */
+nav {
+    width: 100%;
+    background: black;
+    font-weight: bold;
+}
+
+nav .navlist {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    list-style: none;
+    list-style-type: none;
+    align-items: center;
+}
+
+nav .navlist .title {
+    padding: 0px 0px 0px 50px;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+
+}
+
+nav .navlist .signin:hover, nav .navlist .signup:hover {
+    border-bottom: 2px solid;
+}
+
+nav .navlist .title, .signin, .signup {
+    float: left;
+}
+
+nav .navlist .title a, nav .navlist .signin a, nav .navlist .signup a {
+    width: 60px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+nav .navlist .signup a {
+    margin-right: 50px;
+}
+
+nav .navlist .signin a {
+    margin-right: 10px;
+}
+
 nav .navlist .search-box {
     display: none;
 }
@@ -94,7 +173,7 @@ nav .navlist .search-box {
     padding: 10px 0px;
     width: 100%;
     border-radius: 20px;
-    background-color:white;
+    background-color: white;
     transition-duration: 1s;
 }
 
@@ -191,9 +270,13 @@ input[type=text]:focus {
     margin: 50px 0 50px 0;
     font-family: 'Squada One', cursive;
 }
-.bottomwrap{
-    background-size:cover;
-    height:1400px;
+
+.bottomwrap {
+    background-size: cover;
+    height: 1400px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
 }
 
 .top5hit {
@@ -243,7 +326,7 @@ input[type=text]:focus {
     opacity: 0;
     color: white;
     position: relative;
-    bottom: 354px;
+    bottom: 356px;
     display: none;
 }
 
@@ -275,13 +358,13 @@ input[type=text]:focus {
 
 .randomtitle {
     text-align: center;
-    color:white;
+    color: white;
     font-size: 60px;
     font-weight: bold;
     padding-bottom: 5px;
     height: 60px;
     line-height: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     font-family: 'Squada One', cursive;
 }
 
@@ -296,19 +379,20 @@ input[type=text]:focus {
 }
 
 .random_group_img_wrap {
+    /*flex: 10;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    margin-right:150px;
+}
+
+.random_group_img_wrap > a {
     flex: 10;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.buffer{
-    flex:1;
-}
-
-.buffer_right{
-    flex:1.5;
 }
 
 .member_wrap {
@@ -320,8 +404,8 @@ input[type=text]:focus {
 }
 
 .random_group_img {
-    width: 90%;
-    height: 400px;
+    width: 500px;
+    height: 350px;
     object-fit: contain;
     overflow: hidden;
     box-shadow: 0px 0px 4px 3px lightgrey;
@@ -378,6 +462,10 @@ input[type=text]:focus {
     width: 100%;
     text-align: center;
     font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 10px;
 }
 
 
@@ -452,9 +540,11 @@ input[type=text]:focus {
 .next {
     left: 73px;
 }
-#target1:hover{
-    background-color:yellow;
+
+#target1:hover {
+    background-color: yellow;
 }
+
 .prev:hover, .next:hover {
     color: grey;
 }
@@ -464,7 +554,44 @@ input[type=text]:focus {
     background-color: #00b8ff;
 }
 
-.random_group_img_wrap > a{
-    width:80%;
-    height: 400px;
+
+
+/* Footer */
+.footer {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    color: gray;
+    background-color: black;
+    line-height: 60px;
+}
+
+.background-footer {
+    position: relative;
+    bottom: 500px;
+    z-index: 100;
+    width: 100%;
+    height: 440px;
+    background-repeat: no-repeat;
+    min-height: 440px;
+    background-size: 100% 440px;
+}
+
+.developer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.developer > a {
+    text-decoration: none;
+    color: gray;
+}
+
+/* fullpage.js */
+.section {
+    background-size: cover;
 }
