@@ -15,9 +15,10 @@
 }
 
 .rpw_complete_title {
-    padding-top: 36px;
+    padding-top: 50px;
     font-size: 30px;
     font-weight: bold;
+    font-family: "Squada One";
 }
 
 .rpw_complete_explanation {

@@ -1,5 +1,5 @@
 .album_data {
-    font-size: 40px;
+    font-size: 60px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
@@ -8,11 +8,12 @@
     padding-bottom: 5px;
     color: #00b8ff;
     margin-bottom: 40px;
-    margin-top: 30px
+    margin-top: 30px;
+    font-family: "Squada One";
 }
 
 .song_data {
-    font-size: 40px;
+    font-size: 60px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
@@ -22,6 +23,7 @@
     color: #00b8ff;
     margin-bottom: 0px;
     margin-top: 30px;
+    font-family: "Squada One";
 
 }
 
