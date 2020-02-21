@@ -72,7 +72,7 @@
 
                                 <div class="artist_groups">
                                     {% for group in artist.group.all %}
-                                        <a href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a>
+                                        <a class="groupname" href="{% url 'Kasa:group_detail' group.pk %}">{{ group }}</a>
                                     {% endfor %}
                                 </div>
                                 {% if artist.singer_song.first %}
