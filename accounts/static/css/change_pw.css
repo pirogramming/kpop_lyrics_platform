@@ -1,5 +1,5 @@
 body .wrap {
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
@@ -10,13 +10,14 @@ body .wrap {
 
     background: white;
     min-width: 450px;
-    height:500px;
+    height: 500px;
 }
 
 .chagepwtitle {
     padding-top: 30px;
-    font-size: 36px;
+    font-size: 50px;
     font-weight: bold;
+    font-family: "Squada One";
 }
 
 .wrap_2 {
@@ -52,7 +53,8 @@ body .wrap {
 .login_btn:hover {
     box-shadow: 0.3rem 0.3rem 2rem -1rem rgba(0, 0, 0, 0.5);
     color: #000000;
-    background: linear-gradient(to right, #06c9ff, #009cc9);}
+    background: linear-gradient(to right, #06c9ff, #009cc9);
+}
 
 .change_pw_username, .change_pw_password {
     padding-bottom: 5px;
@@ -63,4 +65,12 @@ body .wrap {
     width: 375px;
     height: 35px;
     padding-left: 10px;
+}
+
+.error_message {
+    text-align: center;
+    display: block;
+    margin-top:10px;
+    font-size: 20px;
+    color: #00b8ff;
 }

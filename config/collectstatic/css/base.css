@@ -1,0 +1,28 @@
+html {
+    font-family: "Nunito Sans","Noto Sans KR";
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+body .wrap {
+    position: relative;
+    min-height: 78vh;
+    width: 70%;
+    display: block;
+    margin:20px auto 135px auto;
+}
+
+input[type=text]:focus {
+    outline: 0.1rem solid #00b8ff;
+}
+
+button {
+    outline: 0;
+    border: 0;
+}

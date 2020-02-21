@@ -144,3 +144,4 @@ dmypy.json
 desktop.ini
 Pipfile
 Pipfile.lock
+db.sqlite3

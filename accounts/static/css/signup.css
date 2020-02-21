@@ -10,8 +10,9 @@
 
 .signup_title {
     padding-top: 30px;
-    font-size: 36px;
+    font-size: 50px;
     font-weight: bold;
+    font-family: "Squada One";
 }
 
 .signup_wrap_2 {
@@ -65,4 +66,5 @@
     margin-top: -5px;
     margin-bottom: -5px;
     font-size: 20px;
+    color: #00b8ff;
 }

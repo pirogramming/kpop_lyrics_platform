@@ -27,7 +27,7 @@ def login(request):
             auth.login(request, user)
             next_url = request.POST.get('next_url', 'accounts:login')
             if next_url == '/search/':
-                next_url = '/'
+                next_url = ''
             return redirect(next_url)
             # return redirect('accounts:login')
         else:
@@ -125,7 +125,7 @@ class reset_pw_done(PasswordResetDoneView):
 # # 새로운 비밀번호 설정 뷰
 class reset_pw_confirm(PasswordResetConfirmView):
     template_name = 'accounts/reset_pw_confirm.html'
-    success_url = reverse_lazy("accounts:reset_pw_complete")
+    success_url = reverse_lazy("accounts:login")
     form_class = SetPasswordForm
 
     def get_user(self, uidb64):
@@ -141,7 +141,7 @@ class reset_pw_confirm(PasswordResetConfirmView):
 # 새로운 비밀번호 설정 완료 뷰
 class reset_pw_complete(PasswordChangeDoneView):
     template_name = "accounts/reset_pw_complete.html"
-    # success_url = reverse_lazy("accounts:reset_pw_done")
+    success_url = reverse_lazy("accounts:login")
 
 
 #
