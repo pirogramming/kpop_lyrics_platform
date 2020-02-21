@@ -31,9 +31,10 @@ a {
 
 .result_title {
     color: #00b8ff;
-    font-size: 30px;
+    font-size: 60px;
     height: 60px;
     font-weight: bold;
+    font-family: 'Squada One';
 }
 
 .result_length {
@@ -62,10 +63,11 @@ a {
 }
 
 .artist_image {
-    box-shadow: 0px 0px 7px 2px grey;
+    box-shadow: 0px 0px 5px 2px lightgrey;
     width: 120px;
     height: 120px;
     object-fit: cover;
+    border-radius: 2px;
 }
 
 .artist_group_image {
@@ -101,10 +103,12 @@ a {
 
 .artist_groups > a {
     color: grey;
+    font-size:13px;
 }
 
 .artist_agency {
     color: grey;
+    font-size:13px;
 }
 
 .artist_song {
@@ -249,8 +253,9 @@ a {
 .album_image {
     width: 100%;
     object-fit: contain;
-    box-shadow: 0px 0px 5px 2px grey;
-    border: 1px solid grey
+    box-shadow: 0px 0px 5px 2px lightgrey;
+    /*border: 1px solid grey*/
+    border-radius: 2px;
 }
 
 .album_info {
