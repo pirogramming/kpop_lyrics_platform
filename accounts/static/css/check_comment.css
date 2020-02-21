@@ -5,11 +5,12 @@
 
 .comment_title {
     padding-top: 30px;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: bold;
     border-bottom: 1px solid lightgrey;
     color: #00b8ff;
     padding-bottom: 5px;
+    font-family: "Squada One";
 }
 
 .each_comment {
