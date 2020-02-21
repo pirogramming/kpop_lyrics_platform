@@ -43,7 +43,7 @@
 .singer_image {
     width: 100%;
     object-fit: contain;
-    box-shadow: 0px 0px 5px 2px gray;
+    box-shadow: 0px 0px 5px 2px grey;
     border-radius: 10px;
 }
 
@@ -69,12 +69,12 @@
 .singer_name {
     font-size: 40px;
     font-weight: bold;
-    color: black;
+    color: #00b8ff;
 }
 
 
 .singer_data {
-    font-size: 50px;
+    font-size: 40px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
@@ -83,11 +83,10 @@
     padding-bottom: 5px;
     color: #00b8ff;
     margin-bottom: 40px;
-    font-family: 'Squada One';
 }
 
 .singer_group_data {
-    font-size: 50px;
+    font-size: 40px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
@@ -96,8 +95,7 @@
     padding-bottom: 5px;
     color: #00b8ff;
     margin-bottom: 40px;
-    margin-top: 30px;
-    font-family: 'Squada One';
+    margin-top: 30px
 }
 
 .singer_group_wrap {
@@ -124,12 +122,11 @@
 }
 
 .singer_group_img {
-    box-shadow: 0px 0px 5px 2px lightgrey;
-    /*border: 1px solid grey;*/
+    box-shadow: 0px 0px 5px 2px grey;
+    border: 1px solid grey;
     width:200px;
     height:200px;
     object-fit: contain;
-    border-radius:5px;
 }
 
 .singer_group_name {

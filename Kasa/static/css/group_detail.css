@@ -75,7 +75,7 @@
 }
 
 .album_data {
-    font-size: 60px;
+    font-size: 40px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
@@ -84,7 +84,6 @@
     padding-bottom: 5px;
     color: #00b8ff;
     margin-bottom: 40px;
-    font-family: "Squada One";
 }
 
 .wrapall .wrap1 img {
@@ -137,7 +136,7 @@
 
 
 .artist_data {
-    font-size: 60px;
+    font-size: 40px;
     text-align: left;
     border-bottom: 1px solid lightgrey;
     height: 60px;
@@ -145,7 +144,6 @@
     line-height: 60px;
     color: #00b8ff;
     padding-bottom: 5px;
-    font-family: "Squada One";
 }
 
 .album_wrap {
