@@ -396,6 +396,8 @@ input[type=text]:focus {
 }
 
 .member_wrap {
+    /*border:1px solid white;*/
+    width:35%;
     flex: 6;
     display: flex;
     align-items: center;
@@ -404,14 +406,15 @@ input[type=text]:focus {
 }
 
 .random_group_img {
-    width: 500px;
-    height: 350px;
+    width: 90%;
+    margin-top: 50px;
+    height: 300px;
     object-fit: contain;
     overflow: hidden;
-    box-shadow: 0px 0px 4px 3px lightgrey;
+    box-shadow: 0px 0px 2px 3px lightgrey;
+    /*border:1px solid darkslategray;*/
     border-radius: 10px;
     z-index: 10;
-    background-color: white;
 }
 
 /* Slideshow container */
@@ -420,7 +423,7 @@ input[type=text]:focus {
     max-width: 1000px;
     position: relative;
     margin: auto;
-    width: 250px;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -433,6 +436,7 @@ input[type=text]:focus {
 
 .singer_img {
     width: 100%;
+    height:100%;
     box-shadow: 0px 0px 7px 3px lightgrey;
     vertical-align: middle;
     object-fit: contain;
@@ -467,7 +471,8 @@ input[type=text]:focus {
     white-space: nowrap;
     padding: 0 10px;
 }
-
+.dotwrap{
+}
 
 /* The dots/bullets/indicators */
 .dot {
