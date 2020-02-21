@@ -77,18 +77,18 @@
 
 .korlyrics {
     display: block;
-    color: black;
+    color: #283B42;
     line-height: 1.5em;
 }
 
 .englyriscs {
     display: none;
-    color: darkslategray;
+    color: #1D6A96;
 }
 
 .romlyrics {
     display: none;
-    color: gray;
+    color: #85B8CB;
 }
 
 .lyric-a {

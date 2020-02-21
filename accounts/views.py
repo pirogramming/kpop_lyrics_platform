@@ -27,7 +27,7 @@ def login(request):
             auth.login(request, user)
             next_url = request.POST.get('next_url', 'accounts:login')
             if next_url == '/search/':
-                next_url = '/'
+                next_url = ''
             return redirect(next_url)
             # return redirect('accounts:login')
         else:
