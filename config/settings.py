@@ -161,10 +161,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'Kasa/static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'config/collectstatic')
+STATIC_ROOT = os.path.join(BASE_DIR, 'config/static')
 
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Social Login
 AUTHENTICATION_BACKENDS = (
