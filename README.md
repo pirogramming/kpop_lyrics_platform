@@ -4,10 +4,10 @@ K-pop 다국어 가사 동시 제공 웹 서비스
 > 한국어, 영어, 로마자 가사를 동시 제공하여 가시성, 편의성을 제공.
 
 ## 👨‍👨‍👧‍👦 Contributors
-- [![신우철](https://img.shields.io/badge/DEVELOPER-%EA%B6%8C%EA%B5%AC%EC%83%81-blue)](https://github.com/swc0620)
+- [![신우철](https://img.shields.io/badge/DEVELOPER-%EC%8B%A0%EC%9A%B0%EC%B2%A0-blue)](https://github.com/swc0620)
 - [![권구상](https://img.shields.io/badge/DEVELOPER-%EA%B6%8C%EA%B5%AC%EC%83%81-blue)](https://github.com/rnjsrntkd95)
-- [![정승현](https://img.shields.io/badge/DEVELOPER-%EA%B6%8C%EA%B5%AC%EC%83%81-blue)](https://github.com/herrakam)
-- [![송민호](https://img.shields.io/badge/DEVELOPER-%EA%B6%8C%EA%B5%AC%EC%83%81-blue)](https://github.com/pot1223)
+- [![정승현](https://img.shields.io/badge/DEVELOPER-%EC%A0%95%EC%8A%B9%ED%98%84-blue)](https://github.com/herrakam)
+- [![송민호](https://img.shields.io/badge/DEVELOPER-%EC%86%A1%EB%AF%BC%ED%98%B8-blue)](https://github.com/pot1223)
 
 ## 🔍 Pages Introduction
 - User Page
